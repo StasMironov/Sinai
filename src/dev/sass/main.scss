@@ -1,0 +1,133 @@
+@import "./normalize.scss";
+@import "./colors.scss";
+@import "./media.scss";
+@import "./fonts.scss";
+@import "./libs/libs.scss";
+
+* {
+  box-sizing: border-box;
+  outline: none !important;
+}
+
+html {
+  height: 100%;
+  min-width: 320px;
+  overflow-x: hidden;
+  font-size: 16px;
+
+  @media (max-width: 1023px) {
+    font-size: 14px;
+    line-height: 20px;
+  }
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  color: $basic;
+  font-weight: normal;
+  overflow: hidden;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  background-color: #fff;
+  word-wrap: break-word;
+}
+
+.b-container {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 1240px;
+  margin: auto;
+  padding: 0 20px;
+
+
+  @media (max-width:1023px) {
+    padding: 0 15px 0px;
+  }
+}
+
+img {
+  vertical-align: bottom;
+}
+
+.bgi {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+a {
+  display: inline;
+  color: inherit;
+  text-decoration: none;
+  transition: linear 0.3s;
+}
+
+.clearfix::after,
+.clearfix::before {
+  content: '';
+  display: table;
+  clear: both;
+}
+
+ul,
+ol {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+input::-ms-clear {
+  display: none;
+}
+
+.hidden {
+  display: none;
+}
+
+.title-1 {
+  font-weight: bold;
+  font-size: 50px;
+  line-height: 108%;
+  color: $black-1;
+}
+
+.title-2 {
+  font-size: 2.5rem;
+  line-height: 2.75rem;
+
+  @media (max-width:1023px) {
+    font-size: 2rem;
+    line-height: 2.125rem;
+  }
+}
+
+.title-3 {
+  font-size: 2rem;
+  line-height: 2.125rem;
+
+  @media (max-width:1023px) {
+    font-size: 1.5rem;
+    line-height: 1.75rem;
+  }
+}
+
+.title-4 {
+  font-size: 1.75rem;
+  line-height: 2rem;
+
+  @media (max-width:1023px) {
+    font-size: 1.125rem;
+    line-height: 1.25rem;
+  }
+}
+
+.b-svg {
+  width: auto;
+  height: auto;
+}
+
+@import "./components/index/index.scss";
+@import "./components/index/index-img.scss";
+@import "./components/index/index-content.scss";
+@import "./components/header.scss";
+@import "./components/btn.scss";

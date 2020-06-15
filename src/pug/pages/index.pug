@@ -1,0 +1,64 @@
+extends ../layout/main
+
+block variables
+	- var title = 'Главная страница'
+	- var pageClass = 'index-page';
+
+block content
+	.index
+		.index__container.b-container
+			.index__special
+				.index__block
+					.index__items
+						.index-content
+							.swiper-wrapper
+								.swiper-slide
+									.index-content__inner
+										.index-content__title.title-1 Счастливая аллея
+										.index-content__txt Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+										a(href="").btn.btn--decor  
+												.btn__decor
+													+svg('arr')
+												.btn__txt подробнее
+								.swiper-slide
+									.index-content__inner
+										.index-content__title.title-1 Счастливая аллея
+										.index-content__txt Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+										a(href="").btn.btn--decor  
+												.btn__decor
+													+svg('arr')
+												.btn__txt подробнее
+							.swiper-pagination
+						.index-img
+							.swiper-wrapper
+								.swiper-slide
+									.index-img__pic
+										img(src="./img/index/p1.jpg" alt="")
+									a(href="").btn.btn--slide 
+										span Выбрать квартиру в этом доме
+								.swiper-slide
+									.index-img__pic
+										img(src="./img/index/p1.jpg" alt="")
+									a(href="").btn.btn--slide 
+										span Выбрать квартиру в этом доме
+			.index__special
+				.index__block
+					.index__items
+						.index__left
+							img(src="./img/index/p1.jpg" alt="")
+
+							.index__info 
+								.index__part
+									.index__num 13
+									.index__txt свободных квартир
+								.index__part
+									.index__num 2020
+									.index__txt завершение проекта
+
+						.index__right
+			.index__special
+
+							
+								
+
+block script
