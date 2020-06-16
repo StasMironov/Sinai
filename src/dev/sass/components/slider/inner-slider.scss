@@ -1,0 +1,52 @@
+.inner-slider {
+    width: 100%;
+    margin-top: 38px;
+
+    &__container {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        position: absolute;
+        height: 100%;
+        margin: 0 auto;
+        left: 0;
+        right: 0;
+        background-color: red;
+    }
+
+    &__title {
+        max-width: 411px;
+        color: white;
+        margin-right: 20px;
+    }
+
+    &__box {
+        display: flex;
+    }
+
+    &__cover {
+        display: flex;
+        padding-bottom: 84px;
+    }
+
+    .swiper-slide {
+        min-height: 960px;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+    }
+
+    .btn {
+        color: white;
+        margin-top: 0;
+        align-items: center;
+
+        &:after {
+            fill: white;
+        }
+
+        &__decor {
+            border: 1.5px solid rgba(216, 187, 84, .5);
+        }
+    }
+}

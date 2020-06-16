@@ -6,10 +6,6 @@ jQuery.fn.exists = function () {
 };
 
 $(function () {
-  $(window).on('resize load', function () {
-    $('.index__special').height($('.index__block').height());
-  });
-
   if ($('.index-content__txt').exists()) {
     var truncate = document.querySelectorAll(".index-content__txt");
 
@@ -24,57 +20,76 @@ $(function () {
 
   if ($('.index-content').exists() && $('.index-img').exists()) {
     try {
-      (function () {
-        var indexContent = new Swiper('.index-content', {
-          slidesPerView: 1,
-          spaceBetween: 10,
-          effect: 'fade',
-          fadeEffect: {
-            crossFade: true
-          },
-          touchRatio: 0,
-          pagination: {
-            el: '.swiper-pagination',
-            clickable: true
-          }
-        });
-        var indexImg = new Swiper('.index-img', {
-          slidesPerView: 1,
-          spaceBetween: 10,
-          effect: 'fade',
-          fadeEffect: {
-            crossFade: true
-          }
-        });
-        indexContent.controller.control = indexImg;
-        indexImg.controller.control = indexContent;
-        $('.swiper-wrapper').resize(function () {
-          $('.index__special').height($('.index-content').height());
-        });
-        var bullet = document.querySelectorAll('.swiper-pagination-bullet');
-        var slide = document.querySelectorAll('.index-content .swiper-slide');
-
-        var _loop = function _loop(_i) {
-          bullet[_i].onclick = function () {
-            for (var j = 0; j < slide.length; j++) {
-              if (_i == j) {
-                var h = slide[j].scrollHeight;
-                var p = slide[j].parentNode.parentNode;
-                console.log($(p).height() + 50); // $('.index__special').height($(p).height());
-              }
-            }
-          };
-        };
-
-        for (var _i = 0; _i < bullet.length; _i++) {
-          _loop(_i);
+      var indexContent = new Swiper('.index-content', {
+        slidesPerView: 1,
+        spaceBetween: 10,
+        effect: 'fade',
+        fadeEffect: {
+          crossFade: true
+        },
+        touchRatio: 0,
+        pagination: {
+          el: '.swiper-pagination',
+          clickable: true
         }
-
-        console.log(bullet);
-        console.log(slide);
-      })();
+      });
+      var indexImg = new Swiper('.index-img', {
+        slidesPerView: 1,
+        spaceBetween: 10,
+        effect: 'fade',
+        fadeEffect: {
+          crossFade: true
+        }
+      });
+      indexContent.controller.control = indexImg;
+      indexImg.controller.control = indexContent;
+      $('.swiper-wrapper').resize(function () {
+        $('.index__special').height($('.index-content').height());
+      });
     } catch (err) {
       console.log('Ошибка ' + err.name + ":" + err.message + "\n" + err.stack);
     }
   }
+
+  if ($('.index-project__contant').exists() && $('.index-project__img').exists()) {
+    try {
+      var projectContent = new Swiper('.index-project__contant', {
+        slidesPerView: 1,
+        spaceBetween: 10,
+        effect: 'fade',
+        fadeEffect: {
+          crossFade: true
+        },
+        touchRatio: 0
+      });
+      var projectImg = new Swiper('.index-project__img', {
+        slidesPerView: 1,
+        spaceBetween: 10,
+        effect: 'fade',
+        fadeEffect: {
+          crossFade: true
+        },
+        navigation: {
+          nextEl: '.index-project__link--next',
+          prevEl: '.index-project__link--prev'
+        }
+      });
+      projectContent.controller.control = projectImg;
+      projectImg.controller.control = projectContent;
+      $('.swiper-wrapper').resize(function () {
+        $('.index__special').height($('.index-content').height());
+      });
+    } catch (err) {
+      console.log('Ошибка ' + err.name + ":" + err.message + "\n" + err.stack);
+    }
+  }
+
+  var projectContent = new Swiper('.inner-slider', {
+    slidesPerView: 1,
+    spaceBetween: 10,
+    effect: 'fade',
+    fadeEffect: {
+      crossFade: true
+    },
+  });
 });

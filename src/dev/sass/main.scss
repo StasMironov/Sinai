@@ -22,9 +22,9 @@ html {
 }
 
 body {
-  font-family: 'Inter', sans-serif;
+  font-family: Inter;
   color: $basic;
-  font-weight: normal;
+  font-weight: 400;
   overflow: hidden;
   font-size: 1rem;
   line-height: 1.5rem;
@@ -92,23 +92,16 @@ input::-ms-clear {
 }
 
 .title-2 {
-  font-size: 2.5rem;
-  line-height: 2.75rem;
-
-  @media (max-width:1023px) {
-    font-size: 2rem;
-    line-height: 2.125rem;
-  }
+  font-weight: bold;
+  font-size: 40px;
+  line-height: 120%;
+  color: $black-1;
 }
 
 .title-3 {
-  font-size: 2rem;
-  line-height: 2.125rem;
-
-  @media (max-width:1023px) {
-    font-size: 1.5rem;
-    line-height: 1.75rem;
-  }
+  font-weight: bold;
+  font-size: 30px;
+  line-height: 108%;
 }
 
 .title-4 {
@@ -129,5 +122,8 @@ input::-ms-clear {
 @import "./components/index/index.scss";
 @import "./components/index/index-img.scss";
 @import "./components/index/index-content.scss";
+@import "./components/index/index-project.scss";
+@import "./components/index/index-inner.scss";
 @import "./components/header.scss";
+@import "./components/slider/inner-slider.scss";
 @import "./components/btn.scss";

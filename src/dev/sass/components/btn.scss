@@ -63,7 +63,7 @@
         &:after {
             position: absolute;
             content: '';
-            background-image: url('../img/icon/arr.png');
+            background-image: url('../img/icon/arr.svg');
             background-repeat: no-repeat;
             left: 0;
             top: 0;
@@ -77,7 +77,7 @@
             position: absolute;
             height: 43px;
             width: 43px;
-            background-color: white;
+            background-color: transparent;
             left: 74px;
             top: 0;
             bottom: 0;
@@ -94,8 +94,12 @@
                 width: 104px;
                 transform: rotate(-45deg);
                 fill: $ochre;
-                top: 47px;
-                left: -65px;
+                top: 45.5px;
+                left: -64px;
+            }
+
+            &--white {
+                border-color: white;
             }
         }
 

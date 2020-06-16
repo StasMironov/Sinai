@@ -10,6 +10,18 @@ block content
 			.index__special
 				.index__block
 					.index__items
+						.index-img
+							.swiper-wrapper
+								.swiper-slide
+									.index-img__pic
+										img(src="./img/index/p1.jpg" alt="")
+									a(href="").btn.btn--slide 
+										span Выбрать квартиру в этом доме
+								.swiper-slide
+									.index-img__pic
+										img(src="./img/index/p2.jpg" alt="")
+									a(href="").btn.btn--slide 
+										span Выбрать квартиру в этом доме
 						.index-content
 							.swiper-wrapper
 								.swiper-slide
@@ -22,25 +34,14 @@ block content
 												.btn__txt подробнее
 								.swiper-slide
 									.index-content__inner
-										.index-content__title.title-1 Счастливая аллея
+										.index-content__title.title-1 Счастливая аллея2
 										.index-content__txt Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
 										a(href="").btn.btn--decor  
 												.btn__decor
 													+svg('arr')
 												.btn__txt подробнее
 							.swiper-pagination
-						.index-img
-							.swiper-wrapper
-								.swiper-slide
-									.index-img__pic
-										img(src="./img/index/p1.jpg" alt="")
-									a(href="").btn.btn--slide 
-										span Выбрать квартиру в этом доме
-								.swiper-slide
-									.index-img__pic
-										img(src="./img/index/p1.jpg" alt="")
-									a(href="").btn.btn--slide 
-										span Выбрать квартиру в этом доме
+						
 			.index__special
 				.index__block
 					.index__items
@@ -54,11 +55,147 @@ block content
 								.index__part
 									.index__num 2020
 									.index__txt завершение проекта
-
+								.index__btn
+									a(href="").index__func
+										<svg class="b-svg" width="30" height="18" viewBox="0 0 30 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+											<path d="M29.25 8.89344C29.25 10.9779 27.8204 12.9976 25.2241 14.5369C22.6442 16.0666 19.0311 17.0369 15 17.0369C10.9689 17.0369 7.35584 16.0666 4.7759 14.5369C2.17959 12.9976 0.75 10.9779 0.75 8.89344C0.75 6.80897 2.17959 4.7893 4.7759 3.24996C7.35584 1.72032 10.9689 0.75 15 0.75C19.0311 0.75 22.6442 1.72032 25.2241 3.24996C27.8204 4.7893 29.25 6.80897 29.25 8.89344Z" stroke="#D8BB54" stroke-width="1.5"/>
+											<path class="fill" d="M19.9055 8.89328C19.9055 12.2359 17.6048 14.7416 14.9997 14.7416C12.3947 14.7416 10.094 12.2359 10.094 8.89328C10.094 5.55069 12.3947 3.04492 14.9997 3.04492C17.6048 3.04492 19.9055 5.55069 19.9055 8.89328Z" stroke="#D8BB54" stroke-width="1.5"/>
+										</svg>
+										.index__word О комплексе
 						.index__right
+							.index__status
+								img(src="./img/icon/ok.png" alt="")
+								.index__st Сдаётся
+							.title-2 Счастливая аллея
+							.index-content__txt Комплекс расположен на экологически чистом районе города Магнитогорска, пересечение ул. Жукова и 50 лет Магнитки. Большое количество детских дошкольных, общеобразовательных и досуговых учреждений, школы по изучению иностранных языков.
+							a(href="").btn.btn--decor  
+												.btn__decor
+													+svg('arr')
+												.btn__txt подробнее
 			.index__special
+				.index__block
+					.index__items
+						.index__left
+							img(src="./img/index/p2.jpg" alt="")
+							.index__info 
+								.index__part
+									.index__num 13
+									.index__txt свободных квартир
+								.index__part
+									.index__num 2020
+									.index__txt завершение проекта
+								.index__btn
+									a(href="").index__func
+										<svg class="b-svg" width="30" height="18" viewBox="0 0 30 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+											<path d="M29.25 8.89344C29.25 10.9779 27.8204 12.9976 25.2241 14.5369C22.6442 16.0666 19.0311 17.0369 15 17.0369C10.9689 17.0369 7.35584 16.0666 4.7759 14.5369C2.17959 12.9976 0.75 10.9779 0.75 8.89344C0.75 6.80897 2.17959 4.7893 4.7759 3.24996C7.35584 1.72032 10.9689 0.75 15 0.75C19.0311 0.75 22.6442 1.72032 25.2241 3.24996C27.8204 4.7893 29.25 6.80897 29.25 8.89344Z" stroke="#D8BB54" stroke-width="1.5"/>
+											<path class="fill" d="M19.9055 8.89328C19.9055 12.2359 17.6048 14.7416 14.9997 14.7416C12.3947 14.7416 10.094 12.2359 10.094 8.89328C10.094 5.55069 12.3947 3.04492 14.9997 3.04492C17.6048 3.04492 19.9055 5.55069 19.9055 8.89328Z" stroke="#D8BB54" stroke-width="1.5"/>
+										</svg>
+										.index__word О комплексе
+						.index__right
+							.index__status
+								img(src="./img/icon/el.png" alt="")
+								.index__st Строится
+							.title-2 ЖК «Яблоневый сад»
+							.index-content__txt На прилегающей к комплексу территории расположена удобная детская и спортивная площадка, на которой вы и ваши ваши дети могут с удовольствием проводить свободное время. В нашем доме нет мусоропровода!
+							a(href="").btn.btn--decor  
+												.btn__decor
+													+svg('arr')
+												.btn__txt подробнее
+			.index__special
+				.index__block
+					.index__items
+						.index__left
+							img(src="./img/index/p3.jpg" alt="")
 
-							
+							.index__info 
+								.index__part
+									.index__num 13
+									.index__txt свободных квартир
+								.index__part
+									.index__num 2020
+									.index__txt завершение проекта
+								.index__btn
+									a(href="").index__func
+										<svg class="b-svg" width="30" height="18" viewBox="0 0 30 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+											<path d="M29.25 8.89344C29.25 10.9779 27.8204 12.9976 25.2241 14.5369C22.6442 16.0666 19.0311 17.0369 15 17.0369C10.9689 17.0369 7.35584 16.0666 4.7759 14.5369C2.17959 12.9976 0.75 10.9779 0.75 8.89344C0.75 6.80897 2.17959 4.7893 4.7759 3.24996C7.35584 1.72032 10.9689 0.75 15 0.75C19.0311 0.75 22.6442 1.72032 25.2241 3.24996C27.8204 4.7893 29.25 6.80897 29.25 8.89344Z" stroke="#D8BB54" stroke-width="1.5"/>
+											<path class="fill" d="M19.9055 8.89328C19.9055 12.2359 17.6048 14.7416 14.9997 14.7416C12.3947 14.7416 10.094 12.2359 10.094 8.89328C10.094 5.55069 12.3947 3.04492 14.9997 3.04492C17.6048 3.04492 19.9055 5.55069 19.9055 8.89328Z" stroke="#D8BB54" stroke-width="1.5"/>
+										</svg>
+										.index__word О комплексе
+						.index__right
+							.index__status
+								img(src="./img/icon/ok.png" alt="")
+								.index__st Сдаётся
+							.title-2 ЖК «Спортивный»
+							.index-content__txt Не будем забывать и про основную проблему 21 века — парковочные места. Жильцы нашего дома имеют возможность припарковать свое транспортное средство по всему периметру дома. Парковочные места — асфальтированы, в зимнее время ведется уборка придомовой территории.
+							a(href="").btn.btn--decor  
+												.btn__decor
+													+svg('arr')
+												.btn__txt подробнее
+	.index-project
+		.index-project__container.b-container
+			.index-project__title.title-3 Реализованные проекты Синай-групп
+		.index-project__inner
+			.index-project__container.b-container
+				.index-project__special
+						.index-project__block
+							.index__items
+								.index-project__img
+									.swiper-wrapper
+										.swiper-slide
+											.index-img__pic
+												img(src="./img/index/p1.jpg" alt="")
+										.swiper-slide
+											.index-img__pic
+												img(src="./img/index/p1.jpg" alt="")
+									.index-project__wrapper
+										.index-project__link.index-project__link--next
+											+svg('arr_sm')
+										.index-project__link.index-project__link--prev
+											+svg('arr_sm')
+								.index-project__contant
+									.swiper-wrapper
+										.swiper-slide
+											.index-content__inner
+												.title-2 ЖК «Спортивный»
+												.index-content__txt Наш дом выгодно отличается от типовой застройки данного района. В первую очередь – это уникальный архитектурный облик. Во – вторых – переменная этажность. Наш дом имеет 3 подъезда – 10/14/16 этажей.Наш дом выгодно отличается от типовой застройки данного района. В первую очередь это уникальный архитектурный облик. Во-вторых – переменная этажность. Наш дом имеет 3 подъезда – 10/14/16 этажей.
+												a(href="").btn.btn--decor  
+														.btn__decor
+															+svg('arr')
+														.btn__txt подробнее
+										.swiper-slide
+											.index-content__inner
+												.title-2 ЖК «Спортивный»
+												.index-content__txt Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+												a(href="").btn.btn--decor  
+														.btn__decor
+															+svg('arr')
+														.btn__txt подробнее
+	.index-inner
+		.b-container
+			.index-project__title.title-3 Внутренняя атмосфера наших квартир
+		.inner-slider
+			.swiper-wrapper
+				.swiper-slide(style="background-image: url(./img/index/p4.jpg)")
+					.inner-slider__container.b-container
+						.inner-slider__box
+							.inner-slider__cover
+								.inner-slider__title.title-2 Аппартаменты на 50 лет Магнитки
+								a(href="").btn.btn--decor  
+									.btn__decor.btn__decor--white
+										+svg('arr')
+									.btn__txt Выбрать планировку в этом доме
+							.inner-slider__wrapper
+								.inner-slider__num
+								.inner-slider__pagination
+									.index-project__link.index-project__link--next
+										+svg('arr_sm')
+									.index-project__link.index-project__link--prev
+										+svg('arr_sm')
+
+
+	div(style="height: 150px")
+
+		
 								
 
 block script

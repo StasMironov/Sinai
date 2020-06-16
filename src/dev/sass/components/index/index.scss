@@ -1,23 +1,45 @@
 .index {
     &__block {
         position: absolute;
-        min-height: 684px;
-        width: 1560px;
+        width: calc(100% + 360px);
     }
 
     &__special {
         position: relative;
+        min-height: 684px;
 
         &:nth-child(2n) {
             .index__block {
                 right: 0;
             }
         }
+
+        &:not(:first-child) {
+            min-height: 766px;
+            margin-top: 71px;
+        }
+
+        &:nth-child(odd) {
+            .index__items {
+                flex-direction: row-reverse;
+            }
+
+            .index__left {
+                margin-right: 0;
+            }
+
+            .index__right {
+                margin-right: 122px;
+            }
+
+            .index__info {
+                right: 616px;
+            }
+        }
     }
 
     &__items {
         display: flex;
-        justify-content: space-between;
     }
 
     &__container {
@@ -29,12 +51,21 @@
         height: 710px;
         max-width: 950px;
         width: 100%;
+        margin-right: 122px;
 
         img {
             height: 100%;
             width: 100%;
             object-fit: cover;
         }
+    }
+
+    &__right {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        max-width: 472px;
+        width: 100%;
     }
 
     &__info {
@@ -47,15 +78,74 @@
         bottom: 0;
         right: 0;
         color: white;
+        padding: 59px 130px 61px 69px;
+        bottom: -57px;
+        right: -52px;
     }
 
     &__num {
         font-size: 59px;
         line-height: 71px;
+        font-weight: bold;
     }
 
     &__txt {
         font-size: 16px;
         line-height: 26px;
     }
+
+
+    &__func {
+        display: flex;
+        align-items: center;
+
+        .b-svg {
+            margin-right: 12px;
+
+
+            .fill {
+                fill: transparent;
+                transition: fill 400ms ease;
+            }
+        }
+
+
+        &:hover .fill {
+            fill: $ochre;
+        }
+    }
+
+    &__part {
+        &:not(:first-child) {
+            margin-top: 12px;
+        }
+    }
+
+    &__btn {
+        margin-top: 30px;
+    }
+
+    &__word {
+        font-weight: 1;
+        font-size: 18px;
+        line-height: 30px;
+        text-transform: uppercase;
+    }
+
+    &__status {
+        display: flex;
+        align-items: center;
+        position: relative;
+        font-weight: bold;
+        font-size: 14px;
+        line-height: 30px;
+        padding-left: 5px;
+        text-transform: uppercase;
+        transform: translateY(-13px);
+
+        img {
+            margin-right: 11px;
+        }
+    }
+
 }

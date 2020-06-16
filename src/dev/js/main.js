@@ -5,11 +5,6 @@ jQuery.fn.exists = function () {
 
 $(() => {
 
-    $(window).on('resize load', function () {
-        $('.index__special').height($('.index__block').height());
-    });
-
-
     if ($('.index-content__txt').exists()) {
         let truncate = document.querySelectorAll(".index-content__txt");
 
@@ -54,28 +49,49 @@ $(() => {
                 $('.index__special').height($('.index-content').height());
             });
 
-            let bullet = document.querySelectorAll('.swiper-pagination-bullet');
-            let slide = document.querySelectorAll('.index-content .swiper-slide');
-
-            for (let i = 0; i < bullet.length; i++) {
-                bullet[i].onclick = function () {
-                    for (let j = 0; j < slide.length; j++) {
-                        if (i == j) {
-                            let h = slide[j].scrollHeight;
-                            let p = slide[j].parentNode.parentNode;
-
-                            console.log($(p).height() + 50);
-                            // $('.index__special').height($(p).height());
-                        }
-                    }
-                }
-            }
-            console.log(bullet);
-            console.log(slide);
-
         } catch (err) {
             console.log('Ошибка ' + err.name + ":" + err.message + "\n" + err.stack);
         }
     }
+
+
+    if ($('.index-project__contant').exists() && $('.index-project__img').exists()) {
+        try {
+            let projectContent = new Swiper('.index-project__contant', {
+                slidesPerView: 1,
+                spaceBetween: 10,
+                effect: 'fade',
+                fadeEffect: {
+                    crossFade: true
+                },
+                touchRatio: 0,
+            });
+
+            let projectImg = new Swiper('.index-project__img', {
+                slidesPerView: 1,
+                spaceBetween: 10,
+                effect: 'fade',
+                fadeEffect: {
+                    crossFade: true
+                },
+                navigation: {
+                    nextEl: '.index-project__link--next',
+                    prevEl: '.index-project__link--prev'
+                },
+            });
+
+            projectContent.controller.control = projectImg;
+            projectImg.controller.control = projectContent;
+
+
+            $('.swiper-wrapper').resize(function () {
+                $('.index__special').height($('.index-content').height());
+            });
+        } catch (err) {
+            console.log('Ошибка ' + err.name + ":" + err.message + "\n" + err.stack);
+        }
+    }
+
+
 
 });

@@ -1,0 +1,149 @@
+.index-project {
+
+    margin-top: 71px;
+
+    &__title {
+        line-height: 43px;
+    }
+
+    &__block {
+        position: absolute;
+        width: 1560px;
+    }
+
+    &__inner {
+        margin-top: 32px;
+        background-color: $black-1;
+
+        .title-2 {
+            color: white;
+        }
+    }
+
+    &__special {
+        position: relative;
+        min-height: 627px;
+
+        &:nth-child(2n) {
+            .index__block {
+                right: 0;
+            }
+        }
+
+        &:not(:first-child) {
+            min-height: 766px;
+            margin-top: 71px;
+        }
+
+        .index__items {
+            flex-direction: row-reverse;
+        }
+    }
+
+    &__wrapper {
+        position: absolute;
+        display: flex;
+        width: 183px;
+        height: 102px;
+        background-color: $black-1;
+        bottom: 0;
+        z-index: 1;
+    }
+
+    &__link {
+        position: relative;
+        height: 100%;
+        width: 50%;
+        background-color: transparent;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+
+        .b-svg {
+            width: 26px;
+            height: 10px;
+            fill: white;
+        }
+
+        &--prev {
+            transform: scale(-1, 1);
+            transform-origin: center;
+        }
+    }
+
+    &__img {
+        position: relative;
+        max-width: 950px;
+        width: 100%;
+        overflow: hidden;
+
+        &__pic {
+            height: 625px;
+            max-width: 950px;
+        }
+
+        .swiper-slide {
+            position: relative;
+            height: 100%;
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+    }
+
+    &__contant {
+        position: relative;
+        max-width: 488px;
+        width: 100%;
+        margin-right: 122px;
+        overflow: hidden;
+        padding-bottom: 55px;
+        box-sizing: border-box;
+        color: $gray-1;
+        min-height: 627px;
+
+        &__txt {
+            margin-top: 8px;
+        }
+
+        &__inner {
+            margin-top: 115px;
+        }
+
+        .swiper-slide {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 0 14px 0;
+        }
+
+        .swiper-pagination-bullet {
+            width: 16px;
+            height: 16px;
+            transform: rotate(45deg);
+            border-radius: 0 !important;
+            background-color: $ochre;
+            opacity: 0.5;
+
+            &:not(:last-child) {
+                margin-right: 13px;
+            }
+        }
+
+        .swiper-pagination {
+            position: relative;
+            display: flex;
+            // margin-top: 135px;
+            margin-left: 4px;
+        }
+
+        .swiper-pagination-bullet-active {
+            opacity: 1;
+        }
+    }
+}
