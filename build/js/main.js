@@ -62,7 +62,8 @@ $(function () {
         },
         touchRatio: 0
       });
-      var projectImg = new Swiper('.index-project__img', {
+
+      var _projectImg = new Swiper('.index-project__img', {
         slidesPerView: 1,
         spaceBetween: 10,
         effect: 'fade',
@@ -74,8 +75,9 @@ $(function () {
           prevEl: '.index-project__link--prev'
         }
       });
-      projectContent.controller.control = projectImg;
-      projectImg.controller.control = projectContent;
+
+      projectContent.controller.control = _projectImg;
+      _projectImg.controller.control = projectContent;
       $('.swiper-wrapper').resize(function () {
         $('.index__special').height($('.index-content').height());
       });
@@ -84,12 +86,16 @@ $(function () {
     }
   }
 
-  var projectContent = new Swiper('.inner-slider', {
+  var projectImg = new Swiper('.inner-slider', {
     slidesPerView: 1,
     spaceBetween: 10,
     effect: 'fade',
     fadeEffect: {
       crossFade: true
     },
+    navigation: {
+      nextEl: '.inner-slider__link--next',
+      prevEl: '.inner-slider__link--prev'
+    }
   });
 });

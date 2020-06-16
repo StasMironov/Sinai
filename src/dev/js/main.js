@@ -5,6 +5,7 @@ jQuery.fn.exists = function () {
 
 $(() => {
 
+
     if ($('.index-content__txt').exists()) {
         let truncate = document.querySelectorAll(".index-content__txt");
 
@@ -91,6 +92,19 @@ $(() => {
             console.log('Ошибка ' + err.name + ":" + err.message + "\n" + err.stack);
         }
     }
+
+    let projectImg = new Swiper('.inner-slider', {
+        slidesPerView: 1,
+        spaceBetween: 10,
+        effect: 'fade',
+        fadeEffect: {
+            crossFade: true
+        },
+        navigation: {
+            nextEl: '.inner-slider__link--next',
+            prevEl: '.inner-slider__link--prev'
+        },
+    });
 
 
 

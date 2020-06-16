@@ -148,9 +148,9 @@ block content
 											.index-img__pic
 												img(src="./img/index/p1.jpg" alt="")
 									.index-project__wrapper
-										.index-project__link.index-project__link--next
-											+svg('arr_sm')
 										.index-project__link.index-project__link--prev
+											+svg('arr_sm')
+										.index-project__link.index-project__link--next
 											+svg('arr_sm')
 								.index-project__contant
 									.swiper-wrapper
@@ -187,10 +187,30 @@ block content
 							.inner-slider__wrapper
 								.inner-slider__num
 								.inner-slider__pagination
-									.index-project__link.index-project__link--next
+									.inner-slider__link.inner-slider__link--prev
 										+svg('arr_sm')
-									.index-project__link.index-project__link--prev
+									.inner-slider__link.inner-slider__link--next
 										+svg('arr_sm')
+				.swiper-slide(style="background-image: url(./img/index/p2.jpg)")
+					.inner-slider__container.b-container
+						.inner-slider__box
+							.inner-slider__cover
+								.inner-slider__title.title-2 Test 2
+								a(href="").btn.btn--decor  
+									.btn__decor.btn__decor--white
+										+svg('arr')
+									.btn__txt Выбрать планировку в этом доме
+							.inner-slider__wrapper
+								.inner-slider__num
+								.inner-slider__pagination
+									.inner-slider__link.inner-slider__link--prev
+										+svg('arr_sm')
+									.inner-slider__link.inner-slider__link--next
+										+svg('arr_sm')
+	.index-example
+		.index-example__conyainer.b-container
+			.index-example__slider
+				
 
 
 	div(style="height: 150px")
