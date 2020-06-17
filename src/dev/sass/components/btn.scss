@@ -58,55 +58,192 @@
         text-transform: uppercase;
         margin-top: 55px;
         color: $ochre;
-        padding-left: 140px;
 
-        &:after {
+        .btn__cover {
+            display: block;
+            position: relative;
+            width: 126px;
+            margin-right: 15px;
+        }
+
+        .btn__line {
             position: absolute;
-            content: '';
-            background-image: url('../img/icon/arr.svg');
-            background-repeat: no-repeat;
             left: 0;
             top: 0;
             bottom: 0;
             margin: auto;
             width: 101px;
             height: 12px;
+
+            .b-svg {
+                position: absolute;
+                height: 100%;
+                width: 100%;
+                top: 0;
+                bottom: 0;
+                right: 0;
+                left: 0;
+                margin: auto;
+                fill: $ochre;
+            }
+        }
+
+        .btn__figure {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            margin: auto;
+            transition: .3s;
+
+            .b-svg {
+                stroke: $ochre;
+                width: 100%;
+                height: 100%;
+                fill: transparent;
+                transition: fill 400ms ease;
+            }
         }
 
         .btn__decor {
             position: absolute;
-            height: 43px;
-            width: 43px;
-            background-color: transparent;
-            left: 74px;
+            width: 60px;
+            height: 60px;
+            right: 126px;
             top: 0;
             bottom: 0;
+            left: 1px;
             margin: auto;
-            transform: rotate(45deg);
-            border: 1.5px solid rgba(216, 187, 84, 0.5);
             overflow: hidden;
-            z-index: 1;
-            transition: .3s;
+
+
 
             .b-svg {
                 position: absolute;
+                width: 101px;
                 height: 12px;
-                width: 104px;
-                transform: rotate(-45deg);
+                stroke: none;
                 fill: $ochre;
-                top: 45.5px;
-                left: -64px;
-            }
-
-            &--white {
-                border-color: white;
+                top: 0;
+                bottom: 0;
+                margin: auto;
+                left: -66px;
+                transition: fill 400ms ease;
             }
         }
 
         &:hover {
-            .btn__decor {
-                background-color: $ochre;
+            .btn__figure {
 
+                .b-svg {
+                    fill: $ochre;
+                }
+            }
+
+            .btn__decor {
+                .b-svg {
+                    fill: white;
+                }
+            }
+        }
+    }
+
+
+
+    &--white {
+        position: relative;
+        display: inline-flex;
+        font-weight: bold;
+        font-size: 18px;
+        line-height: 30px;
+        text-transform: uppercase;
+        margin-top: 55px;
+        color: white;
+
+        .btn__cover {
+            display: block;
+            position: relative;
+            width: 126px;
+            margin-right: 15px;
+        }
+
+        .btn__line {
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            margin: auto;
+            width: 101px;
+            height: 12px;
+
+            .b-svg {
+                position: absolute;
+                height: 100%;
+                width: 100%;
+                top: 0;
+                bottom: 0;
+                right: 0;
+                left: 0;
+                margin: auto;
+                fill: white;
+            }
+        }
+
+        .btn__figure {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            margin: auto;
+            transition: .3s;
+
+            .b-svg {
+                stroke: white;
+                width: 100%;
+                height: 100%;
+                fill: transparent;
+                transition: fill 400ms ease;
+            }
+        }
+
+        .btn__decor {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            right: 126px;
+            top: 0;
+            bottom: 0;
+            left: 1px;
+            margin: auto;
+            overflow: hidden;
+
+            .b-svg {
+                position: absolute;
+                width: 101px;
+                height: 12px;
+                stroke: none;
+                fill: white;
+                top: 0;
+                bottom: 0;
+                margin: auto;
+                left: -66px;
+                transition: fill 400ms ease;
+            }
+        }
+
+        &:hover {
+            .btn__figure {
+
+                .b-svg {
+                    fill: $ochre;
+                }
+            }
+
+            .btn__decor {
                 .b-svg {
                     fill: white;
                 }

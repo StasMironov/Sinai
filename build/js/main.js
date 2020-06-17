@@ -6,6 +6,8 @@ jQuery.fn.exists = function () {
 };
 
 $(function () {
+  lightGallery(document.getElementById('lightgallery-cer'));
+
   if ($('.index-content__txt').exists()) {
     var truncate = document.querySelectorAll(".index-content__txt");
 
@@ -82,5 +84,63 @@ $(function () {
     } catch (err) {
       console.log('Ошибка ' + err.name + ":" + err.message + "\n" + err.stack);
     }
+  }
+
+  if ($('.inner-slider').exists()) {
+    try {
+      var _projectImg = new Swiper('.inner-slider', {
+        slidesPerView: 1,
+        spaceBetween: 10,
+        effect: 'fade',
+        fadeEffect: {
+          crossFade: true
+        },
+        navigation: {
+          nextEl: '.inner-slider__link--next',
+          prevEl: '.inner-slider__link--prev'
+        },
+        pagination: {
+          el: '.inner-slider__num',
+          type: "custom",
+          renderCustom: function renderCustom(swiper, current, total) {
+            var i = current ? current : 0;
+            return "<span>".concat(("" + i).slice(-2), "</span>") + "/<span>".concat(("" + total).slice(-2), "</span>");
+          }
+        }
+      });
+    } catch (err) {
+      console.log('Ошибка ' + err.name + ":" + err.message + "\n" + err.stack);
+    }
+  }
+
+  if ($('.index-project__example').exists()) {
+    var projectEx = new Swiper('.index-project__example', {
+      slidesPerView: 3,
+      spaceBetween: 20,
+      effect: 'slide',
+      fadeEffect: {
+        crossFade: true
+      },
+      navigation: {
+        nextEl: '.index-project__arr--next',
+        prevEl: '.index-project__arr--prev'
+      }
+    });
+  }
+
+  if ($('.index-certificate__cer').exists()) {
+    console.log(1);
+    var projectCer = new Swiper('.index-certificate__cer', {
+      slidesPerView: 4,
+      spaceBetween: 50,
+      effect: 'slide',
+      fadeEffect: {
+        crossFade: true
+      },
+      navigation: {
+        nextEl: '.index-project__arr--snext',
+        prevEl: '.index-project__arr--sprev'
+      }
+    });
   }
 });

@@ -1,6 +1,28 @@
 .inner-slider {
+    position: relative;
     width: 100%;
     margin-top: 38px;
+
+    &__num {
+        display: flex;
+        justify-content: center;
+        color: white;
+        font-weight: bold;
+        font-size: 50px;
+        line-height: 108%;
+    }
+
+    &__inner {
+        align-self: flex-end;
+    }
+
+    &__wrapper {
+        width: 183px;
+        height: 102px;
+        background-color: $black-1;
+        align-self: flex-end;
+        margin-top: 6px;
+    }
 
     &__container {
         display: flex;
@@ -11,22 +33,65 @@
         margin: 0 auto;
         left: 0;
         right: 0;
-        background-color: red;
     }
 
     &__title {
         max-width: 411px;
+        width: 100%;
         color: white;
         margin-right: 20px;
     }
 
     &__box {
         display: flex;
+        justify-content: space-between;
     }
 
     &__cover {
         display: flex;
+        min-height: 180px;
+        align-items: center;
         padding-bottom: 84px;
+        max-width: 936px;
+        width: 100%;
+    }
+
+    &__pagination {
+        height: 100%;
+        display: flex;
+    }
+
+    &__link {
+        position: relative;
+        height: 100%;
+        width: 50%;
+        background-color: transparent;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+
+        .b-svg {
+            position: relative;
+            width: 26px;
+            height: 10px;
+            fill: white;
+        }
+
+        &--next {
+            transform: scale(-1, 1);
+            transform-origin: center;
+
+            .b-svg {
+                right: -5px;
+            }
+        }
+
+        &--prev {
+            .b-svg {
+                left: 5px;
+            }
+        }
     }
 
     .swiper-slide {
@@ -37,16 +102,11 @@
     }
 
     .btn {
-        color: white;
-        margin-top: 0;
+        margin-top: 16px;
         align-items: center;
 
-        &:after {
-            fill: white;
-        }
-
-        &__decor {
-            border: 1.5px solid rgba(216, 187, 84, .5);
+        &__txt {
+            color: white;
         }
     }
 }

@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "main": "gulpfile.js",
   "dependencies": {
+    "lightgallery.js": "^1.2.0",
     "object-fit-polyfill": "^0.1.0",
     "svgxuse": "^1.2.6",
     "swiper": "^5.4.3"

@@ -96,6 +96,7 @@ input::-ms-clear {
   font-size: 40px;
   line-height: 120%;
   color: $black-1;
+  letter-spacing: 1.3px;
 }
 
 .title-3 {
@@ -105,13 +106,10 @@ input::-ms-clear {
 }
 
 .title-4 {
-  font-size: 1.75rem;
-  line-height: 2rem;
-
-  @media (max-width:1023px) {
-    font-size: 1.125rem;
-    line-height: 1.25rem;
-  }
+  font-weight: bold;
+  font-size: 26px;
+  line-height: 28px;
+  color: white
 }
 
 .b-svg {
@@ -119,11 +117,17 @@ input::-ms-clear {
   height: auto;
 }
 
+button {
+  width: auto;
+}
+
 @import "./components/index/index.scss";
 @import "./components/index/index-img.scss";
 @import "./components/index/index-content.scss";
 @import "./components/index/index-project.scss";
 @import "./components/index/index-inner.scss";
+@import "./components/index/index-certificate.scss";
+@import "./components/index/index-example.scss";
 @import "./components/header.scss";
 @import "./components/slider/inner-slider.scss";
 @import "./components/btn.scss";

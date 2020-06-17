@@ -1,0 +1,76 @@
+.index-example {
+    background-color: $black-1;
+
+    &__container {
+        padding-top: 82px;
+    }
+
+    &__slider {
+        margin-top: 71px;
+    }
+
+    &__title {
+        color: white;
+        letter-spacing: 1.4px;
+    }
+
+    &__grid {
+        display: flex;
+    }
+
+    &__left {
+        width: 645px;
+        height: 493px;
+        margin-right: 67px;
+
+        img {
+            height: 100%;
+            width: 100%;
+            object-fit: contain;
+        }
+    }
+
+    &__right {
+        padding-top: 30px;
+        width: calc(100% - 645px - 67px);
+
+        .btn {
+            margin-top: 39px;
+            letter-spacing: .5px;
+        }
+    }
+
+    &__items {
+        display: flex;
+    }
+
+    &__item {
+        &:not(:last-child) {
+            margin-right: 32px;
+        }
+    }
+
+    &__header {
+        font-size: 16px;
+        line-height: 29px;
+        letter-spacing: 0.3px;
+        color: white;
+    }
+
+    &__info {
+        font-size: 16px;
+        line-height: 26px;
+        letter-spacing: 0.3px;
+        color: $gray-2;
+        margin-top: 4px;
+    }
+
+    &__txt {
+        font-size: 16px;
+        line-height: 26px;
+        color: $gray-1;
+        letter-spacing: 0.3px;
+        max-width: 431px;
+        margin-top: 31px;
+    }
+}
