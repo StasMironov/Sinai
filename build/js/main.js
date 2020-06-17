@@ -83,13 +83,4 @@ $(function () {
       console.log('Ошибка ' + err.name + ":" + err.message + "\n" + err.stack);
     }
   }
-
-  var projectContent = new Swiper('.inner-slider', {
-    slidesPerView: 1,
-    spaceBetween: 10,
-    effect: 'fade',
-    fadeEffect: {
-      crossFade: true
-    },
-  });
 });
