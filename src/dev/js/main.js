@@ -155,6 +155,65 @@ $(() => {
         });
     }
 
+    if ($('.index-example__slider').exists()) {
+        console.log(1);
+        let projectCer = new Swiper('.index-example__slider', {
+            slidesPerView: 1,
+            effect: 'fade',
+            fadeEffect: {
+                crossFade: true
+            },
+            navigation: {
+                nextEl: '.index-project__arr--ex_next',
+                prevEl: '.index-project__arr--ex_prev'
+            },
+        });
+    }
+
+    if ($('.index-news__slider').exists()) {
+        console.log(1);
+        let projectCer = new Swiper('.index-news__slider', {
+            slidesPerView: 'auto',
+            spaceBetween: 40,
+            effect: 'slide',
+            loop: true,
+            autoplay: {
+                delay: 5000
+            },
+            fadeEffect: {
+                crossFade: true
+            },
+            pagination: {
+                el: '.index-news__pagination',
+                type: 'progressbar',
+            },
+        });
+    }
+
+
+
+    let ns4 = (document.layers) ? true : false;
+    let ie4 = (document.all) ? true : false;
+
+    var element = document.getElementById('test');
+    var mouse_x = 0;
+    var mouse_y = 0;
+
+
+    element.addEventListener('mousemove',
+        function (e) {
+
+            mouse_x = e.clientX - element.offsetLeft - 450;
+            mouse_y = e.clientY - element.offsetTop + 325;
+
+            console.log(`x ${mouse_x }`);
+            console.log(`y ${mouse_y}`);
+
+            document.getElementById('test').style.backgroundPosition = '0 0,0 0,' + mouse_x + 'px ' + mouse_y + 'px,0 0';
+        }
+    )
+
+
 
 
 

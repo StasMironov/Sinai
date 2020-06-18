@@ -1,0 +1,15 @@
+.logo {
+    display: inline-flex;
+    margin-right: 47px;
+
+    &__txt {
+        align-self: center;
+        font-size: 12px;
+        line-height: 19px;
+        letter-spacing: 0.3px;
+    }
+
+    &__pic {
+        margin-right: 8px;
+    }
+}

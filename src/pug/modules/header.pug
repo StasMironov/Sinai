@@ -1,2 +1,32 @@
 include ../mixins
 header.header
+    .header__container.b-container
+        .header__wrapper
+            a(href="javascript:void(0);").logo
+                .logo__pic
+                    img(src="./img/icon/logo.svg" alt="")
+                .logo__txt От идеи <br> до эксплуатации
+            .header__nav
+                .header__item.header__item--menu
+                    .header__link
+                            a(href="javascript:void(0);") О компании
+                            <i class="fas fa-chevron-down"></i>
+                    .header__sub
+                        //- a(href="javascript:void(0);").header__ref.header__ref--act Авиабилеты
+                        //- a(href="javascript:void(0);").header__ref Авиабилеты
+                        //- a(href="javascript:void(0);").header__ref Авиабилеты
+                .header__item
+                    .header__link
+                        a(href="javascript:void(0);") Проекты
+                .header__item
+                    .header__link
+                        a(href="javascript:void(0);") Ход строительства
+                .header__item
+                    .header__link
+                        a(href="javascript:void(0);") Вторичное жилье
+                .header__item
+                    .header__link
+                        a(href="javascript:void(0);") Земельные участки
+            .header__phone
+                .header__link
+                    a(href="tel:+7 (900) 000-00-00").b-header__tel +7 (900) 000-00-00

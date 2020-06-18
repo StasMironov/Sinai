@@ -2,7 +2,7 @@
     background-color: $black-1;
 
     &__container {
-        padding-top: 82px;
+        padding-top: 101px;
     }
 
     &__slider {
@@ -72,5 +72,11 @@
         letter-spacing: 0.3px;
         max-width: 431px;
         margin-top: 31px;
+    }
+
+    .index-project__wrapper {
+        position: relative;
+        margin-top: -22px;
+        margin-left: auto;
     }
 }

@@ -1,12 +1,25 @@
 .index {
     &__block {
+        display: flex;
+        justify-content: space-between;
         position: absolute;
         width: calc(100% + 360px);
+        height: 100%;
+
+
+        @media(max-width: 992px) {
+            position: relative;
+            width: 100%;
+        }
     }
 
     &__special {
         position: relative;
         min-height: 684px;
+
+        @media(max-width: 1024px) {
+            min-height: 560px;
+        }
 
         &:nth-child(2n) {
             .index__block {
@@ -22,6 +35,10 @@
         &:nth-child(odd) {
             .index__items {
                 flex-direction: row-reverse;
+
+                @media(max-width: 992px) {
+                    flex-direction: column;
+                }
             }
 
             .index__left {
@@ -40,6 +57,11 @@
 
     &__items {
         display: flex;
+
+        @media(max-width: 992px) {
+            max-width: 100%;
+            flex-direction: column;
+        }
     }
 
     &__container {
@@ -61,11 +83,16 @@
     }
 
     &__right {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
+        align-items: normal;
+        justify-content: normal;
+        padding-top: 217px;
         max-width: 472px;
         width: 100%;
+
+
+        .btn {
+            margin-top: 44px;
+        }
     }
 
     &__info {
