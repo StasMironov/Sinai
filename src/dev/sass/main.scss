@@ -40,8 +40,8 @@ body {
   padding: 0 20px;
 
 
-  @media (max-width:1023px) {
-    padding: 0 15px 0px;
+  @media (max-width:1024px) {
+    padding: 0 20px 0px;
   }
 }
 
@@ -90,7 +90,7 @@ input::-ms-clear {
   line-height: 108%;
   color: $black-1;
 
-  @media(max-width: 992px) {
+  @media(max-width: 1024px) {
     font-weight: bold;
     font-size: 40px;
     line-height: 43px;
@@ -104,6 +104,13 @@ input::-ms-clear {
   line-height: 120%;
   color: $black-1;
   letter-spacing: 1.3px;
+
+  @media(max-width: 1024px) {
+    font-size: 32px;
+    line-height: 38px;
+    letter-spacing: 1px;
+  }
+
 }
 
 .title-3 {
@@ -116,7 +123,13 @@ input::-ms-clear {
   font-weight: bold;
   font-size: 26px;
   line-height: 28px;
-  color: white
+  color: white;
+
+  @media(max-width: 1024px) {
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 17px;
+  }
 }
 
 .b-svg {

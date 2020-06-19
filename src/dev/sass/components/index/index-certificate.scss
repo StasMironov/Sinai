@@ -6,15 +6,26 @@
     }
 
     &__left {
-        max-width: 454px;
+        max-width: 685px;
         width: 100%;
-        margin-right: 56px;
+        margin-right: 37px;
+        width: calc(100% - 685px - 37px);
+
+        @media(max-width: 1235px) {
+            max-width: 420px;
+            margin-right: 37px;
+            width: calc(100% - 420px - 37px);
+        }
     }
 
     &__right {
-        max-width: 650px;
+        max-width: 685px;
         width: 100%;
         padding-top: 10px;
+
+        @media(max-width: 1235px) {
+            max-width: 420px;
+        }
 
         .index-project__wrapper {
             position: relative;
@@ -42,9 +53,13 @@
 
     &__cer {
         position: absolute;
-        width: calc(100% + 337px);
+        width: calc(100% + 318px);
         height: 100%;
         overflow: hidden;
+
+        @media(max-width: 1235px) {
+            width: calc(100% + 500px);
+        }
     }
 
     .swiper-slide {

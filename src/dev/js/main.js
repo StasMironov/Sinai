@@ -57,14 +57,18 @@ $(() => {
     }
 
 
-    if ($('.index-project__contant').exists() && $('.index-project__img').exists()) {
+    if ($('.index-project__content').exists() && $('.index-project__img').exists()) {
         try {
-            let projectContent = new Swiper('.index-project__contant', {
+            let projectContent = new Swiper('.index-project__content', {
                 slidesPerView: 1,
                 spaceBetween: 10,
                 effect: 'fade',
                 fadeEffect: {
                     crossFade: true
+                },
+                pagination: {
+                    el: '.project-pagination',
+                    clickable: true
                 },
                 touchRatio: 0,
             });
@@ -127,6 +131,7 @@ $(() => {
             slidesPerView: 3,
             spaceBetween: 20,
             effect: 'slide',
+            loop: true,
             fadeEffect: {
                 crossFade: true
             },
