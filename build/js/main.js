@@ -53,14 +53,18 @@ $(function () {
     }
   }
 
-  if ($('.index-project__contant').exists() && $('.index-project__img').exists()) {
+  if ($('.index-project__content').exists() && $('.index-project__img').exists()) {
     try {
-      var projectContent = new Swiper('.index-project__contant', {
+      var projectContent = new Swiper('.index-project__content', {
         slidesPerView: 1,
         spaceBetween: 10,
         effect: 'fade',
         fadeEffect: {
           crossFade: true
+        },
+        pagination: {
+          el: '.project-pagination',
+          clickable: true
         },
         touchRatio: 0
       });
@@ -118,6 +122,7 @@ $(function () {
       slidesPerView: 3,
       spaceBetween: 20,
       effect: 'slide',
+      loop: true,
       fadeEffect: {
         crossFade: true
       },
@@ -132,14 +137,41 @@ $(function () {
     console.log(1);
     var projectCer = new Swiper('.index-certificate__cer', {
       slidesPerView: 4,
-      spaceBetween: 50,
+      spaceBetween: 42,
       effect: 'slide',
+      loop: true,
       fadeEffect: {
         crossFade: true
       },
       navigation: {
         nextEl: '.index-project__arr--snext',
         prevEl: '.index-project__arr--sprev'
+      },
+      breakpoints: {
+        922: {
+          slidesPerView: 4,
+          spaceBetween: 42
+        },
+        769: {
+          slidesPerView: 4,
+          spaceBetween: 42
+        },
+        768: {
+          slidesPerView: 3,
+          spaceBetween: 42
+        },
+        501: {
+          slidesPerView: 3,
+          spaceBetween: 42
+        },
+        500: {
+          slidesPerView: 2,
+          spaceBetween: 8
+        },
+        320: {
+          slidesPerView: 2,
+          spaceBetween: 8
+        }
       }
     });
   }
@@ -148,24 +180,65 @@ $(function () {
     console.log(1);
 
     var _projectCer = new Swiper('.index-example__slider', {
-      slidesPerView: 4,
-      spaceBetween: 50,
-      effect: 'slide',
+      slidesPerView: 1,
+      effect: 'fade',
       fadeEffect: {
         crossFade: true
       },
       navigation: {
-        nextEl: '.index-project__arr--snext',
-        prevEl: '.index-project__arr--sprev'
+        nextEl: '.index-project__arr--ex_next',
+        prevEl: '.index-project__arr--ex_prev'
+      }
+    });
+  }
+
+  if ($('.index-news__slider').exists()) {
+    console.log(1);
+
+    var _projectCer2 = new Swiper('.index-news__slider', {
+      slidesPerView: 'auto',
+      spaceBetween: 40,
+      effect: 'slide',
+      loop: true,
+      autoplay: {
+        delay: 5000
+      },
+      fadeEffect: {
+        crossFade: true
       },
       pagination: {
-        el: '.inner-slider__num',
-        type: "custom",
-        renderCustom: function renderCustom(swiper, current, total) {
-          var i = current ? current : 0;
-          return "<span>".concat(("" + i).slice(-2), "</span>") + "/<span>".concat(("" + total).slice(-2), "</span>");
-        }
+        el: '.index-news__pagination',
+        type: 'progressbar'
       }
+    });
+  }
+
+  var ns4 = document.layers ? true : false;
+  var ie4 = document.all ? true : false;
+  var element = document.getElementById('test');
+  var mouse_x = 0;
+  var mouse_y = 0;
+  element.addEventListener('mousemove', function (e) {
+    mouse_x = e.clientX - element.offsetLeft - 450;
+    mouse_y = e.clientY - element.offsetTop + 325;
+    console.log("x ".concat(mouse_x));
+    console.log("y ".concat(mouse_y));
+    document.getElementById('test').style.backgroundPosition = '0 0,0 0,' + mouse_x + 'px ' + mouse_y + 'px,0 0';
+  });
+
+  if ($('.index-certificate__unique').exists()) {
+    setHeaderHeight('#lightgallery-cer .swiper-slide', '.index-certificate__unique');
+    $(window).on('resize load', function () {
+      setHeaderHeight('#lightgallery-cer .swiper-slide', '.index-certificate__unique');
+      console.log(1);
+    });
+  }
+
+  function setHeaderHeight(child, parent) {
+    var height = $(child).height();
+    $(parent).css({
+      height: height + "px" // приравниванием высоту header'a к высоте абсолютного элемента
+
     });
   }
 });

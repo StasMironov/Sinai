@@ -40,8 +40,12 @@ body {
   padding: 0 20px;
 
 
-  @media (max-width:1023px) {
-    padding: 0 15px 0px;
+  @media (max-width:1024px) {
+    padding: 0 20px 0px;
+  }
+
+  @media (max-width:640px) {
+    padding: 0 16px 0px;
   }
 }
 
@@ -89,6 +93,19 @@ input::-ms-clear {
   font-size: 50px;
   line-height: 108%;
   color: $black-1;
+
+  @media(max-width: 1024px) {
+    font-weight: bold;
+    font-size: 40px;
+    line-height: 43px;
+    letter-spacing: 1px;
+  }
+
+  @media(max-width: 640px) {
+    font-size: 35px;
+    line-height: 42px;
+    letter-spacing: 0.5px;
+  }
 }
 
 .title-2 {
@@ -97,19 +114,42 @@ input::-ms-clear {
   line-height: 120%;
   color: $black-1;
   letter-spacing: 1.3px;
+
+  @media(max-width: 1024px) {
+    font-size: 32px;
+    line-height: 38px;
+    letter-spacing: 1px;
+  }
+
+  @media(max-width: 640px) {
+    font-size: 30px;
+    line-height: 36px;
+    letter-spacing: 0.5px;
+  }
 }
 
 .title-3 {
   font-weight: bold;
   font-size: 30px;
   line-height: 108%;
+
+  @media(max-width: 640px) {
+    font-size: 24px;
+    line-height: 29px;
+  }
 }
 
 .title-4 {
   font-weight: bold;
   font-size: 26px;
   line-height: 28px;
-  color: white
+  color: white;
+
+  @media(max-width: 1024px) {
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 17px;
+  }
 }
 
 .b-svg {
@@ -121,6 +161,11 @@ button {
   width: auto;
 }
 
+#test {
+  background: linear-gradient(transparent, rgba(0, 0, 0, .8) 100%), url('http://s017.radikal.ru/i443/1508/44/6a78a290f954.png'), url('http://s45.radikal.ru/i109/1508/08/0c104c0f72c8.png') no-repeat, #000;
+  background-position: 0 0, 0 0, 100px 100px, 0 0;
+}
+
 @import "./components/index/index.scss";
 @import "./components/index/index-img.scss";
 @import "./components/index/index-content.scss";
@@ -128,6 +173,8 @@ button {
 @import "./components/index/index-inner.scss";
 @import "./components/index/index-certificate.scss";
 @import "./components/index/index-example.scss";
+@import "./components/index/index-news.scss";
 @import "./components/header.scss";
 @import "./components/slider/inner-slider.scss";
 @import "./components/btn.scss";
+@import "./components/logo.scss";

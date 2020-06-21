@@ -3,22 +3,63 @@
 
     &__grid {
         display: flex;
+
+        @media(max-width: 992px) {
+            flex-direction: column;
+        }
     }
 
     &__left {
-        max-width: 454px;
+        max-width: 685px;
         width: 100%;
-        margin-right: 56px;
+        margin-right: 37px;
+        width: calc(100% - 685px - 37px);
+
+        @media(max-width: 1235px) {
+            max-width: 420px;
+            margin-right: 37px;
+            width: calc(100% - 420px - 37px);
+        }
+
+        @media(max-width: 992px) {
+            width: 100%;
+            max-width: 100%;
+        }
+
+        @media(max-width: 992px) {
+            max-width: 620px;
+        }
     }
 
     &__right {
-        max-width: 650px;
+        max-width: 685px;
         width: 100%;
         padding-top: 10px;
+
+        @media(max-width: 1235px) {
+            max-width: 420px;
+        }
+
+        @media(max-width: 992px) {
+            width: 100%;
+            max-width: 100%;
+            padding-top: 0;
+            margin-top: 32px;
+        }
 
         .index-project__wrapper {
             position: relative;
             margin-top: -52px;
+
+            @media(max-width: 992px) {
+                margin-top: -52px;
+                margin-left: auto;
+                display: flex;
+            }
+
+            @media(max-width: 600px) {
+                display: none;
+            }
         }
     }
 
@@ -33,6 +74,10 @@
     &__unique {
         position: relative;
         height: 318px;
+
+        @media(max-width: 992px) {
+            height: 298px;
+        }
     }
 
     &__wrapper {
@@ -42,13 +87,23 @@
 
     &__cer {
         position: absolute;
-        width: calc(100% + 337px);
-        height: 100%;
+        width: calc(100% + 318px);
+        height: auto;
         overflow: hidden;
+
+        @media(max-width: 1235px) {
+            width: calc(100% + 500px);
+        }
+
+        @media(max-width: 992px) {
+            width: 100%;
+            max-width: 100%;
+        }
     }
 
     .swiper-slide {
         display: block;
+        height: auto;
 
         img {
             height: auto;
