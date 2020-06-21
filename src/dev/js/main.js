@@ -155,6 +155,35 @@ $(() => {
         });
     }
 
+    if ($('.index-example__slider').exists()) {
+        console.log(1);
+        let projectCer = new Swiper('.index-example__slider', {
+            slidesPerView: 4,
+            spaceBetween: 50,
+            effect: 'slide',
+            fadeEffect: {
+                crossFade: true
+            },
+            navigation: {
+                nextEl: '.index-project__arr--snext',
+                prevEl: '.index-project__arr--sprev'
+            },
+            pagination: {
+                el: '.inner-slider__num',
+                type: "custom",
+                renderCustom: function (swiper, current, total) {
+                    let i = current ? current : 0;
+                    return `<span>${("" + i).slice(-2)}</span>` +
+                        `/<span>${("" + total).slice(-2)}</span>`;
+                }
+            },
+        });
+    }
+
+
+
+
+
 
 
 

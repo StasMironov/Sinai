@@ -143,4 +143,29 @@ $(function () {
       }
     });
   }
+
+  if ($('.index-example__slider').exists()) {
+    console.log(1);
+
+    var _projectCer = new Swiper('.index-example__slider', {
+      slidesPerView: 4,
+      spaceBetween: 50,
+      effect: 'slide',
+      fadeEffect: {
+        crossFade: true
+      },
+      navigation: {
+        nextEl: '.index-project__arr--snext',
+        prevEl: '.index-project__arr--sprev'
+      },
+      pagination: {
+        el: '.inner-slider__num',
+        type: "custom",
+        renderCustom: function renderCustom(swiper, current, total) {
+          var i = current ? current : 0;
+          return "<span>".concat(("" + i).slice(-2), "</span>") + "/<span>".concat(("" + total).slice(-2), "</span>");
+        }
+      }
+    });
+  }
 });
