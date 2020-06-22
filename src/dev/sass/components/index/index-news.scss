@@ -33,6 +33,10 @@
             max-width: 465px;
             margin-top: 40px;
         }
+
+        @media(max-width: 992px) {
+            max-width: 100%;
+        }
     }
 
     &__article {
@@ -76,6 +80,14 @@
     &__unique {
         position: relative;
         min-height: 479px;
+
+        @media(max-width: 1235px) {
+            min-height: 410px;
+        }
+
+        @media(max-width: 992px) {
+            min-height: auto;
+        }
     }
 
     &__slider {
@@ -84,14 +96,22 @@
         height: 100%;
         overflow: hidden;
 
-        .swiper-slide {
-            // max-width: 263px;
-            // width: 100%;
+        @media(max-width: 992px) {
+            position: relative;
+            width: 100%;
         }
     }
 
     &__img {
         height: 332px;
+
+        @media(max-width: 1235px) {
+            height: 270px;
+        }
+
+        @media(max-width: 500px) {
+            height: 177px
+        }
 
         img {
             width: 100%;
@@ -131,11 +151,28 @@
         min-width: 263px;
         transition: .3s;
         height: 422px;
+
+        @media(max-width: 640px) {
+            height: auto;
+        }
+
+        @media(max-width: 500px) {
+            min-width: 100%;
+        }
     }
 
     .swiper-slide-active {
-        width: 451px !important;
+        width: 451px;
+
+        @media(max-width: 992px) {
+            width: 263px;
+        }
+
+        @media(max-width: 500px) {
+            width: 100%;
+        }
     }
+
 
     .swiper-pagination-progressbar-fill {
         background-color: $ochre;
@@ -143,6 +180,10 @@
 
     .swiper-pagination-progressbar {
         height: 3px;
+
+        @media(max-width: 640px) {
+            display: none;
+        }
     }
 
     .swiper-pagination-progressbar {

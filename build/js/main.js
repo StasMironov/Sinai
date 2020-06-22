@@ -20,42 +20,24 @@ $(function () {
     }
   }
 
-  if ($('.index-content').exists() && $('.index-img').exists()) {
-    try {
-      var indexContent = new Swiper('.index-content', {
-        slidesPerView: 1,
-        spaceBetween: 10,
-        effect: 'fade',
-        fadeEffect: {
-          crossFade: true
-        },
-        touchRatio: 0,
-        pagination: {
-          el: '.swiper-pagination',
-          clickable: true
-        }
-      });
-      var indexImg = new Swiper('.index-img', {
-        slidesPerView: 1,
-        spaceBetween: 10,
-        effect: 'fade',
-        fadeEffect: {
-          crossFade: true
-        }
-      });
-      indexContent.controller.control = indexImg;
-      indexImg.controller.control = indexContent;
-      $('.swiper-wrapper').resize(function () {
-        $('.index__special').height($('.index-content').height());
-      });
-    } catch (err) {
-      console.log('Ошибка ' + err.name + ":" + err.message + "\n" + err.stack);
-    }
-  }
+  var projectContent = new Swiper('.index-slider', {
+    slidesPerView: 1,
+    spaceBetween: 10,
+    effect: 'fade',
+    fadeEffect: {
+      crossFade: true
+    },
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true
+    },
+    //  autoHeight: true,
+    touchRatio: 0
+  });
 
   if ($('.index-project__content').exists() && $('.index-project__img').exists()) {
     try {
-      var projectContent = new Swiper('.index-project__content', {
+      var _projectContent = new Swiper('.index-project__content', {
         slidesPerView: 1,
         spaceBetween: 10,
         effect: 'fade',
@@ -65,9 +47,9 @@ $(function () {
         pagination: {
           el: '.project-pagination',
           clickable: true
-        },
-        touchRatio: 0
+        }
       });
+
       var projectImg = new Swiper('.index-project__img', {
         slidesPerView: 1,
         spaceBetween: 10,
@@ -80,8 +62,8 @@ $(function () {
           prevEl: '.index-project__link--prev'
         }
       });
-      projectContent.controller.control = projectImg;
-      projectImg.controller.control = projectContent;
+      _projectContent.controller.control = projectImg;
+      projectImg.controller.control = _projectContent;
       $('.swiper-wrapper').resize(function () {
         $('.index__special').height($('.index-content').height());
       });
@@ -211,6 +193,56 @@ $(function () {
         type: 'progressbar'
       }
     });
+  }
+
+  if ($('.index__slider').exists()) {
+    var breakpoint = window.matchMedia('(min-width:641px)');
+    var mySwiper;
+
+    var breakpointChecker = function breakpointChecker() {
+      if (breakpoint.matches === true) {
+        if (mySwiper !== undefined) mySwiper.destroy(true, true);
+        return;
+      } else if (breakpoint.matches === false) {
+        return enableSwiper();
+      }
+    };
+
+    var enableSwiper = function enableSwiper() {
+      mySwiper = new Swiper('.index__slider', {
+        slidesPerView: 1,
+        spaceBetween: 16,
+        a11y: true,
+        keyboardControl: true,
+        grabCursor: true,
+        effect: 'slide',
+        slidesPerColumn: 3,
+        // autoHeight: true,
+        pagination: {
+          el: '.index__pag',
+          clickable: true
+        },
+        breakpoints: {
+          1920: {
+            slidesPerColumn: 3,
+            spaceBetween: 16
+          },
+          640: {
+            slidesPerColumn: 1,
+            slidesPerView: 1,
+            spaceBetween: 16
+          },
+          320: {
+            slidesPerColumn: 1,
+            slidesPerView: 1,
+            spaceBetween: 16
+          }
+        }
+      });
+    };
+
+    breakpoint.addListener(breakpointChecker);
+    breakpointChecker();
   }
 
   var ns4 = document.layers ? true : false;

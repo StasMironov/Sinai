@@ -134,8 +134,8 @@ input::-ms-clear {
   line-height: 108%;
 
   @media(max-width: 640px) {
-    font-size: 24px;
-    line-height: 29px;
+    font-size: 26px;
+    line-height: 30px;
   }
 }
 
@@ -176,5 +176,6 @@ button {
 @import "./components/index/index-news.scss";
 @import "./components/header.scss";
 @import "./components/slider/inner-slider.scss";
+@import "./components/slider/index-slider.scss";
 @import "./components/btn.scss";
 @import "./components/logo.scss";
