@@ -32,7 +32,23 @@ $(function () {
       clickable: true
     },
     //  autoHeight: true,
-    touchRatio: 0
+    touchRatio: 0,
+    breakpoints: {
+      1920: {
+        slidesPerView: 1,
+        spaceBetween: 10
+      },
+      640: {
+        slidesPerView: 1,
+        spaceBetween: 10,
+        touchRatio: 1
+      },
+      320: {
+        slidesPerView: 1,
+        spaceBetween: 10,
+        touchRatio: 1
+      }
+    }
   });
 
   if ($('.index-project__content').exists() && $('.index-project__img').exists()) {
