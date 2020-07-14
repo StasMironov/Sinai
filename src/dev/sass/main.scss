@@ -200,6 +200,8 @@ button {
   }
 }
 
+@import "./components/floor.scss";
+@import "./components/card/object.scss";
 @import "./components/index/index.scss";
 @import "./components/index/index-img.scss";
 @import "./components/index/index-content.scss";

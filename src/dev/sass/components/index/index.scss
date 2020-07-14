@@ -139,15 +139,15 @@
         }
 
         .swiper-pagination-bullet {
-            width: 16px;
-            height: 16px;
+            width: 15px;
+            height: 15px;
             transform: rotate(45deg);
             border-radius: 0 !important;
             background-color: $ochre;
             opacity: 0.5;
 
             &:not(:last-child) {
-                margin-right: 13px;
+                margin-right: 17px;
             }
         }
 

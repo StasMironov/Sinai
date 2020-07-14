@@ -1,0 +1,14 @@
+.floor {
+    position: absolute;
+    background-repeat: no-repeat;
+    width: 100%;
+    cursor: pointer;
+
+
+    &--15 {
+        background: url('../img/card/floor15.svg') 0 0 no-repeat;
+        height: 180px;
+        width: 100%;
+        background-size: contain;
+    }
+}
