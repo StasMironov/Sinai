@@ -1,5 +1,17 @@
 .btn {
 
+    &__news {
+        height: 24px;
+        width: 24px;
+
+        .b-svg {
+            fill: none;
+            stroke: $ochre;
+            height: 100%;
+            width: 100%;
+        }
+    }
+
     &__txt {
         @media(max-width: 1024px) {
             font-size: 14px;

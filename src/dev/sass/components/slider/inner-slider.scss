@@ -3,9 +3,25 @@
     width: 100%;
     margin-top: 38px;
     padding-right: 0;
+    //transform: translateX(19.8%);
+
+    @media(max-width: 768px) {
+        margin-top: 20px;
+    }
 
     @media(max-width: 640px) {
         margin-top: 32px;
+    }
+
+    &__act {
+        display: flex;
+        max-width: 936px;
+        width: 100%;
+        padding-bottom: 84px;
+
+        @media(max-width: 1235px) {
+            padding-bottom: 0;
+        }
     }
 
     &__in {
@@ -90,11 +106,14 @@
             font-size: 30px;
             line-height: normal;
             letter-spacing: 0.3px;
+            font-weight: normal;
         }
 
         @media(max-width: 768px) {
             font-size: 18px;
             line-height: 29px;
+            padding-top: 9px;
+            letter-spacing: 2px;
         }
 
         @media(max-width: 640px) {
@@ -103,18 +122,29 @@
             line-height: 160%;
         }
 
-
+        &--example {
+            color: white;
+        }
 
     }
 
     &__inner {
-        position: absolute;
-        /* top: 0; */
-        bottom: 0;
-        z-index: 99;
-        right: 0;
+        // position: absolute;
+        // /* top: 0; */
+        // bottom: 0;
+        // z-index: 99;
+        // right: 0;
+        margin-left: auto;
         align-self: flex-end;
-        right: 18.75%;
+        //right: 18.75%;
+
+        // @media(max-width: 1600px) {
+        //     right: 12.75%;
+        // }
+
+        // @media(max-width: 1400px) {
+        //     right: 7.2%;
+        // }
 
         @media(max-width: 1235px) {
             align-self: normal;
@@ -128,8 +158,10 @@
         align-self: flex-end;
         margin-top: 6px;
 
-        @media(max-width: 1235px) {
-            display: none;
+        &--build {
+            @media(max-width: 1235px) {
+                display: none;
+            }
         }
     }
 
@@ -154,6 +186,10 @@
         color: white;
         margin-right: 20px;
         letter-spacing: 1px;
+
+        @media(max-width: 1600px) {
+            max-width: 375px;
+        }
 
         @media(max-width: 1235px) {
             color: $black-1;
@@ -180,9 +216,8 @@
         display: flex;
         min-height: 180px;
         align-items: center;
-        padding-bottom: 84px;
-        max-width: 936px;
         width: 100%;
+        //  margin-right: 21.9%;
         //margin-right: calc(21.6%);
 
         @media(max-width: 1235px) {

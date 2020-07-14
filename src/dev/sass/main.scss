@@ -175,6 +175,31 @@ button {
   background-size: 100% auto;
 }
 
+.swiper-menu {
+  display: flex;
+  margin-left: auto;
+
+  &__item {
+    width: 15px;
+    height: 15px;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+    -webkit-border-radius: 0 !important;
+    border-radius: 0 !important;
+    background-color: #d8bb54;
+    opacity: .5 !important;
+
+    &:not(:last-child) {
+      margin-right: 17px;
+    }
+
+    &--active {
+      opacity: 1 !important;
+    }
+  }
+}
+
 @import "./components/index/index.scss";
 @import "./components/index/index-img.scss";
 @import "./components/index/index-content.scss";

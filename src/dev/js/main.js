@@ -93,7 +93,7 @@ $(() => {
 
     if ($('.inner-slider').exists()) {
         try {
-            let projectImg = new Swiper('.inner-slider', {
+            var projectImg = new Swiper('.inner-slider', {
                 slidesPerView: 1,
                 spaceBetween: 10,
                 effect: 'fade',
@@ -114,6 +114,7 @@ $(() => {
                     },
                 },
             });
+
 
         } catch (err) {
             console.log('Ошибка ' + err.name + ":" + err.message + "\n" + err.stack);
@@ -142,6 +143,10 @@ $(() => {
             spaceBetween: 42,
             effect: 'slide',
             loop: true,
+            autoplay: {
+                delay: 1000,
+                disableOnInteraction: false,
+            },
             fadeEffect: {
                 crossFade: true
             },
@@ -152,15 +157,21 @@ $(() => {
             breakpoints: {
                 922: {
                     slidesPerView: 4,
-                    spaceBetween: 42
+                    spaceBetween: 42,
+                    autoplay: false,
                 },
                 769: {
                     slidesPerView: 4,
                     spaceBetween: 42,
+                    autoplay: false,
                 },
                 768: {
                     slidesPerView: 3,
                     spaceBetween: 42,
+                    autoplay: false,
+                },
+                601: {
+                    autoplay: false,
                 },
                 501: {
                     slidesPerView: 3,
@@ -179,7 +190,7 @@ $(() => {
     }
 
     if ($('.index-example__slider').exists()) {
-        let projectCer = new Swiper('.index-example__slider', {
+        var projectCer = new Swiper('.index-example__slider', {
             slidesPerView: 1,
             effect: 'fade',
             fadeEffect: {
@@ -188,6 +199,15 @@ $(() => {
             navigation: {
                 nextEl: '.index-project__arr--ex_next',
                 prevEl: '.index-project__arr--ex_prev'
+            },
+            pagination: {
+                el: '.inner-slider__num--example',
+                type: "custom",
+                renderCustom: function (swiper, current, total) {
+                    let i = current ? current : 0;
+                    return `<span>${("" + i).slice(-2)}</span>` +
+                        `/<span>${("" + total).slice(-2)}</span>`;
+                },
             },
         });
     }
@@ -296,5 +316,85 @@ $(() => {
         $(parent).css({
             height: height + "px" // приравниванием высоту header'a к высоте абсолютного элемента
         });
+    }
+
+    createPag('.index-example');
+    createPag('.index-inner');
+
+    $('.index-example .swiper-menu').on('click', '.swiper-menu__item', function () {
+        checkPag(this, projectCer);
+    });
+
+    $('.swiper-menu').on('click', '.swiper-menu__item', function () {
+        checkPag(this, projectImg);
+    });
+
+
+
+    function checkPag(contecst, slider) {
+        let contecsts = contecst;
+        const index = $(contecsts).data('index');
+        slider.slideTo(index);
+
+        let temp = $(contecsts).attr('index', index);
+        for (let i = 0; i < temp.length; i++) {
+
+            $(contecsts).closest('.swiper-wrapper').find('.swiper-menu').each(function () {
+
+
+
+                $(this).find('.swiper-menu__item').each(function () {
+                    if ($(this).data('index') != index) {
+                        $(this).removeClass('swiper-menu__item--active');
+                        console.log($(this));
+                        console.log(index);
+                    } else {
+                        $(this).addClass('swiper-menu__item--active');
+                    }
+                    console.log($(this));
+                });
+
+                // $(this).find('.swiper-menu__item').each(function () {
+
+                //     if ($(this).data('index') != index) {
+                //         $(this).removeClass('swiper-menu__item--active');
+                //         console.log($(this));
+                //         console.log(index);
+                //     }
+
+                // });
+            });
+
+            // $(contecsts).siblings().each(
+            //     function () {
+
+            //         $(this).removeClass('swiper-menu__item--active');
+
+            //     }
+            // )
+        }
+
+
+    }
+
+    function createPag(block) {
+        let bloc = document.querySelector(block);
+        let qtySlide = projectImg.slides.length;
+        let parentEl = bloc.querySelectorAll('.swiper-menu');
+
+        if (qtySlide > 0) {
+            for (let i = 0; i < parentEl.length; i++) {
+                for (let j = 0; j < qtySlide; j++) {
+                    let itemSlide = document.createElement('div');
+                    itemSlide.classList.add('swiper-menu__item');
+                    itemSlide.setAttribute('data-index', j);
+                    parentEl[i].appendChild(itemSlide);
+
+                    if (j == 0) {
+                        itemSlide.classList.add('swiper-menu__item--active');
+                    }
+                }
+            }
+        }
     }
 });
