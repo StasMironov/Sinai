@@ -132,7 +132,6 @@ $(function () {
   }
 
   if ($('.index-certificate__cer').exists()) {
-    console.log(1);
     var projectCer = new Swiper('.index-certificate__cer', {
       slidesPerView: 4,
       spaceBetween: 42,
@@ -175,8 +174,6 @@ $(function () {
   }
 
   if ($('.index-example__slider').exists()) {
-    console.log(1);
-
     var _projectCer = new Swiper('.index-example__slider', {
       slidesPerView: 1,
       effect: 'fade',
@@ -191,8 +188,6 @@ $(function () {
   }
 
   if ($('.index-news__slider').exists()) {
-    console.log(1);
-
     var _projectCer2 = new Swiper('.index-news__slider', {
       slidesPerView: 'auto',
       spaceBetween: 40,
@@ -261,24 +256,35 @@ $(function () {
     breakpointChecker();
   }
 
-  var ns4 = document.layers ? true : false;
-  var ie4 = document.all ? true : false;
-  var element = document.getElementById('test');
-  var mouse_x = 0;
-  var mouse_y = 0;
-  element.addEventListener('mousemove', function (e) {
-    mouse_x = e.clientX - element.offsetLeft - 450;
-    mouse_y = e.clientY - element.offsetTop + 325;
-    console.log("x ".concat(mouse_x));
-    console.log("y ".concat(mouse_y));
-    document.getElementById('test').style.backgroundPosition = '0 0,0 0,' + mouse_x + 'px ' + mouse_y + 'px,0 0';
-  });
+  var btnBg = document.querySelectorAll('.button');
+
+  var _loop = function _loop(_i) {
+    btnBg[_i].addEventListener('mousemove', function (e) {
+      var event = e;
+      this.classList.add('button-bg');
+      bgMove(btnBg[_i], event);
+    });
+
+    btnBg[_i].addEventListener('mouseleave', function () {
+      this.classList.remove('button-bg');
+    });
+  };
+
+  for (var _i = 0; _i < btnBg.length; _i++) {
+    _loop(_i);
+  }
+
+  function bgMove(bloc, e) {
+    var target = bloc.getBoundingClientRect();
+    var x = e.clientX - target.left - 90;
+    var y = e.clientY - target.top - 90;
+    bloc.style.backgroundPosition = '0 0,0 0,' + x + 'px ' + y + 'px,0 0';
+  }
 
   if ($('.index-certificate__unique').exists()) {
     setHeaderHeight('#lightgallery-cer .swiper-slide', '.index-certificate__unique');
     $(window).on('resize load', function () {
       setHeaderHeight('#lightgallery-cer .swiper-slide', '.index-certificate__unique');
-      console.log(1);
     });
   }
 

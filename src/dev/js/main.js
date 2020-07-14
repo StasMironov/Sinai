@@ -18,9 +18,6 @@ $(() => {
         }
     }
 
-
-
-
     let projectContent = new Swiper('.index-slider', {
         slidesPerView: 1,
         spaceBetween: 10,
@@ -139,10 +136,7 @@ $(() => {
         });
     }
 
-
-
     if ($('.index-certificate__cer').exists()) {
-        console.log(1);
         let projectCer = new Swiper('.index-certificate__cer', {
             slidesPerView: 4,
             spaceBetween: 42,
@@ -185,7 +179,6 @@ $(() => {
     }
 
     if ($('.index-example__slider').exists()) {
-        console.log(1);
         let projectCer = new Swiper('.index-example__slider', {
             slidesPerView: 1,
             effect: 'fade',
@@ -200,7 +193,6 @@ $(() => {
     }
 
     if ($('.index-news__slider').exists()) {
-        console.log(1);
         let projectCer = new Swiper('.index-news__slider', {
             slidesPerView: 'auto',
             spaceBetween: 40,
@@ -270,35 +262,32 @@ $(() => {
         breakpointChecker();
     }
 
+    let btnBg = document.querySelectorAll('.button');
 
 
-    let ns4 = (document.layers) ? true : false;
-    let ie4 = (document.all) ? true : false;
+    for (let i = 0; i < btnBg.length; i++) {
+        btnBg[i].addEventListener('mousemove', function (e) {
+            let event = e;
+            this.classList.add('button-bg');
+            bgMove(btnBg[i], event);
+        });
 
-    var element = document.getElementById('test');
-    var mouse_x = 0;
-    var mouse_y = 0;
+        btnBg[i].addEventListener('mouseleave', function () {
+            this.classList.remove('button-bg');
+        });
+    }
 
-
-    element.addEventListener('mousemove',
-        function (e) {
-
-            mouse_x = e.clientX - element.offsetLeft - 450;
-            mouse_y = e.clientY - element.offsetTop + 325;
-
-            console.log(`x ${mouse_x }`);
-            console.log(`y ${mouse_y}`);
-
-            document.getElementById('test').style.backgroundPosition = '0 0,0 0,' + mouse_x + 'px ' + mouse_y + 'px,0 0';
-        }
-    )
-
+    function bgMove(bloc, e) {
+        var target = bloc.getBoundingClientRect();
+        var x = e.clientX - target.left - 90;
+        var y = e.clientY - target.top - 90;
+        bloc.style.backgroundPosition = '0 0,0 0,' + x + 'px ' + y + 'px,0 0';
+    }
 
     if ($('.index-certificate__unique').exists()) {
         setHeaderHeight('#lightgallery-cer .swiper-slide', '.index-certificate__unique');
         $(window).on('resize load', function () {
             setHeaderHeight('#lightgallery-cer .swiper-slide', '.index-certificate__unique');
-            console.log(1);
         });
     }
 

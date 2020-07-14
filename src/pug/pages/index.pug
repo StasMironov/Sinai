@@ -249,11 +249,10 @@ block content
 										.swiper-slide
 											.index-project__pic
 												img(src="./img/index/p1.jpg" alt="")
-									.index-project__wrapper
-										.index-project__link.index-project__link--prev
-											+svg('arr_sm')
-										.index-project__link.index-project__link--next
-											+svg('arr_sm')
+									.index-project__wrapper.button
+										.inner-slider__in
+											.index-project__link.index-project__link--prev
+											.index-project__link.index-project__link--next
 								.index-project__content
 									.swiper-wrapper
 										.swiper-slide
@@ -390,11 +389,10 @@ block content
 															<path class = "fill" d="M15.682 9.81802C17.4393 11.5754 17.4393 14.4246 15.682 16.182C13.9246 17.9393 11.0754 17.9393 9.31802 16.182C7.56066 14.4246 7.56066 11.5754 9.31802 9.81802C11.0754 8.06066 13.9246 8.06066 15.682 9.81802" stroke="#D8BB54" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 														</svg>
 												.btn__txt подробнее
-										.index-project__wrapper
-											.index-project__arr.index-project__arr--prev
-												+svg('arr_sm')
-											.index-project__arr.index-project__arr--next
-												+svg('arr_sm')
+										.index-project__wrapper.button
+											.inner-slider__in
+												.index-project__arr.index-project__arr--prev
+												.index-project__arr.index-project__arr--next
 							.index-project__items.index-project__items--mobile
 									.index-project__item 
 										.index-project__num 26
@@ -430,15 +428,10 @@ block content
 												img(src="./img/index/p8.png" alt="letter")
 											a(href="./img/index/p8.png").swiper-slide
 												img(src="./img/index/p8.png" alt="letter")
-								.index-project__wrapper
-									.index-project__arr.index-project__arr--sprev
-										+svg('arr_sm')
-									.index-project__arr.index-project__arr--snext
-										+svg('arr_sm')
-
-										
-										
-
+								.index-project__wrapper.button
+									.inner-slider__in
+										.index-project__arr.index-project__arr--sprev
+										.index-project__arr.index-project__arr--snext
 
 	.index-inner
 		.index-inner__container.b-container.b-container
@@ -460,14 +453,15 @@ block content
 											.btn__decor
 												+svg('arr')
 									.btn__txt Выбрать планировку в этом доме
-							.inner-slider__inner
-								.inner-slider__num
-								.inner-slider__wrapper
-									.inner-slider__pagination#test
-										.inner-slider__link.inner-slider__link--prev
-											+svg('arr_sm')
-										.inner-slider__link.inner-slider__link--next
-											+svg('arr_sm')
+							.test
+							//- .inner-slider__inner
+							//- 	.inner-slider__num
+							//- 	.inner-slider__wrapper
+							//- 		.inner-slider__pagination.button
+							//- 			.inner-slider__in
+							//- 				.inner-slider__link.inner-slider__link--prev
+							//- 				.inner-slider__link.inner-slider__link--next
+												
 						.inner-slider__bottom
 							.inner-slider__ref
 								img(src="./img/icon/plane.svg" alt="")
@@ -488,19 +482,25 @@ block content
 											.btn__decor
 												+svg('arr')
 									.btn__txt Выбрать планировку в этом доме
-							.inner-slider__inner
-								.inner-slider__num
-								.inner-slider__wrapper
-									.inner-slider__pagination#test
-										.inner-slider__link.inner-slider__link--prev
-											+svg('arr_sm')
-										.inner-slider__link.inner-slider__link--next
-											+svg('arr_sm')
+							//- .inner-slider__inner
+							//- 	.inner-slider__num
+							//- 	.inner-slider__wrapper
+							//- 		.inner-slider__pagination.button
+							//- 			.inner-slider__in
+							//- 				.inner-slider__link.inner-slider__link--prev
+							//- 				.inner-slider__link.inner-slider__link--next
 						.inner-slider__bottom
 							.inner-slider__ref
 								img(src="./img/icon/plane.svg" alt="")
 								.inner-slider__word Выбрать планировку
 							.inner-slider__pagination
+		.inner-slider__inner
+			.inner-slider__num
+			.inner-slider__wrapper
+				.inner-slider__pagination.button
+					.inner-slider__in
+						.inner-slider__link.inner-slider__link--prev
+						.inner-slider__link.inner-slider__link--next
 
 				
 	.index-example
@@ -565,11 +565,10 @@ block content
 											.btn__decor
 												+svg('arr')
 									.btn__txt Выбрать свою планировку
-				.index-project__wrapper
-					.index-project__arr.index-project__arr--ex_prev
-						+svg('arr_sm')
-					.index-project__arr.index-project__arr--ex_next
-						+svg('arr_sm')
+				.index-project__wrapper.button
+					.inner-slider__in
+						.index-project__arr.index-project__arr--ex_prev
+						.index-project__arr.index-project__arr--ex_next
 	.index-news 
 		.index-news__container.b-container
 			.index-news__title.title-3 Новости
@@ -578,7 +577,7 @@ block content
 					.index-news__article Почему у нас выгодно приобретать недвижимость?
 					.index-news__block
 						.index-news__info Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas varius tortor nibh, sit amet tempor nibh finibus et. Aenean eu enim justo. Vestibulum aliquam hendrerit molestie. Mauris malesuada nisi sit amet augue accumsan tincidunt. 
-						.index-news__info Maecenas tincidunt, velit ac porttitor pulvinar, tortor eros facilisis libero, vitae commodo nunc quam et ligula. Ut nec ipsum sapien. Interdum et malesuada fames ac ante ipsum primis in faucibus. Integer id nisi nec nulla luctus lacinia non eu turpis. Etiam in ex imperdiet justo tincidunt egestas. Ut porttitor urna ac augue cursus tincidunt sit amet sed orci. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas varius tortor nibh, sit amet tempor nibh finibus et. Aenean eu enim justo. Vestibulum aliquam hendrerit molestie.
+						.index-news__info Maecenas tincidunt, velit ac porttitor pulvinar, tortor eros facilisis libero, vitae commodo nunc quam et ligula. Ut nec ipsum sapien. Interdum et malesuada fames ac ante ipsum primis in faucibus. Integer id nisi nec nulla luctus lacinia non eu turpis. Etiam in ex imperdiet justo tincidunt egestas. Ut porttitor urna ac augue cursus tincidunt sit amet sed orci.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas varius tortor nibh, sit amet tempor nibh finibus et. Aenean eu enim justo. Vestibulum aliquam hendrerit molestie.
 					a(href="").btn.btn--decor
 						.btn__cover
 							.btn__line
