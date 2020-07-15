@@ -1,10 +1,10 @@
 .object {
-    position: relative;
-    background-position: center;
-    background-position-y: 0%;
-    width: 100%;
-    background: url(./img/card/object.jpg) 0 0 no-repeat, red;
+    background-image: url(./img/card/object.jpg);
+    background-position: 54.5% center;
+    -webkit-background-size: cover;
     background-size: cover;
+    position: relative;
+    background-color: #464646;
 
     &__container {
         height: 100%;
@@ -17,16 +17,57 @@
         left: 0;
         right: 0;
         height: 80.6%;
-        background-color: rgba(0, 0, 0, .5);
+        //  background-color: rgba(0, 0, 0, .5);
         min-width: 20.67%;
-        width: 20.6%;
-        margin-left: auto;
-        margin-right: 24.6%;
+        width: 397px;
+        margin-left: 54.9%;
+        margin-right: 24.5%;
+    }
+
+    &__panel {
+        position: absolute;
+        width: 950px;
+        height: 288px;
+        left: 0;
+        bottom: 0;
+        background: rgba(30, 32, 44, 0.54);
+        padding: 70px 204px 85px 360px;
+    }
+
+    &__img {
+        width: 19px;
+        height: 19px;
+        margin-right: 8px;
+        margin-top: 5px;
+
+        .b-svg {
+            height: 100%;
+            width: 100%;
+            fill: white;
+        }
+    }
+
+    &__title {
+        color: white;
+    }
+
+    &__items {
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: 34px;
+        margin-left: -50px;
+    }
+
+    &__item {
+        display: flex;
+        margin-left: 50px;
+        color: #fff;
+        width: calc(50% - 50px);
+        max-width: 139px;
     }
 
     img {
         opacity: 0;
         visibility: hidden;
-        max-width: 100%;
     }
 }

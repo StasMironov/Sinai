@@ -1,0 +1,16 @@
+.wrapper {
+    display: flex;
+    justify-content: space-between;
+
+    &__right {
+        max-width: 895px;
+        width: 100%;
+        ;
+    }
+
+    &__left {
+        max-width: 164px;
+        width: 100%;
+        margin-right: 140px;
+    }
+}
