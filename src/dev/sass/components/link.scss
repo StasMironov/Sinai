@@ -1,0 +1,11 @@
+.link {
+    &--ochre {
+        display: inline-block;
+        color: $ochre;
+        font-weight: bold;
+        font-size: 18px;
+        line-height: 30px;
+        letter-spacing: 0.3px;
+        text-transform: uppercase;
+    }
+}

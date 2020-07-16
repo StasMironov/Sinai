@@ -449,4 +449,90 @@ $(() => {
             $('.module').removeClass('module--active');
         });
     });
+
+
+    if ($('#map').length > 0) {
+        mapboxgl.accessToken = 'pk.eyJ1Ijoic3Rhc21pcm9ub3YiLCJhIjoiY2s2dWYxZXh1MDRmcjNlb2Fxejhna2I1NSJ9.vCwZFnzz7zeC7KCQ9vmVrw';
+        var centerMap;
+        if (window.location.hostname == "sochi.uralmedias.ru") {
+            centerMap = [39.723617, 43.587611];
+        } else {
+            centerMap = [58.985550, 53.377120];
+        }
+
+        var map = new mapboxgl.Map({
+            style: 'mapbox://styles/mapbox/light-v10',
+            center: centerMap,
+            zoom: 15.5,
+            pitch: 45,
+            bearing: -17.6,
+            container: 'map',
+            antialias: true
+        });
+        var geojson = {
+            type: 'FeatureCollection',
+            features: [{
+                type: 'Feature',
+                geometry: {
+                    type: 'Point',
+                    coordinates: centerMap
+                },
+                properties: {
+                    title: 'Uralmedias',
+                    description: 'улица Завенягина, 1/2'
+                }
+            }]
+        }; // add markers to map
+
+        if (window.location.hostname == "sochi.uralmedias.ru") {
+            geojson.features[0].properties.description = 'ТЦ Атриум, Навагинская, дом 9д';
+        }
+
+        geojson.features.forEach(function (marker) {
+            // create a HTML element for each feature
+            var el = document.createElement('div');
+            el.className = 'marker'; // make a marker for each feature and add to the map
+
+            new mapboxgl.Marker(el).setLngLat(marker.geometry.coordinates).addTo(map);
+            new mapboxgl.Marker(el).setLngLat(marker.geometry.coordinates).setPopup(new mapboxgl.Popup({
+                    offset: 25
+                }) // add popups
+                .setHTML('<h3>' + marker.properties.title + '</h3><p>' + marker.properties.description + '</p>')).addTo(map);
+        }); // The 'building' layer in the mapbox-streets vector source contains building-height
+        // data from OpenStreetMap.
+
+        map.on('load', function () {
+            // Insert the layer beneath any symbol layer.
+            var layers = map.getStyle().layers;
+            var labelLayerId;
+
+            for (var i = 0; i < layers.length; i++) {
+                if (layers[i].type === 'symbol' && layers[i].layout['text-field']) {
+                    labelLayerId = layers[i].id;
+                    break;
+                }
+            }
+
+            map.addLayer({
+                'id': '3d-buildings',
+                'source': 'composite',
+                'source-layer': 'building',
+                'filter': ['==', 'extrude', 'true'],
+                'type': 'fill-extrusion',
+                'minzoom': 15,
+                'paint': {
+                    'fill-extrusion-color': '#aaa',
+                    // use an 'interpolate' expression to add a smooth transition effect to the
+                    // buildings as the user zooms in
+                    'fill-extrusion-height': ['interpolate', ['linear'],
+                        ['zoom'], 15, 0, 15.05, ['get', 'height']
+                    ],
+                    'fill-extrusion-base': ['interpolate', ['linear'],
+                        ['zoom'], 15, 0, 15.05, ['get', 'min_height']
+                    ],
+                    'fill-extrusion-opacity': 0.6
+                }
+            }, labelLayerId);
+        });
+    }
 });

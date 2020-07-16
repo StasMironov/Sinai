@@ -201,6 +201,10 @@ button {
   }
 }
 
+
+@import "./components/card/project-department.scss";
+@import "./components/card/project-map.scss";
+@import "./components/card/project-services.scss";
 @import "./components/module.scss";
 @import "./components/floor.scss";
 @import "./components/wrapper.scss";
@@ -219,3 +223,4 @@ button {
 @import "./components/slider/index-slider.scss";
 @import "./components/btn.scss";
 @import "./components/logo.scss";
+@import "./components/link.scss";

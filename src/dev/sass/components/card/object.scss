@@ -26,12 +26,13 @@
 
     &__panel {
         position: absolute;
-        width: 950px;
         height: 288px;
         left: 0;
         bottom: 0;
-        background: rgba(30, 32, 44, 0.54);
-        padding: 70px 204px 85px 360px;
+        width: 935px;
+        height: 288px;
+        background: rgba(30, 32, 44, .54);
+        padding: 70px 204px 85px 344px;
     }
 
     &__img {
