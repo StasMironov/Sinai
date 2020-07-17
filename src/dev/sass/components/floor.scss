@@ -18,6 +18,7 @@
             cursor: pointer;
             transition: ease-out .2s;
             fill-opacity: 0;
+            stroke: yellow;
 
             &:hover {
                 fill-opacity: 0.8;

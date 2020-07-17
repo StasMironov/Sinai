@@ -1,0 +1,187 @@
+.form-project {
+    margin-top: 96px;
+    display: flex;
+    align-items: baseline;
+    margin-top: 37px;
+
+    &__agreement {
+        position: relative;
+        margin-top: 24px;
+        -ms-user-select: none;
+        -moz-user-select: none;
+        -khtml-user-select: none;
+        -webkit-user-select: none;
+
+        .custom-checkbox+label {
+            font-style: normal;
+            font-weight: normal;
+            font-size: 12px;
+            line-height: 15px;
+            letter-spacing: 0.3px;
+            display: inline-flex;
+            cursor: pointer;
+            position: absolute;
+            width: 100%;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
+
+        .custom-checkbox+label::before {
+            content: '';
+            display: inline-block;
+            margin-right: 11px;
+            width: 15px;
+            height: 15px;
+            -webkit-transform: rotate(45deg);
+            -ms-transform: rotate(45deg);
+            transform: rotate(45deg);
+            -webkit-border-radius: 0 !important;
+            border-radius: 0 !important;
+            background-color: transparent;
+
+            border: 1px solid $ochre;
+            box-sizing: border-box;
+
+            transition: 400ms ease;
+        }
+
+        .custom-checkbox:checked+label::before {
+            background-color: $ochre;
+        }
+
+        /* стили при наведении курсора на checkbox */
+        .custom-checkbox:not(:disabled):not(:checked)+label:hover::before {
+            opacity: .5;
+        }
+
+        a {
+            color: $gray-1;
+            margin-left: 3px;
+
+            &:hover {
+                color: #bdb9b9;
+            }
+        }
+    }
+
+    &__box {
+        margin-right: 32px;
+        max-width: 529px;
+        width: 100%;
+    }
+
+    &__items {
+        display: flex;
+        justify-content: space-between;
+        max-width: 695px;
+        width: 100%;
+        margin-top: 19px;
+    }
+
+    &__item {
+        &:not(:last-child) {
+            margin-right: 50px;
+        }
+    }
+
+    &__group {
+        display: flex;
+        align-items: center;
+        width: 100%;
+    }
+
+
+
+
+    .btn {
+        align-items: center;
+    }
+
+
+    &__field {
+        position: absolute;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 16px;
+        line-height: 26px;
+        letter-spacing: 0.3px;
+        color: $gray-1;
+        cursor: pointer;
+        height: 100%;
+        background-color: transparent;
+
+        &::placeholder {
+            font-style: normal;
+            font-weight: normal;
+            font-size: 16px;
+            line-height: 26px;
+            letter-spacing: 0.3px;
+            color: $gray-1;
+        }
+
+        &:focus,
+        &:hover {
+            color: $basic;
+
+            &::placeholder {
+                color: $basic;
+            }
+        }
+    }
+
+    &__block {
+        position: relative;
+        height: 41px;
+        border-bottom: 1px solid $gray-1;
+
+
+
+        &:after {
+            position: absolute;
+            content: '';
+            width: 0%;
+            height: 1px;
+            background-color: $basic;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            transition: 400ms ease;
+        }
+
+        &:first-child {
+            max-width: 233px;
+            width: 100%;
+            margin-right: 24px;
+        }
+
+        &:last-child {
+            max-width: 272px;
+            width: 100%;
+        }
+
+        &:hover:after {
+            // width: 100%;
+        }
+
+        &:hover {
+            &.project-department__field {
+                color: $basic;
+            }
+        }
+
+        &--active {
+            &:after {
+                width: 100%;
+            }
+
+            .form-project__field {
+                color: $basic;
+            }
+        }
+    }
+
+    .btn {
+        cursor: pointer;
+    }
+}

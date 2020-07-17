@@ -201,7 +201,40 @@ button {
   }
 }
 
+.boxes {
+  position: relative;
+  width: 1920px;
+  height: 800px;
+}
 
+.box {
+  position: absolute;
+  border: 1px solid black;
+  max-width: 300px;
+  margin-left: auto;
+  max-width: 891px;
+  bottom: 0;
+
+  position: absolute;
+  border: 1px solid #000;
+  margin-left: auto;
+  max-width: 891px;
+  bottom: 0;
+  right: 0;
+  left: 0;
+}
+
+.bloc {
+  width: 100%;
+  background-color: red;
+
+  &:not(:first-child) {
+    margin-top: 20px;
+  }
+}
+
+
+@import "./components/form-project.scss";
 @import "./components/card/project-department.scss";
 @import "./components/card/project-map.scss";
 @import "./components/card/project-services.scss";

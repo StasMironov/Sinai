@@ -428,25 +428,56 @@ $(() => {
         }
     }
 
+    function getCoords(elem) {
+        let box = elem[0].getBoundingClientRect();
+
+        return {
+            top: box.top + pageYOffset,
+            bottom: box.bottom + pageYOffset
+        };
+    }
+
     let floorEl = $("[data-floor]");
     floorEl.each(function () {
         $(this).on('mousemove', function () {
-            // $('.module').animate({
-            //     'opacity': 1,
-            //     // 'left': '38.4%'
-            // }, 500);
-
-            console.log($(this));
-
-            let target = $(this)[0].getBoundingClientRect().top - 17;
-            console.log(target);
+            let target = $(this).offset().top - $('.object__inner').offset().top - 20;
+            let top = getCoords($(this));
+            let parent = getCoords($('.object__inner'));
 
             $('.module').addClass('module--active');
+            $('.module').css('top', ((top.bottom) - parent.top) + 85);
+        });
+
+        $(this).on('mouseleave', function () {
+            //   $('.module').removeClass('module--active');
+        });
+    });
+
+
+    $(".bloc").each(function () {
+        $(this).on('mousemove', function () {
+
+
+            // let target = $(this)[0].getBoundingClientRect().top - 17;
+            //let target = $(this).offset().top;
+            // console.log($(this)[0].getBoundingClientRect().top);
+
+            // let parentOf = $('.box').offset();
+            //  let target = $(this).position().top + 100 + 'px';
+            let target = $(this).position().top + $('.box').position().top;
+            $('.module').css('top', target);
+
+
+            //   console.log(parentOf);
+            //console.log(target);
+            // console.log($(this)[0].getBoundingClientRect().height);
+
+            // $('.module').addClass('module--active');
             $('.module').css('top', target);
         });
 
         $(this).on('mouseleave', function () {
-            $('.module').removeClass('module--active');
+            //   $('.module').removeClass('module--active');
         });
     });
 
@@ -533,6 +564,29 @@ $(() => {
                     'fill-extrusion-opacity': 0.6
                 }
             }, labelLayerId);
+        });
+    }
+
+    if ($('.form-project__field').exists) {
+        $('.form-project__field').each(function () {
+            $(this).on('mousemove', () => {
+                $(this).closest('.form-project__block').addClass('form-project__block--active');
+            });
+
+            $(this).on('mouseleave', () => {
+
+                if (!$(this).is(":focus") && !$(this).val()) {
+                    $(this).closest('.form-project__block').removeClass('form-project__block--active');
+
+                }
+            });
+
+            $(this).on('blur', function () {
+                if (!$(this).val()) {
+                    $(this).closest('.form-project__block').removeClass('form-project__block--active');
+                }
+            });
+
         });
     }
 });

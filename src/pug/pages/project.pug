@@ -121,10 +121,32 @@ block content
 						.project-department__item 
 							.project-department__bloc Адрес: 
 							.project-department__bloc г. Магнитогорск, ул. Завенягина 1/2
-					.project-department__form 
-						.project-department__group
-							input(placeholder="" type="text" required).project-department__field
-							input(placeholder="" type="text" required).project-department__field
-						.project-department__btn
+					form(method='get').form-project
+						.form-project__box
+							.form-project__group
+								.form-project__block
+									input(placeholder="Ваше имя" type="text" required).form-project__field
+								.form-project__block
+									input(placeholder="Ваша почта" type="text" required).form-project__field
+							.form-project__agreement
+								<input type="checkbox" class="custom-checkbox" id="agr" name="agr" value="yes">
+								<label for="agr">Нажимая кнопку, Вы принимаете условия <a href="javascript:void(0);">пользовательского соглашения.</a></label>
+
+						button(type='submit').btn.btn--decor
+							.btn__cover
+								.btn__button
+									.btn__line
+										+svg('arr')
+									.btn__figure
+										+svg('figure')
+										.btn__decor
+											+svg('arr')
+								.btn__button.btn__button--laptop 
+									<svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+										<path d="M2 13.5C7.52298 6.83333 16.477 6.83333 22 13.5" stroke="#D8BB54" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+										<path class = "fill" d="M15.682 9.81802C17.4393 11.5754 17.4393 14.4246 15.682 16.182C13.9246 17.9393 11.0754 17.9393 9.31802 16.182C7.56066 14.4246 7.56066 11.5754 9.31802 9.81802C11.0754 8.06066 13.9246 8.06066 15.682 9.81802" stroke="#D8BB54" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+									</svg>
+							.btn__txt подробнее
+				div(style='height: 150px')
 							
 block script

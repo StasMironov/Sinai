@@ -1,10 +1,17 @@
 .project-department {
     margin-top: 96px;
 
+    &__box {
+        margin-right: 32px;
+        max-width: 529px;
+        width: 100%;
+        cursor: pointer;
+    }
+
     &__items {
         display: flex;
         justify-content: space-between;
-        max-width: 695px;
+        max-width: 683px;
         width: 100%;
         margin-top: 19px;
     }
@@ -12,6 +19,101 @@
     &__item {
         &:not(:last-child) {
             margin-right: 50px;
+        }
+    }
+
+    &__group {
+        display: flex;
+        align-items: center;
+        width: 100%;
+    }
+
+    &__form {
+        display: flex;
+        align-items: baseline;
+        margin-top: 40px;
+
+        .btn {
+            align-items: center;
+        }
+    }
+
+    &__field {
+        position: absolute;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 16px;
+        line-height: 26px;
+        letter-spacing: 0.3px;
+        color: $gray-1;
+        cursor: pointer;
+        height: 100%;
+        min-height: 35px;
+        background-color: transparent;
+
+        &::placeholder {
+            font-style: normal;
+            font-weight: normal;
+            font-size: 16px;
+            line-height: 26px;
+            letter-spacing: 0.3px;
+            color: $gray-1;
+        }
+
+        &:focus,
+        &:hover {
+            color: $basic;
+
+            &::placeholder {
+                color: $basic;
+            }
+        }
+    }
+
+    &__block {
+        position: relative;
+        height: 35px;
+        border-bottom: 1px solid $gray-1;
+
+
+
+        &:after {
+            position: absolute;
+            content: '';
+            width: 0%;
+            height: 1px;
+            background-color: $basic;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            transition: .3s;
+        }
+
+        &:first-child {
+            max-width: 233px;
+            width: 100%;
+            margin-right: 24px;
+        }
+
+        &:last-child {
+            max-width: 272px;
+            width: 100%;
+        }
+
+        &:hover:after {
+            // width: 100%;
+        }
+
+        &:hover {
+            &.project-department__field {
+                color: $basic;
+            }
+        }
+
+        &--active {
+            &:after {
+                width: 100%;
+            }
         }
     }
 }
