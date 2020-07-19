@@ -454,34 +454,6 @@ $(() => {
     });
 
 
-    $(".bloc").each(function () {
-        $(this).on('mousemove', function () {
-
-
-            // let target = $(this)[0].getBoundingClientRect().top - 17;
-            //let target = $(this).offset().top;
-            // console.log($(this)[0].getBoundingClientRect().top);
-
-            // let parentOf = $('.box').offset();
-            //  let target = $(this).position().top + 100 + 'px';
-            let target = $(this).position().top + $('.box').position().top;
-            $('.module').css('top', target);
-
-
-            //   console.log(parentOf);
-            //console.log(target);
-            // console.log($(this)[0].getBoundingClientRect().height);
-
-            // $('.module').addClass('module--active');
-            $('.module').css('top', target);
-        });
-
-        $(this).on('mouseleave', function () {
-            //   $('.module').removeClass('module--active');
-        });
-    });
-
-
     if ($('#map').length > 0) {
         mapboxgl.accessToken = 'pk.eyJ1Ijoic3Rhc21pcm9ub3YiLCJhIjoiY2s2dWYxZXh1MDRmcjNlb2Fxejhna2I1NSJ9.vCwZFnzz7zeC7KCQ9vmVrw';
         var centerMap;
@@ -586,7 +558,72 @@ $(() => {
                     $(this).closest('.form-project__block').removeClass('form-project__block--active');
                 }
             });
-
         });
     }
+
+    $('.project-period__bloc').on('click', function () {
+        $('.project-period__box').toggleClass('project-period__box--active');
+    });
+
+    if ($('.project-period__slider').exists()) {
+        try {
+            var projecPeriod = new Swiper('.project-period__slider', {
+                slidesPerView: '1',
+                spaceBetween: 40,
+                effect: 'slide',
+                // autoplay: {
+                //     delay: 5000
+                // },
+                fadeEffect: {
+                    crossFade: true
+                },
+                pagination: {
+                    el: '.index-news__pagination',
+                    type: 'progressbar',
+                },
+            });
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
+    $('.project-period__unit').each(function () {
+
+        let dataVal = 0;
+        let dataSlide = 0;
+
+        $(this).on('click', function () {
+            $('.project-period__text').text($(this).text());
+            $('.project-period__box').removeClass('project-period__box--active');
+
+            dataVal = $(this).find('input').data('period');
+
+            $('.project-period__slider .swiper-slide').each(function () {
+                dataSlide = $(this).data('slide');
+
+
+                if (dataSlide == dataVal) {
+                    // alert(dataSlide);
+                    projecPeriod.slideTo(dataSlide - 1);
+                    return false;
+                }
+            });
+        });
+
+
+
+        //console.log(dataVal);
+
+
+    });
+
+    projecPeriod.on('mouseover', function () {
+        alert(projecPeriod.activeIndex);
+    });
+
+
+
+
+
+
 });

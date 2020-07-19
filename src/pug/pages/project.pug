@@ -147,6 +147,28 @@ block content
 										<path class = "fill" d="M15.682 9.81802C17.4393 11.5754 17.4393 14.4246 15.682 16.182C13.9246 17.9393 11.0754 17.9393 9.31802 16.182C7.56066 14.4246 7.56066 11.5754 9.31802 9.81802C11.0754 8.06066 13.9246 8.06066 15.682 9.81802" stroke="#D8BB54" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 									</svg>
 							.btn__txt подробнее
-				div(style='height: 150px')
+				.project-period
+					.project-period__title.title-1 Срок сдачи: 1 квартал 2021
+					.project-period__box
+						.project-period__bloc
+							.project-period__text Июнь 2019
+							.project-period__img
+								<svg width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+									<path d="M1 5L5.24264 9.24264L9.48528 5" stroke="#1E202C" stroke-width="1.5"/>
+								</svg>
+						.project-period__list
+							.project-period__unit
+								<input id="period1" type="radio" name="period" value="Апрель 2019" data-period='1'>
+								<label for="period1">Апрель 2019</label>
+							.project-period__unit
+								<input id="period2" type="radio" name="period" value="Февраль 2019" data-period='2'>
+								<label for="period2">Февраль 2019</label>
+					.project-period__slider
+						.swiper-wrapper
+							.swiper-slide(data-slide='1')
+								img(src='./img/card/pic4.jpg' alt='')
+							.swiper-slide(data-slide='2')
+								img(src='./img/card/pic2.jpg' alt='' )
+				div(style='height: 350px')
 							
 block script
