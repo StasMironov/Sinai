@@ -3,14 +3,14 @@
     top: 272px;
     min-height: 193px;
     width: 284px;
-    background-color: black;
+    background-color: white;
     left: 38.4%;
     right: 0;
     font-size: 16px;
     line-height: 26px;
     letter-spacing: .3px;
     transition: ease-out .5s;
-    opacity: 1;
+    opacity: 0;
     transform: translateX(-100px);
     //visibility: hidden;
 
@@ -58,7 +58,7 @@
         position: absolute;
         content: "";
         border: 10px solid transparent;
-        border-left: 18px solid black;
+        border-left: 18px solid white;
         right: -28px;
         top: 8px;
         bottom: 0;

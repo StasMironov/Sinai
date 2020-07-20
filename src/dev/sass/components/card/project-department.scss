@@ -1,6 +1,10 @@
 .project-department {
     margin-top: 96px;
 
+    @media(max-width: 1024px) {
+        margin-top: 70px;
+    }
+
     &__box {
         margin-right: 32px;
         max-width: 529px;
@@ -11,14 +15,30 @@
     &__items {
         display: flex;
         justify-content: space-between;
-        max-width: 683px;
+        max-width: 693px;
         width: 100%;
         margin-top: 19px;
+
+        @media(max-width: 640px) {
+            flex-direction: column;
+            max-width: 100%;
+            margin-top: 22px;
+        }
     }
 
     &__item {
         &:not(:last-child) {
-            margin-right: 50px;
+            margin-right: 40px;
+
+            @media(max-width: 640px) {
+                margin-right: 0;
+            }
+        }
+
+        &:not(:first-child) {
+            @media(max-width: 640px) {
+                margin-top: 16px;
+            }
         }
     }
 
@@ -67,6 +87,21 @@
             &::placeholder {
                 color: $basic;
             }
+        }
+    }
+
+    &__bloc {
+        font-style: normal;
+        font-weight: normal;
+        font-size: 16px;
+        line-height: 26px;
+        letter-spacing: 0.3px;
+    }
+
+    &__title {
+        @media(max-width: 640px) {
+            font-size: 30px;
+            line-height: 120%;
         }
     }
 

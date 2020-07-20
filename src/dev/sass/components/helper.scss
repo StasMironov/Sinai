@@ -1,0 +1,11 @@
+.mf-fixed {
+    position: fixed;
+    top: 0;
+    transform: translateY(45px);
+    z-index: 1;
+    transition: 400ms ease;
+    min-height: auto !important;
+
+    width: 100%;
+    max-width: inherit;
+}

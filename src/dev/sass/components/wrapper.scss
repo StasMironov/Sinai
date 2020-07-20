@@ -3,15 +3,31 @@
     justify-content: space-between;
     margin-top: 70px;
 
+    @media(max-width: 922px) {
+        flex-direction: column;
+    }
+
     &__right {
         max-width: 895px;
-        width: 100%;
-        ;
+        width: calc(100% - 253px - 40px);
+
+        @media(max-width: 922px) {
+            max-width: 100%;
+            width: 100%;
+            margin-top: 50px;
+        }
     }
 
     &__left {
-        max-width: 164px;
+        max-width: 253px;
+        min-width: 253px;
         width: 100%;
-        margin-right: 140px;
+        margin-right: 40px;
+
+        @media(max-width: 922px) {
+            max-width: 100%;
+            min-width: 100%;
+            margin-right: 0;
+        }
     }
 }

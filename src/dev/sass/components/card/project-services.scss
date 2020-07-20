@@ -5,6 +5,21 @@
         flex-wrap: wrap;
         margin-left: -29px;
         margin-top: 40px;
+
+        @media(max-width: 1024px) {
+            flex-direction: column;
+            margin-left: 0;
+        }
+
+        @media(max-width: 922px) {
+            flex-direction: row;
+            margin-left: -29px;
+        }
+
+        @media(max-width: 640px) {
+            flex-direction: column;
+            margin-left: 0;
+        }
     }
 
     &__item {
@@ -13,8 +28,41 @@
         width: calc(33.333% - 29px);
         margin-left: 29px;
 
+        @media(max-width: 1024px) {
+            width: 100%;
+            margin-left: 0;
+        }
+
+        @media(max-width: 922px) {
+            width: calc(33.333% - 29px);
+            margin-left: 29px;
+        }
+
+        @media(max-width: 640px) {
+            width: 100%;
+            margin-left: 0;
+        }
+
+        &:not(:first-child) {
+            @media(max-width: 1024px) {
+                margin-top: 20px;
+            }
+
+            @media(max-width: 922px) {
+                margin-top: 0;
+            }
+
+            @media(max-width: 640px) {
+                margin-top: 20px;
+            }
+        }
+
         .link {
             margin-top: 32px;
+
+            @media(max-width: 1024px) {
+                margin-top: 15px;
+            }
         }
     }
 
@@ -33,5 +81,9 @@
         font-size: 16px;
         line-height: 26px;
         letter-spacing: 0.3px;
+
+        @media(max-width: 1024px) {
+            margin-top: 10px;
+        }
     }
 }

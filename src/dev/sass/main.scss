@@ -172,7 +172,7 @@ button {
 }
 
 .button-bg {
-  background: linear-gradient(transparent, rgba(0, 0, 0, .0) 100%), url(''), url('../img/bgMove.png') no-repeat;
+  background: linear-gradient(transparent, rgba(0, 0, 0, .0) 100%), transparent, url('../img/bgMove.png') no-repeat;
   background-size: 100% auto;
 }
 
@@ -233,8 +233,12 @@ button {
   }
 }
 
+.test {
+  background-color: red;
+}
 
-
+@import "./components/helper.scss";
+@import "./components/menu-content.scss";
 @import "./components/card/project-period.scss";
 @import "./components/form-project.scss";
 @import "./components/card/project-department.scss";
