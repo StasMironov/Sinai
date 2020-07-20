@@ -437,7 +437,7 @@ $(() => {
         };
     }
 
-    function moveModal(seting) {
+    function moveModal(seting, flag) {
 
         let floorEl = $("[data-floor]");
         floorEl.each(function () {
@@ -448,7 +448,9 @@ $(() => {
                 $('.module').addClass('module--active');
                 $('.module').css('top', ((top.bottom) - parent.top) + seting);
 
-
+                if (flag == -1) {
+                    $('.module').css('top', ((top.bottom) - parent.top) - seting);
+                }
 
             });
 
@@ -460,11 +462,10 @@ $(() => {
 
     $(window).on('load', function () {
         if ($(this).width() > 1300) {
-            moveModal(85);
+            moveModal(85, );
         } else if ($(this).width() <= 1300) {
             moveModal(55);
         }
-
     });
 
 

@@ -436,7 +436,7 @@ $(function () {
     };
   }
 
-  function moveModal(seting) {
+  function moveModal(seting, flag) {
     var floorEl = $("[data-floor]");
     floorEl.each(function () {
       $(this).on('mousemove', function () {
@@ -445,6 +445,10 @@ $(function () {
         var parent = getCoords($('.object__inner'));
         $('.module').addClass('module--active');
         $('.module').css('top', top.bottom - parent.top + seting);
+
+        if (flag == -1) {
+          $('.module').css('top', top.bottom - parent.top - seting);
+        }
       });
       $(this).on('mouseleave', function () {
         $('.module').removeClass('module--active');

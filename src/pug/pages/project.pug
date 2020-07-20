@@ -102,7 +102,7 @@ block content
 							span Посмотреть планировки
 						a(href="#").inner-slider__ref
 							img(src="./img/icon/plane.svg" alt="")
-							.inner-slider__word Посмотреть планировки
+							.inner-slider__word Выбрать планировку
 				#structure
 				.project-map#map
 				.project-service
@@ -138,10 +138,6 @@ block content
 									input(placeholder="Ваше имя" type="text" required).form-project__field
 								.form-project__block
 									input(placeholder="Ваша почта" type="text" required).form-project__field
-						.form-project__cover
-							.form-project__agreement
-								<input type="checkbox" class="custom-checkbox" id="agr" name="agr" value="yes">
-								<label for="agr"><div>Нажимая кнопку, Вы принимаете условия <a href="javascript:void(0);">пользовательского соглашения.</a></div></label>
 							button(type='submit').btn.btn--decor
 								.btn__cover
 									.btn__button
@@ -154,6 +150,22 @@ block content
 									.btn__button.btn__button--laptop 
 										+svg('phone')
 								.btn__txt Перезвоните мне
+						//- .form-project__cover
+						//- 	.form-project__agreement
+						//- 		<input type="checkbox" class="custom-checkbox" id="agr" name="agr" value="yes">
+						//- 		<label for="agr"><div>Нажимая кнопку, Вы принимаете условия <a href="javascript:void(0);">пользовательского соглашения.</a></div></label>
+						//- 	button(type='submit').btn.btn--decor
+						//- 		.btn__cover
+						//- 			.btn__button
+						//- 				.btn__line
+						//- 					+svg('arr')
+						//- 				.btn__figure
+						//- 					+svg('figure')
+						//- 					.btn__decor
+						//- 						+svg('arr')
+						//- 			.btn__button.btn__button--laptop 
+						//- 				+svg('phone')
+						//- 		.btn__txt Перезвоните мне
 				.project-period(id="period")
 					.project-period__title.title-1 Срок сдачи: 1 квартал 2021
 					.project-period__box
