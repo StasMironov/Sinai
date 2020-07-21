@@ -459,86 +459,60 @@ $(function () {
   });
 
   if ($('#map').length > 0) {
-    mapboxgl.accessToken = 'pk.eyJ1Ijoic3Rhc21pcm9ub3YiLCJhIjoiY2s2dWYxZXh1MDRmcjNlb2Fxejhna2I1NSJ9.vCwZFnzz7zeC7KCQ9vmVrw';
-    var centerMap;
-
-    if (window.location.hostname == "sochi.uralmedias.ru") {
-      centerMap = [39.723617, 43.587611];
-    } else {
-      centerMap = [58.985550, 53.377120];
-    }
-
-    var map = new mapboxgl.Map({
-      style: 'mapbox://styles/mapbox/light-v10',
-      center: centerMap,
-      zoom: 15.5,
-      pitch: 45,
-      bearing: -17.6,
-      container: 'map',
-      antialias: true
-    });
-    var geojson = {
+    //mapboxgl.accessToken = 'pk.eyJ1Ijoic3Rhc21pcm9ub3YiLCJhIjoiY2s2dWYxZXh1MDRmcjNlb2Fxejhna2I1NSJ9.vCwZFnzz7zeC7KCQ9vmVrw';
+    L.mapbox.accessToken = 'pk.eyJ1IjoiYWRtaW5zaW5haSIsImEiOiJja2N2czJ2ejcwNzdoMzBtbDVneTh6NTNkIn0.pkiEoq-UDjbqvdDrB_zZCQ';
+    var map = L.mapbox.map('map').setView([53.377120, 58.985550], 17).addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/light-v10'));
+    var myLayer = L.mapbox.featureLayer().addTo(map);
+    var geoJson = {
       type: 'FeatureCollection',
       features: [{
-        type: 'Feature',
-        geometry: {
-          type: 'Point',
-          coordinates: centerMap
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [58.985550, 53.377120]
         },
-        properties: {
-          title: 'Uralmedias',
-          description: 'улица Завенягина, 1/2'
+        "properties": {
+          "title": "Магазин",
+          "icon": {
+            "iconUrl": "../img/icon/marker/shop.png",
+            "iconSize": [50, 50],
+            // size of the icon
+            "iconAnchor": [25, 25],
+            // point of the icon which will correspond to marker's location
+            "popupAnchor": [0, -25],
+            // point from which the popup should open relative to the iconAnchor
+            "className": "marker"
+          }
+        }
+      }, {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [58.988547, 53.376635]
+        },
+        "properties": {
+          "title": "Школа",
+          "icon": {
+            "iconUrl": "../img/icon/marker/school.png",
+            "iconSize": [50, 50],
+            // size of the icon
+            "iconAnchor": [25, 25],
+            // point of the icon which will correspond to marker's location
+            "popupAnchor": [0, -25],
+            // point from which the popup should open relative to the iconAnchor
+            "className": "marker"
+          }
         }
       }]
-    }; // add markers to map
+    }; // Set a custom icon on each marker based on feature properties.
 
-    if (window.location.hostname == "sochi.uralmedias.ru") {
-      geojson.features[0].properties.description = 'ТЦ Атриум, Навагинская, дом 9д';
-    }
+    myLayer.on('layeradd', function (e) {
+      var marker = e.layer,
+          feature = marker.feature;
+      marker.setIcon(L.icon(feature.properties.icon));
+    }); // Add features to the map.
 
-    geojson.features.forEach(function (marker) {
-      // create a HTML element for each feature
-      var el = document.createElement('div');
-      el.className = 'marker'; // make a marker for each feature and add to the map
-
-      new mapboxgl.Marker(el).setLngLat(marker.geometry.coordinates).addTo(map);
-      new mapboxgl.Marker(el).setLngLat(marker.geometry.coordinates).setPopup(new mapboxgl.Popup({
-        offset: 25
-      }) // add popups
-      .setHTML('<h3>' + marker.properties.title + '</h3><p>' + marker.properties.description + '</p>')).addTo(map);
-    }); // The 'building' layer in the mapbox-streets vector source contains building-height
-    // data from OpenStreetMap.
-
-    map.on('load', function () {
-      // Insert the layer beneath any symbol layer.
-      var layers = map.getStyle().layers;
-      var labelLayerId;
-
-      for (var i = 0; i < layers.length; i++) {
-        if (layers[i].type === 'symbol' && layers[i].layout['text-field']) {
-          labelLayerId = layers[i].id;
-          break;
-        }
-      }
-
-      map.addLayer({
-        'id': '3d-buildings',
-        'source': 'composite',
-        'source-layer': 'building',
-        'filter': ['==', 'extrude', 'true'],
-        'type': 'fill-extrusion',
-        'minzoom': 15,
-        'paint': {
-          'fill-extrusion-color': '#aaa',
-          // use an 'interpolate' expression to add a smooth transition effect to the
-          // buildings as the user zooms in
-          'fill-extrusion-height': ['interpolate', ['linear'], ['zoom'], 15, 0, 15.05, ['get', 'height']],
-          'fill-extrusion-base': ['interpolate', ['linear'], ['zoom'], 15, 0, 15.05, ['get', 'min_height']],
-          'fill-extrusion-opacity': 0.6
-        }
-      }, labelLayerId);
-      map.scrollZoom.disable();
-    });
+    myLayer.setGeoJSON(geoJson);
   }
 
   if ($('.form-project__field').exists) {
@@ -704,5 +678,13 @@ $(function () {
         }
       }
     }
+  });
+  $('.project-map__item').each(function () {
+    console.log($(this));
+    $(this).on('click', function () {
+      if ($(this).find('input').is(':checked')) {
+        $(this).addClass('project-map__item--active').siblings().removeClass('project-map__item--active');
+      }
+    });
   });
 });

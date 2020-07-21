@@ -237,6 +237,17 @@ button {
   background-color: red;
 }
 
+.marker {}
+
+.mapboxgl-popup {
+  max-width: 200px;
+}
+
+.mapboxgl-popup-content {
+  text-align: center;
+  font-family: 'Open Sans', sans-serif;
+}
+
 @import "./components/helper.scss";
 @import "./components/menu-content.scss";
 @import "./components/card/project-period.scss";

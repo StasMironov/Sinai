@@ -1,4 +1,75 @@
 .project-map {
-    height: 478px;
-    margin-top: 50px;
+
+    margin-top: 48px;
+
+    &__map {
+        height: 478px;
+        margin-top: 50px;
+    }
+
+    &__filter {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        margin-top: -15px;
+
+        @media(max-width: 640px) {
+            display: none;
+        }
+    }
+
+    &__item {
+        display: flex;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 16px;
+        line-height: 26px;
+        letter-spacing: 0.3px;
+        margin-top: 15px;
+        padding: 8px 24px;
+        cursor: pointer;
+        transition: 400ms ease;
+
+        &:not(:last-child) {
+            margin-right: 14px;
+        }
+
+        & input[type=radio] {
+            display: none;
+        }
+
+        & label {
+            display: inline-block;
+            cursor: pointer;
+            position: relative;
+            margin-right: 0;
+            line-height: 18px;
+            user-select: none;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 16px;
+            line-height: 26px;
+            letter-spacing: 0.3px;
+            color: $black-1
+        }
+
+        &--active {
+            background-color: $ochre-2;
+        }
+    }
+
+    &__img {
+        height: 24px;
+        width: 24px;
+        margin-right: 10px;
+
+        .b-svg {
+            height: 100%;
+            width: 100%;
+            fill: none;
+            stroke: $black-1;
+        }
+    }
+
+
 }
