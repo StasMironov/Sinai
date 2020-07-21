@@ -34,13 +34,14 @@
 
         @media(max-width: 922px) {
             white-space: nowrap;
+            font-size: 14px;
+            line-height: 24px;
         }
 
         @media(max-width: 640px) {
-            font-style: normal;
-            font-weight: normal;
-            font-size: 16px;
-            line-height: 160%;
+            font-size: 12px;
+            line-height: 19px;
+            letter-spacing: 0.3px;
         }
 
         &:hover {
@@ -54,6 +55,17 @@
             line-height: 26px;
             letter-spacing: 1px;
             color: $black-1;
+
+            @media(max-width: 922px) {
+                white-space: nowrap;
+                font-size: 18px;
+                line-height: 22px;
+            }
+
+            @media(max-width: 640px) {
+                font-size: 16px;
+                line-height: 22px;
+            }
         }
 
         &:not(:first-child) {

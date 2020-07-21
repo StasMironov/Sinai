@@ -3,6 +3,7 @@
     display: flex;
     align-items: baseline;
     margin-top: 37px;
+    flex-direction: column;
 
     @media(max-width: 1235px) {
         flex-direction: column;
@@ -79,24 +80,35 @@
 
     &__cover {
         width: 100%;
-        margin-top: 24px;
+        margin-top: 4px;
 
-        @media(max-width: 640px) {
+        @media(max-width: 1235px) {
+            width: 100%;
+            margin-top: 15px;
+        }
+
+        @media(max-width: 600px) {
             width: 100%;
             flex-direction: column-reverse;
             display: flex;
-            margin-top: 28px;
+            margin-top: 0;
         }
     }
 
     &__box {
+        align-items: baseline;
         margin-right: 0;
         width: 100%;
 
         display: flex;
         justify-content: space-between;
 
-        @media(max-width: 640px) {
+        @media(max-width: 922px) {
+            max-width: 740px;
+        }
+
+        @media(max-width: 600px) {
+            flex-direction: column;
             max-width: 100%;
         }
     }
@@ -118,12 +130,11 @@
     &__group {
         display: flex;
         align-items: center;
-        width: 100%;
         max-width: 530px;
-        width: 199%;
-        margin-right: 32px;
+        width: 100%;
+        margin-right: 25px;
 
-        @media(max-width: 640px) {
+        @media(max-width: 600px) {
             flex-direction: column;
         }
     }
@@ -191,7 +202,7 @@
             width: 100%;
             margin-right: 24px;
 
-            @media(max-width: 640px) {
+            @media(max-width: 600px) {
                 max-width: 100%;
                 margin-right: 0;
             }
@@ -201,7 +212,7 @@
             max-width: 272px;
             width: 100%;
 
-            @media(max-width: 640px) {
+            @media(max-width: 600px) {
                 max-width: 100%;
                 margin-top: 18px;
             }
@@ -230,14 +241,20 @@
 
     .btn {
         cursor: pointer;
+        min-width: 334px;
 
         @media(max-width: 1235px) {
             margin-top: 30px;
         }
 
-        @media(max-width: 640px) {
+        @media(max-width: 1024px) {
+            min-width: 187px;
+        }
+
+        @media(max-width: 600px) {
             margin-top: 0;
             padding: 0;
+            margin-top: 28px;
         }
 
         &__button {
@@ -248,7 +265,5 @@
             }
         }
     }
-
-
 
 }

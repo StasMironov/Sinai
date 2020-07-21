@@ -436,19 +436,15 @@ $(function () {
     };
   }
 
-  function moveModal(seting, flag) {
+  function moveModal() {
     var floorEl = $("[data-floor]");
     floorEl.each(function () {
       $(this).on('mousemove', function () {
-        var target = $(this).offset().top - $('.object__inner').offset().top - 20;
         var top = getCoords($(this));
         var parent = getCoords($('.object__inner'));
         $('.module').addClass('module--active');
-        $('.module').css('top', top.bottom - parent.top + seting);
-
-        if (flag == -1) {
-          $('.module').css('top', top.bottom - parent.top - seting);
-        }
+        var heightEl = $(this)[0].getBoundingClientRect().height;
+        $('.module').css('top', top.top - $('.header').height() - heightEl / 2.9);
       });
       $(this).on('mouseleave', function () {
         $('.module').removeClass('module--active');
@@ -457,10 +453,8 @@ $(function () {
   }
 
   $(window).on('load', function () {
-    if ($(this).width() > 1300) {
-      moveModal(85);
-    } else if ($(this).width() <= 1300) {
-      moveModal(55);
+    if ($(this).width() >= 620) {
+      moveModal();
     }
   });
 
@@ -617,12 +611,6 @@ $(function () {
   });
   projecPeriod.on('mouseover', function () {
     alert(projecPeriod.activeIndex);
-  });
-  $(document).on('click', function (event) {
-    var target = event.target;
-    console.log(target); // if (!$(target).hasClass('.project-period__bloc')) {
-    //     console.log($(target));
-    // }
   });
   $('.project-period__list').mCustomScrollbar({
     theme: "dark",
