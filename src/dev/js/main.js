@@ -721,6 +721,7 @@ $(() => {
         console.log($(this));
 
         $(this).on('click', function () {
+            $(this).find('input').prop('checked', true);
             if ($(this).find('input').is(':checked')) {
                 $(this).addClass('project-map__item--active').siblings().removeClass('project-map__item--active');
             }

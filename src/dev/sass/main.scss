@@ -14,6 +14,9 @@ html {
   min-width: 320px;
   overflow-x: hidden;
   font-size: 16px;
+  line-height: 30px;
+
+  letter-spacing: 0.3px;
 
   @media (max-width: 1023px) {
     font-size: 14px;
@@ -248,6 +251,8 @@ button {
   font-family: 'Open Sans', sans-serif;
 }
 
+
+@import "./components/projects/structure.scss";
 @import "./components/helper.scss";
 @import "./components/menu-content.scss";
 @import "./components/card/project-period.scss";
