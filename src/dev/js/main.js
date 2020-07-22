@@ -9,6 +9,45 @@ $(() => {
         mobile: false
     });
 
+    if ($('.group').length > 0) {
+        let temp = $('.group li')[$('.group li').length - 1];
+        $(temp).find('a').css('padding-right', '0px');
+
+
+        var $el, leftPos, newWidth,
+            $mainNav = $("#example-one");
+
+        $mainNav.append("<li id='magic-line'></li>");
+        var $magicLine = $("#magic-line");
+
+        $magicLine
+            .width($(".current_page_item").width())
+            .css("left", $(".current_page_item a").position().left)
+            .data("origLeft", $magicLine.position().left)
+            .data("origWidth", $magicLine.width());
+
+        $("#example-one li a").on('click', function () {
+            $el = $(this);
+            leftPos = $el.position().left;
+            newWidth = $el.parent().width();
+            $magicLine.stop().animate({
+                left: leftPos,
+                width: newWidth
+            });
+        });
+
+        $('.group li').each(function () {
+            $(this).on('click', function () {
+                $(this).find('input').prop('checked', true);
+                if ($(this).find('input').is(':checked')) {
+                    $(this).addClass('current_page_item').siblings().removeClass('current_page_item');
+                }
+            });
+        });
+    }
+
+
+
     lightGallery(document.getElementById('lightgallery-cer'));
 
     if ($('.index-content__txt').exists()) {
@@ -525,31 +564,186 @@ $(() => {
             var marker = e.layer,
                 feature = marker.feature;
 
-
-
-            // for (let i = 0; i < geoJson.features.length; i++) {
-            //     console.log(i);
-            // }
-
-            // // $(feature).each(function (i) {
-            // //     // console.log(geoJson.features);
-            // //     //  delete $(this)[0];
-
-            // //     if ($(this)[i].properties.title == 'Магазин') {
-            // //         // console.log(marker);
-
-            // //     } 
-
-            // //     //  console.log($(this)[i].properties.title);
-            // // });
-
-
-
             marker.setIcon(L.icon(feature.properties.icon));
         });
 
         // Add features to the map.
         myLayer.setGeoJSON(geoJson);
+
+    }
+
+
+    if ($('#map-projects').length > 0) {
+        // L.mapbox.accessToken = 'pk.eyJ1IjoiYWRtaW5zaW5haSIsImEiOiJja2N2czJ2ejcwNzdoMzBtbDVneTh6NTNkIn0.pkiEoq-UDjbqvdDrB_zZCQ';
+        mapboxgl.accessToken = 'pk.eyJ1IjoiYWRtaW5zaW5haSIsImEiOiJja2N2czJ2ejcwNzdoMzBtbDVneTh6NTNkIn0.pkiEoq-UDjbqvdDrB_zZCQ';
+        let flying = false;
+        let mapCenter = [58.985550, 53.377120];
+        var map = new mapboxgl.Map({
+            container: 'map-projects',
+            style: 'mapbox://styles/mapbox/light-v10',
+            center: mapCenter,
+            zoom: 15.5,
+            // bearing: -17.6,
+        });
+
+        map.on('moveend', function (e) {
+            if (flying) {
+                // alert(1);
+                map.fire('flyend');
+            }
+        });
+
+        map.on('flystart', function () {
+            flying = true;
+        });
+        map.on('flyend', function () {
+            flying = false;
+        });
+
+        var center = map.getCenter();
+
+        let geoJson = {
+            type: 'FeatureCollection',
+            features: [{
+                    "type": "Feature",
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [58.985550, 53.377120]
+                    },
+                    "properties": {
+                        "title": "Магазин",
+                        "icon": {
+                            "iconUrl": "../img/icon/marker/shop.png",
+                            "iconSize": [50, 50], // size of the icon
+                            "iconAnchor": [25, 25], // point of the icon which will correspond to marker's location
+                            "popupAnchor": [0, -25], // point from which the popup should open relative to the iconAnchor
+                            "className": "marker"
+                        }
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [59.089068, 53.379590]
+                    },
+                    "properties": {
+                        "title": "Школа",
+                        "icon": {
+                            "iconUrl": "../img/icon/marker/school.png",
+                            "iconSize": [50, 50], // size of the icon
+                            "iconAnchor": [25, 25], // point of the icon which will correspond to marker's location
+                            "popupAnchor": [0, -25], // point from which the popup should open relative to the iconAnchor
+                            "className": "marker"
+                        }
+                    }
+                },
+
+                // {
+                //     "type": "Feature",
+                //     "geometry": {
+                //         "type": "Point",
+                //         "coordinates": [58.985753, 53.386078]
+                //     },
+                //     "properties": {
+                //         "title": "Школа",
+                //         "icon": {
+                //             "iconUrl": "../img/icon/marker/school.png",
+                //             "iconSize": [118, 118], // size of the icon
+                //             "iconAnchor": [25, 25], // point of the icon which will correspond to marker's location
+                //             "popupAnchor": [0, -25], // point from which the popup should open relative to the iconAnchor
+                //             "className": "marker"
+                //         }
+                //     }
+                // }
+
+
+
+
+            ]
+        };
+
+        geoJson.features.forEach(function (marker) {
+            // create a DOM element for the marker
+            var el = document.createElement('div');
+            el.className = 'marker';
+            el.style.backgroundImage = 'url(' + marker.properties.icon.iconUrl + ')';
+            el.style.width = marker.properties.icon.iconSize[0] + 'px';
+            el.style.height = marker.properties.icon.iconSize[1] + 'px';
+
+            // el.addEventListener('click', function () {
+            //     window.alert(marker.properties.message);
+            // });
+
+            // var popup = new mapboxgl.Popup({
+            //     offset: 25
+            // }).setText(
+            //     'Construction on the Washington Monument began in 1848.'
+            // );
+
+            // add marker to map
+            new mapboxgl.Marker(el)
+                .setLngLat(marker.geometry.coordinates) // sets a popup on this marker
+                .addTo(map);
+        });
+
+
+
+        if ($('.structure__item').length > 0) {
+            let idx = 0;
+            let projectsData = [];
+
+            $('.structure__item').each(function (i) {
+                if ($(this).data('coordinates') != undefined) {
+                    projectsData.push($(this).data('coordinates'));
+                }
+
+                function fly() {
+                    map.flyTo({
+                        center: projectsData[i],
+                        essential: true // this animation is considered essential with respect to prefers-reduced-motion
+                    });
+                    map.fire('flystart');
+                    console.log(map);
+                }
+
+                $(this).hover(function () {
+                    // Back to the first coordinate.
+                    // if (idx >= projectsData.length) {
+                    //     idx = 0;
+                    // }
+                    fly();
+                });
+            });
+
+            // console.log(projectsData);
+        }
+
+        // var idx = 0;
+
+        // var arrayOfCoordinates = [
+        //     [-73.554, 45.5088],
+        //     [-73.9808, 40.7648],
+        //     [-117.1628, 32.7174],
+        //     [7.2661, 43.7031],
+        //     [11.374478, 43.846144],
+        //     [12.631267, 41.85256],
+        //     [12.3309, 45.4389],
+        //     [21.9885, 50.0054]
+        // ];
+
+        // document.querySelector('.structure__item').addEventListener('click', function () {
+        //     // Back to the first coordinate.
+        //     if (idx >= arrayOfCoordinates.length) {
+        //         idx = 0;
+        //     }
+
+        //     map.flyTo({
+        //         center: arrayOfCoordinates[idx]
+        //     });
+
+        //     idx++;
+        // });
 
     }
 
@@ -752,6 +946,8 @@ $(() => {
             }
         });
     });
+
+
 
 
 });

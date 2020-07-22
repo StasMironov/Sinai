@@ -11,27 +11,40 @@ block content
 			.structure__quote Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
 			.structure__wrapper
 				.structure__left
-					.structure__menu
-						<div class="structure__link ">
-							<input id="radio-1" type="radio" name="radio" value="1" checked>
-							<label for="radio-1">Все</label>
-						</div>
-						<div class="structure__link ">
-							<input id="radio-1" type="radio" name="radio" value="1">
-							<label for="radio-1">Старт продаж</label>
-						</div>
-						<div class="structure__link ">
-							<input id="radio-1" type="radio" name="radio" value="1">
-							<label for="radio-1">Строительство</label>
-						</div>
-						<div class="structure__link ">
-							<input id="radio-1" type="radio" name="radio" value="1">
-							<label for="radio-1">Завершенные</label>
-						</div>
+					<nav class="structure-menu nav-wrap">
+						<ul class="group" id="example-one">
+							<li class="current_page_item">
+								<a class="structure__link ">
+									<input id="radio-1" type="radio" name="radio" value="1" checked>
+									<label for="radio-1">Все</label>
+								</a>
+							</li>
+							<li>
+								<a class="structure__link ">
+									<input id="radio-2" type="radio" name="radio" value="1">
+									<label for="radio-2">Старт продаж</label>
+								</a>
+							</li>
+							<li>
+								<a class="structure__link ">
+									<input id="radio-3" type="radio" name="radio" value="1">
+									<label for="radio-3">Строительство</label>
+								</a>
+							</li>
+							<li>
+								<a class="structure__link ">
+									<input id="radio-4" type="radio" name="radio" value="1">
+									<label for="radio-4">Завершенные</label>
+								</a>
+							</li>
+							
+						</ul>
+					</nav>
 					.structure__items
-						.structure__item
+						.structure__item(data-coordinates = "[58.988547, 53.376635]")
 							.structure__pic
 								img(src="./img/index/p1.jpg" alt="")
+								.structure__status Старт продаж
 							.structure__box
 								.structure__top
 									.structure__bloc
@@ -46,6 +59,62 @@ block content
 										.structure__qty 132
 										a(href="javascript:void(0)").structure__ref свободные квартиры
 									.structure__date срок сдачи: <span>1 апреля 2020</span>
+						.structure__item(data-coordinates = "[59.089068, 53.379590]")
+							.structure__pic
+								img(src="./img/index/p1.jpg" alt="")
+								.structure__status Старт продаж
+							.structure__box
+								.structure__top
+									.structure__bloc
+										.structure__article Современный дом в центре города
+										.structure__adres по Завенягина, рядом с парком
+									.structure__price от 1,5 млн руб.
+								.structure__midle
+									.structure_info Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas varius tortor nibh, sit amet tempor nibh finibus et. Aenean eu enim justo. Vestibulum aliquam hendrerit molestie. Mauris malesuada nisi sit amet augue accumsan tincidunt. Maecenas tincidunt, velit ac porttitor pulvinar.
+								.structure__bottom
+									.structure__floor
+										.structure__ic
+										.structure__qty 132
+										a(href="javascript:void(0)").structure__ref свободные квартиры
+									.structure__date срок сдачи: <span>1 апреля 2020</span>
+						.structure__item.structure__item--special
+							.structure__pic
+								img(src="./img/index/p1.jpg" alt="")
+								.structure__status Дом 2 в продаже
+							.structure__box
+								.structure__top
+									.structure__bloc
+										.structure__article Современный дом в центре города
+										.structure__adres по Завенягина, рядом с парком
+									.structure__price от 1,5 млн руб.
+								.structure__midle
+									.structure_info Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas varius tortor nibh, sit amet tempor nibh finibus et. Aenean eu enim justo. Vestibulum aliquam hendrerit molestie. Mauris malesuada nisi sit amet augue accumsan tincidunt. Maecenas tincidunt, velit ac porttitor pulvinar.
+								.structure__bottom
+									.structure__floor
+										.structure__ic
+										.structure__qty 132
+										a(href="javascript:void(0)").structure__ref свободные квартиры
+									.structure__date срок сдачи: <span>1 апреля 2020</span>
+					.structure__catalog
+						.structure__info Каталог квартир на обмен
+						a(href="javascript:void(0)").structure__count 64 квартиры 
 				.structure__right
-					
+					#map-projects
+			.structure__note
+				.structure__word Узнайте больше о проектах или запишитесь на экскурсию. Оставьте свой номер, и мы перезвоним вам в течение рабочего дня.	
+				a(href="").btn.btn--decor.btn--black
+					.btn__cover
+						.btn__button
+							.btn__line
+								+svg('arr')
+							.btn__figure
+								+svg('figure')
+								.btn__decor
+									+svg('arr')
+						.btn__button.btn__button--laptop 
+							<svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<path d="M2 13.5C7.52298 6.83333 16.477 6.83333 22 13.5" stroke="#D8BB54" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+								<path class = "fill" d="M15.682 9.81802C17.4393 11.5754 17.4393 14.4246 15.682 16.182C13.9246 17.9393 11.0754 17.9393 9.31802 16.182C7.56066 14.4246 7.56066 11.5754 9.31802 9.81802C11.0754 8.06066 13.9246 8.06066 15.682 9.81802" stroke="#D8BB54" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+							</svg>
+					.btn__txt Заказать обратный звонок
 block script

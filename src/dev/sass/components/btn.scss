@@ -308,4 +308,34 @@
         }
     }
 
+
+    &--black {
+        color: $black-1;
+
+        .btn__line {
+            .b-svg {
+                fill: $black-1 !important;
+                stroke: $black-1 !important;
+            }
+        }
+
+        &:hover {
+            .b-svg {
+                fill: $black-1 !important;
+            }
+        }
+
+        .btn__figure {
+            .b-svg {
+                stroke: $black-1 !important;
+            }
+
+            &:hover {
+                .b-svg {
+                    fill: $black-1 !important;
+                }
+            }
+        }
+    }
+
 }
