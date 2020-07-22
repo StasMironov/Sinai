@@ -480,50 +480,77 @@ $(() => {
         var geoJson = {
             type: 'FeatureCollection',
             features: [{
-                "type": "Feature",
-                "geometry": {
-                    "type": "Point",
-                    "coordinates": [58.985550, 53.377120]
+                    "type": "Feature",
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [58.985550, 53.377120]
+                    },
+                    "properties": {
+                        "title": "Магазин",
+                        "icon": {
+                            "iconUrl": "../img/icon/marker/shop.png",
+                            "iconSize": [50, 50], // size of the icon
+                            "iconAnchor": [25, 25], // point of the icon which will correspond to marker's location
+                            "popupAnchor": [0, -25], // point from which the popup should open relative to the iconAnchor
+                            "className": "marker"
+                        }
+                    }
                 },
-                "properties": {
-                    "title": "Магазин",
-                    "icon": {
-                        "iconUrl": "../img/icon/marker/shop.png",
-                        "iconSize": [50, 50], // size of the icon
-                        "iconAnchor": [25, 25], // point of the icon which will correspond to marker's location
-                        "popupAnchor": [0, -25], // point from which the popup should open relative to the iconAnchor
-                        "className": "marker"
+                {
+                    "type": "Feature",
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [58.988547, 53.376635]
+                    },
+                    "properties": {
+                        "title": "Школа",
+                        "icon": {
+                            "iconUrl": "../img/icon/marker/school.png",
+                            "iconSize": [50, 50], // size of the icon
+                            "iconAnchor": [25, 25], // point of the icon which will correspond to marker's location
+                            "popupAnchor": [0, -25], // point from which the popup should open relative to the iconAnchor
+                            "className": "marker"
+                        }
                     }
                 }
-            }, {
-                "type": "Feature",
-                "geometry": {
-                    "type": "Point",
-                    "coordinates": [58.988547, 53.376635]
-                },
-                "properties": {
-                    "title": "Школа",
-                    "icon": {
-                        "iconUrl": "../img/icon/marker/school.png",
-                        "iconSize": [50, 50], // size of the icon
-                        "iconAnchor": [25, 25], // point of the icon which will correspond to marker's location
-                        "popupAnchor": [0, -25], // point from which the popup should open relative to the iconAnchor
-                        "className": "marker"
-                    }
-                }
-            }]
+            ]
         };
 
+        //console.log(geoJson.features);
+
+
+        let temp = [];
         // Set a custom icon on each marker based on feature properties.
         myLayer.on('layeradd', function (e) {
             var marker = e.layer,
                 feature = marker.feature;
+
+
+
+            // for (let i = 0; i < geoJson.features.length; i++) {
+            //     console.log(i);
+            // }
+
+            // // $(feature).each(function (i) {
+            // //     // console.log(geoJson.features);
+            // //     //  delete $(this)[0];
+
+            // //     if ($(this)[i].properties.title == 'Магазин') {
+            // //         // console.log(marker);
+
+            // //     } 
+
+            // //     //  console.log($(this)[i].properties.title);
+            // // });
+
+
 
             marker.setIcon(L.icon(feature.properties.icon));
         });
 
         // Add features to the map.
         myLayer.setGeoJSON(geoJson);
+
     }
 
     if ($('.form-project__field').exists) {
@@ -718,8 +745,6 @@ $(() => {
     });
 
     $('.project-map__item').each(function () {
-        console.log($(this));
-
         $(this).on('click', function () {
             $(this).find('input').prop('checked', true);
             if ($(this).find('input').is(':checked')) {

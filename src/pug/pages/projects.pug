@@ -12,11 +12,26 @@ block content
 			.structure__wrapper
 				.structure__left
 					.structure__menu
-						.structure__link 
+						<div class="structure__link ">
+							<input id="radio-1" type="radio" name="radio" value="1" checked>
+							<label for="radio-1">Все</label>
+						</div>
+						<div class="structure__link ">
+							<input id="radio-1" type="radio" name="radio" value="1">
+							<label for="radio-1">Старт продаж</label>
+						</div>
+						<div class="structure__link ">
+							<input id="radio-1" type="radio" name="radio" value="1">
+							<label for="radio-1">Строительство</label>
+						</div>
+						<div class="structure__link ">
+							<input id="radio-1" type="radio" name="radio" value="1">
+							<label for="radio-1">Завершенные</label>
+						</div>
 					.structure__items
 						.structure__item
 							.structure__pic
-								img(src="" alt="")
+								img(src="./img/index/p1.jpg" alt="")
 							.structure__box
 								.structure__top
 									.structure__bloc
@@ -24,7 +39,13 @@ block content
 										.structure__adres по Завенягина, рядом с парком
 									.structure__price от 1,5 млн руб.
 								.structure__midle
+									.structure_info Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas varius tortor nibh, sit amet tempor nibh finibus et. Aenean eu enim justo. Vestibulum aliquam hendrerit molestie. Mauris malesuada nisi sit amet augue accumsan tincidunt. Maecenas tincidunt, velit ac porttitor pulvinar.
 								.structure__bottom
+									.structure__floor
+										.structure__ic
+										.structure__qty 132
+										a(href="javascript:void(0)").structure__ref свободные квартиры
+									.structure__date срок сдачи: <span>1 апреля 2020</span>
 				.structure__right
 					
 block script

@@ -504,11 +504,24 @@ $(function () {
           }
         }
       }]
-    }; // Set a custom icon on each marker based on feature properties.
+    }; //console.log(geoJson.features);
+
+    var temp = []; // Set a custom icon on each marker based on feature properties.
 
     myLayer.on('layeradd', function (e) {
       var marker = e.layer,
-          feature = marker.feature;
+          feature = marker.feature; // for (let i = 0; i < geoJson.features.length; i++) {
+      //     console.log(i);
+      // }
+      // // $(feature).each(function (i) {
+      // //     // console.log(geoJson.features);
+      // //     //  delete $(this)[0];
+      // //     if ($(this)[i].properties.title == 'Магазин') {
+      // //         // console.log(marker);
+      // //     } 
+      // //     //  console.log($(this)[i].properties.title);
+      // // });
+
       marker.setIcon(L.icon(feature.properties.icon));
     }); // Add features to the map.
 
@@ -680,7 +693,6 @@ $(function () {
     }
   });
   $('.project-map__item').each(function () {
-    console.log($(this));
     $(this).on('click', function () {
       $(this).find('input').prop('checked', true);
 

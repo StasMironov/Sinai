@@ -1,4 +1,9 @@
 .structure {
+
+    &__items {
+        margin-top: 40px;
+    }
+
     &__quote {
         max-width: 692px;
         width: 100%;
@@ -27,5 +32,85 @@
     &__left {
         max-width: 692px;
         width: 100%;
+    }
+
+    &__wrapper {
+        margin-top: 56px;
+    }
+
+    &__pic {
+        max-width: 692px;
+        height: 333px;
+
+        img {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+        }
+    }
+
+    &__box {
+        margin-top: 32px;
+    }
+
+    &__midle {
+        margin-top: 22px;
+    }
+
+    &__bottom {
+        display: flex;
+        align-items: center;
+        margin-top: 24px;
+        justify-content: space-between;
+    }
+
+    &__floor {
+        display: flex;
+        align-items: center;
+    }
+
+    &__ic {
+        width: 14px;
+        height: 14px;
+        background-color: $ochre;
+        margin-right: 8px;
+        transform: rotate(45deg);
+    }
+
+    &__qty {
+        margin-right: 8px;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 20px;
+        line-height: 26px;
+    }
+
+    &__date {
+        font-style: normal;
+        font-weight: normal;
+        font-size: 16px;
+        line-height: 26px;
+        text-align: right;
+        letter-spacing: 0.3px;
+        margin-left: auto;
+
+        span {
+            font-weight: bold;
+        }
+    }
+
+    &__menu {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    &__link {
+        display: flex;
+        padding: 5px 25px;
+
+        input {
+            display: none;
+        }
     }
 }
