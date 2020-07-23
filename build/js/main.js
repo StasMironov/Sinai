@@ -584,8 +584,7 @@ $(function () {
         }
       }]
     }; //console.log(geoJson.features);
-
-    var _temp = []; // Set a custom icon on each marker based on feature properties.
+    // Set a custom icon on each marker based on feature properties.
 
     myLayer.on('layeradd', function (e) {
       var marker = e.layer,
@@ -595,6 +594,8 @@ $(function () {
 
     myLayer.setGeoJSON(geoJson);
   }
+
+  var markerArr = [];
 
   if ($('#map-projects').length > 0) {
     // L.mapbox.accessToken = 'pk.eyJ1IjoiYWRtaW5zaW5haSIsImEiOiJja2N2czJ2ejcwNzdoMzBtbDVneTh6NTNkIn0.pkiEoq-UDjbqvdDrB_zZCQ';
@@ -607,19 +608,8 @@ $(function () {
       center: mapCenter,
       zoom: 15.5 // bearing: -17.6,
 
-    });
-    map.on('moveend', function (e) {
-      if (flying) {
-        // alert(1);
-        map.fire('flyend');
-      }
-    });
-    map.on('flystart', function () {
-      flying = true;
-    });
-    map.on('flyend', function () {
-      flying = false;
-    });
+    }); //console.log(markerArr);
+
     var center = map.getCenter();
     var _geoJson = {
       type: 'FeatureCollection',
@@ -632,8 +622,8 @@ $(function () {
         "properties": {
           "title": "Магазин",
           "icon": {
-            "iconUrl": "../img/icon/marker/shop.png",
-            "iconSize": [50, 50],
+            "iconUrl": "../img/icon/marker/house.png",
+            "iconSize": [118, 118],
             // size of the icon
             "iconAnchor": [25, 25],
             // point of the icon which will correspond to marker's location
@@ -651,8 +641,8 @@ $(function () {
         "properties": {
           "title": "Школа",
           "icon": {
-            "iconUrl": "../img/icon/marker/school.png",
-            "iconSize": [50, 50],
+            "iconUrl": "../img/icon/marker/house.png",
+            "iconSize": [118, 118],
             // size of the icon
             "iconAnchor": [25, 25],
             // point of the icon which will correspond to marker's location
@@ -661,45 +651,25 @@ $(function () {
             "className": "marker"
           }
         }
-      } // {
-      //     "type": "Feature",
-      //     "geometry": {
-      //         "type": "Point",
-      //         "coordinates": [58.985753, 53.386078]
-      //     },
-      //     "properties": {
-      //         "title": "Школа",
-      //         "icon": {
-      //             "iconUrl": "../img/icon/marker/school.png",
-      //             "iconSize": [118, 118], // size of the icon
-      //             "iconAnchor": [25, 25], // point of the icon which will correspond to marker's location
-      //             "popupAnchor": [0, -25], // point from which the popup should open relative to the iconAnchor
-      //             "className": "marker"
-      //         }
-      //     }
-      // }
-      ]
+      }]
     };
 
     _geoJson.features.forEach(function (marker) {
       // create a DOM element for the marker
       var el = document.createElement('div');
-      el.className = 'marker';
-      el.style.backgroundImage = 'url(' + marker.properties.icon.iconUrl + ')';
-      el.style.width = marker.properties.icon.iconSize[0] + 'px';
-      el.style.height = marker.properties.icon.iconSize[1] + 'px'; // el.addEventListener('click', function () {
-      //     window.alert(marker.properties.message);
-      // });
-      // var popup = new mapboxgl.Popup({
-      //     offset: 25
-      // }).setText(
-      //     'Construction on the Washington Monument began in 1848.'
-      // );
-      // add marker to map
+      var doc = new DOMParser().parseFromString('<svg width="118" height="118" viewBox="0 0 118 118" fill="none" xmlns="http://www.w3.org/2000/svg"><rect class="rect" y="59" width="83.4386" height="83.4386" transform="rotate(-45 0 59)" fill="#40424C"/><path d="M68.2258 75.368V45.0131C68.2258 44.0275 67.4259 43.2275 66.4402 43.2275H52.1556C51.1699 43.2275 50.37 44.0275 50.37 45.0131V75.368" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>                <path d="M50.3699 53.9409H43.2276C42.242 53.9409 41.442 54.7409 41.442 55.7265V75.3679" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>                <path d="M77.1537 75.3679V55.7265C77.1537 54.7409 76.3538 53.9409 75.3682 53.9409H68.2258" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M54.8339 68.2256H63.7618" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M61.9763 68.2256V75.3679" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M56.6195 75.3679V68.2256" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M55.7267 56.6194H62.869" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M55.7267 61.976H62.869" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M55.7267 51.2627H62.869" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M46.7988 61.976H50.37" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M46.7988 68.2256H50.37" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M68.2258 61.976H71.797" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M68.2258 68.2256H71.797" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/> <path d="M78.9393 75.3679H39.6565" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>', 'application/xml');
+      console.log(doc);
+      el.appendChild(el.ownerDocument.importNode(doc.documentElement, true));
+      el.className = 'marker'; //   el.style.backgroundImage = 'url(' + marker.properties.icon.iconUrl + ')';
 
+      el.style.width = marker.properties.icon.iconSize[0] + 'px';
+      el.style.height = marker.properties.icon.iconSize[1] + 'px';
+      markerArr.push(el);
       new mapboxgl.Marker(el).setLngLat(marker.geometry.coordinates) // sets a popup on this marker
       .addTo(map);
     });
+
+    var _temp = 0;
 
     if ($('.structure__item').length > 0) {
       var idx = 0;
@@ -709,46 +679,41 @@ $(function () {
           projectsData.push($(this).data('coordinates'));
         }
 
-        function fly() {
+        function fly(i) {
           map.flyTo({
             center: projectsData[i],
             essential: true // this animation is considered essential with respect to prefers-reduced-motion
 
           });
           map.fire('flystart');
-          console.log(map);
+          return i;
         }
 
         $(this).hover(function () {
-          // Back to the first coordinate.
-          // if (idx >= projectsData.length) {
-          //     idx = 0;
-          // }
-          fly();
+          fly(i);
+          _temp = fly(i);
         });
-      }); // console.log(projectsData);
-    } // var idx = 0;
-    // var arrayOfCoordinates = [
-    //     [-73.554, 45.5088],
-    //     [-73.9808, 40.7648],
-    //     [-117.1628, 32.7174],
-    //     [7.2661, 43.7031],
-    //     [11.374478, 43.846144],
-    //     [12.631267, 41.85256],
-    //     [12.3309, 45.4389],
-    //     [21.9885, 50.0054]
-    // ];
-    // document.querySelector('.structure__item').addEventListener('click', function () {
-    //     // Back to the first coordinate.
-    //     if (idx >= arrayOfCoordinates.length) {
-    //         idx = 0;
-    //     }
-    //     map.flyTo({
-    //         center: arrayOfCoordinates[idx]
-    //     });
-    //     idx++;
-    // });
+      });
+      map.on('moveend', function (e) {
+        if (flying) {
+          //   markerArr[temp].style.backgroundImage = 'url("../img/icon/marker/active.png")';
+          markerArr[_temp].classList.add('marker--active');
 
+          for (var _i4 = 0; _i4 < markerArr.length; _i4++) {
+            if (_i4 != _temp) {//  markerArr[i].style.backgroundImage = 'url("../img/icon/marker/house.png")';
+            }
+          }
+
+          map.fire('flyend');
+        }
+      });
+      map.on('flystart', function () {
+        flying = true;
+      });
+      map.on('flyend', function () {
+        flying = false;
+      });
+    }
   }
 
   if ($('.form-project__field').exists) {

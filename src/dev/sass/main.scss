@@ -244,6 +244,24 @@ button {
 
 .marker {
   background-size: contain;
+
+  svg {
+    transition: .5s;
+    transition: fill 400ms ease;
+
+  }
+
+  .rect {
+    transition: .5s;
+    transition: fill 400ms ease;
+    fill: $black-1;
+  }
+
+  &--active {
+    .rect {
+      fill: $ochre;
+    }
+  }
 }
 
 .mapboxgl-popup {
