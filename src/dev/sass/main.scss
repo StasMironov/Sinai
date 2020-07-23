@@ -29,8 +29,10 @@ body {
   color: $basic;
   font-weight: 400;
   overflow: hidden;
-  font-size: 1rem;
-  line-height: 1.5rem;
+  font-size: 16px;
+  line-height: 30px;
+  /* identical to box height, or 26px */
+  letter-spacing: 0.3px;
   background-color: #fff;
   word-wrap: break-word;
   height: auto !important;

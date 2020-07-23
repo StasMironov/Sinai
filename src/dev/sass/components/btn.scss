@@ -312,6 +312,12 @@
     &--black {
         color: $black-1;
 
+        .btn__figure {
+            .b-svg {
+                stroke: $black-1;
+            }
+        }
+
         .btn__line {
             .b-svg {
                 fill: $black-1 !important;
@@ -323,17 +329,24 @@
             .b-svg {
                 fill: $black-1 !important;
             }
+
+            .btn__decor {
+                .b-svg {
+                    stroke: white !important;
+                    fill: white !important;
+                }
+            }
         }
 
-        .btn__figure {
+
+
+        .btn__decor {
+            left: 2px;
+
             .b-svg {
                 stroke: $black-1 !important;
-            }
-
-            &:hover {
-                .b-svg {
-                    fill: $black-1 !important;
-                }
+                fill: $black-1 !important;
+                left: -68px;
             }
         }
     }

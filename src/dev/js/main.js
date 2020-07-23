@@ -9,6 +9,54 @@ $(() => {
         mobile: false
     });
 
+    if ($('.project-period__list').exists()) {
+        $('.project-period__list').mCustomScrollbar({
+            theme: "dark",
+            mouseWheelPixels: 90
+        });
+    }
+
+
+    $(window).on('resize load', function () {
+        $('.structure__menu').width($('.structure__items').width());
+    });
+
+    if ($('.structure__right').exists) {
+        try {
+            let $window = $(window),
+                $target = $("#map-projects"),
+                $h = $target.offset().top;
+            $window.on('scroll', function () {
+                let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                if (scrollTop > $h) {
+                    $target.addClass("map-fixed");
+
+
+                    var wt = $(window).scrollTop();
+                    var wh = $(window).height();
+                    var et = $('.structure__note').offset().top;
+                    var eh = $('.structure__note').outerHeight();
+                    var dh = $(document).height();
+                    if (wt + wh >= et || wh + wt == dh || eh + et < wh) {
+                        console.log('Элемент показан');
+                        $("#map-projects").removeClass("map-fixed");
+                        $('.structure__inner').addClass('map-end');
+                    } else {
+                        $("#map-projects").addClass("map-fixed");
+                        $('.structure__inner').removeClass('map-end');
+                    }
+
+                    return;
+                } else {
+                    $target.removeClass("map-fixed");
+                }
+                return;
+            });
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
     if ($('.group').length > 0) {
         let temp = $('.group li')[$('.group li').length - 1];
         $(temp).find('a').css('padding-right', '0px');
@@ -487,7 +535,6 @@ $(() => {
                 $('.module').addClass('module--active');
                 let heightEl = $(this)[0].getBoundingClientRect().height;
                 $('.module').css('top', ((top.top) - $('.header').height() - (heightEl / 2.9)));
-
             });
 
             $(this).on('mouseleave', function () {
@@ -501,11 +548,6 @@ $(() => {
             moveModal();
         }
     });
-
-
-
-
-
 
     if ($('#map').length > 0) {
         //mapboxgl.accessToken = 'pk.eyJ1Ijoic3Rhc21pcm9ub3YiLCJhIjoiY2s2dWYxZXh1MDRmcjNlb2Fxejhna2I1NSJ9.vCwZFnzz7zeC7KCQ9vmVrw';
@@ -661,7 +703,7 @@ $(() => {
 
 
             ]
-        };
+        }
 
         geoJson.features.forEach(function (marker) {
             // create a DOM element for the marker
@@ -744,7 +786,6 @@ $(() => {
 
         //     idx++;
         // });
-
     }
 
     if ($('.form-project__field').exists) {
@@ -769,9 +810,11 @@ $(() => {
         });
     }
 
-    $('.project-period__bloc').on('click', function () {
-        $('.project-period__box').toggleClass('project-period__box--active');
-    });
+    if ($('.project-period__bloc').length > 0) {
+        $('.project-period__bloc').on('click', function () {
+            $('.project-period__box').toggleClass('project-period__box--active');
+        });
+    }
 
     if ($('.project-period__slider').exists()) {
         try {
@@ -799,46 +842,29 @@ $(() => {
         }
     }
 
-    $('.project-period__unit').each(function () {
+    if ($('.project-period__unit').exists()) {
+        $('.project-period__unit').each(function () {
 
-        let dataVal = 0;
-        let dataSlide = 0;
+            let dataVal = 0;
+            let dataSlide = 0;
 
-        $(this).on('click', function () {
-            $('.project-period__text').text($(this).text());
-            $('.project-period__box').removeClass('project-period__box--active');
+            $(this).on('click', function () {
+                $('.project-period__text').text($(this).text());
+                $('.project-period__box').removeClass('project-period__box--active');
 
-            dataVal = $(this).find('input').data('period');
+                dataVal = $(this).find('input').data('period');
 
-            $('.project-period__slider .swiper-slide').each(function () {
-                dataSlide = $(this).data('slide');
+                $('.project-period__slider .swiper-slide').each(function () {
+                    dataSlide = $(this).data('slide');
 
-
-                if (dataSlide == dataVal) {
-                    // alert(dataSlide);
-                    projecPeriod.slideTo(dataSlide - 1);
-                    return false;
-                }
+                    if (dataSlide == dataVal) {
+                        projecPeriod.slideTo(dataSlide - 1);
+                        return false;
+                    }
+                });
             });
         });
-
-
-
-        //console.log(dataVal);
-
-
-    });
-
-    projecPeriod.on('mouseover', function () {
-        alert(projecPeriod.activeIndex);
-    });
-
-
-    $('.project-period__list').mCustomScrollbar({
-        theme: "dark",
-        mouseWheelPixels: 90
-    });
-
+    }
 
     $(document).click(function (e) {
         var elem = $('.project-period__box');
@@ -847,72 +873,70 @@ $(() => {
         }
     });
 
-
-
-    $('a[href^="#"]').click(function () {
-        let anchor = $(this).attr('href');
-        $('html, body').animate({
-            scrollTop: $(anchor).offset().top - 130
-        }, 600);
-    });
-
-
-
-    var anchor = {
-
-        el_menu: '.menu-content__inner:eq(0)', // Меню
-
-        // Старт
-        init: function () {
-            // console.log('true');
-            anchor.menu();
-            $(document).scroll(function () {
-                anchor.scolling();
+    if ($('.menu-content__inner').exists()) {
+        try {
+            $('a[href^="#"]').click(function () {
+                let anchor = $(this).attr('href');
+                $('html, body').animate({
+                    scrollTop: $(anchor).offset().top - 130
+                }, 600);
             });
-        },
 
-        // Собираем якоря из меню
-        menu: function () {
-            anchor.links_arr = [];
-            $('' + anchor.el_menu + ' a').each(function (i) {
-                if ($(this).attr('href')) {
-                    if ($(this).attr('href').indexOf('#') != -1) {
-                        var resh = $(this).attr('href').indexOf('#'),
-                            all = $(this).attr('href').length,
-                            val = $(this).attr('href').substr(resh, all);
-                        anchor.links_arr[i] = $(this).attr('href') + '::' + val;
-                    }
+            var anchor = {
+                el_menu: '.menu-content__inner:eq(0)', // Меню
+                // Старт
+                init: function () {
+                    anchor.menu();
+                    $(document).scroll(function () {
+                        anchor.scolling();
+                    });
+                },
+
+                // Собираем якоря из меню
+                menu: function () {
+                    anchor.links_arr = [];
+                    $('' + anchor.el_menu + ' a').each(function (i) {
+                        if ($(this).attr('href')) {
+                            if ($(this).attr('href').indexOf('#') != -1) {
+                                var resh = $(this).attr('href').indexOf('#'),
+                                    all = $(this).attr('href').length,
+                                    val = $(this).attr('href').substr(resh, all);
+                                anchor.links_arr[i] = $(this).attr('href') + '::' + val;
+                            }
+                        }
+                    });
+                },
+
+                scolling: function () {
+                    anchor.links_arr.forEach(function (item) {
+                        var item_arr = item.split('::');
+                        if (anchor.inWindow('' + item_arr[1] + '').length > 0) {
+                            $('.menu-content__li').removeClass('menu-content__li--active');
+                            $('a[href="' + item_arr[0] + '"]').addClass('menu-content__li--active');
+                            return false;
+                        }
+                    });
+                },
+
+                // Проверка якоря в области видимости
+                inWindow: function (s) {
+                    var scrollTop = $(window).scrollTop() - 70,
+                        windowHeight = $(window).height(),
+                        currentEls = $(s),
+                        result = [];
+                    currentEls.each(function () {
+                        var el = $(this),
+                            offset = el.offset();
+                        if (scrollTop <= offset.top && (el.height() + offset.top) < (scrollTop + windowHeight)) result.push(this);
+                    });
+                    return $(result);
                 }
-            });
-        },
-
-        scolling: function () {
-            anchor.links_arr.forEach(function (item) {
-                var item_arr = item.split('::');
-                if (anchor.inWindow('' + item_arr[1] + '').length > 0) {
-                    $('.menu-content__li').removeClass('menu-content__li--active');
-                    $('a[href="' + item_arr[0] + '"]').addClass('menu-content__li--active');
-                    return false;
-                }
-            });
-        },
-
-        // Проверка якоря в области видимости
-        inWindow: function (s) {
-            var scrollTop = $(window).scrollTop() - 70,
-                windowHeight = $(window).height(),
-                currentEls = $(s),
-                result = [];
-            currentEls.each(function () {
-                var el = $(this),
-                    offset = el.offset();
-                if (scrollTop <= offset.top && (el.height() + offset.top) < (scrollTop + windowHeight)) result.push(this);
-            });
-            return $(result);
+            }
+            anchor.init();
+        } catch (err) {
+            console.log(err);
         }
     }
-    anchor.init();
-
 
     $(window).on('resize load', function () {
         if ($(this).width() > 922) {
@@ -938,16 +962,14 @@ $(() => {
         }
     });
 
-    $('.project-map__item').each(function () {
-        $(this).on('click', function () {
-            $(this).find('input').prop('checked', true);
-            if ($(this).find('input').is(':checked')) {
-                $(this).addClass('project-map__item--active').siblings().removeClass('project-map__item--active');
-            }
+    if ($('.project-map__item').exists()) {
+        $('.project-map__item').each(function () {
+            $(this).on('click', function () {
+                $(this).find('input').prop('checked', true);
+                if ($(this).find('input').is(':checked')) {
+                    $(this).addClass('project-map__item--active').siblings().removeClass('project-map__item--active');
+                }
+            });
         });
-    });
-
-
-
-
+    }
 });

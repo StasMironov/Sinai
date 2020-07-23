@@ -10,7 +10,25 @@
     max-width: inherit;
 }
 
+.map-fixed {
+    position: fixed !important;
+    top: 0;
+    z-index: 1;
+    transition: 400ms ease;
+}
+
+.map-end {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    top: auto;
+}
+
 
 .mf-margin {
     margin-top: 103px;
+
+    @media(max-width: 1024px) {
+        margin-top: 70px;
+    }
 }
