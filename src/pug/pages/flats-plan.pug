@@ -1,0 +1,270 @@
+extends ../layout/main
+
+block variables
+	- var title = 'Главная страница'
+	- var pageClass = 'index-page';
+
+block content
+	.flats-filter.mf-margin
+		.flats-filter__container.b-container
+			.flats-filter__title.title-1 Квартиры Завенягина 1/2
+			.flats-filter__date 2 квартал 2021
+			form(method="get").building-filter
+				.building-filter__row
+					.building-filter__col.building-filter__col--project
+						.building-filter__header Проект
+						.building-filter__box
+							.building-filter__case
+								.building-filter__wrp
+									.building-filter__text Все
+									.building-filter__img
+										<svg width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+											<path d="M1 5L5.24264 9.24264L9.48528 5" stroke="#1E202C" stroke-width="1.5"/>
+										</svg>
+								.building-filter__select
+									.building-filter__unit
+										<input id="type1" type="radio" name="type" value="Завенягина 1/2" checked>
+										<label for="type1" title="Завенягина 1">Завенягина 1/2</label>
+									.building-filter__unit
+										<input id="type2" type="radio" name="type" value="улица имени Газеты Правда, 79">
+										<label for="type2" title="улица имени Газеты Правда, 79">улица имени Газеты Правда, 79</label>
+									.building-filter__unit
+										<input id="type3" type="radio" name="type" value="Завенягина 1/2" checked>
+										<label for="type3" title="Завенягина 1">Завенягина 1/2</label>
+									.building-filter__unit
+										<input id="type4" type="radio" name="type" value="улица имени Газеты Правда, 79">
+										<label for="type4" title="улица имени Газеты Правда, 79">улица имени Газеты Правда, 79</label>
+					.building-filter__col.building-filter__col--room
+						.building-filter__header Кол-во комнат
+						.building-filter__box
+							.building-filter__list
+								.building-filter__radio
+									<input id="room1" type="radio" name="room" value="C" checked>
+									<label for="room1">C</label>
+								.building-filter__radio
+									<input id="room2" type="radio" name="room" value="1">
+									<label for="room2">1</label>
+								.building-filter__radio
+									<input id="room3" type="radio" name="room" value="2">
+									<label for="room3">2</label>
+								.building-filter__radio
+									<input id="room4" type="radio" name="room" value="3+">
+									<label for="room4">3+</label>
+					.building-filter__col.building-filter__col--period
+						.building-filter__header Срок сдачи
+						.building-filter__box
+							.building-filter__case
+								.building-filter__wrp
+									.building-filter__text Срок сдачи
+									.building-filter__img
+										<svg width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+											<path d="M1 5L5.24264 9.24264L9.48528 5" stroke="#1E202C" stroke-width="1.5"/>
+										</svg>
+								.building-filter__select
+									.building-filter__unit
+										<input id="period1" type="radio" name="period" value="2020" checked>
+										<label for="period1" type="radio" title="2020">2020</label>
+									.building-filter__unit
+										<input id="period2" type="radio" name="period" value="2019">
+										<label for="period2" title="2019">2019</label>
+									.building-filter__unit
+										<input id="period3" type="radio" name="period" value="2018">
+										<label for="period3" title="2018">2018</label>
+									.building-filter__unit
+										<input id="period4" type="radio" name="period" value="2017">
+										<label for="period4" title="2017">2017</label>
+					.building-filter__col.building-filter__col--offer
+						.building-filter__header Спецпредложения
+						.building-filter__box
+							.building-filter__case
+								.building-filter__wrp
+									.building-filter__text Спецпредложения
+									.building-filter__img
+										<svg width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+											<path d="M1 5L5.24264 9.24264L9.48528 5" stroke="#1E202C" stroke-width="1.5"/>
+										</svg>
+								.building-filter__select
+									.building-filter__unit
+										<input id="offer1" type="radio" name="offer" value="Все" checked>
+										<label for="offer1">Все</label>
+									.building-filter__unit
+										<input id="offer2" type="radio" name="offer" value="Старт продаж">
+										<label for="offer2">Старт продаж</label>
+									.building-filter__unit
+										<input id="offer3" type="radio" name="offer" value="Строительство">
+										<label for="offer3">Строительство</label>
+									.building-filter__unit
+										<input id="offer4" type="radio" name="period" value="Завершенные">
+										<label for="offer4">Завершенные</label>
+					.building-filter__col.building-filter__col--cost
+						<div id="polzunok"></div>
+
+				.building-filter__row
+				button.temp Отправить
+	.flats-basic
+		.flats-basic__container.b-container
+			.flats-basic__menu
+				<nav class="filter-menu nav-wrap">
+						<ul class="group" id="example-one">
+							<li class="current_page_item">
+								<a class="filter-menu__link ">
+									<input id="view1" type="radio" name="radio" value="1" checked>
+									<label for="view1">Планировка</label>
+								</a>
+							</li>
+							<li>
+								<a class="filter-menu__link ">
+									<input id="view2" type="radio" name="radio" value="2">
+									<label for="view2">Плитка</label>
+								</a>
+							</li>
+							<li>
+								<a class="filter-menu__link ">
+									<input id="view3" type="radio" name="radio" value="3">
+									<label for="view3">Этажи</label>
+								</a>
+							</li>							
+						</ul>
+				</nav>
+				.flats-basic__filter
+			.flats-basic__box
+				.flats-basic__items
+					.flats-basic__item
+						.flats-basic__plan
+							.flats-basic__qty <span>4<span> квартиры
+							.flats-basic__inner
+								.flats-basic__img
+									img(src='./img/flats/plan/plan.png' alt='')
+						.flats-basic__cover
+							.flats-basic__info 1 комнатная квартира 23,0м <sup><small>2</small></sup>
+							.flats-basic__price от <span>1 250 000</span> руб.
+							.flats-basic__adres Завенягина 123/2
+							.flats-basic__bottom
+								.flats-basic__bloc
+									.flats-basic__txt Срок сдачи:
+									.flats-basic__period 1 квартал 2021
+								a(href="javascript:void(0);").flats-basic__link Подробнее
+					.flats-basic__item
+						.flats-basic__plan
+							.flats-basic__qty <span>4<span> квартиры
+							.flats-basic__inner
+								.flats-basic__img
+									img(src='./img/flats/plan/plan.png' alt='')
+						.flats-basic__cover
+							.flats-basic__info 1 комнатная квартира 23,0м <sup><small>2</small></sup>
+							.flats-basic__price от <span>1 250 000</span> руб.
+							.flats-basic__adres Завенягина 123/2
+							.flats-basic__bottom
+								.flats-basic__bloc
+									.flats-basic__txt Срок сдачи:
+									.flats-basic__period 1 квартал 2021
+								a(href="javascript:void(0);").flats-basic__link Подробнее
+					.flats-basic__item
+						.flats-basic__plan
+							.flats-basic__qty <span>4<span> квартиры
+							.flats-basic__inner
+								.flats-basic__img
+									img(src='./img/flats/plan/plan.png' alt='')
+						.flats-basic__cover
+							.flats-basic__info 1 комнатная квартира 23,0м <sup><small>2</small></sup>
+							.flats-basic__price от <span>1 250 000</span> руб.
+							.flats-basic__adres Завенягина 123/2
+							.flats-basic__bottom
+								.flats-basic__bloc
+									.flats-basic__txt Срок сдачи:
+									.flats-basic__period 1 квартал 2021
+								a(href="javascript:void(0);").flats-basic__link Подробнее
+					.flats-basic__item
+						.flats-basic__plan
+							.flats-basic__qty <span>4<span> квартиры
+							.flats-basic__inner
+								.flats-basic__img
+									img(src='./img/flats/plan/plan.png' alt='')
+						.flats-basic__cover
+							.flats-basic__info 1 комнатная квартира 23,0м <sup><small>2</small></sup>
+							.flats-basic__price от <span>1 250 000</span> руб.
+							.flats-basic__adres Завенягина 123/2
+							.flats-basic__bottom
+								.flats-basic__bloc
+									.flats-basic__txt Срок сдачи:
+									.flats-basic__period 1 квартал 2021
+								a(href="javascript:void(0);").flats-basic__link Подробнее
+					.flats-basic__item
+						.flats-basic__plan
+							.flats-basic__qty <span>4<span> квартиры
+							.flats-basic__inner
+								.flats-basic__img
+									img(src='./img/flats/plan/plan.png' alt='')
+						.flats-basic__cover
+							.flats-basic__info 1 комнатная квартира 23,0м <sup><small>2</small></sup>
+							.flats-basic__price от <span>1 250 000</span> руб.
+							.flats-basic__adres Завенягина 123/2
+							.flats-basic__bottom
+								.flats-basic__bloc
+									.flats-basic__txt Срок сдачи:
+									.flats-basic__period 1 квартал 2021
+								a(href="javascript:void(0);").flats-basic__link Подробнее
+					.flats-basic__item
+						.flats-basic__plan
+							.flats-basic__qty <span>4<span> квартиры
+							.flats-basic__inner
+								.flats-basic__img
+									img(src='./img/flats/plan/plan.png' alt='')
+						.flats-basic__cover
+							.flats-basic__info 1 комнатная квартира 23,0м <sup><small>2</small></sup>
+							.flats-basic__price от <span>1 250 000</span> руб.
+							.flats-basic__adres Завенягина 123/2
+							.flats-basic__bottom
+								.flats-basic__bloc
+									.flats-basic__txt Срок сдачи:
+									.flats-basic__period 1 квартал 2021
+								a(href="javascript:void(0);").flats-basic__link Подробнее
+					.flats-basic__item
+						.flats-basic__plan
+							.flats-basic__qty <span>4<span> квартиры
+							.flats-basic__inner
+								.flats-basic__img
+									img(src='./img/flats/plan/plan.png' alt='')
+						.flats-basic__cover
+							.flats-basic__info 1 комнатная квартира 23,0м <sup><small>2</small></sup>
+							.flats-basic__price от <span>1 250 000</span> руб.
+							.flats-basic__adres Завенягина 123/2
+							.flats-basic__bottom
+								.flats-basic__bloc
+									.flats-basic__txt Срок сдачи:
+									.flats-basic__period 1 квартал 2021
+								a(href="javascript:void(0);").flats-basic__link Подробнее
+					.flats-basic__item
+						.flats-basic__plan
+							.flats-basic__qty <span>4<span> квартиры
+							.flats-basic__inner
+								.flats-basic__img
+									img(src='./img/flats/plan/plan.png' alt='')
+						.flats-basic__cover
+							.flats-basic__info 1 комнатная квартира 23,0м <sup><small>2</small></sup>
+							.flats-basic__price от <span>1 250 000</span> руб.
+							.flats-basic__adres Завенягина 123/2
+							.flats-basic__bottom
+								.flats-basic__bloc
+									.flats-basic__txt Срок сдачи:
+									.flats-basic__period 1 квартал 2021
+								a(href="javascript:void(0);").flats-basic__link Подробнее
+					.flats-basic__item
+						.flats-basic__plan
+							.flats-basic__qty <span>4<span> квартиры
+							.flats-basic__inner
+								.flats-basic__img
+									img(src='./img/flats/plan/plan.png' alt='')
+						.flats-basic__cover
+							.flats-basic__info 1 комнатная квартира 23,0м <sup><small>2</small></sup>
+							.flats-basic__price от <span>1 250 000</span> руб.
+							.flats-basic__adres Завенягина 123/2
+							.flats-basic__bottom
+								.flats-basic__bloc
+									.flats-basic__txt Срок сдачи:
+									.flats-basic__period 1 квартал 2021
+								a(href="javascript:void(0);").flats-basic__link Подробнее
+					
+					
+	div(style = "height: 200px")
+block script

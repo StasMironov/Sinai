@@ -286,7 +286,103 @@ button {
   font-family: 'Open Sans', sans-serif;
 }
 
+.nav-wrap {
+  border-bottom: 2px solid white;
+}
 
+/* Clearfix */
+.group:after,
+.group:before {
+  content: none;
+}
+
+.group:after {
+  position: absolute;
+  content: '';
+  width: 100%;
+  height: 2px;
+  background-color: $gray-1;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+/* IE7 */
+
+.structure {
+  &__menu {
+    max-width: 407px;
+  }
+
+  &__link {
+    padding: 5px 15px 11px;
+  }
+}
+
+/* Example One */
+#example-one {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+  list-style: none;
+  position: relative;
+  width: 100%;
+}
+
+#example-one li {
+  display: inline-block;
+
+  &:last-child {
+    a {
+      padding-right: 0;
+    }
+  }
+}
+
+#example-one a {
+  color: $basic;
+  float: left;
+  text-decoration: none;
+
+  &:hover {
+    color: $black-1;
+  }
+
+}
+
+#example-one a:hover {
+  // color: white;
+}
+
+#magic-line {
+  position: absolute;
+  bottom: 0px;
+  left: 0;
+  width: 100px;
+  height: 2px;
+  background: $ochre;
+  z-index: 1;
+}
+
+.current_page_item a {
+  color: $black-1 !important;
+}
+
+.ie6 #example-one li,
+.ie7 #example-one li {
+  display: inline;
+}
+
+.ie6 #magic-line {
+  bottom: -3px;
+}
+
+
+@import "./components/building-filter";
+@import "./components/filter-menu.scss";
+@import "./components/flats/flats-basic.scss";
+@import "./components/flats/flats-filter.scss";
 @import "./components/projects/structure.scss";
 @import "./components/helper.scss";
 @import "./components/menu-content.scss";
