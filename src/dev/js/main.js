@@ -628,6 +628,8 @@ $(() => {
             // bearing: -17.6,
         });
 
+        map.scrollZoom.disable();
+
         //console.log(markerArr);
 
 
@@ -644,12 +646,13 @@ $(() => {
                     },
                     "properties": {
                         "title": "Магазин",
+                        "href": "test1",
                         "icon": {
                             "iconUrl": "../img/icon/marker/house.png",
                             "iconSize": [118, 118], // size of the icon
                             "iconAnchor": [25, 25], // point of the icon which will correspond to marker's location
                             "popupAnchor": [0, -25], // point from which the popup should open relative to the iconAnchor
-                            "className": "marker"
+                            "className": "marker",
                         }
                     }
                 },
@@ -661,15 +664,35 @@ $(() => {
                     },
                     "properties": {
                         "title": "Школа",
+                        "href": "test2",
                         "icon": {
                             "iconUrl": "../img/icon/marker/house.png",
                             "iconSize": [118, 118], // size of the icon
                             "iconAnchor": [25, 25], // point of the icon which will correspond to marker's location
                             "popupAnchor": [0, -25], // point from which the popup should open relative to the iconAnchor
-                            "className": "marker"
+                            "className": "marker",
                         }
                     }
                 },
+                {
+                    //53.375217, 58.986310
+                    "type": "Feature",
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [58.986310, 53.375217]
+                    },
+                    "properties": {
+                        "title": "Школа",
+                        "href": "test3",
+                        "icon": {
+                            "iconUrl": "../img/icon/marker/house.png",
+                            "iconSize": [118, 118], // size of the icon
+                            "iconAnchor": [25, 25], // point of the icon which will correspond to marker's location
+                            "popupAnchor": [0, -25], // point from which the popup should open relative to the iconAnchor
+                            "className": "marker",
+                        }
+                    }
+                }
             ]
         }
 
@@ -678,13 +701,16 @@ $(() => {
             var el = document.createElement('div');
             var doc = new DOMParser().parseFromString(
                 '<svg width="118" height="118" viewBox="0 0 118 118" fill="none" xmlns="http://www.w3.org/2000/svg"><rect class="rect" y="59" width="83.4386" height="83.4386" transform="rotate(-45 0 59)" fill="#40424C"/><path d="M68.2258 75.368V45.0131C68.2258 44.0275 67.4259 43.2275 66.4402 43.2275H52.1556C51.1699 43.2275 50.37 44.0275 50.37 45.0131V75.368" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>                <path d="M50.3699 53.9409H43.2276C42.242 53.9409 41.442 54.7409 41.442 55.7265V75.3679" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>                <path d="M77.1537 75.3679V55.7265C77.1537 54.7409 76.3538 53.9409 75.3682 53.9409H68.2258" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M54.8339 68.2256H63.7618" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M61.9763 68.2256V75.3679" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M56.6195 75.3679V68.2256" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M55.7267 56.6194H62.869" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M55.7267 61.976H62.869" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M55.7267 51.2627H62.869" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M46.7988 61.976H50.37" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M46.7988 68.2256H50.37" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M68.2258 61.976H71.797" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M68.2258 68.2256H71.797" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/> <path d="M78.9393 75.3679H39.6565" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>', 'application/xml');
-            console.log(doc);
             el.appendChild(
                 el.ownerDocument.importNode(doc.documentElement, true));
             el.className = 'marker';
-            //   el.style.backgroundImage = 'url(' + marker.properties.icon.iconUrl + ')';
             el.style.width = marker.properties.icon.iconSize[0] + 'px';
             el.style.height = marker.properties.icon.iconSize[1] + 'px';
+
+            el.addEventListener('click', function () {
+                window.location.href = marker.properties.href;
+            });
+            // el.setAttribute('href', marker.properties.href);
 
             markerArr.push(el);
             new mapboxgl.Marker(el)
@@ -720,11 +746,11 @@ $(() => {
 
             map.on('moveend', function (e) {
                 if (flying) {
-                    //   markerArr[temp].style.backgroundImage = 'url("../img/icon/marker/active.png")';
                     markerArr[temp].classList.add('marker--active');
+
                     for (let i = 0; i < markerArr.length; i++) {
                         if (i != temp) {
-                            //  markerArr[i].style.backgroundImage = 'url("../img/icon/marker/house.png")';
+                            markerArr[i].classList.remove('marker--active');
                         }
                     }
 
@@ -738,7 +764,6 @@ $(() => {
             map.on('flyend', function () {
                 flying = false;
             });
-
         }
     }
 

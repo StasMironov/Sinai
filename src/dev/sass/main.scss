@@ -243,7 +243,9 @@ button {
 }
 
 .marker {
+  display: block;
   background-size: contain;
+  cursor: pointer;
 
   svg {
     transition: .5s;
