@@ -550,7 +550,6 @@ $(() => {
     });
 
     if ($('#map').length > 0) {
-        //mapboxgl.accessToken = 'pk.eyJ1Ijoic3Rhc21pcm9ub3YiLCJhIjoiY2s2dWYxZXh1MDRmcjNlb2Fxejhna2I1NSJ9.vCwZFnzz7zeC7KCQ9vmVrw';
         L.mapbox.accessToken = 'pk.eyJ1IjoiYWRtaW5zaW5haSIsImEiOiJja2N2czJ2ejcwNzdoMzBtbDVneTh6NTNkIn0.pkiEoq-UDjbqvdDrB_zZCQ';
         var map = L.mapbox.map('map')
             .setView([53.377120, 58.985550], 17)
@@ -597,10 +596,6 @@ $(() => {
             ]
         };
 
-        //console.log(geoJson.features);
-
-
-
         // Set a custom icon on each marker based on feature properties.
         myLayer.on('layeradd', function (e) {
             var marker = e.layer,
@@ -611,12 +606,10 @@ $(() => {
 
         // Add features to the map.
         myLayer.setGeoJSON(geoJson);
-
     }
     let markerArr = [];
 
     if ($('#map-projects').length > 0) {
-        // L.mapbox.accessToken = 'pk.eyJ1IjoiYWRtaW5zaW5haSIsImEiOiJja2N2czJ2ejcwNzdoMzBtbDVneTh6NTNkIn0.pkiEoq-UDjbqvdDrB_zZCQ';
         mapboxgl.accessToken = 'pk.eyJ1IjoiYWRtaW5zaW5haSIsImEiOiJja2N2czJ2ejcwNzdoMzBtbDVneTh6NTNkIn0.pkiEoq-UDjbqvdDrB_zZCQ';
         let flying = false;
         let mapCenter = [58.985550, 53.377120];
@@ -630,12 +623,6 @@ $(() => {
 
         map.scrollZoom.disable();
 
-        //console.log(markerArr);
-
-
-
-        var center = map.getCenter();
-
         let geoJson = {
             type: 'FeatureCollection',
             features: [{
@@ -646,7 +633,6 @@ $(() => {
                     },
                     "properties": {
                         "title": "Магазин",
-                        "href": "test1",
                         "icon": {
                             "iconUrl": "../img/icon/marker/house.png",
                             "iconSize": [118, 118], // size of the icon
@@ -664,7 +650,6 @@ $(() => {
                     },
                     "properties": {
                         "title": "Школа",
-                        "href": "test2",
                         "icon": {
                             "iconUrl": "../img/icon/marker/house.png",
                             "iconSize": [118, 118], // size of the icon
@@ -675,7 +660,6 @@ $(() => {
                     }
                 },
                 {
-                    //53.375217, 58.986310
                     "type": "Feature",
                     "geometry": {
                         "type": "Point",
@@ -683,7 +667,6 @@ $(() => {
                     },
                     "properties": {
                         "title": "Школа",
-                        "href": "test3",
                         "icon": {
                             "iconUrl": "../img/icon/marker/house.png",
                             "iconSize": [118, 118], // size of the icon
@@ -708,9 +691,8 @@ $(() => {
             el.style.height = marker.properties.icon.iconSize[1] + 'px';
 
             el.addEventListener('click', function () {
-                window.location.href = marker.properties.href;
+                window.location.href = this.getAttribute('data-href');
             });
-            // el.setAttribute('href', marker.properties.href);
 
             markerArr.push(el);
             new mapboxgl.Marker(el)
@@ -725,6 +707,8 @@ $(() => {
             let projectsData = [];
 
             $('.structure__item').each(function (i) {
+                markerArr[i].setAttribute('data-href', $(this).data('href'));
+
                 if ($(this).data('coordinates') != undefined) {
                     projectsData.push($(this).data('coordinates'));
                 }
@@ -741,6 +725,7 @@ $(() => {
                 $(this).hover(function () {
                     fly(i);
                     temp = fly(i);
+
                 });
             });
 
@@ -753,7 +738,6 @@ $(() => {
                             markerArr[i].classList.remove('marker--active');
                         }
                     }
-
                     map.fire('flyend');
                 }
             });
