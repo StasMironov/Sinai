@@ -247,19 +247,30 @@ button {
   background-size: contain;
   cursor: pointer;
 
+  &:hover .rect {
+    stroke: $ochre;
+    stroke-width: 2px;
+  }
+
   svg {
     transition: .5s;
-    transition: fill 400ms ease;
+    transition: 400ms ease;
 
   }
 
   .rect {
     transition: .5s;
-    transition: fill 400ms ease;
+    transition: 400ms ease;
     fill: $black-1;
+    stroke: transparent;
   }
 
   &--active {
+    &:hover .rect {
+      stroke: $black-1;
+      stroke-width: 2px;
+    }
+
     .rect {
       fill: $ochre;
     }
