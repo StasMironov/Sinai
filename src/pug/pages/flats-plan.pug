@@ -94,13 +94,64 @@ block content
 										<input id="offer3" type="radio" name="offer" value="Строительство">
 										<label for="offer3">Строительство</label>
 									.building-filter__unit
-										<input id="offer4" type="radio" name="period" value="Завершенные">
+										<input id="offer4" type="radio" name="offer" value="Завершенные">
 										<label for="offer4">Завершенные</label>
 					.building-filter__col.building-filter__col--cost
-						<div id="polzunok"></div>
+						.building-filter__header Стоимость
+						.building-filter__range
+							.building-filter__up
+							.building-filter__low
+						div#cost
+						<input type="hidden" name="send-cost" id="send-result-сost" />
 
 				.building-filter__row
-				button.temp Отправить
+					.building-filter__col.building-filter__col--cost
+						.building-filter__header Площадь
+						.building-filter__range
+							.building-filter__up
+							.building-filter__low
+						div#area
+						<input type="hidden" name="send-area" id="send-result-area" />
+					.building-filter__col.building-filter__col--area
+						.building-filter__header Особенности планировки
+						.building-filter__box
+							.building-filter__case
+								.building-filter__wrp
+									.building-filter__text Особенности планировки
+									.building-filter__img
+										<svg width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+											<path d="M1 5L5.24264 9.24264L9.48528 5" stroke="#1E202C" stroke-width="1.5"/>
+										</svg>
+								.building-filter__select
+									.building-filter__unit
+										<input id="area1" type="radio" name="area" value="Все" checked>
+										<label for="area1">Все</label>
+									.building-filter__unit
+										<input id="area2" type="radio" name="area" value="Старт продаж">
+										<label for="area2">Старт продаж</label>
+									.building-filter__unit
+										<input id="area3" type="radio" name="area" value="Строительство">
+										<label for="area3">Строительство</label>
+									.building-filter__unit
+										<input id="area4" type="radio" name="area"  value="Завершенные">
+										<label for="area4">Завершенные</label>
+					.building-filter__button
+						.building-filter__txt Свободно <span>55</span> квартир
+						a(href="").btn.btn--decor
+							.btn__cover
+								.btn__button
+									.btn__line
+										+svg('arr')
+									.btn__figure
+										+svg('figure')
+										.btn__decor
+											+svg('arr')
+								.btn__button.btn__button--laptop 
+									<svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+										<path d="M2 13.5C7.52298 6.83333 16.477 6.83333 22 13.5" stroke="#D8BB54" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+										<path class = "fill" d="M15.682 9.81802C17.4393 11.5754 17.4393 14.4246 15.682 16.182C13.9246 17.9393 11.0754 17.9393 9.31802 16.182C7.56066 14.4246 7.56066 11.5754 9.31802 9.81802C11.0754 8.06066 13.9246 8.06066 15.682 9.81802" stroke="#D8BB54" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+									</svg>
+							.btn__txt подробнее
 	.flats-basic
 		.flats-basic__container.b-container
 			.flats-basic__menu
@@ -126,7 +177,38 @@ block content
 							</li>							
 						</ul>
 				</nav>
-				.flats-basic__filter
+				form(method="get").flats-basic__filter
+					.flats-basic__word Сортировать по
+					.flats-basic__group
+						.flats-basic__module
+							.flats-basic__text Цене
+							.flats-basic__switch
+								.flats-basic__sort
+									<input id="sort1" type="radio" name="sort1" value="1">
+									<label for="sort1">
+										+svg('arr_list')
+									</label>
+								.flats-basic__sort
+									<input id="sort2" type="radio" name="sort1" value="2">
+									<label for="sort2">
+										+svg('arr_list')
+									</label>
+						.flats-basic__module
+							.flats-basic__text Площади
+							.flats-basic__switch
+								.flats-basic__sort
+									<input id="sort3" type="radio" name="sort2" value="3">
+									<label for="sort3">
+										+svg('arr_list')
+									</label>
+								.flats-basic__sort
+									<input id="sort4" type="radio" name="sort2" value="4">
+									<label for="sort4">
+										+svg('arr_list')
+									</label>
+					button(type="reset").flats-basic__close
+						.flats-basic__ic 
+						.flats-basic__text Сбросить фильтр
 			.flats-basic__box
 				.flats-basic__items
 					.flats-basic__item

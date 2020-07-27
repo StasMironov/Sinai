@@ -10,6 +10,36 @@ $(function () {
     mobile: false
   });
 
+  function rangeSlider(block, min, max, steps, input) {
+    var slider = document.querySelector(block);
+    noUiSlider.create(slider, {
+      start: [min, max],
+      connect: true,
+      step: steps,
+      format: wNumb({
+        decimals: 0
+      }),
+      range: {
+        'min': min,
+        'max': max
+      }
+    });
+    var handle = $(block).closest('.building-filter__col');
+    var skipValues = [$(handle).find('.building-filter__up'), $(handle).find('.building-filter__low')];
+    slider.noUiSlider.on('update', function (values, i) {
+      $(skipValues[i]).text(values[i]);
+      $(input).val(values);
+    });
+  }
+
+  if ($('#cost').exists()) {
+    rangeSlider('#cost', 1500000, 13500000, 100000, '#send-result-сost');
+  }
+
+  if ($('#area').exists()) {
+    rangeSlider('#area', 0, 100, 10, '#send-result-area');
+  }
+
   if ($('.project-period__list').exists()) {
     $('.project-period__list').mCustomScrollbar({
       theme: "dark",
@@ -787,8 +817,15 @@ $(function () {
   if ($('.building-filter__wrp').length > 0) {
     $('.building-filter__wrp').each(function () {
       $(this).on('click', function () {
-        $(this).parent().toggleClass('building-filter__case--active');
+        $(this).parent().toggleClass('building-filter__case--active'); //console.log($(this).closest('.building-filter'));
+
         $(this).closest('.building-filter__col').siblings().find('.building-filter__case').removeClass('building-filter__case--active');
+        var temp = $(this).parent();
+        $('.building-filter__case').each(function (index) {
+          if ($(this) == $(temp)) {
+            console.log(this);
+          }
+        });
       });
       $(this).next('.building-filter__select').mCustomScrollbar({
         theme: "dark",
@@ -811,7 +848,6 @@ $(function () {
 
   function sendForm(e) {
     e.preventDefault();
-    console.log($('.building-filter'));
   }
 
   if ($('.building-filter__unit').length > 0) {
@@ -823,14 +859,6 @@ $(function () {
       });
     });
   }
-
-  $("#polzunok").slider({
-    animate: "slow",
-    range: "min",
-    min: 1500000,
-    max: 13500000,
-    values: [1500000, 13500000]
-  });
 
   if ($('.project-period__bloc').length > 0) {
     $('.project-period__bloc').each(function () {
