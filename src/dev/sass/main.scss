@@ -378,10 +378,9 @@ button {
   bottom: -3px;
 }
 
-
-
-
-@import "./components/building-filter";
+@import "./components/filter-sort.scss";
+@import "./components/burger-filter.scss";
+@import "./components/building-filter.scss";
 @import "./components/filter-menu.scss";
 @import "./components/flats/flats-basic.scss";
 @import "./components/flats/flats-filter.scss";

@@ -40,6 +40,13 @@ $(function () {
     rangeSlider('#area', 0, 100, 10, '#send-result-area');
   }
 
+  if ($('.burger-filter').exists()) {
+    $('.burger-filter').on('click', function () {
+      $(this).toggleClass('burger-filter--active');
+      $('.building-filter').toggleClass('building-filter--active');
+    });
+  }
+
   if ($('.project-period__list').exists()) {
     $('.project-period__list').mCustomScrollbar({
       theme: "dark",
@@ -817,8 +824,8 @@ $(function () {
   if ($('.building-filter__wrp').length > 0) {
     $('.building-filter__wrp').each(function () {
       $(this).on('click', function () {
-        $(this).parent().toggleClass('building-filter__case--active'); //console.log($(this).closest('.building-filter'));
-
+        $(this).parent().toggleClass('building-filter__case--active');
+        console.log($('.building-filter__case'));
         $(this).closest('.building-filter__col').siblings().find('.building-filter__case').removeClass('building-filter__case--active');
         var temp = $(this).parent();
         $('.building-filter__case').each(function (index) {
