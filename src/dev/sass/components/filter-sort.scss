@@ -1,1 +1,141 @@
-.filter-sort {}
+.filter-sort {
+    display: none;
+
+    @media(max-width: 992px) {
+        display: block;
+    }
+
+    &__box {
+        height: 54px;
+        margin-top: 16px;
+    }
+
+    &__case {
+        position: relative;
+        max-width: 277px;
+        width: 100%;
+        height: 100%;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        padding: 18px 18px 18px 26px;
+        cursor: pointer;
+
+        @media(max-width: 500px) {
+            max-width: 100%
+        }
+
+        &--active {
+            border-bottom: none !important;
+
+            .filter-sort__select {
+                opacity: 1;
+                visibility: visible;
+            }
+
+            .filter-sort__img {
+                transform: scale(1, -1);
+            }
+        }
+    }
+
+    &__wrp {
+        -webkit-box-pack: justify;
+        -webkit-justify-content: space-between;
+        -ms-flex-pack: justify;
+        justify-content: space-between;
+        height: 100%;
+        top: 0;
+        bottom: 0;
+        padding: 18px 13px 18px 26px;
+        position: absolute;
+        border: 2px solid #e1e1e1 !important;
+        right: 0;
+        width: 100%;
+        left: 0;
+        display: flex;
+        align-items: center;
+    }
+
+    &__select {
+        opacity: 0;
+        visibility: hidden;
+        margin: auto;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        padding: 18px 18px 18px 26px;
+        min-height: auto;
+        overflow: hidden;
+        -webkit-transition: .2s ease-out;
+        -o-transition: .2s ease-out;
+        transition: .2s ease-out;
+        bottom: auto;
+        max-height: 175px;
+        z-index: 2;
+        background-color: #fff;
+        max-width: 100%;
+        top: 52px;
+        position: absolute;
+        border: 2px solid #e1e1e1 !important;
+        right: 0;
+        width: 100%;
+        left: 0;
+    }
+
+    &__text {
+        white-space: nowrap;
+        overflow: hidden;
+        -o-text-overflow: ellipsis;
+        text-overflow: ellipsis;
+        padding-right: 10px;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 26px;
+        letter-spacing: .3px;
+    }
+
+    &__img {
+        height: 6px;
+        display: flex;
+        align-items: center;
+        transform-origin: center;
+        transition: 400ms ease;
+        margin-top: -6px;
+    }
+
+    &__unit {
+        color: $black-1;
+
+        &:not(:first-child) {
+            margin-top: 10px;
+        }
+
+        & label {
+            display: inline-block;
+            cursor: pointer;
+            position: relative;
+            margin-right: 0;
+            line-height: 18px;
+            user-select: none;
+            transition: 400ms ease;
+            color: $basic;
+
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            width: 100%;
+
+            &:hover {
+                color: $basic;
+            }
+        }
+
+        & input[type=radio]:checked+label {
+            color: red;
+        }
+
+        & input {
+            display: none;
+        }
+    }
+}

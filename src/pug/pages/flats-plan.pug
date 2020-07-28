@@ -167,20 +167,29 @@ block content
 										<path class = "fill" d="M15.682 9.81802C17.4393 11.5754 17.4393 14.4246 15.682 16.182C13.9246 17.9393 11.0754 17.9393 9.31802 16.182C7.56066 14.4246 7.56066 11.5754 9.31802 9.81802C11.0754 8.06066 13.9246 8.06066 15.682 9.81802" stroke="#D8BB54" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 									</svg>
 							.btn__txt подробнее
-		.filter-sort
-			.filter-sort__header Особенности планировки
-			.filter-sort__box
-				.filter-sort__case
-					.filter-sort__wrp
-						.filter-sort__text Особенности планировки
-						.filter-sort__img
-							<svg width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-								<path d="M1 5L5.24264 9.24264L9.48528 5" stroke="#1E202C" stroke-width="1.5"/>
-							</svg>
-					.filter-sort__select
-						.filter-sort__unit
-							<input id="area1" type="radio" name="area" value="Все" checked>
-							<label for="area1">Все</label>
+			.filter-sort
+				.filter-sort__box
+					.filter-sort__case
+						.filter-sort__wrp
+							.filter-sort__text Сортировка
+							.filter-sort__img
+								<svg width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+									<path d="M1 5L5.24264 9.24264L9.48528 5" stroke="#1E202C" stroke-width="1.5"/>
+								</svg>
+						.filter-sort__select
+							.filter-sort__unit
+								<input id="sorts1" type="radio" name="sorts" value="pay-min" checked>
+								<label for="sorts1" title="Цена (минимальная)">Цена (минимальная)</label>
+							.filter-sort__unit
+								<input id="sorts2" type="radio" name="sorts" value="pay-max" checked>
+								<label for="sorts2" title="Цена (максимальная)">Цена (максимальная)</label>
+							.filter-sort__unit
+								<input id="sorts3" type="radio" name="sorts" value="area-min" checked>
+								<label for="sorts3" title="Площадь (минимальная)">Площадь (минимальная)</label>
+							.filter-sort__unit
+								<input id="sorts4" type="radio" name="sorts" value="area-max" checked>
+								<label for="sorts4" title="Площадь (максимальная)">Площадь (максимальная)</label>
+						
 
 	.flats-basic
 		.flats-basic__container.b-container

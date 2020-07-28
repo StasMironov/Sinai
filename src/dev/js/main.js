@@ -889,13 +889,47 @@ $(() => {
         });
     }
 
-    $('.temp').on('click', (e) => {
-        sendForm(e);
-    });
 
-    function sendForm(e) {
-        e.preventDefault();
+    if ($('.filter-sort__wrp').length > 0) {
+        $('.filter-sort__wrp').each(function () {
+            $(this).on('click', function () {
+                $(this).parent().toggleClass('filter-sort__case--active');
+            });
+
+
+            $(this).next('.filter-sort__select').mCustomScrollbar({
+                theme: "dark",
+                mouseWheelPixels: 90
+            });
+
+        });
+        //$('.project-period__bloc')
+
+        $(document).click(function (e) {
+            var elem = $('.filter-sort__case');
+            if (e.target != elem[0] && !elem.has(e.target).length) {
+                elem.removeClass('filter-sort__case--active');
+            }
+        });
     }
+
+
+    if ($('.filter-sort__unit').exists()) {
+        $('.filter-sort__unit').each(function () {
+
+            let dataVal = 0;
+            let dataSlide = 0;
+
+            $(this).on('click', function () {
+                $('.filter-sort__text').text($(this).text());
+                $('.filter-sort__box').removeClass('filter-sort__box--active');
+
+                dataVal = $(this).find('input').data('period');
+            });
+        });
+    }
+
+
 
     if ($('.building-filter__unit').length > 0) {
         $('.building-filter__unit').each(function () {
@@ -903,19 +937,9 @@ $(() => {
             $(this).on('click', function () {
                 $(this).closest('.building-filter__case').find('.building-filter__text').text($(this).text());
                 $('.building-filter__case').removeClass('building-filter__case--active');
-
-                // console.log($(this).closest('.building-filter__case').find('.building-filter__text'));
-                //console.log($(this));
             });
         });
     }
-
-
-
-
-
-
-
 
 
     if ($('.project-period__bloc').length > 0) {
