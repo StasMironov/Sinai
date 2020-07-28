@@ -33,11 +33,17 @@ $(function () {
   }
 
   if ($('#cost').exists()) {
-    rangeSlider('#cost', 1500000, 13500000, 100000, '#send-result-сost');
+    var min = $('#cost').closest('.building-filter__col').find('.building-filter__range').data('min');
+    var max = $('#cost').closest('.building-filter__col').find('.building-filter__range').data('max');
+    rangeSlider('#cost', min, max, 100000, '#send-result-сost');
   }
 
   if ($('#area').exists()) {
-    rangeSlider('#area', 0, 100, 10, '#send-result-area');
+    var _min = $('#area').closest('.building-filter__col').find('.building-filter__range').data('min');
+
+    var _max = $('#area').closest('.building-filter__col').find('.building-filter__range').data('max');
+
+    rangeSlider('#area', _min, _max, 10, '#send-result-area');
   }
 
   if ($('.burger-filter').exists()) {
@@ -824,13 +830,11 @@ $(function () {
   if ($('.building-filter__wrp').length > 0) {
     $('.building-filter__wrp').each(function () {
       $(this).on('click', function () {
-        $(this).parent().toggleClass('building-filter__case--active');
-        console.log($('.building-filter__case'));
+        var temp = $(this).parent().toggleClass('building-filter__case--active');
         $(this).closest('.building-filter__col').siblings().find('.building-filter__case').removeClass('building-filter__case--active');
-        var temp = $(this).parent();
         $('.building-filter__case').each(function (index) {
-          if ($(this) == $(temp)) {
-            console.log(this);
+          if ($(this)[0] != temp[0] && $(this)[0].classList.contains('building-filter__case--active')) {
+            $(this)[0].classList.remove('building-filter__case--active');
           }
         });
       });
@@ -838,8 +842,7 @@ $(function () {
         theme: "dark",
         mouseWheelPixels: 90
       });
-    }); //$('.project-period__bloc')
-
+    });
     $(document).click(function (e) {
       var elem = $('.building-filter__case');
 

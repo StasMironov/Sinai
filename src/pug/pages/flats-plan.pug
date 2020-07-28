@@ -113,7 +113,7 @@ block content
 										<label for="offer4">Завершенные</label>
 					.building-filter__col.building-filter__col--cost
 						.building-filter__header Стоимость
-						.building-filter__range
+						.building-filter__range(data-min="1500000" data-max="13500000")
 							.building-filter__up
 							.building-filter__low
 						div#cost
@@ -122,7 +122,7 @@ block content
 				.building-filter__row
 					.building-filter__col.building-filter__col--cost
 						.building-filter__header Площадь
-						.building-filter__range
+						.building-filter__range(data-min="0" data-max="100")
 							.building-filter__up
 							.building-filter__low
 						div#area
@@ -385,7 +385,4 @@ block content
 									.flats-basic__txt Срок сдачи:
 									.flats-basic__period 1 квартал 2021
 								a(href="javascript:void(0);").flats-basic__link Подробнее
-					
-					
-	div(style = "height: 200px")
 block script
