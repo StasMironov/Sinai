@@ -1,0 +1,99 @@
+extends ../layout/main
+
+block variables
+	- var title = 'Главная страница'
+	- var pageClass = 'index-page';
+
+block content
+	.flats-filter.mf-margin
+		.flats-filter__container.b-container
+			.flats-filter__title.title-1 Квартиры Завенягина 1/2
+			.flats-filter__date 2 квартал 2021
+			.burger-filter
+				span.line
+				span.line
+				span.line
+			include ../modules/filter-flats
+			.filter-sort
+				.filter-sort__box
+					.filter-sort__case
+						.filter-sort__wrp
+							.filter-sort__text Сортировка
+							.filter-sort__img
+								<svg width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+									<path d="M1 5L5.24264 9.24264L9.48528 5" stroke="#1E202C" stroke-width="1.5"/>
+								</svg>
+						.filter-sort__select
+							.filter-sort__unit
+								<input id="sorts1" type="radio" name="sorts" value="pay-min" checked>
+								<label for="sorts1" title="Цена (минимальная)">Цена (минимальная)</label>
+							.filter-sort__unit
+								<input id="sorts2" type="radio" name="sorts" value="pay-max" checked>
+								<label for="sorts2" title="Цена (максимальная)">Цена (максимальная)</label>
+							.filter-sort__unit
+								<input id="sorts3" type="radio" name="sorts" value="area-min" checked>
+								<label for="sorts3" title="Площадь (минимальная)">Площадь (минимальная)</label>
+							.filter-sort__unit
+								<input id="sorts4" type="radio" name="sorts" value="area-max" checked>
+								<label for="sorts4" title="Площадь (максимальная)">Площадь (максимальная)</label>
+						
+
+	.flats-basic
+		.flats-basic__container.b-container
+			.flats-basic__menu
+				<nav class="filter-menu nav-wrap">
+						<ul class="group" id="example-one">
+							<li>
+								<a class="filter-menu__link ">
+									<input id="view1" type="radio" name="radio" value="1" checked>
+									<label for="view1">Планировка</label>
+								</a>
+							</li>
+							<li>
+								<a class="filter-menu__link ">
+									<input id="view2" type="radio" name="radio" value="2">
+									<label for="view2">Плитка</label>
+								</a>
+							</li>
+							<li class="current_page_item">
+								<a class="filter-menu__link ">
+									<input id="view3" type="radio" name="radio" value="3">
+									<label for="view3">Этажи</label>
+								</a>
+							</li>							
+						</ul>
+				</nav>
+				form(method="get").flats-basic__filter
+					.flats-basic__word Сортировать по
+					.flats-basic__group
+						.flats-basic__module
+							.flats-basic__text Цене
+							.flats-basic__switch
+								.flats-basic__sort
+									<input id="sort1" type="radio" name="sort1" value="1">
+									<label for="sort1">
+										+svg('arr_list')
+									</label>
+								.flats-basic__sort
+									<input id="sort2" type="radio" name="sort1" value="2">
+									<label for="sort2">
+										+svg('arr_list')
+									</label>
+						.flats-basic__module
+							.flats-basic__text Площади
+							.flats-basic__switch
+								.flats-basic__sort
+									<input id="sort3" type="radio" name="sort2" value="3">
+									<label for="sort3">
+										+svg('arr_list')
+									</label>
+								.flats-basic__sort
+									<input id="sort4" type="radio" name="sort2" value="4">
+									<label for="sort4">
+										+svg('arr_list')
+									</label>
+					button(type="reset").flats-basic__close
+						.flats-basic__ic 
+						.flats-basic__text Сбросить фильтр
+			
+block script

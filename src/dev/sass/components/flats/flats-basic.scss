@@ -171,7 +171,18 @@
         }
     }
 
+    &__decor {
+        display: none;
+        margin-right: 10px;
+
+        @media(max-width: 540px) {
+            display: block;
+        }
+    }
+
     &__link {
+        display: flex;
+        align-items: center;
         font-weight: bold;
         font-size: 18px;
         line-height: 24px;
@@ -191,8 +202,23 @@
             line-height: 21px;
         }
 
+        @media(max-width: 540px) {
+            padding-right: 13px;
+        }
+
         &:hover {
             color: $ochre;
+
+            path {
+                stroke: $ochre;
+            }
+        }
+    }
+
+    &__decor {
+        path {
+            transition: linear .3s;
+            stroke: $black-1;
         }
     }
 
