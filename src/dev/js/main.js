@@ -39,6 +39,54 @@ $(() => {
         });
     }
 
+
+    if ($('.slider-flats').exists()) {
+        try {
+            let flatsSlider = new Swiper('.slider-flats', {
+                slidesPerView: 1,
+                spaceBetween: 10,
+                touchRatio: 0,
+                effect: 'fade',
+                fadeEffect: {
+                    crossFade: true
+                },
+                pagination: {
+                    el: '.slider-flats__pagination',
+                    clickable: true,
+                    renderBullet: function (index, className) {
+                        return '<span class="' + className + '">' + (index + 1) + '</span>';
+                    }
+                },
+                navigation: {
+                    nextEl: '.slider-flats__arrow--next',
+                    prevEl: '.slider-flats__arrow--prev',
+                }
+            });
+
+            // let projectImg = new Swiper('.index-project__img', {
+            //     slidesPerView: 1,
+            //     spaceBetween: 10,
+            //     effect: 'fade',
+            //     fadeEffect: {
+            //         crossFade: true
+            //     },
+            //     navigation: {
+            //         nextEl: '.index-project__link--next',
+            //         prevEl: '.index-project__link--prev'
+            //     },
+            // });
+
+            // projectContent.controller.control = projectImg;
+            // projectImg.controller.control = projectContent;
+
+            // $('.swiper-wrapper').resize(function () {
+            //     $('.index__special').height($('.index-content').height());
+            // });
+        } catch (err) {
+            console.log('Ошибка ' + err.name + ":" + err.message + "\n" + err.stack);
+        }
+    }
+
     if ($('#cost').exists()) {
         let min = $('#cost').closest('.building-filter__col').find('.building-filter__range').data('min');
         let max = $('#cost').closest('.building-filter__col').find('.building-filter__range').data('max');
@@ -646,39 +694,39 @@ $(() => {
         var geoJson = {
             type: 'FeatureCollection',
             features: [{
-                    "type": "Feature",
-                    "geometry": {
-                        "type": "Point",
-                        "coordinates": [58.985550, 53.377120]
-                    },
-                    "properties": {
-                        "title": "Магазин",
-                        "icon": {
-                            "iconUrl": "../img/icon/marker/shop.png",
-                            "iconSize": [50, 50], // size of the icon
-                            "iconAnchor": [25, 25], // point of the icon which will correspond to marker's location
-                            "popupAnchor": [0, -25], // point from which the popup should open relative to the iconAnchor
-                            "className": "marker"
-                        }
-                    }
+                "type": "Feature",
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [58.985550, 53.377120]
                 },
-                {
-                    "type": "Feature",
-                    "geometry": {
-                        "type": "Point",
-                        "coordinates": [58.988547, 53.376635]
-                    },
-                    "properties": {
-                        "title": "Школа",
-                        "icon": {
-                            "iconUrl": "../img/icon/marker/school.png",
-                            "iconSize": [50, 50], // size of the icon
-                            "iconAnchor": [25, 25], // point of the icon which will correspond to marker's location
-                            "popupAnchor": [0, -25], // point from which the popup should open relative to the iconAnchor
-                            "className": "marker"
-                        }
+                "properties": {
+                    "title": "Магазин",
+                    "icon": {
+                        "iconUrl": "../img/icon/marker/shop.png",
+                        "iconSize": [50, 50], // size of the icon
+                        "iconAnchor": [25, 25], // point of the icon which will correspond to marker's location
+                        "popupAnchor": [0, -25], // point from which the popup should open relative to the iconAnchor
+                        "className": "marker"
                     }
                 }
+            },
+            {
+                "type": "Feature",
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [58.988547, 53.376635]
+                },
+                "properties": {
+                    "title": "Школа",
+                    "icon": {
+                        "iconUrl": "../img/icon/marker/school.png",
+                        "iconSize": [50, 50], // size of the icon
+                        "iconAnchor": [25, 25], // point of the icon which will correspond to marker's location
+                        "popupAnchor": [0, -25], // point from which the popup should open relative to the iconAnchor
+                        "className": "marker"
+                    }
+                }
+            }
             ]
         };
 
@@ -712,56 +760,56 @@ $(() => {
         let geoJson = {
             type: 'FeatureCollection',
             features: [{
-                    "type": "Feature",
-                    "geometry": {
-                        "type": "Point",
-                        "coordinates": [58.985550, 53.377120]
-                    },
-                    "properties": {
-                        "title": "Магазин",
-                        "icon": {
-                            "iconUrl": "../img/icon/marker/house.png",
-                            "iconSize": [118, 118], // size of the icon
-                            "iconAnchor": [25, 25], // point of the icon which will correspond to marker's location
-                            "popupAnchor": [0, -25], // point from which the popup should open relative to the iconAnchor
-                            "className": "marker",
-                        }
-                    }
+                "type": "Feature",
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [58.985550, 53.377120]
                 },
-                {
-                    "type": "Feature",
-                    "geometry": {
-                        "type": "Point",
-                        "coordinates": [59.089068, 53.379590]
-                    },
-                    "properties": {
-                        "title": "Школа",
-                        "icon": {
-                            "iconUrl": "../img/icon/marker/house.png",
-                            "iconSize": [118, 118], // size of the icon
-                            "iconAnchor": [25, 25], // point of the icon which will correspond to marker's location
-                            "popupAnchor": [0, -25], // point from which the popup should open relative to the iconAnchor
-                            "className": "marker",
-                        }
-                    }
-                },
-                {
-                    "type": "Feature",
-                    "geometry": {
-                        "type": "Point",
-                        "coordinates": [58.986310, 53.375217]
-                    },
-                    "properties": {
-                        "title": "Школа",
-                        "icon": {
-                            "iconUrl": "../img/icon/marker/house.png",
-                            "iconSize": [118, 118], // size of the icon
-                            "iconAnchor": [25, 25], // point of the icon which will correspond to marker's location
-                            "popupAnchor": [0, -25], // point from which the popup should open relative to the iconAnchor
-                            "className": "marker",
-                        }
+                "properties": {
+                    "title": "Магазин",
+                    "icon": {
+                        "iconUrl": "../img/icon/marker/house.png",
+                        "iconSize": [118, 118], // size of the icon
+                        "iconAnchor": [25, 25], // point of the icon which will correspond to marker's location
+                        "popupAnchor": [0, -25], // point from which the popup should open relative to the iconAnchor
+                        "className": "marker",
                     }
                 }
+            },
+            {
+                "type": "Feature",
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [59.089068, 53.379590]
+                },
+                "properties": {
+                    "title": "Школа",
+                    "icon": {
+                        "iconUrl": "../img/icon/marker/house.png",
+                        "iconSize": [118, 118], // size of the icon
+                        "iconAnchor": [25, 25], // point of the icon which will correspond to marker's location
+                        "popupAnchor": [0, -25], // point from which the popup should open relative to the iconAnchor
+                        "className": "marker",
+                    }
+                }
+            },
+            {
+                "type": "Feature",
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [58.986310, 53.375217]
+                },
+                "properties": {
+                    "title": "Школа",
+                    "icon": {
+                        "iconUrl": "../img/icon/marker/house.png",
+                        "iconSize": [118, 118], // size of the icon
+                        "iconAnchor": [25, 25], // point of the icon which will correspond to marker's location
+                        "popupAnchor": [0, -25], // point from which the popup should open relative to the iconAnchor
+                        "className": "marker",
+                    }
+                }
+            }
             ]
         }
 

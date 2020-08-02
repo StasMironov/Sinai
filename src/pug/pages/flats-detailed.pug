@@ -10,7 +10,87 @@ block content
 			.flats-detailed__title.title-1 2к квартира на Завенягина 1/2
 
 			.flats-detailed__bloc
-				.flats-detailed___left
+				.flats-detailed__left
+					.slider-flats
+						.slider-flats__wrapp.swiper-wrapper
+							.slider-flats__box.swiper-slide
+								.slider-flats__left
+									img(src="./img/flats/plan/plan.svg" alt="")
+								.slider-flats__right
+									.slider-flats__ic(style="background-image: url(./img/flats/plan/weather.svg)")
+							.slider-flats__box.swiper-slide
+								.slider-flats__left
+									img(src="./img/flats/plan/plan.svg" alt="")
+								.slider-flats__right
+									.slider-flats__ic(style="background-image: url(./img/flats/plan/weather.svg)")
+						.slider-flats__cover
+							.slider-flats__text Этажи
+							.slider-flats__arrow
+								.slider-flats__arrow--prev
+									+svg('arr_flats')
+								.slider-flats__pagination
+								.slider-flats__arrow--next
+									+svg('arr_flats')
 				.flats-detailed__right
+					.flats-info
+						.swiper-wrapper
+							.swiper-slide
+								.flats-info__top
+									.flats-info__items
+										.flats-info__item
+											.flats-info__txt Адрес:
+											.flats-info__txt Завенягина 1/2
+										.flats-info__item
+											.flats-info__txt Срок сдачи:
+											.flats-info__txt 1 квартал 2021 
+										.flats-info__item
+											.flats-info__txt Этаж:
+											.flats-info__txt 4 из 10
+										.flats-info__item
+											.flats-info__txt Пощадь:
+											.flats-info__txt 23,0 м
+								.flats-info__content
+									.flats-info__blocs
+										.flats-info__bloc
+											.flats-info__ic(style="background-image: url(./img/flats/plan/benefit1.svg)")
+											.flats-info__txt Гардероб в спальне
+										.flats-info__bloc
+											.flats-info__ic(style="background-image: url(./img/flats/plan/benefit2.svg)")
+											.flats-info__txt Второй санузел
+										.flats-info__bloc
+											.flats-info__ic(style="background-image: url(./img/flats/plan/benefit3.svg)")
+											.flats-info__txt Вид на 2 стороны
+										.flats-info__bloc
+											.flats-info__ic(style="background-image: url(./img/flats/plan/benefit4.svg)")
+											.flats-info__txt Постирочная
+								.flats-info__price
+									.flats-info__unit
+										.flats-info__num 1 250 000 руб.
+										.flats-info__word купить в ипотеку от 9 400 руб/мес.
+									a(href="javascript:void(0);").flats-info__link Купите квартиру в ипотеку без первоначального взноса
+								.flats-info__func
+									a(href="javascript:void(0);").flats-info__module
+										.flats-info__pic
+											<svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+												<path d="M28.3333 36.6667C23.7317 36.6667 20 32.935 20 28.3333C20 23.7317 23.7317 20 28.3333 20C32.9367 20 36.6667 23.7317 36.6667 28.3333C36.6667 32.935 32.9367 36.6667 28.3333 36.6667" stroke="#323232" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+												<path d="M28.3333 25V31.6667" stroke="#323232" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+												<path d="M25 28.3333L28.3333 31.6666L31.6667 28.3333" stroke="#323232" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+												<path d="M31.6667 20.695V13.0467C31.6667 12.1633 31.315 11.315 30.69 10.69L25.9767 5.97667C25.3517 5.35167 24.5033 5 23.62 5H8.33333C6.49167 5 5 6.49167 5 8.33333V31.6667C5 33.5083 6.49167 35 8.33333 35H23.3333" stroke="#323232" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+												<path d="M31.6663 13.3333H24.9997C24.0797 13.3333 23.333 12.5867 23.333 11.6667V5" stroke="#323232" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+											</svg>
+
+										.flats-info__char Скачать PDF
+									a(href="javascript:void(0);").flats-info__module
+										.flats-info__pic
+											<svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+												<path d="M16.4099 18.0354C17.4949 19.1204 17.4949 20.8796 16.4099 21.9646C15.3249 23.0496 13.5657 23.0496 12.4807 21.9646C11.3957 20.8796 11.3957 19.1204 12.4807 18.0354C13.5658 16.9504 15.3249 16.9504 16.4099 18.0354" stroke="#323232" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+												<path d="M16.917 21.2334L23.0837 24.3167" stroke="#323232" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+												<path d="M23.0837 15.6833L16.917 18.7667" stroke="#323232" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+												<path d="M27.5193 12.4805C28.6043 13.5655 28.6043 15.3247 27.5193 16.4097C26.4343 17.4947 24.6751 17.4947 23.5901 16.4097C22.5051 15.3246 22.5051 13.5655 23.5901 12.4805C24.6751 11.3955 26.4343 11.3955 27.5193 12.4805" stroke="#323232" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+												<path d="M27.5193 23.5904C28.6043 24.6754 28.6043 26.4345 27.5193 27.5195C26.4343 28.6045 24.6751 28.6045 23.5901 27.5195C22.5051 26.4345 22.5051 24.6754 23.5901 23.5904C24.6751 22.5054 26.4343 22.5054 27.5193 23.5904" stroke="#323232" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+												<path fill-rule="evenodd" clip-rule="evenodd" d="M31.6667 35H8.33333C6.49167 35 5 33.5083 5 31.6667V8.33333C5 6.49167 6.49167 5 8.33333 5H31.6667C33.5083 5 35 6.49167 35 8.33333V31.6667C35 33.5083 33.5083 35 31.6667 35Z" stroke="#323232" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+											</svg>
+										.flats-info__char Поделиться
+
 			
 block script

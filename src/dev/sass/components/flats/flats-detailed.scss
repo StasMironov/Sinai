@@ -1,1 +1,16 @@
-.flats-detailed {}
+.flats-detailed {
+    &__bloc {
+        display: flex;
+        margin-top: 88px;
+    }
+
+    &__left {
+        width: 513px;
+        margin-right: 97px;
+    }
+
+    &__right {
+        padding-top: 13px;
+        width: calc(100% - 513px - 97px);
+    }
+}
