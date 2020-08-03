@@ -2,8 +2,6 @@
 
     margin-top: 71px;
 
-
-
     &__unit {
         @media(max-width: 992px) {
             display: none;
@@ -653,5 +651,15 @@
 
     &__cert {
         margin-top: 71px;
+    }
+
+    &--about {
+        .title-2 {
+            letter-spacing: 1px;
+        }
+
+        .index-project__inner {
+            margin-top: 27px;
+        }
     }
 }

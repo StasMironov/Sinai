@@ -55,4 +55,39 @@
         margin-left: 83px;
     }
 
+    &__box {
+        display: flex;
+        flex-wrap: wrap;
+        margin-left: -83px;
+        margin-top: 56px;
+    }
+
+    &__bloc {
+        display: flex;
+        flex-direction: column;
+        width: calc(33.333% - 83px);
+        margin-left: 83px;
+    }
+
+    &__num {
+        font-weight: bold;
+        font-size: 89px;
+        line-height: 108px;
+        color: $ochre;
+    }
+
+    &__article {
+        font-weight: bold;
+        font-size: 26px;
+        line-height: 28px;
+        letter-spacing: 1px;
+        color: $black-1;
+        margin-top: 15px;
+    }
+
+    &__txt {
+        margin-top: 8px;
+        line-height: 26px;
+        letter-spacing: 0.3px;
+    }
 }

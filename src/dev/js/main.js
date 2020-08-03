@@ -39,6 +39,20 @@ $(() => {
         });
     }
 
+    if ($('.partner__slider').exists()) {
+        try {
+            console.log(true);
+            let test = new Swiper('.partner__slider', {
+                spaceBetween: 110,
+                slidesPerView: 'auto',
+                loop: true,
+                autoplay: true
+            });
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
     if ($('#cost').exists()) {
         let min = $('#cost').closest('.building-filter__col').find('.building-filter__range').data('min');
         let max = $('#cost').closest('.building-filter__col').find('.building-filter__range').data('max');

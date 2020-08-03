@@ -1,0 +1,54 @@
+.contacts {
+    &--about {
+        margin-top: 70px;
+    }
+
+    &__row {
+        display: flex;
+    }
+
+    &__ic {
+        width: 24px;
+        height: 24px;
+        margin-right: 8px;
+
+        img {
+            display: block;
+            height: 100%;
+            width: 100%;
+        }
+    }
+
+    &__article {
+        font-style: normal;
+        font-weight: bold;
+        font-size: 20px;
+        line-height: 26px;
+    }
+
+    &__wrapper {
+        margin-top: 25px;
+    }
+
+    &__box {
+        margin-top: 12px;
+    }
+
+    &__txt {
+        font-size: 16px;
+        line-height: 25px;
+        letter-spacing: 0.3px;
+    }
+
+    &__row {
+        &:not(:first-child) {
+            margin-top: 7px;
+        }
+    }
+
+    &__bloc {
+        &:not(:first-child) {
+            margin-top: 40px;
+        }
+    }
+}

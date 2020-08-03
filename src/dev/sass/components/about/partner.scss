@@ -1,0 +1,20 @@
+.partner {
+    margin-top: 70px;
+
+    &__slider {
+        margin-top: 40px;
+        padding-left: 28px;
+    }
+
+    &__title {
+        text-align: center;
+    }
+
+    .swiper-slide {
+        width: auto;
+    }
+
+    .swiper-wrapper {
+        align-items: center;
+    }
+}

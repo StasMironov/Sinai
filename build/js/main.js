@@ -32,6 +32,20 @@ $(function () {
     });
   }
 
+  if ($('.partner__slider').exists()) {
+    try {
+      console.log(true);
+      var test = new Swiper('.partner__slider', {
+        spaceBetween: 110,
+        slidesPerView: 'auto',
+        loop: true,
+        autoplay: true
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
   if ($('#cost').exists()) {
     var min = $('#cost').closest('.building-filter__col').find('.building-filter__range').data('min');
     var max = $('#cost').closest('.building-filter__col').find('.building-filter__range').data('max');

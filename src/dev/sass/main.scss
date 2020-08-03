@@ -378,7 +378,9 @@ button {
   bottom: -3px;
 }
 
-
+@import "./components/about/certificate.scss";
+@import "./components/contacts/contacts.scss";
+@import "./components/about/partner.scss";
 @import "./components/about/about.scss";
 @import "./components/flats/flats-detailed.scss";
 @import "./components/filter-sort.scss";
