@@ -41,24 +41,47 @@ block content
 	.partner
 		.partner__container.b-container
 			.partner__title.title-3 Наши партнеры
-		.partner__slider
-			.swiper-wrapper
-				.swiper-slide
-					img(src="./img/partner/img1.svg" alt="")
-				.swiper-slide
-					img(src="./img/partner/img2.svg" alt="")
-				.swiper-slide
-					img(src="./img/partner/img3.svg" alt="")
-				.swiper-slide
-					img(src="./img/partner/img4.svg" alt="")
-				.swiper-slide
-					img(src="./img/partner/img5.svg" alt="")
+		.partner__inner
+			.partner__slider
+				.swiper-wrapper
+					.swiper-slide
+						img(src="./img/partner/img1.svg" alt="")
+					.swiper-slide
+						img(src="./img/partner/img2.svg" alt="")
+					.swiper-slide
+						img(src="./img/partner/img3.svg" alt="")
+					.swiper-slide
+						img(src="./img/partner/img4.svg" alt="")
+					.swiper-slide
+						img(src="./img/partner/img5.svg" alt="")
 	.certificate
 		.certificate__container.b-container
 			.certificate__title.title-2 Наши сертификаты
 			.certificate__quote Чтобы доказать нашу компетенцию и вы смогли доверить нам вашу жизнь и жизни родных — ознакомьтесь с документами. Сертификаты выдаются гос. структурами за соблюдение общепринятых норм в строительстве и проектировании, что делает наши возводимые объекты гарантом надежности и безопасности. 
-			.certificate__slider
-				.swiper-wrapper
-					a(href="./img/certificate/cer.png").swiper-slide
-						img(src="./img/certificate/cer.png" alt="")
+			.certificate__cover
+				.certificate__slider
+					.swiper-wrapper#certificate__gallery
+						a(href="./img/certificate/cer.png").swiper-slide
+							img(src="./img/certificate/cer.png" alt="")
+						a(href="./img/certificate/cer.png").swiper-slide
+							img(src="./img/certificate/cer.png" alt="")
+						a(href="./img/certificate/cer.png").swiper-slide
+							img(src="./img/certificate/cer.png" alt="")
+						a(href="./img/certificate/cer.png").swiper-slide
+							img(src="./img/certificate/cer.png" alt="")
+						a(href="./img/certificate/cer.png").swiper-slide
+							img(src="./img/certificate/cer.png" alt="")
+						a(href="./img/certificate/cer.png").swiper-slide
+							img(src="./img/certificate/cer.png" alt="")
+						a(href="./img/certificate/cer.png").swiper-slide
+							img(src="./img/certificate/cer.png" alt="")
+						a(href="./img/certificate/cer.png").swiper-slide
+							img(src="./img/certificate/cer.png" alt="")
+						a(href="./img/certificate/cer.png").swiper-slide
+							img(src="./img/certificate/cer.png" alt="")
+						a(href="./img/certificate/cer.png").swiper-slide
+							img(src="./img/certificate/cer.png" alt="")
+	include ../modules/news
+	.b-container
+		include ../modules/call
 block script

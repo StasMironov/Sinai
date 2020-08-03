@@ -3,6 +3,10 @@
 
     &__title {
         text-align: center;
+
+        @media(max-width: 620px) {
+            text-align: left;
+        }
     }
 
     &__quote {
@@ -11,7 +15,30 @@
         margin: 0 auto;
         text-align: center;
         margin-top: 8px;
+
+        @media(max-width: 620px) {
+            text-align: left;
+        }
     }
 
+    &__slider {
+        overflow: hidden;
+    }
 
+    &__cover {
+        position: relative;
+        height: auto;
+        margin-top: 40px;
+    }
+
+    .swiper-slide {
+        display: block;
+        height: auto;
+        margin-right: 318px;
+
+        img {
+            height: auto;
+            width: 100%;
+        }
+    }
 }

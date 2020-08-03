@@ -1,0 +1,82 @@
+.slider-flats {
+    &__box {
+        display: flex;
+    }
+
+    &__arrow {
+        display: flex;
+        align-items: center;
+
+        .b-svg {
+            display: block;
+            height: 100%;
+            width: 100%;
+            fill: none;
+            stroke: black;
+            stroke-width: 2px;
+        }
+
+        &--next {
+            transform: scale(-1, 1);
+        }
+
+        &--next, &--prev {
+            height: 13px;
+            width: 13px;
+            cursor: pointer;
+        }
+    }
+
+    &__left {
+        width: 435px;
+        height: 503px; 
+        margin-left: -24px; 
+
+      img {
+          height: 100%;
+          width: 100%;
+          object-fit: contain;
+      }
+    }
+
+    &__right {
+        margin-left: -5px;
+        padding-top: 13px;
+    }
+
+    &__ic {
+        width: 88px;
+        height: 88px;
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position: center;
+    }
+
+    &__cover {
+        display: flex;
+        align-items: center;
+        margin-top: 65px;
+    }
+
+    &__text {
+        margin-right: 24px;
+    }
+
+    &__pagination {
+        display: flex;
+        align-items: center;
+        margin: 0 15px;
+       
+        .swiper-pagination-bullet {
+            cursor: pointer;
+            padding: 0 9px;
+            display: flex;
+            align-items: center;
+            background: transparent;
+
+            &:first-child {
+                padding-left: 0;
+            }
+        }
+    }
+}

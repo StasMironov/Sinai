@@ -39,6 +39,62 @@ $(() => {
         });
     }
 
+    if ($('.certificate__slider').exists()) {
+        try {
+            let certificateSlider = new Swiper('.certificate__slider', {
+                spaceBetween: 24,
+                slidesPerView: 5,
+                touchRatio: 0,
+                slidesPerColumn: 2,
+                slidesPerColumnFill: 'row',
+                autoplay: {
+                    delay: 3000,
+                },
+                breakpoints: {
+                    1025: {
+                        slidesPerView: 5,
+                        spaceBetween: 24,
+                    },
+                    1024: {
+                        slidesPerView: 4,
+                        spaceBetween: 24,
+                        touchRatio: 1,
+                    },
+                    641: {
+                        slidesPerView: 4,
+                        spaceBetween: 24,
+                        touchRatio: 1,
+                    },
+                    640: {
+                        slidesPerView: 3,
+                        spaceBetween: 24,
+                        touchRatio: 1,
+                    },
+                    501: {
+                        slidesPerView: 3,
+                        spaceBetween: 24,
+                        touchRatio: 1,
+                    },
+                    500: {
+                        slidesPerView: 2,
+                        spaceBetween: 10,
+                        touchRatio: 1,
+                        slidesPerColumn: 1,
+                    },
+                    320: {
+                        slidesPerView: 2,
+                        spaceBetween: 10,
+                        touchRatio: 1,
+                        slidesPerColumn: 1,
+                    }
+                }
+            });
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
+
     if ($('.partner__slider').exists()) {
         try {
             console.log(true);
@@ -46,10 +102,120 @@ $(() => {
                 spaceBetween: 110,
                 slidesPerView: 'auto',
                 loop: true,
-                autoplay: true
+                autoplay: {
+                    delay: 1000,
+                },
+                breakpoints: {
+                    1920: {
+                        spaceBetween: 110,
+                        slidesPerView: 'auto',
+                    },
+                    1301: {
+                        spaceBetween: 110,
+                        slidesPerView: 'auto',
+                    },
+                    1300: {
+                        spaceBetween: 40,
+                        slidesPerView: 4,
+                        loop: false
+                    },
+                    1025: {
+                        spaceBetween: 40,
+                        slidesPerView: 4,
+                    },
+                    1024: {
+                        slidesPerView: 4,
+                        spaceBetween: 40,
+                        slidesPerColumn: 2,
+                        slidesPerColumnFill: 'row',
+                        touchRatio: 0,
+                    },
+                    769: {
+                        slidesPerView: 4,
+                        spaceBetween: 40,
+                        slidesPerColumn: 2,
+                        slidesPerColumnFill: 'row',
+                        touchRatio: 0,
+                    },
+                    768: {
+                        slidesPerView: 3,
+                        spaceBetween: 18,
+                        slidesPerColumn: 2,
+                        slidesPerColumnFill: 'row',
+                        touchRatio: 0,
+                    },
+                    501: {
+                        slidesPerView: 3,
+                        spaceBetween: 18,
+                        slidesPerColumn: 2,
+                        slidesPerColumnFill: 'row',
+                        touchRatio: 0,
+                    },
+                    500: {
+                        slidesPerView: 2,
+                        spaceBetween: 18,
+                        slidesPerColumn: 3,
+                        slidesPerColumnFill: 'row',
+                        touchRatio: 0,
+                    },
+                    320: {
+                        slidesPerView: 2,
+                        spaceBetween: 18,
+                        slidesPerColumn: 3,
+                        slidesPerColumnFill: 'row',
+                        touchRatio: 0,
+                    }
+                }
             });
         } catch (err) {
             console.log(err);
+        }
+    }
+
+    if ($('.slider-flats').exists()) {
+        try {
+            let flatsSlider = new Swiper('.slider-flats', {
+                slidesPerView: 1,
+                spaceBetween: 10,
+                touchRatio: 0,
+                effect: 'fade',
+                fadeEffect: {
+                    crossFade: true
+                },
+                pagination: {
+                    el: '.slider-flats__pagination',
+                    clickable: true,
+                    renderBullet: function (index, className) {
+                        return '<span class="' + className + '">' + (index + 1) + '</span>';
+                    }
+                },
+                navigation: {
+                    nextEl: '.slider-flats__arrow--next',
+                    prevEl: '.slider-flats__arrow--prev',
+                }
+            });
+
+            // let projectImg = new Swiper('.index-project__img', {
+            //     slidesPerView: 1,
+            //     spaceBetween: 10,
+            //     effect: 'fade',
+            //     fadeEffect: {
+            //         crossFade: true
+            //     },
+            //     navigation: {
+            //         nextEl: '.index-project__link--next',
+            //         prevEl: '.index-project__link--prev'
+            //     },
+            // });
+
+            // projectContent.controller.control = projectImg;
+            // projectImg.controller.control = projectContent;
+
+            // $('.swiper-wrapper').resize(function () {
+            //     $('.index__special').height($('.index-content').height());
+            // });
+        } catch (err) {
+            console.log('Ошибка ' + err.name + ":" + err.message + "\n" + err.stack);
         }
     }
 
@@ -197,6 +363,8 @@ $(() => {
 
 
     lightGallery(document.getElementById('lightgallery-cer'));
+    lightGallery(document.getElementById('certificate__gallery'));
+
 
     if ($('.index-content__txt').exists()) {
         try {
@@ -346,7 +514,7 @@ $(() => {
                 spaceBetween: 42,
                 effect: 'slide',
                 loop: true,
-                autoplay: {
+                autautoplay: {
                     delay: 1000,
                     disableOnInteraction: false,
                 },
@@ -421,25 +589,57 @@ $(() => {
             console.log(err);
         }
     }
+    $('.your-class').slick({
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        infinite: true,
+        speed: 500,
+    });
+
 
     if ($('.index-news__slider').exists()) {
         try {
-            var projectCer = new Swiper('.index-news__slider', {
-                slidesPerView: 'auto',
-                spaceBetween: 40,
-                effect: 'slide',
-                loop: true,
-                autoplay: {
-                    delay: 5000
-                },
-                fadeEffect: {
-                    crossFade: true
-                },
-                pagination: {
-                    el: '.index-news__pagination',
-                    type: 'progressbar',
-                },
-            });
+
+
+            // var projectCer = new Swiper('.index-news__slider', {
+            //     slidesPerView: 'auto',
+            //     spaceBetween: 40,
+            //     loop: true,
+            //     // effect: 'slide',
+
+            //     // // autoplay: {
+            //     // //     delay: 5000
+            //     // // },
+            //     // //onTransitionStart: handleDuplicates.bind(this),
+            //     on: {
+            //         slideNextTransitionStart() {
+            //             let slideEl = $('.index-news__slider .swiper-slide');
+            //             //  console.log(slideEl);
+            //             //  console.log(projectCer.activeIndex);
+            //             //  console.log($(slideEl)[projectCer.activeIndex]);
+            //             // if ($(slideEl)[projectCer.activeIndex + 1]) {
+            //             //     console.log($(slideEl)[projectCer.activeIndex + 1]);
+            //             // } else {
+            //             //     alert('End');
+            //             //     projectCer.slideToLoop(0);
+            //             // }
+
+            //         },
+            //     },
+            //     pagination: {
+            //         el: '.index-news__pagination',
+            //         type: 'progressbar',
+            //     },
+            // });
+
+            function next() {
+
+                // console.log(projectCer.realIndex);
+                // if (projectCer.realIndex + 1) {
+                //     // console.log(projectCer.realIndex);
+                //     projectCer.slideNext(projectCer.realIndex + 1);
+                // }
+            }
         } catch (err) {
             console.log(err);
         }
@@ -532,6 +732,13 @@ $(() => {
         setHeaderHeight('#lightgallery-cer .swiper-slide', '.index-certificate__unique');
         $(window).on('resize load', function () {
             setHeaderHeight('#lightgallery-cer .swiper-slide', '.index-certificate__unique');
+        });
+    }
+
+    if ($('.certificate__cover').exists()) {
+        setHeaderHeight('.certificate__slider ', '.certificate__cover');
+        $(window).on('resize load', function () {
+            setHeaderHeight('.certificate__slider ', '.certificate__cover');
         });
     }
 

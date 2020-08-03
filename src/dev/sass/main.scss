@@ -99,6 +99,7 @@ input::-ms-clear {
   font-size: 50px;
   line-height: 108%;
   color: $black-1;
+  letter-spacing: 1px;
 
   @media(max-width: 1024px) {
     font-weight: bold;
@@ -351,9 +352,9 @@ button {
 
 }
 
-#example-one a:hover {
-  // color: white;
-}
+// #example-one a:hover {
+//   // color: white;
+// }
 
 #magic-line {
   position: absolute;
@@ -378,9 +379,12 @@ button {
   bottom: -3px;
 }
 
+
 @import "./components/about/certificate.scss";
 @import "./components/contacts/contacts.scss";
 @import "./components/about/partner.scss";
+@import "./components/slider/flats-info.scss";
+@import "./components/slider/slider-flats.scss";
 @import "./components/about/about.scss";
 @import "./components/flats/flats-detailed.scss";
 @import "./components/filter-sort.scss";
