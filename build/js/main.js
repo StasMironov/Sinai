@@ -95,7 +95,7 @@ $(function () {
         slidesPerView: 'auto',
         loop: true,
         autoplay: {
-          delay: 1000
+          delay: 5000
         },
         breakpoints: {
           1920: {
@@ -568,7 +568,7 @@ $(function () {
   if ($('.index-news__slider').exists()) {
     try {
       var projectCer = new Swiper('.index-news__slider', {
-        slidesPerView: 2,
+        slidesPerView: 'auto',
         spaceBetween: 40,
         loop: true,
         pagination: {
