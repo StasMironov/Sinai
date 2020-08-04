@@ -380,10 +380,12 @@ button {
 }
 
 
+@import "./components/flats/flats-calc.scss";
+@import "./components/flats/flats-special.scss";
 @import "./components/about/certificate.scss";
 @import "./components/contacts/contacts.scss";
 @import "./components/about/partner.scss";
-@import "./components/slider/flats-info.scss";
+@import "./components/flats/flats-info.scss";
 @import "./components/slider/slider-flats.scss";
 @import "./components/about/about.scss";
 @import "./components/flats/flats-detailed.scss";

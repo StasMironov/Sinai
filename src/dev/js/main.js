@@ -39,6 +39,28 @@ $(() => {
         });
     }
 
+    if ($('#price').exists()) {
+        let min = $('#price').closest('.flats-calc__item').find('.flats-calc__block').data('min');
+        let max = $('#price').closest('.flats-calc__item').find('.flats-calc__block').data('max');
+
+        rangeSlider('#price', min, max, 100000, '#send-result-price');
+    }
+
+    if ($('#plan-slider').exists()) {
+        try {
+            let planSlider = new Swiper('#plan-slider', {
+                spaceBetween: 20,
+                slidesPerView: 'auto',
+                navigation: {
+                    nextEl: '.index-project__link--pf_next',
+                    prevEl: '.index-project__link--pf_prev'
+                }
+            });
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
     if ($('.certificate__slider').exists()) {
         try {
             let certificateSlider = new Swiper('.certificate__slider', {
@@ -194,26 +216,6 @@ $(() => {
                     prevEl: '.slider-flats__arrow--prev',
                 }
             });
-
-            // let projectImg = new Swiper('.index-project__img', {
-            //     slidesPerView: 1,
-            //     spaceBetween: 10,
-            //     effect: 'fade',
-            //     fadeEffect: {
-            //         crossFade: true
-            //     },
-            //     navigation: {
-            //         nextEl: '.index-project__link--next',
-            //         prevEl: '.index-project__link--prev'
-            //     },
-            // });
-
-            // projectContent.controller.control = projectImg;
-            // projectImg.controller.control = projectContent;
-
-            // $('.swiper-wrapper').resize(function () {
-            //     $('.index__special').height($('.index-content').height());
-            // });
         } catch (err) {
             console.log('Ошибка ' + err.name + ":" + err.message + "\n" + err.stack);
         }

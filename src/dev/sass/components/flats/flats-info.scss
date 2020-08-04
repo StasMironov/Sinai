@@ -79,8 +79,25 @@
     }
 
     &__link {
+        position: relative;
+        display: inline-block;
         margin-top: 16px;
-        display: block;
+        line-height: 17px;
+
+        &:after {
+            position: absolute;
+            content: "";
+            width: 100%;
+            height: 1px;
+            background-color: $black-1;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
+    }
+
+    &__char {
+        transition: 400ms ease;
     }
 
     &__module {
@@ -90,16 +107,34 @@
         &:first-child {
             margin-right: 52px;
         }
+
+        &:hover .flats-info__char {
+            color: $ochre;
+        }
+
+        &:hover path {
+            fill: none;
+            stroke: $ochre;
+        }
     }
 
     &__pic {
         height: 40px;
-        margin-right: 5px;
+        margin-right: 8px;
+
+        path {
+            transition: 400ms ease;
+        }
     }
 
     &__func {
         display: flex;
         align-items: center;
         margin-top: 40px;
+    }
+
+    .btn {
+        margin-top: 39px;
+        margin-left: 4px;
     }
 }

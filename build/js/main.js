@@ -32,6 +32,27 @@ $(function () {
     });
   }
 
+  if ($('#price').exists()) {
+    var min = $('#price').closest('.flats-calc__item').find('.flats-calc__block').data('min');
+    var max = $('#price').closest('.flats-calc__item').find('.flats-calc__block').data('max');
+    rangeSlider('#price', min, max, 100000, '#send-result-price');
+  }
+
+  if ($('#plan-slider').exists()) {
+    try {
+      var planSlider = new Swiper('#plan-slider', {
+        spaceBetween: 20,
+        slidesPerView: 'auto',
+        navigation: {
+          nextEl: '.index-project__link--pf_next',
+          prevEl: '.index-project__link--pf_prev'
+        }
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
   if ($('.certificate__slider').exists()) {
     try {
       var certificateSlider = new Swiper('.certificate__slider', {
@@ -185,40 +206,26 @@ $(function () {
           nextEl: '.slider-flats__arrow--next',
           prevEl: '.slider-flats__arrow--prev'
         }
-      }); // let projectImg = new Swiper('.index-project__img', {
-      //     slidesPerView: 1,
-      //     spaceBetween: 10,
-      //     effect: 'fade',
-      //     fadeEffect: {
-      //         crossFade: true
-      //     },
-      //     navigation: {
-      //         nextEl: '.index-project__link--next',
-      //         prevEl: '.index-project__link--prev'
-      //     },
-      // });
-      // projectContent.controller.control = projectImg;
-      // projectImg.controller.control = projectContent;
-      // $('.swiper-wrapper').resize(function () {
-      //     $('.index__special').height($('.index-content').height());
-      // });
+      });
     } catch (err) {
       console.log('Ошибка ' + err.name + ":" + err.message + "\n" + err.stack);
     }
   }
 
   if ($('#cost').exists()) {
-    var min = $('#cost').closest('.building-filter__col').find('.building-filter__range').data('min');
-    var max = $('#cost').closest('.building-filter__col').find('.building-filter__range').data('max');
-    rangeSlider('#cost', min, max, 100000, '#send-result-сost');
+    var _min = $('#cost').closest('.building-filter__col').find('.building-filter__range').data('min');
+
+    var _max = $('#cost').closest('.building-filter__col').find('.building-filter__range').data('max');
+
+    rangeSlider('#cost', _min, _max, 100000, '#send-result-сost');
   }
 
   if ($('#area').exists()) {
-    var _min = $('#area').closest('.building-filter__col').find('.building-filter__range').data('min');
+    var _min2 = $('#area').closest('.building-filter__col').find('.building-filter__range').data('min');
 
-    var _max = $('#area').closest('.building-filter__col').find('.building-filter__range').data('max');
+    var _max2 = $('#area').closest('.building-filter__col').find('.building-filter__range').data('max');
 
-    rangeSlider('#area', _min, _max, 10, '#send-result-area');
+    rangeSlider('#area', _min2, _max2, 10, '#send-result-area');
   }
 
   if ($('.burger-filter').exists()) {
