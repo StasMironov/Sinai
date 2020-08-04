@@ -589,57 +589,29 @@ $(() => {
             console.log(err);
         }
     }
-    $('.your-class').slick({
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        infinite: true,
-        speed: 500,
-    });
+    // $('.index-news__slider').slick({
+    //     // centerMode: true,
+    //     // slidesToShow: 3,
+    //     slidesToShow: 2,
+    //     speed: 500,
+    //     dots: false,
+
+    // });
 
 
     if ($('.index-news__slider').exists()) {
         try {
 
 
-            // var projectCer = new Swiper('.index-news__slider', {
-            //     slidesPerView: 'auto',
-            //     spaceBetween: 40,
-            //     loop: true,
-            //     // effect: 'slide',
-
-            //     // // autoplay: {
-            //     // //     delay: 5000
-            //     // // },
-            //     // //onTransitionStart: handleDuplicates.bind(this),
-            //     on: {
-            //         slideNextTransitionStart() {
-            //             let slideEl = $('.index-news__slider .swiper-slide');
-            //             //  console.log(slideEl);
-            //             //  console.log(projectCer.activeIndex);
-            //             //  console.log($(slideEl)[projectCer.activeIndex]);
-            //             // if ($(slideEl)[projectCer.activeIndex + 1]) {
-            //             //     console.log($(slideEl)[projectCer.activeIndex + 1]);
-            //             // } else {
-            //             //     alert('End');
-            //             //     projectCer.slideToLoop(0);
-            //             // }
-
-            //         },
-            //     },
-            //     pagination: {
-            //         el: '.index-news__pagination',
-            //         type: 'progressbar',
-            //     },
-            // });
-
-            function next() {
-
-                // console.log(projectCer.realIndex);
-                // if (projectCer.realIndex + 1) {
-                //     // console.log(projectCer.realIndex);
-                //     projectCer.slideNext(projectCer.realIndex + 1);
-                // }
-            }
+            var projectCer = new Swiper('.index-news__slider', {
+                slidesPerView: 2,
+                spaceBetween: 40,
+                loop: true,
+                pagination: {
+                    el: '.index-news__pagination',
+                    type: 'progressbar',
+                },
+            });
         } catch (err) {
             console.log(err);
         }
@@ -867,39 +839,39 @@ $(() => {
         var geoJson = {
             type: 'FeatureCollection',
             features: [{
-                    "type": "Feature",
-                    "geometry": {
-                        "type": "Point",
-                        "coordinates": [58.985550, 53.377120]
-                    },
-                    "properties": {
-                        "title": "Магазин",
-                        "icon": {
-                            "iconUrl": "../img/icon/marker/shop.png",
-                            "iconSize": [50, 50], // size of the icon
-                            "iconAnchor": [25, 25], // point of the icon which will correspond to marker's location
-                            "popupAnchor": [0, -25], // point from which the popup should open relative to the iconAnchor
-                            "className": "marker"
-                        }
-                    }
+                "type": "Feature",
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [58.985550, 53.377120]
                 },
-                {
-                    "type": "Feature",
-                    "geometry": {
-                        "type": "Point",
-                        "coordinates": [58.988547, 53.376635]
-                    },
-                    "properties": {
-                        "title": "Школа",
-                        "icon": {
-                            "iconUrl": "../img/icon/marker/school.png",
-                            "iconSize": [50, 50], // size of the icon
-                            "iconAnchor": [25, 25], // point of the icon which will correspond to marker's location
-                            "popupAnchor": [0, -25], // point from which the popup should open relative to the iconAnchor
-                            "className": "marker"
-                        }
+                "properties": {
+                    "title": "Магазин",
+                    "icon": {
+                        "iconUrl": "../img/icon/marker/shop.png",
+                        "iconSize": [50, 50], // size of the icon
+                        "iconAnchor": [25, 25], // point of the icon which will correspond to marker's location
+                        "popupAnchor": [0, -25], // point from which the popup should open relative to the iconAnchor
+                        "className": "marker"
                     }
                 }
+            },
+            {
+                "type": "Feature",
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [58.988547, 53.376635]
+                },
+                "properties": {
+                    "title": "Школа",
+                    "icon": {
+                        "iconUrl": "../img/icon/marker/school.png",
+                        "iconSize": [50, 50], // size of the icon
+                        "iconAnchor": [25, 25], // point of the icon which will correspond to marker's location
+                        "popupAnchor": [0, -25], // point from which the popup should open relative to the iconAnchor
+                        "className": "marker"
+                    }
+                }
+            }
             ]
         };
 
@@ -933,56 +905,56 @@ $(() => {
         let geoJson = {
             type: 'FeatureCollection',
             features: [{
-                    "type": "Feature",
-                    "geometry": {
-                        "type": "Point",
-                        "coordinates": [58.985550, 53.377120]
-                    },
-                    "properties": {
-                        "title": "Магазин",
-                        "icon": {
-                            "iconUrl": "../img/icon/marker/house.png",
-                            "iconSize": [118, 118], // size of the icon
-                            "iconAnchor": [25, 25], // point of the icon which will correspond to marker's location
-                            "popupAnchor": [0, -25], // point from which the popup should open relative to the iconAnchor
-                            "className": "marker",
-                        }
-                    }
+                "type": "Feature",
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [58.985550, 53.377120]
                 },
-                {
-                    "type": "Feature",
-                    "geometry": {
-                        "type": "Point",
-                        "coordinates": [59.089068, 53.379590]
-                    },
-                    "properties": {
-                        "title": "Школа",
-                        "icon": {
-                            "iconUrl": "../img/icon/marker/house.png",
-                            "iconSize": [118, 118], // size of the icon
-                            "iconAnchor": [25, 25], // point of the icon which will correspond to marker's location
-                            "popupAnchor": [0, -25], // point from which the popup should open relative to the iconAnchor
-                            "className": "marker",
-                        }
-                    }
-                },
-                {
-                    "type": "Feature",
-                    "geometry": {
-                        "type": "Point",
-                        "coordinates": [58.986310, 53.375217]
-                    },
-                    "properties": {
-                        "title": "Школа",
-                        "icon": {
-                            "iconUrl": "../img/icon/marker/house.png",
-                            "iconSize": [118, 118], // size of the icon
-                            "iconAnchor": [25, 25], // point of the icon which will correspond to marker's location
-                            "popupAnchor": [0, -25], // point from which the popup should open relative to the iconAnchor
-                            "className": "marker",
-                        }
+                "properties": {
+                    "title": "Магазин",
+                    "icon": {
+                        "iconUrl": "../img/icon/marker/house.png",
+                        "iconSize": [118, 118], // size of the icon
+                        "iconAnchor": [25, 25], // point of the icon which will correspond to marker's location
+                        "popupAnchor": [0, -25], // point from which the popup should open relative to the iconAnchor
+                        "className": "marker",
                     }
                 }
+            },
+            {
+                "type": "Feature",
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [59.089068, 53.379590]
+                },
+                "properties": {
+                    "title": "Школа",
+                    "icon": {
+                        "iconUrl": "../img/icon/marker/house.png",
+                        "iconSize": [118, 118], // size of the icon
+                        "iconAnchor": [25, 25], // point of the icon which will correspond to marker's location
+                        "popupAnchor": [0, -25], // point from which the popup should open relative to the iconAnchor
+                        "className": "marker",
+                    }
+                }
+            },
+            {
+                "type": "Feature",
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [58.986310, 53.375217]
+                },
+                "properties": {
+                    "title": "Школа",
+                    "icon": {
+                        "iconUrl": "../img/icon/marker/house.png",
+                        "iconSize": [118, 118], // size of the icon
+                        "iconAnchor": [25, 25], // point of the icon which will correspond to marker's location
+                        "popupAnchor": [0, -25], // point from which the popup should open relative to the iconAnchor
+                        "className": "marker",
+                    }
+                }
+            }
             ]
         }
 

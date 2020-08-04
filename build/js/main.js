@@ -556,51 +556,26 @@ $(function () {
     } catch (err) {
       console.log(err);
     }
-  }
+  } // $('.index-news__slider').slick({
+  //     // centerMode: true,
+  //     // slidesToShow: 3,
+  //     slidesToShow: 2,
+  //     speed: 500,
+  //     dots: false,
+  // });
 
-  $('.your-class').slick({
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    infinite: true,
-    speed: 500
-  });
 
   if ($('.index-news__slider').exists()) {
     try {
-      // var projectCer = new Swiper('.index-news__slider', {
-      //     slidesPerView: 'auto',
-      //     spaceBetween: 40,
-      //     loop: true,
-      //     // effect: 'slide',
-      //     // // autoplay: {
-      //     // //     delay: 5000
-      //     // // },
-      //     // //onTransitionStart: handleDuplicates.bind(this),
-      //     on: {
-      //         slideNextTransitionStart() {
-      //             let slideEl = $('.index-news__slider .swiper-slide');
-      //             //  console.log(slideEl);
-      //             //  console.log(projectCer.activeIndex);
-      //             //  console.log($(slideEl)[projectCer.activeIndex]);
-      //             // if ($(slideEl)[projectCer.activeIndex + 1]) {
-      //             //     console.log($(slideEl)[projectCer.activeIndex + 1]);
-      //             // } else {
-      //             //     alert('End');
-      //             //     projectCer.slideToLoop(0);
-      //             // }
-      //         },
-      //     },
-      //     pagination: {
-      //         el: '.index-news__pagination',
-      //         type: 'progressbar',
-      //     },
-      // });
-      var next = function next() {// console.log(projectCer.realIndex);
-        // if (projectCer.realIndex + 1) {
-        //     // console.log(projectCer.realIndex);
-        //     projectCer.slideNext(projectCer.realIndex + 1);
-        // }
-      };
+      var projectCer = new Swiper('.index-news__slider', {
+        slidesPerView: 2,
+        spaceBetween: 40,
+        loop: true,
+        pagination: {
+          el: '.index-news__pagination',
+          type: 'progressbar'
+        }
+      });
     } catch (err) {
       console.log(err);
     }
