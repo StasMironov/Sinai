@@ -233,7 +233,26 @@ block content
 												.building-filter__low 30
 											.flats-calc__range#period
 											<input type="hidden" name="send-period" id="send-result-period">
+							.flats-calc__row
+								.flats-calc__article Сумма материнского капитала
+								.flats-calc__box
+									.flats-calc__item
+										input(type="text" placeholder="30").flats-calc__input#flats-savings
+									.flats-calc__item
+										.flats-calc__bloc
+											.flats-calc__block(data-min="0" data-max="616 617")
+												.building-filter__up 0
+												.building-filter__low 616 617
+											.flats-calc__range#savings
+											<input type="hidden" name="send-savings" id="send-result-savings">
 							input(type="hidden")#calc-rezult
+						.flats-calc__special
+							.flats-calc__check
+								<input id="select1" type="checkbox" name="select" value="pay-min">
+								<label for="select1" title="Цена (минимальная)">Семейная ипотека</label>
+							.flats-calc__check
+								<input id="select2" type="checkbox" name="select2" value="pay-min">
+								<label for="select2" title="Цена (минимальная)">Есть материнский капитал</label>
 					.flats-calc__right
 						.flats-card
 							.flats-card__items

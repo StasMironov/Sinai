@@ -63,6 +63,60 @@
             -webkit-appearance: none;
         }
     }
+    
+    &__special {
+        display: inline-flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 46px;
+    }
+
+    &__check {
+       -ms-user-select: none;
+       -moz-user-select: none;
+       -khtml-user-select: none;
+       -webkit-user-select: none;
+
+        &:first-child {
+            margin-right: 60px;
+        }
+
+        input {
+            display: none;
+
+            &:checked + label:before {
+                content: "\2713";
+                text-shadow: 1px 1px 1px rgba(0, 0, 0, .2);
+                font-size: 15px;
+                color: #f3f3f3;
+                text-align: center;
+                line-height: 15px;
+            }
+        }
+
+        label {
+            cursor: pointer;
+            position: relative;
+            padding-left: 31px;
+        }
+
+        label:before {
+            content: "";
+            display: inline-block;
+            width: 26px;
+            height: 24px;
+            margin-right: 10px;
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            top: -1px;
+            background-color: none;
+            box-shadow: none;
+            border: 2px solid #E1E1E1;
+            box-sizing: border-box;
+            border-radius: 7px
+        }
+    }
 
     &__item {
         height: 37px;

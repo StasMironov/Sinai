@@ -11,33 +11,40 @@ $(() => {
     });
 
     function rangeSlider(block, min, max, steps, input, parent) {
-        var slider = document.querySelector(block);
-        noUiSlider.create(slider, {
-            start: [min, max],
-            connect: true,
-            step: steps,
-            format: wNumb({
-                decimals: 0
-            }),
-            range: {
-                'min': min,
-                'max': max
+        if ($(block).exists()) {
+            try {
+                var slider = document.querySelector(block);
+                noUiSlider.create(slider, {
+                    start: [min, max],
+                    connect: true,
+                    step: steps,
+                    format: wNumb({
+                        decimals: 0
+                    }),
+                    range: {
+                        'min': min,
+                        'max': max
+                    }
+                });
+
+                let handle = $(block).closest(parent);
+
+                var skipValues = [
+                    $(handle).find('.building-filter__up'),
+                    $(handle).find('.building-filter__low')
+                ];
+
+                slider.noUiSlider.on('update', function (values, i) {
+                    $(skipValues[i]).text(values[i]);
+                    $(input).val(values);
+                });
+
+                return slider;
             }
-        });
-
-        let handle = $(block).closest(parent);
-
-        var skipValues = [
-            $(handle).find('.building-filter__up'),
-            $(handle).find('.building-filter__low')
-        ];
-
-        slider.noUiSlider.on('update', function (values, i) {
-            $(skipValues[i]).text(values[i]);
-            $(input).val(values);
-        });
-
-        return slider;
+            catch (err) {
+                console.log(err);
+            }
+        }
     }
 
     function checkVal(bloc, rangeBloc, sendBbox) {
@@ -47,7 +54,6 @@ $(() => {
             inputVal = inputVal.split(',');
             inputVal = inputVal[0];
         }
-
         return inputVal;
     }
 
@@ -94,7 +100,7 @@ $(() => {
         let sumLoan; // Сумма займа
         let firstDonat = donat; // Первый взнос
         let periodLoan = period * 12; // Срок кредита
-        let percentRate = (4.85 / 12) / 100;
+        let percentRate = (4.85 / 12) / 100; // Процентная ставка
 
         sumLoan = priceFlat - firstDonat;
 
@@ -132,6 +138,8 @@ $(() => {
         $('#flats-period').val(min);
         checkInput('#flats-period', min, max, slider);
     }
+
+
 
     if ($('#plan-slider').exists()) {
         try {
@@ -202,7 +210,6 @@ $(() => {
             console.log(err);
         }
     }
-
 
     if ($('.partner__slider').exists()) {
         try {
@@ -328,14 +335,12 @@ $(() => {
         });
     }
 
-
     if ($('.project-period__list').exists()) {
         $('.project-period__list').mCustomScrollbar({
             theme: "dark",
             mouseWheelPixels: 90
         });
     }
-
 
     $(window).on('resize load', function () {
         $('.structure__menu').width($('.structure__items').width());

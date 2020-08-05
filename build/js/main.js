@@ -11,26 +11,32 @@ $(function () {
   });
 
   function rangeSlider(block, min, max, steps, input, parent) {
-    var slider = document.querySelector(block);
-    noUiSlider.create(slider, {
-      start: [min, max],
-      connect: true,
-      step: steps,
-      format: wNumb({
-        decimals: 0
-      }),
-      range: {
-        'min': min,
-        'max': max
+    if ($(block).exists()) {
+      try {
+        var slider = document.querySelector(block);
+        noUiSlider.create(slider, {
+          start: [min, max],
+          connect: true,
+          step: steps,
+          format: wNumb({
+            decimals: 0
+          }),
+          range: {
+            'min': min,
+            'max': max
+          }
+        });
+        var handle = $(block).closest(parent);
+        var skipValues = [$(handle).find('.building-filter__up'), $(handle).find('.building-filter__low')];
+        slider.noUiSlider.on('update', function (values, i) {
+          $(skipValues[i]).text(values[i]);
+          $(input).val(values);
+        });
+        return slider;
+      } catch (err) {
+        console.log(err);
       }
-    });
-    var handle = $(block).closest(parent);
-    var skipValues = [$(handle).find('.building-filter__up'), $(handle).find('.building-filter__low')];
-    slider.noUiSlider.on('update', function (values, i) {
-      $(skipValues[i]).text(values[i]);
-      $(input).val(values);
-    });
-    return slider;
+    }
   }
 
   function checkVal(bloc, rangeBloc, sendBbox) {
@@ -88,7 +94,8 @@ $(function () {
 
     var periodLoan = period * 12; // Срок кредита
 
-    var percentRate = 4.85 / 12 / 100;
+    var percentRate = 4.85 / 12 / 100; // Процентная ставка
+
     sumLoan = priceFlat - firstDonat;
     kofPay = percentRate * Math.pow(1 + percentRate, periodLoan) / (Math.pow(1 + percentRate, periodLoan) - 1);
     kofPay = kofPay.toFixed(5);
