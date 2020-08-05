@@ -1,6 +1,18 @@
 .flats-calc {
     margin-top: 76px;
 
+    &__row {
+        &:not(:first-child) {
+            margin-top: 38px;
+        }
+    }
+
+    &__bloc {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
     &__grid {
         display: flex;
     }
@@ -8,12 +20,14 @@
     &__left {
         max-width: 545px;
         width: 100%;
+        margin-right: 45px;
     }
 
     &__box {
         display: flex;
+        align-items: flex-end;
         justify-content: space-between;
-        margin-top: 24px;
+        margin-top: 20px;
     }
 
     &__wrapper {
@@ -38,10 +52,25 @@
         letter-spacing: 0.3px;
     }
 
+    &__input {
+        color: $gray-1;
+        transition: .3s;
+        &:focus, &:active {
+            color: $black-1;
+        }
+        &::-webkit-outer-spin-button,
+        &::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+        }
+    }
+
     &__item {
+        height: 37px;
         &:first-child {
             max-width: 230px;
             width: 100%;
+            padding-bottom: 20px;
+            border-bottom: 1px solid $gray-1;
         }
 
         &:last-child {
@@ -52,12 +81,55 @@
         input {
             height: 25px;
             background-color: transparent;
-            padding-bottom: 9px;
-            border-bottom: 1px solid $gray-1;
 
             &::placeholder {
                 color: $gray-1;
             }
         }
+    }
+
+    &__range {
+        margin-top: 5px;
+        height: auto;
+
+        .noUi-handle-upper {
+            display: none;
+        }
+
+        .noUi-base {
+            background-color: $gray-1;
+            height: 2px;
+        }
+
+        .noUi-handle {
+            top: 0;
+            bottom: 0;
+            margin: auto;
+            width: 11px;
+            height: 11px;
+            border-radius: 50%;
+            right: 0;
+            background-color: $basic;
+            box-shadow: none;
+            cursor: pointer;
+
+            &:before,
+            &:after {
+                content: none;
+            }
+        }
+
+        .noUi-handle-lower {
+            right: -9px;
+        }
+
+        .noUi-handle-upper {
+            right: -2px;
+        }
+    }
+
+    &__right {
+        max-width: 610px;
+        width: 100%;
     }
 }

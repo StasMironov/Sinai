@@ -10,7 +10,7 @@ $(() => {
         mobile: false
     });
 
-    function rangeSlider(block, min, max, steps, input) {
+    function rangeSlider(block, min, max, steps, input, parent) {
         var slider = document.querySelector(block);
         noUiSlider.create(slider, {
             start: [min, max],
@@ -25,8 +25,7 @@ $(() => {
             }
         });
 
-
-        let handle = $(block).closest('.building-filter__col');
+        let handle = $(block).closest(parent);
 
         var skipValues = [
             $(handle).find('.building-filter__up'),
@@ -37,13 +36,101 @@ $(() => {
             $(skipValues[i]).text(values[i]);
             $(input).val(values);
         });
+
+        return slider;
+    }
+
+    function checkVal(bloc, rangeBloc, sendBbox) {
+        let inputVal = $(rangeBloc).closest('.flats-calc__item').find('.flats-calc__block').data('min');
+        if ($(bloc).val() != '') {
+            inputVal = $(sendBbox).val();
+            inputVal = inputVal.split(',');
+            inputVal = inputVal[0];
+        }
+
+        return inputVal;
+    }
+
+    function checkInput(bloc, min, max, slider) {
+        if ($(bloc).exists()) {
+            calcPay(checkVal(bloc, '#price', '#send-result-price'), checkVal(bloc, '#donat', '#send-result-donat'), checkVal(bloc, '#period', '#send-result-period'));
+
+            $(bloc).on('change', function () {
+                if ($(this).val() > max) {
+                    slider.noUiSlider.set(max);
+                    $(this).val(max);
+                }
+                else if ($(this).val() < min || $(this).val() == 0) {
+                    slider.noUiSlider.set(min);
+                    $(this).val(min);
+                }
+                else {
+                    slider.noUiSlider.set($(this).val());
+                }
+
+                slider.noUiSlider.set([this.value, null]);
+                slider.noUiSlider.on('update', function (values, handle) {
+                    $(bloc).val(values[0]);
+                });
+
+                // let priceFlat = checkVal(bloc, '#price', '#send-result-price');
+                // let firstDonat = checkVal(bloc, '#donat', '#send-result-donat');
+                // let periodLoan = checkVal(bloc, '#period', '#send-result-period');
+
+                calcPay(checkVal(bloc, '#price', '#send-result-price'), checkVal(bloc, '#donat', '#send-result-donat'), checkVal(bloc, '#period', '#send-result-period'));
+            });
+
+            slider.noUiSlider.on('slide', function (values, handle) {
+                $(bloc).val(values[0]);
+                calcPay(checkVal(bloc, '#price', '#send-result-price'), checkVal(bloc, '#donat', '#send-result-donat'), checkVal(bloc, '#period', '#send-result-period'));
+            });
+        }
+    }
+
+    function calcPay(priceF, donat, period) {
+        let monthPay = 0; // x
+        let kofPay = 0; // k
+        let priceFlat = priceF; // Стоимость квартиры
+        let sumLoan; // Сумма займа
+        let firstDonat = donat; // Первый взнос
+        let periodLoan = period * 12; // Срок кредита
+        let percentRate = (4.85 / 12) / 100;
+
+        sumLoan = priceFlat - firstDonat;
+
+        kofPay = (percentRate * (Math.pow((1 + percentRate), periodLoan))) / ((Math.pow((1 + percentRate), periodLoan)) - 1);
+        kofPay = kofPay.toFixed(5);
+        monthPay = Math.ceil(kofPay * sumLoan);
+        $('#calc-rezult').val(monthPay);
+
+        // console.log(priceFlat);
+        // console.log(firstDonat);
+        console.log(monthPay);
+        // console.log(sumLoan);
     }
 
     if ($('#price').exists()) {
         let min = $('#price').closest('.flats-calc__item').find('.flats-calc__block').data('min');
         let max = $('#price').closest('.flats-calc__item').find('.flats-calc__block').data('max');
+        let slider = rangeSlider('#price', min, max, 10000, '#send-result-price', '.flats-calc__item');
+        $('#flat-price').val(min);
+        checkInput('#flat-price', min, max, slider);
+    }
 
-        rangeSlider('#price', min, max, 100000, '#send-result-price');
+    if ($('#donat').exists()) {
+        let min = $('#donat').closest('.flats-calc__item').find('.flats-calc__block').data('min');
+        let max = $('#donat').closest('.flats-calc__item').find('.flats-calc__block').data('max');
+        let slider = rangeSlider('#donat', min, max, 1000, '#send-result-donat', '.flats-calc__item');
+        $('#flats-donat').val(min);
+        checkInput('#flats-donat', min, max, slider);
+    }
+
+    if ($('#period').exists()) {
+        let min = $('#period').closest('.flats-calc__item').find('.flats-calc__block').data('min');
+        let max = $('#period').closest('.flats-calc__item').find('.flats-calc__block').data('max');
+        let slider = rangeSlider('#period', min, max, 1, '#send-result-period', '.flats-calc__item');
+        $('#flats-period').val(min);
+        checkInput('#flats-period', min, max, slider);
     }
 
     if ($('#plan-slider').exists()) {
@@ -225,13 +312,13 @@ $(() => {
         let min = $('#cost').closest('.building-filter__col').find('.building-filter__range').data('min');
         let max = $('#cost').closest('.building-filter__col').find('.building-filter__range').data('max');
 
-        rangeSlider('#cost', min, max, 100000, '#send-result-сost');
+        rangeSlider('#cost', min, max, 100000, '#send-result-сost', '.building-filter__col');
     }
 
     if ($('#area').exists()) {
         let min = $('#area').closest('.building-filter__col').find('.building-filter__range').data('min');
         let max = $('#area').closest('.building-filter__col').find('.building-filter__range').data('max');
-        rangeSlider('#area', min, max, 10, '#send-result-area');
+        rangeSlider('#area', min, max, 10, '#send-result-area', '.building-filter__col');
     }
 
     if ($('.burger-filter').exists()) {
@@ -841,39 +928,39 @@ $(() => {
         var geoJson = {
             type: 'FeatureCollection',
             features: [{
-                    "type": "Feature",
-                    "geometry": {
-                        "type": "Point",
-                        "coordinates": [58.985550, 53.377120]
-                    },
-                    "properties": {
-                        "title": "Магазин",
-                        "icon": {
-                            "iconUrl": "../img/icon/marker/shop.png",
-                            "iconSize": [50, 50], // size of the icon
-                            "iconAnchor": [25, 25], // point of the icon which will correspond to marker's location
-                            "popupAnchor": [0, -25], // point from which the popup should open relative to the iconAnchor
-                            "className": "marker"
-                        }
-                    }
+                "type": "Feature",
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [58.985550, 53.377120]
                 },
-                {
-                    "type": "Feature",
-                    "geometry": {
-                        "type": "Point",
-                        "coordinates": [58.988547, 53.376635]
-                    },
-                    "properties": {
-                        "title": "Школа",
-                        "icon": {
-                            "iconUrl": "../img/icon/marker/school.png",
-                            "iconSize": [50, 50], // size of the icon
-                            "iconAnchor": [25, 25], // point of the icon which will correspond to marker's location
-                            "popupAnchor": [0, -25], // point from which the popup should open relative to the iconAnchor
-                            "className": "marker"
-                        }
+                "properties": {
+                    "title": "Магазин",
+                    "icon": {
+                        "iconUrl": "../img/icon/marker/shop.png",
+                        "iconSize": [50, 50], // size of the icon
+                        "iconAnchor": [25, 25], // point of the icon which will correspond to marker's location
+                        "popupAnchor": [0, -25], // point from which the popup should open relative to the iconAnchor
+                        "className": "marker"
                     }
                 }
+            },
+            {
+                "type": "Feature",
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [58.988547, 53.376635]
+                },
+                "properties": {
+                    "title": "Школа",
+                    "icon": {
+                        "iconUrl": "../img/icon/marker/school.png",
+                        "iconSize": [50, 50], // size of the icon
+                        "iconAnchor": [25, 25], // point of the icon which will correspond to marker's location
+                        "popupAnchor": [0, -25], // point from which the popup should open relative to the iconAnchor
+                        "className": "marker"
+                    }
+                }
+            }
             ]
         };
 
@@ -907,56 +994,56 @@ $(() => {
         let geoJson = {
             type: 'FeatureCollection',
             features: [{
-                    "type": "Feature",
-                    "geometry": {
-                        "type": "Point",
-                        "coordinates": [58.985550, 53.377120]
-                    },
-                    "properties": {
-                        "title": "Магазин",
-                        "icon": {
-                            "iconUrl": "../img/icon/marker/house.png",
-                            "iconSize": [118, 118], // size of the icon
-                            "iconAnchor": [25, 25], // point of the icon which will correspond to marker's location
-                            "popupAnchor": [0, -25], // point from which the popup should open relative to the iconAnchor
-                            "className": "marker",
-                        }
-                    }
+                "type": "Feature",
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [58.985550, 53.377120]
                 },
-                {
-                    "type": "Feature",
-                    "geometry": {
-                        "type": "Point",
-                        "coordinates": [59.089068, 53.379590]
-                    },
-                    "properties": {
-                        "title": "Школа",
-                        "icon": {
-                            "iconUrl": "../img/icon/marker/house.png",
-                            "iconSize": [118, 118], // size of the icon
-                            "iconAnchor": [25, 25], // point of the icon which will correspond to marker's location
-                            "popupAnchor": [0, -25], // point from which the popup should open relative to the iconAnchor
-                            "className": "marker",
-                        }
-                    }
-                },
-                {
-                    "type": "Feature",
-                    "geometry": {
-                        "type": "Point",
-                        "coordinates": [58.986310, 53.375217]
-                    },
-                    "properties": {
-                        "title": "Школа",
-                        "icon": {
-                            "iconUrl": "../img/icon/marker/house.png",
-                            "iconSize": [118, 118], // size of the icon
-                            "iconAnchor": [25, 25], // point of the icon which will correspond to marker's location
-                            "popupAnchor": [0, -25], // point from which the popup should open relative to the iconAnchor
-                            "className": "marker",
-                        }
+                "properties": {
+                    "title": "Магазин",
+                    "icon": {
+                        "iconUrl": "../img/icon/marker/house.png",
+                        "iconSize": [118, 118], // size of the icon
+                        "iconAnchor": [25, 25], // point of the icon which will correspond to marker's location
+                        "popupAnchor": [0, -25], // point from which the popup should open relative to the iconAnchor
+                        "className": "marker",
                     }
                 }
+            },
+            {
+                "type": "Feature",
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [59.089068, 53.379590]
+                },
+                "properties": {
+                    "title": "Школа",
+                    "icon": {
+                        "iconUrl": "../img/icon/marker/house.png",
+                        "iconSize": [118, 118], // size of the icon
+                        "iconAnchor": [25, 25], // point of the icon which will correspond to marker's location
+                        "popupAnchor": [0, -25], // point from which the popup should open relative to the iconAnchor
+                        "className": "marker",
+                    }
+                }
+            },
+            {
+                "type": "Feature",
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [58.986310, 53.375217]
+                },
+                "properties": {
+                    "title": "Школа",
+                    "icon": {
+                        "iconUrl": "../img/icon/marker/house.png",
+                        "iconSize": [118, 118], // size of the icon
+                        "iconAnchor": [25, 25], // point of the icon which will correspond to marker's location
+                        "popupAnchor": [0, -25], // point from which the popup should open relative to the iconAnchor
+                        "className": "marker",
+                    }
+                }
+            }
             ]
         }
 

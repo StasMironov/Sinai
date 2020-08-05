@@ -201,14 +201,100 @@ block content
 								.flats-calc__article Стоимость квартиры
 								.flats-calc__box
 									.flats-calc__item
-										input(type="text" placeholder="2 350 000").flats-calc__input
+										input(type="number" placeholder="2 350 000").flats-calc__input#flat-price
 									.flats-calc__item
 										.flats-calc__bloc
 											.flats-calc__block(data-min="1500000" data-max="13500000")
-												.flats-calc__start 2 190 000
-												.flats-calc__end 32 000 000
+												.building-filter__up 2 190 000
+												.building-filter__low 32 000 000
 											.flats-calc__range#price
-											<input type="hidden" name="send-cost" id="send-result-price">
+											<input type="hidden" name="send-price" id="send-result-price">
+							.flats-calc__row
+								.flats-calc__article Первый взнос
+								.flats-calc__box
+									.flats-calc__item
+										input(type="number" placeholder="475 000").flats-calc__input#flats-donat
+									.flats-calc__item
+										.flats-calc__bloc
+											.flats-calc__block(data-min="235000" data-max="2115000")
+												.building-filter__up 2 190 000
+												.building-filter__low 32 000 000
+											.flats-calc__range#donat
+											<input type="hidden" name="send-donat" id="send-result-donat">
+							.flats-calc__row
+								.flats-calc__article Срок кредита
+								.flats-calc__box
+									.flats-calc__item
+										input(type="text" placeholder="30").flats-calc__input#flats-period
+									.flats-calc__item
+										.flats-calc__bloc
+											.flats-calc__block(data-min="1" data-max="30")
+												.building-filter__up 1
+												.building-filter__low 30
+											.flats-calc__range#period
+											<input type="hidden" name="send-period" id="send-result-period">
+							input(type="hidden")#calc-rezult
 					.flats-calc__right
-
+						.flats-card
+							.flats-card__items
+								a(href="javascript:void(0);").flats-card__item
+									.flats-card__logo(style="background-image: url('./img/banks/b1.png')")
+									.flats-card__info
+										.flats-card__bloc
+											.flats-card__title Ставка
+											.flats-card__val от 8,10%
+										.flats-card__bloc
+											.flats-card__title Ежемесячный платеж
+											.flats-card__val.flats-card__val--month 14 600 руб/мес
+									.flats-card__promo Сумма ипотеки от 6 млн.
+								a(href="javascript:void(0);").flats-card__item
+									.flats-card__logo(style="background-image: url('./img/banks/b1.png')")
+									.flats-card__info
+										.flats-card__bloc
+											.flats-card__title Ставка
+											.flats-card__val от 8,10%
+										.flats-card__bloc
+											.flats-card__title Ежемесячный платеж
+											.flats-card__val.flats-card__val--month 14 600 руб/мес
+									.flats-card__promo Сумма ипотеки от 6 млн.
+								a(href="javascript:void(0);").flats-card__item
+									.flats-card__logo(style="background-image: url('./img/banks/b1.png')")
+									.flats-card__info
+										.flats-card__bloc
+											.flats-card__title Ставка
+											.flats-card__val от 8,10%
+										.flats-card__bloc
+											.flats-card__title Ежемесячный платеж
+											.flats-card__val.flats-card__val--month 14 600 руб/мес
+									.flats-card__promo Сумма ипотеки от 6 млн.
+								a(href="javascript:void(0);").flats-card__item
+									.flats-card__logo(style="background-image: url('./img/banks/b1.png')")
+									.flats-card__info
+										.flats-card__bloc
+											.flats-card__title Ставка
+											.flats-card__val от 8,10%
+										.flats-card__bloc
+											.flats-card__title Ежемесячный платеж
+											.flats-card__val.flats-card__val--month 14 600 руб/мес
+									.flats-card__promo Сумма ипотеки от 6 млн.
+								a(href="javascript:void(0);").flats-card__item
+									.flats-card__logo(style="background-image: url('./img/banks/b1.png')")
+									.flats-card__info
+										.flats-card__bloc
+											.flats-card__title Ставка
+											.flats-card__val от 8,10%
+										.flats-card__bloc
+											.flats-card__title Ежемесячный платеж
+											.flats-card__val.flats-card__val--month 14 600 руб/мес
+									.flats-card__promo Сумма ипотеки от 6 млн.
+								a(href="javascript:void(0);").flats-card__item
+									.flats-card__logo(style="background-image: url('./img/banks/b1.png')")
+									.flats-card__info
+										.flats-card__bloc
+											.flats-card__title Ставка
+											.flats-card__val от 8,10%
+										.flats-card__bloc
+											.flats-card__title Ежемесячный платеж
+											.flats-card__val.flats-card__val--month 14 600 руб/мес
+									.flats-card__promo Сумма ипотеки от 6 млн.
 block script

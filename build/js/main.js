@@ -10,7 +10,7 @@ $(function () {
     mobile: false
   });
 
-  function rangeSlider(block, min, max, steps, input) {
+  function rangeSlider(block, min, max, steps, input, parent) {
     var slider = document.querySelector(block);
     noUiSlider.create(slider, {
       start: [min, max],
@@ -24,18 +24,109 @@ $(function () {
         'max': max
       }
     });
-    var handle = $(block).closest('.building-filter__col');
+    var handle = $(block).closest(parent);
     var skipValues = [$(handle).find('.building-filter__up'), $(handle).find('.building-filter__low')];
     slider.noUiSlider.on('update', function (values, i) {
       $(skipValues[i]).text(values[i]);
       $(input).val(values);
     });
+    return slider;
+  }
+
+  function checkVal(bloc, rangeBloc, sendBbox) {
+    var inputVal = $(rangeBloc).closest('.flats-calc__item').find('.flats-calc__block').data('min');
+
+    if ($(bloc).val() != '') {
+      inputVal = $(sendBbox).val();
+      inputVal = inputVal.split(',');
+      inputVal = inputVal[0];
+    }
+
+    return inputVal;
+  }
+
+  function checkInput(bloc, min, max, slider) {
+    if ($(bloc).exists()) {
+      calcPay(checkVal(bloc, '#price', '#send-result-price'), checkVal(bloc, '#donat', '#send-result-donat'), checkVal(bloc, '#period', '#send-result-period'));
+      $(bloc).on('change', function () {
+        if ($(this).val() > max) {
+          slider.noUiSlider.set(max);
+          $(this).val(max);
+        } else if ($(this).val() < min || $(this).val() == 0) {
+          slider.noUiSlider.set(min);
+          $(this).val(min);
+        } else {
+          slider.noUiSlider.set($(this).val());
+        }
+
+        slider.noUiSlider.set([this.value, null]);
+        slider.noUiSlider.on('update', function (values, handle) {
+          $(bloc).val(values[0]);
+        }); // let priceFlat = checkVal(bloc, '#price', '#send-result-price');
+        // let firstDonat = checkVal(bloc, '#donat', '#send-result-donat');
+        // let periodLoan = checkVal(bloc, '#period', '#send-result-period');
+
+        calcPay(checkVal(bloc, '#price', '#send-result-price'), checkVal(bloc, '#donat', '#send-result-donat'), checkVal(bloc, '#period', '#send-result-period'));
+      });
+      slider.noUiSlider.on('slide', function (values, handle) {
+        $(bloc).val(values[0]);
+        calcPay(checkVal(bloc, '#price', '#send-result-price'), checkVal(bloc, '#donat', '#send-result-donat'), checkVal(bloc, '#period', '#send-result-period'));
+      });
+    }
+  }
+
+  function calcPay(priceF, donat, period) {
+    var monthPay = 0; // x
+
+    var kofPay = 0; // k
+
+    var priceFlat = priceF; // Стоимость квартиры
+
+    var sumLoan; // Сумма займа
+
+    var firstDonat = donat; // Первый взнос
+
+    var periodLoan = period * 12; // Срок кредита
+
+    var percentRate = 4.85 / 12 / 100;
+    sumLoan = priceFlat - firstDonat;
+    kofPay = percentRate * Math.pow(1 + percentRate, periodLoan) / (Math.pow(1 + percentRate, periodLoan) - 1);
+    kofPay = kofPay.toFixed(5);
+    monthPay = Math.ceil(kofPay * sumLoan);
+    $('#calc-rezult').val(monthPay); // console.log(priceFlat);
+    // console.log(firstDonat);
+
+    console.log(monthPay); // console.log(sumLoan);
   }
 
   if ($('#price').exists()) {
     var min = $('#price').closest('.flats-calc__item').find('.flats-calc__block').data('min');
     var max = $('#price').closest('.flats-calc__item').find('.flats-calc__block').data('max');
-    rangeSlider('#price', min, max, 100000, '#send-result-price');
+    var slider = rangeSlider('#price', min, max, 10000, '#send-result-price', '.flats-calc__item');
+    $('#flat-price').val(min);
+    checkInput('#flat-price', min, max, slider);
+  }
+
+  if ($('#donat').exists()) {
+    var _min = $('#donat').closest('.flats-calc__item').find('.flats-calc__block').data('min');
+
+    var _max = $('#donat').closest('.flats-calc__item').find('.flats-calc__block').data('max');
+
+    var _slider = rangeSlider('#donat', _min, _max, 1000, '#send-result-donat', '.flats-calc__item');
+
+    $('#flats-donat').val(_min);
+    checkInput('#flats-donat', _min, _max, _slider);
+  }
+
+  if ($('#period').exists()) {
+    var _min2 = $('#period').closest('.flats-calc__item').find('.flats-calc__block').data('min');
+
+    var _max2 = $('#period').closest('.flats-calc__item').find('.flats-calc__block').data('max');
+
+    var _slider2 = rangeSlider('#period', _min2, _max2, 1, '#send-result-period', '.flats-calc__item');
+
+    $('#flats-period').val(_min2);
+    checkInput('#flats-period', _min2, _max2, _slider2);
   }
 
   if ($('#plan-slider').exists()) {
@@ -213,19 +304,19 @@ $(function () {
   }
 
   if ($('#cost').exists()) {
-    var _min = $('#cost').closest('.building-filter__col').find('.building-filter__range').data('min');
+    var _min3 = $('#cost').closest('.building-filter__col').find('.building-filter__range').data('min');
 
-    var _max = $('#cost').closest('.building-filter__col').find('.building-filter__range').data('max');
+    var _max3 = $('#cost').closest('.building-filter__col').find('.building-filter__range').data('max');
 
-    rangeSlider('#cost', _min, _max, 100000, '#send-result-сost');
+    rangeSlider('#cost', _min3, _max3, 100000, '#send-result-сost', '.building-filter__col');
   }
 
   if ($('#area').exists()) {
-    var _min2 = $('#area').closest('.building-filter__col').find('.building-filter__range').data('min');
+    var _min4 = $('#area').closest('.building-filter__col').find('.building-filter__range').data('min');
 
-    var _max2 = $('#area').closest('.building-filter__col').find('.building-filter__range').data('max');
+    var _max4 = $('#area').closest('.building-filter__col').find('.building-filter__range').data('max');
 
-    rangeSlider('#area', _min2, _max2, 10, '#send-result-area');
+    rangeSlider('#area', _min4, _max4, 10, '#send-result-area', '.building-filter__col');
   }
 
   if ($('.burger-filter').exists()) {
