@@ -5,6 +5,22 @@
         &:not(:first-child) {
             margin-top: 38px;
         }
+
+        &--savings {
+            max-height: 0;
+            overflow: hidden;
+            transition: .3s;
+            padding-right: 10px;
+            transform: translateX(10px);
+        }
+
+        &--active {
+            opacity: 1;
+            display: block;
+            max-height: 88px;
+            padding-bottom: 6px;
+            margin-bottom: 27px;
+        }
     }
 
     &__bloc {
@@ -20,7 +36,7 @@
     &__left {
         max-width: 545px;
         width: 100%;
-        margin-right: 45px;
+        margin-right: 68px;
     }
 
     &__box {
@@ -55,27 +71,30 @@
     &__input {
         color: $gray-1;
         transition: .3s;
-        &:focus, &:active {
+
+        &:focus,
+        &:active {
             color: $black-1;
         }
+
         &::-webkit-outer-spin-button,
         &::-webkit-inner-spin-button {
             -webkit-appearance: none;
         }
     }
-    
+
     &__special {
         display: inline-flex;
         align-items: center;
         justify-content: space-between;
-        margin-top: 46px;
+        margin-top: 11px
     }
 
     &__check {
-       -ms-user-select: none;
-       -moz-user-select: none;
-       -khtml-user-select: none;
-       -webkit-user-select: none;
+        -ms-user-select: none;
+        -moz-user-select: none;
+        -khtml-user-select: none;
+        -webkit-user-select: none;
 
         &:first-child {
             margin-right: 60px;
@@ -84,13 +103,14 @@
         input {
             display: none;
 
-            &:checked + label:before {
-                content: "\2713";
+            &:checked+label:before {
+                content: "";
+                background-image: url('../img/icon/ok.svg');
                 text-shadow: 1px 1px 1px rgba(0, 0, 0, .2);
                 font-size: 15px;
-                color: #f3f3f3;
                 text-align: center;
                 line-height: 15px;
+                border-color: $ochre;
             }
         }
 
@@ -109,17 +129,21 @@
             position: absolute;
             left: 0;
             bottom: 0;
-            top: -1px;
+            top: -2px;
             background-color: none;
             box-shadow: none;
             border: 2px solid #E1E1E1;
             box-sizing: border-box;
-            border-radius: 7px
+            border-radius: 7px;
+            transition: 400ms ease;
+            background-repeat: no-repeat;
+            background-position: center;
         }
     }
 
     &__item {
         height: 37px;
+
         &:first-child {
             max-width: 230px;
             width: 100%;
@@ -144,7 +168,7 @@
 
     &__range {
         margin-top: 5px;
-        height: auto;
+        height: 1px;
 
         .noUi-handle-upper {
             display: none;
@@ -152,7 +176,11 @@
 
         .noUi-base {
             background-color: $gray-1;
-            height: 2px;
+            height: 1px;
+        }
+
+        .noUi-connect {
+            background-color: $gray-1;
         }
 
         .noUi-handle {
@@ -185,5 +213,19 @@
     &__right {
         max-width: 610px;
         width: 100%;
+    }
+
+    &__about {
+        margin-top: 54px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        max-width: 545px;
+        width: 100%;
+    }
+
+    &__link {
+        position: relative;
+
     }
 }

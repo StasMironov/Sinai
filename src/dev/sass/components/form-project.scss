@@ -266,4 +266,83 @@
         }
     }
 
+    &--call {
+        margin-top: 0;
+
+        .form-project__box,
+        .form-project__group {
+            flex-direction: column;
+        }
+
+        .form-project__block {
+            width: 100%;
+            max-width: 100%;
+            margin-right: 0;
+
+            &:not(:first-child) {
+                margin-top: 20px;
+            }
+        }
+
+        .form-project__group {
+            margin-right: 0;
+        }
+
+        .form-project__link {
+            font-style: normal;
+            font-weight: normal;
+            font-size: 12px;
+            line-height: 160%;
+            text-align: center;
+            letter-spacing: 0.3px;
+            color: $black-2;
+            margin-top: 16px;
+
+            a {
+                color: $gray-5;
+            }
+        }
+
+        .form-project__btn {
+            width: 100%;
+            font-style: normal;
+            font-weight: bold;
+            font-size: 18px;
+            line-height: 30px;
+            letter-spacing: 0.3px;
+            text-transform: uppercase;
+            padding: 30px 100px;
+            cursor: pointer;
+            text-transform: uppercase;
+            background-color: $ochre;
+            color: white;
+            transition: 400ms ease;
+
+            &:disabled {
+                background-color: $gray-1;
+                color: $basic;
+            }
+
+            &:hover:not(:disabled) {
+                background-color: $ochre-2;
+                color: $black-1;
+            }
+        }
+
+        .form-project__wrapper {
+            padding: 16px 62px 21px;
+        }
+
+        input {
+            &::placeholder {
+                text-align: center;
+                color: $basic;
+                font-size: 16px;
+                line-height: 160%;
+                letter-spacing: 0.3px;
+            }
+        }
+
+    }
+
 }

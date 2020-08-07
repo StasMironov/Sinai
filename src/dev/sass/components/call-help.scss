@@ -1,0 +1,32 @@
+.call-help {
+    max-width: 387px;
+    margin: 0 auto;
+    margin-top: 99px;
+
+    &__title {
+        color: $basic;
+        text-align: center;
+        letter-spacing: 1px;
+    }
+
+    &__bloc {
+        padding-top: 46px;
+        margin-top: 40px;
+        background-color: white;
+        box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    &__top {
+        padding: 46px 61px 30px;
+    }
+
+    &__article {
+        font-style: normal;
+        font-weight: bold;
+        font-size: 20px;
+        line-height: 26px;
+        text-align: center;
+        color: $black-1;
+        padding: 0 61px 0;
+    }
+}

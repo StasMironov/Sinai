@@ -111,15 +111,15 @@
     }
 
     &__box {
-        margin-top: 70px;
+        // margin-top: 70px;
 
-        @media(max-width: 1024px) {
-            margin-top: 50px;
-        }
+        // @media(max-width: 1024px) {
+        //     margin-top: 50px;
+        // }
 
-        @media(max-width: 640px) {
-            margin-top: 24px;
-        }
+        // @media(max-width: 640px) {
+        //     margin-top: 24px;
+        // }
     }
 
     &__info {

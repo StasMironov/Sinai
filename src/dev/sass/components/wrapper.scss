@@ -32,4 +32,14 @@
             margin-top: 13px;
         }
     }
+
+    &--basic {
+        .project__box {
+            margin-top: 0;
+        }
+
+        .project-period__slider {
+            height: 595px;
+        }
+    }
 }
