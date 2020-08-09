@@ -3,6 +3,10 @@
     margin-top: 88px;
     background-color: $gray-3;
 
+    @media(max-width: 768px) {
+        padding: 43px 0 22px;
+    }
+
     &__text {
         font-style: normal;
         font-weight: normal;
@@ -27,18 +31,41 @@
     }
 
     &__left {
+        display: flex;
+        flex-direction: column;
         max-width: 348px;
         width: 100%;
         margin-right: 56px;
 
+        @media(max-width: 768px) {
+            max-width: 100%;
+            margin-right: 0;
+        }
+
         .index-project__wrapper {
             position: relative;
             margin-top: 126px;
+
+            @media(max-width: 1300px) {
+                margin-top: auto;
+            }
+
+            @media(max-width: 768px) {
+                display: none;
+            }
         }
     }
 
     &__bloc {
         margin-top: 16px;
+
+        @media(max-width: 1300px) {
+            margin-bottom: 16px;
+        }
+
+        @media(max-width: 1024px) {
+            margin-bottom: 25px;
+        }
     }
 
     &__txt {
@@ -48,11 +75,19 @@
 
         &:not(:first-child) {
             margin-top: 40px;
+
+            @media(max-width: 1024px) {
+                margin-top: 20px;
+            }
         }
     }
 
     &__grid {
         display: flex;
+
+        @media(max-width: 768px) {
+            flex-direction: column;
+        }
     }
 
     &__pic {

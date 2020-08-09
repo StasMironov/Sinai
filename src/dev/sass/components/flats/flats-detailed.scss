@@ -1,8 +1,20 @@
 .flats-detailed {
-    &__bloc {
+    &__wrapper {
         display: flex;
         margin-top: 88px;
         justify-content: space-between;
+
+        @media(max-width: 768px) {
+            flex-direction: column;
+            align-items: center;
+            margin-top: 36px;
+        }
+
+        @media(max-width: 600px) {
+            margin-top: 7px;
+        }
+
+        
     }
 
     &__left {
@@ -23,6 +35,11 @@
 
         @media(max-width: 992px) {
             width: 290px;
+            margin-right: 20px;
+        }
+
+        @media(max-width: 768px) {
+            margin-right: 0;
         }
     }
 
@@ -46,6 +63,15 @@
         @media(max-width: 992px) {
             width: 100%;
             max-width: 520px;
+        }
+
+        @media(max-width: 768px) {
+            padding-top: 0;
+            margin-top: 40px;
+        }
+
+        @media(max-width: 500px) {
+            margin-top: 0;
         }
     }
 }
