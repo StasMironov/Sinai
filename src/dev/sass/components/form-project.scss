@@ -318,6 +318,14 @@
             color: white;
             transition: 400ms ease;
 
+            @media(max-width: 992px) {
+                padding: 20px 75px;
+            }
+
+            @media(max-width: 768px) {
+                padding: 30px 100px;
+            }
+
             &:disabled {
                 background-color: $gray-1;
                 color: $basic;
@@ -331,6 +339,14 @@
 
         .form-project__wrapper {
             padding: 16px 62px 21px;
+
+            @media(max-width: 1024px) {
+                padding: 16px 30px 21px;
+            }
+
+            @media(max-width: 992px) {
+                padding: 16px 15px 21px;
+            }
         }
 
         input {

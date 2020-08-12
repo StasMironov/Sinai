@@ -3,6 +3,10 @@
     margin: 0 auto;
     margin-top: 99px;
 
+    @media(max-width: 768px) {
+        margin: 45px auto 0;
+    }
+
     &__title {
         color: $basic;
         text-align: center;
@@ -14,10 +18,23 @@
         margin-top: 40px;
         background-color: white;
         box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.1);
+
+        @media(max-width: 1024px) {
+            margin-top: 30px;
+            padding-top: 30px;
+
+            @media(max-width: 768px) {
+                margin: 0 auto 0;
+            }
+        }
     }
 
     &__top {
         padding: 46px 61px 30px;
+
+        @media(max-width: 1024px) {
+            padding: 46px 30px 30px;
+        }
     }
 
     &__article {
@@ -28,5 +45,13 @@
         text-align: center;
         color: $black-1;
         padding: 0 61px 0;
+
+        @media(max-width: 1024px) {
+            padding: 0 30px 0;
+        }
+
+        @media(max-width: 1024px) {
+            padding: 0 15px;
+        }
     }
 }

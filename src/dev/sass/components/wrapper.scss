@@ -34,12 +34,85 @@
     }
 
     &--basic {
+        .wrapper__left {
+            margin-top: 0;
+
+            @media(max-width: 600px) {
+                padding: 12px 0;
+            }
+        }
+
+
+
         .project__box {
             margin-top: 0;
         }
 
         .project-period__slider {
             height: 595px;
+            // padding-bottom: 36px;
+
+            // @media(max-width: 1235px) {
+            //     height: 350px;
+            // }
+
+            @media(max-width: 1024px) {
+                height: 400px;
+            }
+
+            @media(max-width: 768px) {
+                height: 295px;
+            }
+
+            @media(max-width: 640px) {
+                height: 195px;
+            }
         }
+
+        .project-period {
+            @media(max-width: 640px) {
+                margin-top: 40px;
+            }
+        }
+
+        .project-period .inner-slider__in {
+            margin-top: auto !important;
+        }
+
+        .inner-slider__inner {
+            position: absolute;
+            bottom: 0;
+            z-index: 4;
+            right: 0;
+
+            @media(max-width: 640px) {
+                display: none;
+            }
+        }
+
+        .inner-slider__pagination {
+            position: relative;
+        }
+
+        .inner-slider__wrapper--build {
+            @media(max-width: 1235px) {
+                display: block;
+            }
+        }
+
+        .inner-slider__num {
+            @media (max-width: 1235px) {
+                color: white;
+                font-size: 50px;
+                line-height: 108%;
+                // /* font-size: 30px; */
+                // line-height: normal;
+                // /* letter-spacing: .3px; */
+                // /* font-weight: 400; */
+
+            }
+        }
+
+
     }
 }

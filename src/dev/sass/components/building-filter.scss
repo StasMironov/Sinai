@@ -96,7 +96,7 @@
         margin: auto;
         -webkit-box-sizing: border-box;
         box-sizing: border-box;
-        padding: 18px 18px 18px 26px;
+        padding: 18px 15px 18px 22px;
         min-height: auto;
         overflow: hidden;
         -webkit-transition: .2s ease-out;
@@ -160,7 +160,7 @@
         height: 100%;
         top: 0;
         bottom: 0;
-        padding: 18px 13px 18px 26px;
+        padding: 18px 13px 18px 22px;
         position: absolute;
         border: 2px solid #e1e1e1 !important;
         right: 0;
@@ -330,7 +330,7 @@
         &--cost {
             max-width: 208px;
             width: 100%;
-            padding-bottom: 10px;
+            padding-bottom: 19px;
 
             @media(max-width: 1024px) {
                 max-width: 190px;
@@ -437,6 +437,92 @@
 
         & input {
             display: none;
+        }
+    }
+
+    &--second-flats {
+
+        .building-filter__col {
+            &:not(:last-child) {
+                margin-right: 24px;
+
+                @media(max-width: 1235px) {
+                    margin-right: 10px;
+                }
+
+                @media(max-width: 992px) {
+                    margin-right: 0;
+                }
+            }
+        }
+
+        .building-filter__col--project {
+            max-width: 202px;
+            width: 100%;
+
+            @media(max-width: 1024px) {
+                max-width: 135px;
+            }
+        }
+
+        .building-filter__col--area {
+            max-width: 151px;
+            margin-right: 25px !important;
+
+            @media(max-width: 1235px) {
+                margin-right: 10px !important;
+            }
+
+            @media(max-width: 1024px) {
+                max-width: 135px;
+            }
+
+            @media(max-width: 992px) {
+                margin-right: 0 !important;
+            }
+        }
+
+        .building-filter__col--from {
+            max-width: 84px;
+            width: 100%;
+            margin-right: 12px !important;
+        }
+
+        .building-filter__col--to {
+            max-width: 84px;
+            width: 100%;
+        }
+
+        .building-filter__col--room {
+            max-width: 135px;
+            width: 100%;
+        }
+
+        .building-filter__col--plan {
+            max-width: 200px;
+            width: 100%;
+
+            @media(max-width: 1024px) {
+                max-width: 135px;
+            }
+        }
+
+        .building-filter__row {
+            &:last-child {
+                margin-top: 22px;
+            }
+        }
+
+        .building-filter__col--space {
+            margin-right: 41px !important;
+
+            @media(max-width: 1024px) {
+                margin-right: 20px !important;
+            }
+
+            @media(max-width: 992px) {
+                margin-right: 0 !important;
+            }
         }
     }
 }

@@ -194,6 +194,7 @@ block content
 									.flats-special__pay
 										.flats-special__word Ипотечный платеж
 										.flats-special__price <span>+6 200</span> р/мес.
+						.project-period__pagination
 			.flats-calc
 				.flats-calc__grid
 					.flats-calc__left
@@ -249,9 +250,9 @@ block content
 											<input type="hidden" name="send-savings" id="send-result-savings">
 							input(type="hidden")#calc-rezult
 						.flats-calc__special
-							.flats-calc__check
-								<input id="select1" type="checkbox" name="select" value="family">
-								<label for="select1">Семейная ипотека</label>
+							//- .flats-calc__check
+							//- 	<input id="select1" type="checkbox" name="select" value="family">
+							//- 	<label for="select1">Семейная ипотека</label>
 							.flats-calc__check
 								<input id="select2" type="checkbox" name="select2" value="savings" data-name="savings">
 								<label for="select2" >Есть материнский капитал</label>
@@ -353,7 +354,23 @@ block content
 							//- 						.form-project__link Нажимая кнопку, Вы принимаете условия <a href="javascript:void(0)">пользовательского соглашения.</a>
 							//- 					button(type='submit' disabled).form-project__btn
 							//- 						.btn__txt жду звонка
-	.b-container
+					.flats-calc__about.flats-calc__about--hidden
+							.flats-calc__unit
+								a(href="").btn.btn--decor
+									.btn__cover
+										.btn__button
+											.btn__line
+												+svg('arr')
+											.btn__figure
+												+svg('figure')
+												.btn__decor
+													+svg('arr')
+										.btn__button.btn__button--laptop 
+											+svg('phone')
+									.btn__txt заказать консультацию
+							.flats-calc__unit 
+								a(href="javascript:void(0);").link.link--underline Об ипотеке
+	.b-container.mf-bg
 		.wrapper.wrapper--basic
 			.wrapper__left
 				.menu-content
@@ -379,32 +396,33 @@ block content
 							li Test 2
 							li Test 3
 						.project__bloc
-							.project__img
-								img(src='./img/card/pic.jpg' alt='')
+							img(src='./img/card/pic.jpg' alt='')
 							.project__info Для удобства жильцов каждый подъезд оборудован 2 лифтами - пассажирским и грузовым, большая входная группа позволяет свободно разместить в коридоре велосипеды и коляски. В нашем доме нет мусоропровода. В нашем доме нет газового оборудования. Установка электрических плит позволяет использовать специальные тарифные планы по оплате за элетроэнергию.
 						.project__bloc
-							.project__img
-								img(src='./img/card/pic2.jpg' alt='')
+							img(src='./img/card/pic2.jpg' alt='')
 							.project__info На прилегающей к комплексу территории расположена удобная детская и спортивная площадка, на которой вы и ваши ваши дети могут с удовольствием проводить свободное время. В районе большое количество детских дошкольных, общеобразовательных и досуговых учреждений, школы по изучению иностранных языков.
 						.project__bloc
-							.project__img
-								img(src='./img/card/pic3.jpg' alt='')
+							img(src='./img/card/pic3.jpg' alt='')
 							.project__info На прилегающей к комплексу территории расположена удобная детская и спортивная площадка, на которой вы и ваши ваши дети могут с удовольствием проводить свободное время. В районе большое количество детских дошкольных, общеобразовательных и досуговых учреждений, школы по изучению иностранных языков.
-				.project-period(id="flat")
-					.project-period__slider
-						.swiper-wrapper
-							.swiper-slide(data-slide='1')
-								img(src='./img/card/pic4.jpg' alt='')
-							.swiper-slide(data-slide='2')
-								img(src='./img/card/pic2.jpg' alt='' )
-							.swiper-slide(data-slide='3')
-								img(src='./img/card/pic3.jpg' alt='' )
-						.project-period__wrapper.button
-							.inner-slider__in
-								.index-project__link.index-project__link--prev
-								.index-project__link.index-project__link--next
-						.project-period__pagination
-				.project__info Для удобства жильцов каждый подъезд оборудован 2 лифтами - пассажирским и грузовым, большая входная группа позволяет свободно разместить в коридоре велосипеды и коляски. В нашем доме нет мусоропровода. В нашем доме нет газового оборудования. Установка электрических плит позволяет использовать специальные тарифные планы по оплате за элетроэнергию
+						.project-period(id="flat")
+							.project-period__slider
+								.swiper-wrapper
+									.swiper-slide(data-slide='1')
+										img(src='./img/card/pic4.jpg' alt='')
+									.swiper-slide(data-slide='2')
+										img(src='./img/card/pic2.jpg' alt='' )
+									.swiper-slide(data-slide='3')
+										img(src='./img/card/pic3.jpg' alt='' )
+								.inner-slider__inner
+									.inner-slider__num
+									.inner-slider__wrapper.inner-slider__wrapper--build
+										.inner-slider__pagination.button
+											.inner-slider__in
+												.inner-slider__link.inner-slider__link--prev
+												.inner-slider__link.inner-slider__link--next
+								.project-period__pagination
+								.swiper-menu
+						p Для удобства жильцов каждый подъезд оборудован 2 лифтами - пассажирским и грузовым, большая входная группа позволяет свободно разместить в коридоре велосипеды и коляски. В нашем доме нет мусоропровода. В нашем доме нет газового оборудования. Установка электрических плит позволяет использовать специальные тарифные планы по оплате за элетроэнергию
 				div(style='height: 350px')
 
 										

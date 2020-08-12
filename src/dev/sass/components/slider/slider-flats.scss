@@ -30,7 +30,7 @@
         &--next {
             transform: scale(-1, 1);
 
-            @media(max-width: 500px) {  
+            @media(max-width: 500px) {
                 transform: rotate(-90deg);
             }
         }
@@ -41,14 +41,14 @@
             width: 13px;
             cursor: pointer;
 
-            @media(max-width: 500px) {  
+            @media(max-width: 500px) {
                 height: 17px;
                 width: 17px;
-            } 
+            }
         }
 
         &--prev {
-            @media(max-width: 500px) {  
+            @media(max-width: 500px) {
                 transform: rotate(90deg);
             }
         }
@@ -121,6 +121,7 @@
         display: flex;
         align-items: center;
         margin-top: 58px;
+        z-index: 10;
 
         @media(max-width: 1300px) {
             margin-top: 25px;

@@ -26,6 +26,9 @@
 
         &--laptop {
             display: none;
+            fill: none;
+            stroke: #d8bb54;
+            height: 22px;
 
             @media(max-width: 1024px) {
                 display: flex;

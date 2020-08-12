@@ -3,6 +3,30 @@ jQuery.fn.exists = function () {
     return $(this).length;
 }
 
+function ObjAd(element, place) {
+    let out = element;
+    document.querySelector(place).innerHTML = out;
+}
+
+if ($('#aside').exists()) {
+    try {
+        let adObj = `<div class="call-help"><div class="call-help__bloc"><div class="call-help__container"><div class="call-help__article">Не хочу искать, перезвоните мне</div>
+            <form class="form-project form-project--call" method="get"><div class="form-project__wrapper"><div class="form-project__box"><div class="form-project__group">
+            <div class="form-project__block"><input class="form-project__field" placeholder="Ваше имя" type="text" required></div><div class="form-project__block"><input class="form-project__field" placeholder="Ваша почта" type="text" required>
+            </div></div></div><div class="form-project__link">Нажимая кнопку, Вы принимаете условия <a href="javascript:void(0)">пользовательского соглашения.</a></div>
+            </div><button class="form-project__btn" type="submit" disabled><div class="btn__txt">жду звонка</div></button></form></div></div>`;
+
+        const breakpoint = window.matchMedia('(min-width:769px)');
+
+        if (breakpoint.matches === true) {
+            ObjAd(adObj, '#aside');
+        } else {
+            ObjAd(adObj, '#insert');
+        }
+    } catch (err) {
+        console.log(err);
+    }
+}
 
 $(() => {
 
@@ -121,7 +145,7 @@ $(() => {
             monthPay = Math.ceil(kofPay * sumLoan);
             //payment = percent + sumLoan + 
 
-            console.log(monthPay);
+            //console.log(monthPay);
         } else {
             kofPay = (percentRate * (Math.pow((1 + percentRate), periodLoan))) / ((Math.pow((1 + percentRate), periodLoan)) - 1);
             kofPay = kofPay.toFixed(5);
@@ -133,7 +157,7 @@ $(() => {
         // kofPay = kofPay.toFixed(5);
         // monthPay = Math.ceil(kofPay * sumLoan);
         // $('#calc-rezult').val(monthPay);
-        console.log(monthPay);
+        //console.log(monthPay);
         // console.log(priceFlat);
         // console.log(firstDonat);
         //console.log(monthPay);
@@ -215,11 +239,61 @@ $(() => {
     if ($('#plan-slider').exists()) {
         try {
             let planSlider = new Swiper('#plan-slider', {
+
                 spaceBetween: 20,
                 slidesPerView: 'auto',
+                loop: true,
+                autoHeight: true,
                 navigation: {
                     nextEl: '.index-project__link--pf_next',
                     prevEl: '.index-project__link--pf_prev'
+                },
+                pagination: {
+                    el: '.project-period__pagination',
+                    clickable: true
+                },
+                breakpoints: {
+                    1920: {
+                        spaceBetween: 20,
+                        slidesPerView: 4
+                    },
+                    1025: {
+                        spaceBetween: 20,
+                        slidesPerView: 4
+                    },
+                    1024: {
+                        slidesPerView: 2,
+                        spaceBetween: 20,
+                        // touchRatio: 1,
+                    },
+                    993: {
+                        slidesPerView: 2,
+                        spaceBetween: 20,
+                    },
+                    992: {
+                        slidesPerView: 1.4,
+                        spaceBetween: 20,
+                    },
+                    769: {
+                        slidesPerView: 1.4,
+                        spaceBetween: 20,
+                    },
+                    768: {
+                        slidesPerView: 2,
+                        spaceBetween: 20,
+                    },
+                    621: {
+                        slidesPerView: 2,
+                        spaceBetween: 20,
+                    },
+                    620: {
+                        slidesPerView: 1,
+                        spaceBetween: 20,
+                    },
+                    320: {
+                        slidesPerView: 1,
+                        spaceBetween: 20,
+                    }
                 }
             });
         } catch (err) {
@@ -284,7 +358,6 @@ $(() => {
 
     if ($('.partner__slider').exists()) {
         try {
-            console.log(true);
             let test = new Swiper('.partner__slider', {
                 spaceBetween: 110,
                 slidesPerView: 'auto',
@@ -434,7 +507,6 @@ $(() => {
                     var eh = $('.structure__note').outerHeight();
                     var dh = $(document).height();
                     if (wt + wh >= et || wh + wt == dh || eh + et < wh) {
-                        console.log('Элемент показан');
                         $("#map-projects").removeClass("map-fixed");
                         $('.structure__inner').addClass('map-end');
                     } else {
@@ -886,6 +958,8 @@ $(() => {
         });
     }
 
+
+
     if ($('.index-example').exists()) {
         createPag('.index-example');
     }
@@ -894,70 +968,77 @@ $(() => {
         createPag('.index-inner');
     }
 
-    $('.index-example .swiper-menu').on('click', '.swiper-menu__item', function () {
-        checkPag(this, projectCer);
-    });
+    // $('.project-period__slider .swiper-menu').on('click', '.swiper-menu__item', function () {
+    //     checkPag(this, projectCer);
+    // });
 
-    if ($('.index-example .swiper-menu').exists()) {
-        try {
-            $('.index-example .swiper-menu').on('click', '.swiper-menu__item', function () {
-                checkPag(this, projectCer);
-            });
-        } catch (err) {
-            console.log(err);
-        }
-    }
+    // $('.index-example .swiper-menu').on('click', '.swiper-menu__item', function () {
+    //     checkPag(this, projecPeriod);
+    // });
 
-    if ($('.swiper-menu').exists()) {
-        try {
-            $('.swiper-menu').on('click', '.swiper-menu__item', function () {
-                checkPag(this, projectImg);
-            });
-        } catch (err) {
-            console.log(err);
-        }
-    }
+    // if ($('.index-example .swiper-menu').exists()) {
+    //     try {
+    //         $('.index-example .swiper-menu').on('click', '.swiper-menu__item', function () {
+    //             checkPag(this, projectCer);
+    //         });
+    //     } catch (err) {
+    //         console.log(err);
+    //     }
+    // }
 
-    function checkPag(contecst, slider) {
-        let contecsts = contecst;
-        const index = $(contecsts).data('index');
-        slider.slideTo(index);
+    // if ($('.swiper-menu').exists()) {
+    //     try {
+    //         $('.swiper-menu').on('click', '.swiper-menu__item', function () {
+    //             checkPag(this, projectImg);
+    //         });
+    //     } catch (err) {
+    //         console.log(err);
+    //     }
+    // }
 
-        let temp = $(contecsts).attr('index', index);
-        for (let i = 0; i < temp.length; i++) {
+    // function checkPag(contecst, slider) {
+    //     let contecsts = contecst;
+    //     const index = $(contecsts).data('index');
+    //     slider.slideTo(index);
 
-            $(contecsts).closest('.swiper-wrapper').find('.swiper-menu').each(function () {
-                $(this).find('.swiper-menu__item').each(function () {
-                    if ($(this).data('index') != index) {
-                        $(this).removeClass('swiper-menu__item--active');
-                    } else {
-                        $(this).addClass('swiper-menu__item--active');
-                    }
-                });
-            });
-        }
-    }
+    //     let temp = $(contecsts).attr('index', index);
+    //     for (let i = 0; i < temp.length; i++) {
 
-    function createPag(block) {
-        let bloc = document.querySelector(block);
-        let qtySlide = projectImg.slides.length;
-        let parentEl = bloc.querySelectorAll('.swiper-menu');
+    //         $(contecsts).closest('.swiper-wrapper').find('.swiper-menu').each(function () {
+    //             $(this).find('.swiper-menu__item').each(function () {
+    //                 if ($(this).data('index') != index) {
+    //                     $(this).removeClass('swiper-menu__item--active');
+    //                 } else {
+    //                     $(this).addClass('swiper-menu__item--active');
+    //                 }
+    //             });
+    //         });
+    //     }
+    // }
 
-        if (qtySlide > 0) {
-            for (let i = 0; i < parentEl.length; i++) {
-                for (let j = 0; j < qtySlide; j++) {
-                    let itemSlide = document.createElement('div');
-                    itemSlide.classList.add('swiper-menu__item');
-                    itemSlide.setAttribute('data-index', j);
-                    parentEl[i].appendChild(itemSlide);
 
-                    if (j == 0) {
-                        itemSlide.classList.add('swiper-menu__item--active');
-                    }
-                }
-            }
-        }
-    }
+
+    // function createPag(block) {
+    //     console.log(block);
+    //     let bloc = document.querySelector(block);
+    //     let qtySlide = projectImg.slides.length;
+    //     let parentEl = bloc.querySelectorAll('.swiper-menu');
+
+    //     if (qtySlide > 0) {
+    //         for (let i = 0; i < parentEl.length; i++) {
+    //             for (let j = 0; j < qtySlide; j++) {
+    //                 let itemSlide = document.createElement('div');
+    //                 itemSlide.classList.add('swiper-menu__item');
+    //                 itemSlide.setAttribute('data-index', j);
+    //                 parentEl[i].appendChild(itemSlide);
+
+    //                 if (j == 0) {
+    //                     itemSlide.classList.add('swiper-menu__item--active');
+    //                 }
+    //             }
+    //         }
+    //     }
+    // }
 
     function getCoords(elem) {
         let box = elem[0].getBoundingClientRect();
@@ -1234,7 +1315,7 @@ $(() => {
             });
 
             $(this).next('.building-filter__select').mCustomScrollbar({
-                theme: "dark",
+                theme: "minimal-dark",
                 mouseWheelPixels: 90
             });
 
@@ -1312,10 +1393,13 @@ $(() => {
 
     if ($('.project-period__slider').exists()) {
         try {
+            console.log('777');
             var projecPeriod = new Swiper('.project-period__slider', {
+
+
                 slidesPerView: '1',
                 spaceBetween: 40,
-                effect: 'fade',
+                // effect: 'fade',
                 // autoplay: {
                 //     delay: 5000
                 // },
@@ -1323,18 +1407,30 @@ $(() => {
                     crossFade: true
                 },
                 pagination: {
-                    el: '.project-period__pagination',
-                    clickable: true
+                    el: '.inner-slider__num',
+                    type: "custom",
+                    renderCustom: function (swiper, current, total) {
+                        let i = current ? current : 0;
+                        return `<span>${("" + i).slice(-2)}</span>` +
+                            `/<span>${("" + total).slice(-2)}</span>`;
+                    },
                 },
+                // pagination: {
+                //     el: '.project-period__pagination',
+                //     clickable: true
+                // },
+
                 navigation: {
-                    nextEl: '.index-project__link.index-project__link--next',
-                    prevEl: '.index-project__link.index-project__link--prev'
+                    nextEl: '.inner-slider__link--next',
+                    prevEl: '.inner-slider__link--prev'
                 },
             });
         } catch (err) {
             console.log(err);
         }
     }
+
+
 
     if ($('.project-period__unit').exists()) {
         $('.project-period__unit').each(function () {
@@ -1434,27 +1530,37 @@ $(() => {
 
     $(window).on('resize load', function () {
         if ($(this).width() > 922) {
-            if ($('.menu-content').exists) {
-                try {
-                    let $window = $(window),
-                        $target = $(".menu-content__inner"),
-                        $h = $target.offset().top;
-                    $window.on('scroll', function () {
-                        let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-                        if (scrollTop > $h) {
-                            $target.addClass("mf-fixed");
-                            return;
-                        } else {
-                            $target.removeClass("mf-fixed");
-                        }
-                        return;
-                    });
-                } catch (err) {
-                    console.log(err);
-                }
-            }
+            fixBloc('.menu-content', '.menu-content__inner');
         }
     });
+
+    fixBloc('.structure__aside', '.structure__inner');
+
+
+    function fixBloc(bloc, target) {
+        if ($(bloc).exists) {
+            try {
+                let $window = $(window),
+                    $target = $(target),
+                    $h = $target.offset().top;
+                $window.on('scroll', function () {
+                    let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                    if (scrollTop > $h) {
+                        $target.addClass("mf-fixed");
+                        return;
+                    } else {
+                        $target.removeClass("mf-fixed");
+                    }
+                    return;
+                });
+            } catch (err) {
+                console.log(err);
+            }
+        }
+    }
+
+
+
 
     if ($('.project-map__item').exists()) {
         $('.project-map__item').each(function () {
@@ -1466,4 +1572,75 @@ $(() => {
             });
         });
     }
+
+
+    function createPag(block, swiperCont) {
+
+        let bloc = document.querySelector(block);
+        let qtySlide = swiperCont.slides.length;
+        let parentEl = bloc.querySelectorAll('.swiper-menu');
+
+
+        console.log(qtySlide);
+
+        if (qtySlide > 0) {
+            for (let i = 0; i < parentEl.length; i++) {
+                for (let j = 0; j < qtySlide; j++) {
+                    let itemSlide = document.createElement('div');
+                    itemSlide.classList.add('swiper-menu__item');
+                    itemSlide.setAttribute('data-index', j);
+                    parentEl[i].appendChild(itemSlide);
+
+                    if (j == 0) {
+                        itemSlide.classList.add('swiper-menu__item--active');
+                    }
+                }
+            }
+        }
+    }
+
+    function checkPag(contecst, slider) {
+        //console.log(contecst);
+        //console.log(slider);
+        let contecsts = contecst;
+        const index = $(contecsts).data('index');
+        slider.slideTo(index);
+
+        let temp = $(contecsts).attr('index', index);
+        // for (let i = 0; i < temp.length; i++) {
+
+        //     $(contecsts).closest('.swiper-wrapper').find('.swiper-menu').each(function () {
+        //         $(this).find('.swiper-menu__item').each(function () {
+        //             if ($(this).data('index') != index) {
+        //                 $(this).removeClass('swiper-menu__item--active');
+        //             } else {
+        //                 $(this).addClass('swiper-menu__item--active');
+        //             }
+        //         });
+        //     });
+        // }
+
+        console.log($(contecsts).closest('.swiper-menu').find('.swiper-menu__item'));
+
+        $(contecsts).closest('.swiper-menu').find('.swiper-menu__item').each(function () {
+            console.log($(this));
+            if ($(this).data('index') != index) {
+                $(this).removeClass('swiper-menu__item--active');
+            } else {
+                $(this).addClass('swiper-menu__item--active');
+            }
+        });
+
+
+
+    }
+
+    if ($('.project-period__slider').exists()) {
+        createPag('.project-period__slider', projecPeriod);
+    }
+    //console.log(projecPeriod);
+    $('.project-period__slider .swiper-menu').on('click', '.swiper-menu__item', function () {
+        checkPag(this, projecPeriod);
+        // console.log(projecPeriod);
+    });
 });

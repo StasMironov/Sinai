@@ -388,6 +388,9 @@ button {
   }
 }
 
+
+
+@import "./components/second-flats/second-flats.scss";
 @import "./components/content.scss";
 @import "./components/call-help.scss";
 @import "./components/flats/flats-card.scss";
@@ -433,3 +436,4 @@ button {
 @import "./components/btn.scss";
 @import "./components/logo.scss";
 @import "./components/link.scss";
+@import "./components/ad.scss";

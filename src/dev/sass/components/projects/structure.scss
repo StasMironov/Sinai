@@ -1,5 +1,23 @@
 .structure {
 
+    &__aside {
+        transition: 400ms ease;
+        min-height: 660px;
+        max-width: 387px;
+        min-width: 387px;
+
+        @media(max-width: 1024px) {
+            max-width: 335px;
+            min-width: 335px;
+            min-height: 615px;
+        }
+
+        @media(max-width: 992px) {
+            max-width: 270px;
+            min-height: 550px;
+        }
+    }
+
     &__bloc {
         @media(max-width: 768px) {
             max-width: 255px;
@@ -114,7 +132,6 @@
     &__inner {
         position: absolute;
         top: 0;
-        right: 0;
         height: 100%;
         width: inherit;
         max-height: calc(100vh - 60px);
@@ -415,6 +432,49 @@
         @media(max-width: 600px) {
             margin-top: 24px;
         }
+
+        &--content {
+            margin-top: 0;
+            justify-content: space-between;
+
+            .structure__right {
+                max-width: 387px;
+                width: 100%;
+
+                @media(max-width: 1024px) {
+                    max-width: 335px;
+                }
+
+                @media(max-width: 992px) {
+                    max-width: 270px;
+                }
+
+                @media(max-width: 768px) {
+                    display: none;
+                }
+
+                .call-help {
+                    margin-top: 0;
+
+                    @media(max-width: 600px) {
+                        margin: 24px auto 0;
+                    }
+                }
+
+                .call-help__bloc {
+                    margin-top: 0;
+                }
+            }
+
+            .structure__inner {
+                height: auto;
+                box-shadow: 0 0 30px rgba(0, 0, 0, .1);
+
+                .call-help__bloc {
+                    box-shadow: none;
+                }
+            }
+        }
     }
 
     &__right {
@@ -433,6 +493,10 @@
         height: 100%;
         // width: calc((100vw - 1280px)/2 + 527px);
         width: 100vh;
+
+        .structure__inner {
+            transform: none !important;
+        }
 
 
         #map-projects {
@@ -618,6 +682,45 @@
         @media(max-width: 600px) {
             display: block;
             max-width: 100%;
+        }
+    }
+
+    .filter-sort {
+        display: none;
+
+        @media(max-width: 600px) {
+            display: block;
+        }
+
+        &__case {
+            max-width: 100%;
+        }
+    }
+
+    &--content {
+        margin-top: 47px;
+
+        @media(max-width: 992px) {
+            margin-top: 30px;
+        }
+
+        .structure__container {
+            padding-top: 57px;
+            padding-bottom: 67px;
+        }
+
+        .structure__left {
+            max-width: 793px;
+            width: 100%;
+            margin-right: 20px;
+
+            @media(max-width: 768px) {
+                margin-right: 0;
+            }
+        }
+
+        .flats-basic__filter {
+            margin-bottom: 40px;
         }
     }
 }
