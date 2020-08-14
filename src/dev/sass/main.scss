@@ -389,7 +389,11 @@ button {
 }
 
 
+@import "./components/include-obj.scss";
 
+@import "./components/share-bloc.scss";
+@import "./components/card-flats/card-location.scss";
+@import "./components/card-flats/card-flats.scss";
 @import "./components/second-flats/second-flats.scss";
 @import "./components/content.scss";
 @import "./components/call-help.scss";

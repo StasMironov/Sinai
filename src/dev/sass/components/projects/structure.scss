@@ -723,4 +723,12 @@
             margin-bottom: 40px;
         }
     }
+
+    &--simple {
+        margin-top: 40px;
+
+        .structure__left {
+            max-width: 793px;
+        }
+    }
 }

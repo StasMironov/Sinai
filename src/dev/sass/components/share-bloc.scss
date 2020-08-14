@@ -1,0 +1,46 @@
+.share-bloc {
+    margin-top: 40px;
+
+    &__box {
+        display: flex;
+        align-items: center;
+    }
+
+    &__text {
+        font-style: normal;
+        font-weight: bold;
+        font-size: 20px;
+        line-height: 130%;
+        color: $black-1;
+        margin-right: 6px;
+    }
+
+    &__items {
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+    }
+
+    &__item {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 48px;
+        width: calc(25% - 24px);
+        margin-left: 24px;
+        max-width: 48px;
+        background-color: $black-1;
+        transition: 400ms ease;
+        cursor: pointer;
+
+        &:hover {
+            background-color: $ochre;
+        }
+
+        .b-svg {
+            height: 35px;
+            width: 35px;
+            fill: white;
+        }
+    }
+}

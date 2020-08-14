@@ -12,7 +12,7 @@ function ObjAd(element, place) {
 
 if ($('#aside').exists()) {
   try {
-    var adObj = "<div class=\"call-help\"><div class=\"call-help__bloc\"><div class=\"call-help__container\"><div class=\"call-help__article\">\u041D\u0435 \u0445\u043E\u0447\u0443 \u0438\u0441\u043A\u0430\u0442\u044C, \u043F\u0435\u0440\u0435\u0437\u0432\u043E\u043D\u0438\u0442\u0435 \u043C\u043D\u0435</div>\n            <form class=\"form-project form-project--call\" method=\"get\"><div class=\"form-project__wrapper\"><div class=\"form-project__box\"><div class=\"form-project__group\">\n            <div class=\"form-project__block\"><input class=\"form-project__field\" placeholder=\"\u0412\u0430\u0448\u0435 \u0438\u043C\u044F\" type=\"text\" required></div><div class=\"form-project__block\"><input class=\"form-project__field\" placeholder=\"\u0412\u0430\u0448\u0430 \u043F\u043E\u0447\u0442\u0430\" type=\"text\" required>\n            </div></div></div><div class=\"form-project__link\">\u041D\u0430\u0436\u0438\u043C\u0430\u044F \u043A\u043D\u043E\u043F\u043A\u0443, \u0412\u044B \u043F\u0440\u0438\u043D\u0438\u043C\u0430\u0435\u0442\u0435 \u0443\u0441\u043B\u043E\u0432\u0438\u044F <a href=\"javascript:void(0)\">\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044C\u0441\u043A\u043E\u0433\u043E \u0441\u043E\u0433\u043B\u0430\u0448\u0435\u043D\u0438\u044F.</a></div>\n            </div><button class=\"form-project__btn\" type=\"submit\" disabled><div class=\"btn__txt\">\u0436\u0434\u0443 \u0437\u0432\u043E\u043D\u043A\u0430</div></button></form></div></div>";
+    var adObj = "<div class=\"call-help call-help--search\"><div class=\"call-help__bloc\"><div class=\"call-help__container\"><div class=\"call-help__article\">\u041D\u0435 \u0445\u043E\u0447\u0443 \u0438\u0441\u043A\u0430\u0442\u044C, \u043F\u0435\u0440\u0435\u0437\u0432\u043E\u043D\u0438\u0442\u0435 \u043C\u043D\u0435</div>\n            <form class=\"form-project form-project--call\" method=\"get\"><div class=\"form-project__wrapper\"><div class=\"form-project__box\"><div class=\"form-project__group\">\n            <div class=\"form-project__block\"><input class=\"form-project__field\" placeholder=\"\u0412\u0430\u0448\u0435 \u0438\u043C\u044F\" type=\"text\" required></div><div class=\"form-project__block\"><input class=\"form-project__field\" placeholder=\"\u0412\u0430\u0448\u0430 \u043F\u043E\u0447\u0442\u0430\" type=\"text\" required>\n            </div></div></div><div class=\"form-project__link\">\u041D\u0430\u0436\u0438\u043C\u0430\u044F \u043A\u043D\u043E\u043F\u043A\u0443, \u0412\u044B \u043F\u0440\u0438\u043D\u0438\u043C\u0430\u0435\u0442\u0435 \u0443\u0441\u043B\u043E\u0432\u0438\u044F <a href=\"javascript:void(0)\">\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044C\u0441\u043A\u043E\u0433\u043E \u0441\u043E\u0433\u043B\u0430\u0448\u0435\u043D\u0438\u044F.</a></div>\n            </div><button class=\"form-project__btn\" type=\"submit\" disabled><div class=\"btn__txt\">\u0436\u0434\u0443 \u0437\u0432\u043E\u043D\u043A\u0430</div></button></form></div></div>";
     var breakpoint = window.matchMedia('(min-width:769px)');
 
     if (breakpoint.matches === true) {
@@ -198,6 +198,10 @@ $(function () {
     checkInput('#flats-savings', _min3, _max3, _slider3);
   }
 
+  $('#submit').on('click', function (event) {
+    event.preventDefault();
+    console.log($('.building-filter--second-flats'));
+  });
   $('[data-name="savings"]').on('click', function () {
     if ($(this).prop("checked")) {
       $('.flats-calc__row--savings').addClass('flats-calc__row--active');
@@ -1043,6 +1047,11 @@ $(function () {
     }
   });
 
+  if ($('#map-flat').exists()) {
+    L.mapbox.accessToken = 'pk.eyJ1IjoiYWRtaW5zaW5haSIsImEiOiJja2N2czJ2ejcwNzdoMzBtbDVneTh6NTNkIn0.pkiEoq-UDjbqvdDrB_zZCQ';
+    var map = L.mapbox.map('map-flat').setView([53.377120, 58.985550], 17).addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/light-v10'));
+  }
+
   if ($('#map').length > 0) {
     L.mapbox.accessToken = 'pk.eyJ1IjoiYWRtaW5zaW5haSIsImEiOiJja2N2czJ2ejcwNzdoMzBtbDVneTh6NTNkIn0.pkiEoq-UDjbqvdDrB_zZCQ';
     var map = L.mapbox.map('map').setView([53.377120, 58.985550], 17).addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/light-v10'));
@@ -1294,8 +1303,7 @@ $(function () {
         theme: "dark",
         mouseWheelPixels: 90
       });
-    }); //$('.project-period__bloc')
-
+    });
     $(document).click(function (e) {
       var elem = $('.filter-sort__case');
 
@@ -1311,7 +1319,7 @@ $(function () {
       var dataSlide = 0;
       $(this).on('click', function () {
         $('.filter-sort__text').text($(this).text());
-        $('.filter-sort__box').removeClass('filter-sort__box--active');
+        $('.filter-sort__case').removeClass('filter-sort__case--active');
         dataVal = $(this).find('input').data('period');
       });
     });
@@ -1341,10 +1349,10 @@ $(function () {
       var projecPeriod = new Swiper('.project-period__slider', {
         slidesPerView: '1',
         spaceBetween: 40,
-        // effect: 'fade',
-        // autoplay: {
-        //     delay: 5000
-        // },
+        effect: 'fade',
+        autoplay: {
+          delay: 5000
+        },
         fadeEffect: {
           crossFade: true
         },

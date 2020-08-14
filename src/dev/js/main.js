@@ -10,7 +10,7 @@ function ObjAd(element, place) {
 
 if ($('#aside').exists()) {
     try {
-        let adObj = `<div class="call-help"><div class="call-help__bloc"><div class="call-help__container"><div class="call-help__article">Не хочу искать, перезвоните мне</div>
+        let adObj = `<div class="call-help call-help--search"><div class="call-help__bloc"><div class="call-help__container"><div class="call-help__article">Не хочу искать, перезвоните мне</div>
             <form class="form-project form-project--call" method="get"><div class="form-project__wrapper"><div class="form-project__box"><div class="form-project__group">
             <div class="form-project__block"><input class="form-project__field" placeholder="Ваше имя" type="text" required></div><div class="form-project__block"><input class="form-project__field" placeholder="Ваша почта" type="text" required>
             </div></div></div><div class="form-project__link">Нажимая кнопку, Вы принимаете условия <a href="javascript:void(0)">пользовательского соглашения.</a></div>
@@ -196,6 +196,11 @@ $(() => {
         checkInput('#flats-savings', min, max, slider);
     }
 
+    $('#submit').on('click', function (event) {
+        event.preventDefault();
+        console.log($('.building-filter--second-flats'));
+    })
+
     $('[data-name="savings"]').on('click', function () {
         if ($(this).prop("checked")) {
             $('.flats-calc__row--savings').addClass('flats-calc__row--active');
@@ -234,7 +239,6 @@ $(() => {
             });
         });
     }
-
 
     if ($('#plan-slider').exists()) {
         try {
@@ -597,11 +601,8 @@ $(() => {
         });
     }
 
-
-
     lightGallery(document.getElementById('lightgallery-cer'));
     lightGallery(document.getElementById('certificate__gallery'));
-
 
     if ($('.index-content__txt').exists()) {
         try {
@@ -667,7 +668,6 @@ $(() => {
                     el: '.project-pagination',
                     clickable: true
                 },
-
             });
 
             let projectImg = new Swiper('.index-project__img', {
@@ -717,8 +717,6 @@ $(() => {
                     },
                 },
             });
-
-
         } catch (err) {
             console.log('Ошибка ' + err.name + ":" + err.message + "\n" + err.stack);
         }
@@ -835,11 +833,8 @@ $(() => {
 
     // });
 
-
     if ($('.index-news__slider').exists()) {
         try {
-
-
             var projectCer = new Swiper('.index-news__slider', {
                 slidesPerView: 'auto',
                 spaceBetween: 40,
@@ -958,8 +953,6 @@ $(() => {
         });
     }
 
-
-
     if ($('.index-example').exists()) {
         createPag('.index-example');
     }
@@ -1073,6 +1066,13 @@ $(() => {
             moveModal();
         }
     });
+
+    if ($('#map-flat').exists()) {
+        L.mapbox.accessToken = 'pk.eyJ1IjoiYWRtaW5zaW5haSIsImEiOiJja2N2czJ2ejcwNzdoMzBtbDVneTh6NTNkIn0.pkiEoq-UDjbqvdDrB_zZCQ';
+        var map = L.mapbox.map('map-flat')
+            .setView([53.377120, 58.985550], 17)
+            .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/light-v10'));
+    }
 
     if ($('#map').length > 0) {
         L.mapbox.accessToken = 'pk.eyJ1IjoiYWRtaW5zaW5haSIsImEiOiJja2N2czJ2ejcwNzdoMzBtbDVneTh6NTNkIn0.pkiEoq-UDjbqvdDrB_zZCQ';
@@ -1300,7 +1300,6 @@ $(() => {
         });
     }
 
-
     if ($('.building-filter__wrp').length > 0) {
         $('.building-filter__wrp').each(function () {
             $(this).on('click', function () {
@@ -1329,21 +1328,17 @@ $(() => {
         });
     }
 
-
     if ($('.filter-sort__wrp').length > 0) {
         $('.filter-sort__wrp').each(function () {
             $(this).on('click', function () {
                 $(this).parent().toggleClass('filter-sort__case--active');
             });
 
-
             $(this).next('.filter-sort__select').mCustomScrollbar({
                 theme: "dark",
                 mouseWheelPixels: 90
             });
-
         });
-        //$('.project-period__bloc')
 
         $(document).click(function (e) {
             var elem = $('.filter-sort__case');
@@ -1353,7 +1348,6 @@ $(() => {
         });
     }
 
-
     if ($('.filter-sort__unit').exists()) {
         $('.filter-sort__unit').each(function () {
 
@@ -1362,7 +1356,7 @@ $(() => {
 
             $(this).on('click', function () {
                 $('.filter-sort__text').text($(this).text());
-                $('.filter-sort__box').removeClass('filter-sort__box--active');
+                $('.filter-sort__case').removeClass('filter-sort__case--active');
 
                 dataVal = $(this).find('input').data('period');
             });
@@ -1395,14 +1389,12 @@ $(() => {
         try {
             console.log('777');
             var projecPeriod = new Swiper('.project-period__slider', {
-
-
                 slidesPerView: '1',
                 spaceBetween: 40,
-                // effect: 'fade',
-                // autoplay: {
-                //     delay: 5000
-                // },
+                effect: 'fade',
+                autoplay: {
+                    delay: 5000
+                },
                 fadeEffect: {
                     crossFade: true
                 },

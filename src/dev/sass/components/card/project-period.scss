@@ -242,4 +242,33 @@
         left: 0;
         right: 0;
     }
+
+    &--simple {
+        margin-top: 0;
+
+        .inner-slider__inner {
+            position: absolute;
+            bottom: 0;
+            z-index: 4;
+            right: 0;
+        }
+
+        .inner-slider__pagination {
+            position: relative;
+        }
+
+        .project-period__slider {
+            margin-top: 0;
+        }
+    }
+
+    &--big {
+        .project-period__slider {
+            height: 595px;
+
+            @media(max-width: 1600px) {
+                height: 490px;
+            }
+        }
+    }
 }

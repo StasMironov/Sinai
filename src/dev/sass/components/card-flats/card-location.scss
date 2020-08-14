@@ -1,0 +1,21 @@
+.card-location {
+    margin-top: 70px;
+
+    &__map {
+        margin-top: 32px;
+        height: 595px;
+
+        #map-flat {
+            height: 100%;
+        }
+    }
+
+    &__info {
+        margin-top: 24px;
+        line-height: 26px;
+    }
+
+    &__text {
+        color: $black-1;
+    }
+}

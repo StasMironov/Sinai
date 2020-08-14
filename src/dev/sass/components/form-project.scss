@@ -326,6 +326,10 @@
                 padding: 30px 100px;
             }
 
+            @media(max-width: 600px) {
+                padding: 20px 70px;
+            }
+
             &:disabled {
                 background-color: $gray-1;
                 color: $basic;
@@ -339,6 +343,7 @@
 
         .form-project__wrapper {
             padding: 16px 62px 21px;
+            width: 100%;
 
             @media(max-width: 1024px) {
                 padding: 16px 30px 21px;
