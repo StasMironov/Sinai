@@ -197,6 +197,11 @@ button {
     background-color: #d8bb54;
     opacity: .5 !important;
 
+    @media(max-width: 768px) {
+      width: 13px;
+      height: 13px;
+    }
+
     &:not(:last-child) {
       margin-right: 17px;
     }
@@ -248,11 +253,6 @@ button {
   background-size: contain;
   cursor: pointer;
 
-  &:hover .rect {
-    stroke: $ochre;
-    stroke-width: 2px;
-  }
-
   svg {
     transition: .5s;
     transition: 400ms ease;
@@ -267,10 +267,6 @@ button {
   }
 
   &--active {
-    &:hover .rect {
-      stroke: $black-1;
-      stroke-width: 2px;
-    }
 
     .rect {
       fill: $ochre;

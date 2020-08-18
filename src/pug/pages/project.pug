@@ -119,29 +119,29 @@ block content
 							.inner-slider__word Выбрать планировку
 				#structure
 				.project-map
-					.project-map__filter
+					.project-map__filter#colors
 						.project-map__item.project-map__item--active
-							<input id="radio-1" type="radio" name="radio" value="1" checked>
+							<input id="radio-1" type="radio" name="filters" value="all" checked>
 							<label for="radio-1">Все</label>
 						.project-map__item
 							.project-map__img
 								+svg('product')
-							<input id="radio-2" type="radio" name="radio" value="2" checked>
+							<input id="radio-2" type="radio" name="filters" value="products" checked>
 							<label for="radio-2">Продуктовый</label>
 						.project-map__item
 							.project-map__img
 								+svg('med')
-							<input id="radio-3" type="radio" name="radio" value="3" checked>
+							<input id="radio-3" type="radio" name="filters" value="mediacina" onclick='showStations();' checked>
 							<label for="radio-3">Медицина</label>
 						.project-map__item
 							.project-map__img
 								+svg('ost')
-							<input id="radio-4" type="radio" name="radio" value="4" checked>
+							<input id="radio-4" type="radio" name="filters" value="state" onclick='showStations();' checked>
 							<label for="radio-4">Остановка</label>
 						.project-map__item
 							.project-map__img
 								+svg('sport')
-							<input id="radio-5" type="radio" name="radio" value="5" checked>
+							<input id="radio-5" type="radio" name="filters" value="sport" onclick='showStations();' checked>
 							<label for="radio-5">Занятия спортом</label>
 						.project-map__item
 							.project-map__img

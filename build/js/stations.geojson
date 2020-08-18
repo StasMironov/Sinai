@@ -1,0 +1,41 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+		"type": "Feature",
+		"geometry": {
+			"type": "Point",
+			"coordinates": [58.985550, 53.377120]
+		},
+		"properties": {
+			"title": "Магазин",
+			"icon": {
+				"iconUrl": "../img/icon/marker/shop.png",
+				"iconSize": [50, 50],
+				"iconAnchor": [25, 25], 
+				"popupAnchor": [0, -25], 
+				"className": "marker"
+			},
+			"name": "products"
+		}
+	},
+	{
+		"type": "Feature",
+		"geometry": {
+			"type": "Point",
+			"coordinates": [58.988547, 53.376635]
+		},
+		"properties": {
+			"title": "Школа",
+			"icon": {
+				"iconUrl": "../img/icon/marker/school.png",
+				"iconSize": [50, 50], 
+				"iconAnchor": [25, 25],
+				"popupAnchor": [0, -25],
+				"className": "marker"
+			},
+			"name": "school"
+		}
+	}
+  ]
+}

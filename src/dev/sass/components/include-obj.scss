@@ -5,6 +5,10 @@
 
         .include-obj__title {
             margin-bottom: 40px;
+
+            @media(max-width: 600px) {
+                margin-bottom: 30px;
+            }
         }
     }
 }

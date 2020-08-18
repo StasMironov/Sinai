@@ -2,11 +2,20 @@
     &__date {
         letter-spacing: 1.3px;
         margin-top: 30px;
+
+        @media(max-width: 600px) {
+            margin-top: 8px;
+        }
     }
 
     &__box {
         display: flex;
         margin-top: 40px;
+
+        @media(max-width: 600px) {
+            margin-top: 25px;
+            align-items: baseline;
+        }
     }
 
     &__unit {
@@ -14,6 +23,11 @@
         line-height: 26px;
         text-align: right;
         letter-spacing: .3px;
+
+        @media(max-width: 600px) {
+            font-size: 12px;
+            line-height: 22px;
+        }
 
         &--price {
             position: relative;
@@ -23,6 +37,11 @@
             padding-right: 12px;
             margin-right: 12px;
             letter-spacing: 0;
+
+            @media(max-width: 600px) {
+                padding-right: 10px;
+                margin-right: 9px;
+            }
 
             &:after {
                 position: absolute;
@@ -34,6 +53,12 @@
                 bottom: 6px;
                 top: 0;
                 margin: auto;
+
+                @media(max-width: 600px) {
+                    width: 2px;
+                    height: 14px;
+                    bottom: -3px;
+                }
             }
         }
     }

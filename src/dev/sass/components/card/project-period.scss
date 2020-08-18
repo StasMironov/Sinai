@@ -269,6 +269,19 @@
             @media(max-width: 1600px) {
                 height: 490px;
             }
+
+            @media(max-width: 1235px) {
+                height: 400px;
+                padding-bottom: 35px;
+            }
+
+            @media(max-width: 1024px) {
+                height: 265px;
+            }
+
+            @media(max-width: 600px) {
+                height: 194px;
+            }
         }
     }
 }
