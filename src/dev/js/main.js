@@ -10,17 +10,12 @@ function ObjAd(element, place) {
 
 if ($('#aside').exists()) {
     try {
-        let adObj = `<div class="call-help call-help--search"><div class="call-help__bloc"><div class="call-help__container"><div class="call-help__article">Не хочу искать, перезвоните мне</div>
-            <form class="form-project form-project--call" method="get"><div class="form-project__wrapper"><div class="form-project__box"><div class="form-project__group">
-            <div class="form-project__block"><input class="form-project__field" placeholder="Ваше имя" type="text" required></div><div class="form-project__block"><input class="form-project__field" placeholder="Ваша почта" type="text" required>
-            </div></div></div><div class="form-project__link">Нажимая кнопку, Вы принимаете условия <a href="javascript:void(0)">пользовательского соглашения.</a></div>
-            </div><button class="form-project__btn" type="submit" disabled><div class="btn__txt">жду звонка</div></button></form></div></div>`;
-
+        let adObj = $('#aside').html();
+        console.log(adObj);
         const breakpoint = window.matchMedia('(min-width:769px)');
 
-        if (breakpoint.matches === true) {
-            ObjAd(adObj, '#aside');
-        } else {
+        if (!breakpoint.matches === true) {
+            $('#aside').html('');
             ObjAd(adObj, '#insert');
         }
     } catch (err) {
@@ -1188,121 +1183,84 @@ $(() => {
 
     }
 
-    // if ($('#map').length > 0) {
-    //     L.mapbox.accessToken = 'pk.eyJ1IjoiYWRtaW5zaW5haSIsImEiOiJja2N2czJ2ejcwNzdoMzBtbDVneTh6NTNkIn0.pkiEoq-UDjbqvdDrB_zZCQ';
-    //     let map = L.mapbox.map('map')
-    //         .setView([53.377120, 58.985550], 17)
-    //         .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/light-v10'));
-
-    //    // let myLayer = L.mapbox.featureLayer().addTo(map);
-
-    //     let places = {
-    //         type: 'FeatureCollection',
-    //         features: [{
-    //                 "type": "Feature",
-    //                 "geometry": {
-    //                     "type": "Point",
-    //                     "coordinates": [58.985550, 53.377120]
-    //                 },
-    //                 "properties": {
-    //                     "title": "Магазин",
-    //                     "icon": {
-    //                         "iconUrl": "../img/icon/marker/shop.png",
-    //                         "iconSize": [50, 50], // size of the icon
-    //                         "iconAnchor": [25, 25], // point of the icon which will correspond to marker's location
-    //                         "popupAnchor": [0, -25], // point from which the popup should open relative to the iconAnchor
-    //                         "className": "marker"
-    //                     },
-    //                     "name": "shop"
-    //                 }
-    //             },
-    //             {
-    //                 "type": "Feature",
-    //                 "geometry": {
-    //                     "type": "Point",
-    //                     "coordinates": [58.988547, 53.376635]
-    //                 },
-    //                 "properties": {
-    //                     "title": "Школа",
-    //                     "icon": {
-    //                         "iconUrl": "../img/icon/marker/school.png",
-    //                         "iconSize": [50, 50], // size of the icon
-    //                         "iconAnchor": [25, 25], // point of the icon which will correspond to marker's location
-    //                         "popupAnchor": [0, -25], // point from which the popup should open relative to the iconAnchor
-    //                         "className": "marker"
-    //                     },
-    //                     "name": "school"
-    //                 }
-    //             }
-    //         ]
-    //     };
-
-    //     // // Set a custom icon on each marker based on feature properties.
-    //     // myLayer.on('layeradd', function (e) {
-    //     //     let marker = e.layer,
-    //     //         feature = marker.feature,
-    //     //         name = marker.feature.properties['name'];
-    //     //     marker.setIcon(L.icon(feature.properties.icon));
-    //     //     console.log(marker);
-    //     // });
-
-    //     // // Add features to the map.
-    //     // myLayer.setGeoJSON(places);
-    // }
-
-
     if ($('#map').length > 0) {
         L.mapbox.accessToken = 'pk.eyJ1IjoiYWRtaW5zaW5haSIsImEiOiJja2N2czJ2ejcwNzdoMzBtbDVneTh6NTNkIn0.pkiEoq-UDjbqvdDrB_zZCQ';
         let map = L.mapbox.map('map')
-            .setView([53.377120, 58.985550], 17)
+            .setView([53.376457, 58.986727], 17.95)
             .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/light-v10'));
 
+        if (map.scrollWheelZoom) {
+            map.scrollWheelZoom.disable();
+        }
+
         let overlays = L.layerGroup().addTo(map);
-        let layers;
+        var layers;
+
 
         L.mapbox.featureLayer()
-            .loadURL('./js/stations.geojson')
+            .loadURL('./js/json/markers.geojson')
             .on('ready', function (e) {
                 layers = e.target;
                 showStations();
+                showAll();
             });
+
         let filters = document.getElementById('colors');
-        console.log(filters);
-
         let inputEl = filters.querySelectorAll('input');
-
 
         for (var i = 0; i < inputEl.length; i++) {
             inputEl[i].addEventListener('click', showStations);
         }
 
-        function showStations() {
+        function showAll() {
+            // then remove any previously-displayed marker groups
+            overlays.clearLayers();
+            // create a new marker group
+            var clusterGroup = new L.MarkerClusterGroup().addTo(overlays);
 
-            //console.log(inputEl);
-            var list = [];
+            layers.eachLayer(function (layer, index) {
+                let marker = layer;
+                let feature = marker.feature;
+                marker.setIcon(L.icon(feature.properties.icon));
+                clusterGroup.addLayer(layer);
+                L.layerGroup().addTo(map);
+            });
+        }
+
+        function showStations() {
+            let list = new Set();
+
             for (var i = 0; i < inputEl.length; i++) {
-                if (inputEl[i].checked) list.push(inputEl[i].value);
+                if (inputEl[i].checked) {
+                    console.log(list);
+                    list.add(inputEl[i].value);
+                }
             }
 
             // then remove any previously-displayed marker groups
             overlays.clearLayers();
             // create a new marker group
-            // var clusterGroup = new L.MarkerClusterGroup().addTo(overlays);
-            // and add any markers that fit the filtered criteria to that group.
-            layers.eachLayer(function (layer) {
-                console.log(layer.feature.properties.name);
-                if (list.indexOf(layer.feature.properties.name) !== -1) {
-                    //   clusterGroup.addLayer(layer);
-                    //L.layerGroup().addTo(map);
-                    alert(1);
+            var clusterGroup = new L.MarkerClusterGroup().addTo(overlays);
+
+            layers.eachLayer(function (layer, index) {
+
+                if (list.has(layer.feature.properties.name) == true) {
+                    let marker = layer;
+                    let feature = marker.feature;
+                    marker.setIcon(L.icon(feature.properties.icon));
+                    clusterGroup.addLayer(layer);
+                    L.layerGroup().addTo(map);
+                } else if (list.has('all') == true) {
+                    let marker = layer;
+                    let feature = marker.feature;
+                    marker.setIcon(L.icon(feature.properties.icon));
+                    clusterGroup.addLayer(layer);
+                    L.layerGroup().addTo(map);
                 }
             });
+
+
         }
-
-
-
-
-
     }
 
 
@@ -1737,9 +1695,11 @@ $(() => {
     if ($('.project-map__item').exists()) {
         $('.project-map__item').each(function () {
             $(this).on('click', function () {
-                $(this).find('input').prop('checked', true);
+                //  $(this).find('input').prop('checked', true);
                 if ($(this).find('input').is(':checked')) {
-                    $(this).addClass('project-map__item--active').siblings().removeClass('project-map__item--active');
+                    $(this).addClass('project-map__item--active');
+                } else {
+                    $(this).removeClass('project-map__item--active');
                 }
             });
         });

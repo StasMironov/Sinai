@@ -12,12 +12,12 @@ function ObjAd(element, place) {
 
 if ($('#aside').exists()) {
   try {
-    var adObj = "<div class=\"call-help call-help--search\"><div class=\"call-help__bloc\"><div class=\"call-help__container\"><div class=\"call-help__article\">\u041D\u0435 \u0445\u043E\u0447\u0443 \u0438\u0441\u043A\u0430\u0442\u044C, \u043F\u0435\u0440\u0435\u0437\u0432\u043E\u043D\u0438\u0442\u0435 \u043C\u043D\u0435</div>\n            <form class=\"form-project form-project--call\" method=\"get\"><div class=\"form-project__wrapper\"><div class=\"form-project__box\"><div class=\"form-project__group\">\n            <div class=\"form-project__block\"><input class=\"form-project__field\" placeholder=\"\u0412\u0430\u0448\u0435 \u0438\u043C\u044F\" type=\"text\" required></div><div class=\"form-project__block\"><input class=\"form-project__field\" placeholder=\"\u0412\u0430\u0448\u0430 \u043F\u043E\u0447\u0442\u0430\" type=\"text\" required>\n            </div></div></div><div class=\"form-project__link\">\u041D\u0430\u0436\u0438\u043C\u0430\u044F \u043A\u043D\u043E\u043F\u043A\u0443, \u0412\u044B \u043F\u0440\u0438\u043D\u0438\u043C\u0430\u0435\u0442\u0435 \u0443\u0441\u043B\u043E\u0432\u0438\u044F <a href=\"javascript:void(0)\">\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044C\u0441\u043A\u043E\u0433\u043E \u0441\u043E\u0433\u043B\u0430\u0448\u0435\u043D\u0438\u044F.</a></div>\n            </div><button class=\"form-project__btn\" type=\"submit\" disabled><div class=\"btn__txt\">\u0436\u0434\u0443 \u0437\u0432\u043E\u043D\u043A\u0430</div></button></form></div></div>";
+    var adObj = $('#aside').html();
+    console.log(adObj);
     var breakpoint = window.matchMedia('(min-width:769px)');
 
-    if (breakpoint.matches === true) {
-      ObjAd(adObj, '#aside');
-    } else {
+    if (!breakpoint.matches === true) {
+      $('#aside').html('');
       ObjAd(adObj, '#insert');
     }
   } catch (err) {
@@ -1162,102 +1162,72 @@ $(function () {
         flying = false;
       });
     }
-  } // if ($('#map').length > 0) {
-  //     L.mapbox.accessToken = 'pk.eyJ1IjoiYWRtaW5zaW5haSIsImEiOiJja2N2czJ2ejcwNzdoMzBtbDVneTh6NTNkIn0.pkiEoq-UDjbqvdDrB_zZCQ';
-  //     let map = L.mapbox.map('map')
-  //         .setView([53.377120, 58.985550], 17)
-  //         .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/light-v10'));
-  //    // let myLayer = L.mapbox.featureLayer().addTo(map);
-  //     let places = {
-  //         type: 'FeatureCollection',
-  //         features: [{
-  //                 "type": "Feature",
-  //                 "geometry": {
-  //                     "type": "Point",
-  //                     "coordinates": [58.985550, 53.377120]
-  //                 },
-  //                 "properties": {
-  //                     "title": "Магазин",
-  //                     "icon": {
-  //                         "iconUrl": "../img/icon/marker/shop.png",
-  //                         "iconSize": [50, 50], // size of the icon
-  //                         "iconAnchor": [25, 25], // point of the icon which will correspond to marker's location
-  //                         "popupAnchor": [0, -25], // point from which the popup should open relative to the iconAnchor
-  //                         "className": "marker"
-  //                     },
-  //                     "name": "shop"
-  //                 }
-  //             },
-  //             {
-  //                 "type": "Feature",
-  //                 "geometry": {
-  //                     "type": "Point",
-  //                     "coordinates": [58.988547, 53.376635]
-  //                 },
-  //                 "properties": {
-  //                     "title": "Школа",
-  //                     "icon": {
-  //                         "iconUrl": "../img/icon/marker/school.png",
-  //                         "iconSize": [50, 50], // size of the icon
-  //                         "iconAnchor": [25, 25], // point of the icon which will correspond to marker's location
-  //                         "popupAnchor": [0, -25], // point from which the popup should open relative to the iconAnchor
-  //                         "className": "marker"
-  //                     },
-  //                     "name": "school"
-  //                 }
-  //             }
-  //         ]
-  //     };
-  //     // // Set a custom icon on each marker based on feature properties.
-  //     // myLayer.on('layeradd', function (e) {
-  //     //     let marker = e.layer,
-  //     //         feature = marker.feature,
-  //     //         name = marker.feature.properties['name'];
-  //     //     marker.setIcon(L.icon(feature.properties.icon));
-  //     //     console.log(marker);
-  //     // });
-  //     // // Add features to the map.
-  //     // myLayer.setGeoJSON(places);
-  // }
-
+  }
 
   if ($('#map').length > 0) {
+    var showAll = function showAll() {
+      // then remove any previously-displayed marker groups
+      overlays.clearLayers(); // create a new marker group
+
+      var clusterGroup = new L.MarkerClusterGroup().addTo(overlays);
+      layers.eachLayer(function (layer, index) {
+        var marker = layer;
+        var feature = marker.feature;
+        marker.setIcon(L.icon(feature.properties.icon));
+        clusterGroup.addLayer(layer);
+        L.layerGroup().addTo(_map2);
+      });
+    };
+
     var showStations = function showStations() {
-      //console.log(inputEl);
-      var list = [];
+      var list = new Set();
 
       for (var i = 0; i < inputEl.length; i++) {
-        if (inputEl[i].checked) list.push(inputEl[i].value);
+        if (inputEl[i].checked) {
+          console.log(list);
+          list.add(inputEl[i].value);
+        }
       } // then remove any previously-displayed marker groups
 
 
       overlays.clearLayers(); // create a new marker group
-      // var clusterGroup = new L.MarkerClusterGroup().addTo(overlays);
-      // and add any markers that fit the filtered criteria to that group.
 
-      layers.eachLayer(function (layer) {
-        console.log(layer.feature.properties.name);
+      var clusterGroup = new L.MarkerClusterGroup().addTo(overlays);
+      layers.eachLayer(function (layer, index) {
+        if (list.has(layer.feature.properties.name) == true) {
+          var marker = layer;
+          var feature = marker.feature;
+          marker.setIcon(L.icon(feature.properties.icon));
+          clusterGroup.addLayer(layer);
+          L.layerGroup().addTo(_map2);
+        } else if (list.has('all') == true) {
+          var _marker = layer;
+          var _feature = _marker.feature;
 
-        if (list.indexOf(layer.feature.properties.name) !== -1) {
-          //   clusterGroup.addLayer(layer);
-          //L.layerGroup().addTo(map);
-          alert(1);
+          _marker.setIcon(L.icon(_feature.properties.icon));
+
+          clusterGroup.addLayer(layer);
+          L.layerGroup().addTo(_map2);
         }
       });
     };
 
     L.mapbox.accessToken = 'pk.eyJ1IjoiYWRtaW5zaW5haSIsImEiOiJja2N2czJ2ejcwNzdoMzBtbDVneTh6NTNkIn0.pkiEoq-UDjbqvdDrB_zZCQ';
 
-    var _map2 = L.mapbox.map('map').setView([53.377120, 58.985550], 17).addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/light-v10'));
+    var _map2 = L.mapbox.map('map').setView([53.376457, 58.986727], 17.95).addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/light-v10'));
+
+    if (_map2.scrollWheelZoom) {
+      _map2.scrollWheelZoom.disable();
+    }
 
     var overlays = L.layerGroup().addTo(_map2);
     var layers;
-    L.mapbox.featureLayer().loadURL('./js/stations.geojson').on('ready', function (e) {
+    L.mapbox.featureLayer().loadURL('./js/json/markers.geojson').on('ready', function (e) {
       layers = e.target;
       showStations();
+      showAll();
     });
     var filters = document.getElementById('colors');
-    console.log(filters);
     var inputEl = filters.querySelectorAll('input');
 
     for (var i = 0; i < inputEl.length; i++) {
@@ -1668,10 +1638,11 @@ $(function () {
   if ($('.project-map__item').exists()) {
     $('.project-map__item').each(function () {
       $(this).on('click', function () {
-        $(this).find('input').prop('checked', true);
-
+        //  $(this).find('input').prop('checked', true);
         if ($(this).find('input').is(':checked')) {
-          $(this).addClass('project-map__item--active').siblings().removeClass('project-map__item--active');
+          $(this).addClass('project-map__item--active');
+        } else {
+          $(this).removeClass('project-map__item--active');
         }
       });
     });
