@@ -6,6 +6,10 @@
     width: 100%;
 
     @media(max-width: 922px) {
+        margin-top: 15px;
+    }
+
+    @media(max-width: 922px) {
         max-width: 100%;
         min-width: 100%;
         min-height: auto;
