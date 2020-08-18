@@ -1,30 +1,31 @@
 "use strict";
 
-//===== Function check element ==========//
-jQuery.fn.exists = function () {
-  return $(this).length;
-};
+document.addEventListener("DOMContentLoaded", function (event) {
+  //===== Function check element ==========//
+  jQuery.fn.exists = function () {
+    return $(this).length;
+  };
 
-function ObjAd(element, place) {
-  var out = element;
-  document.querySelector(place).innerHTML = out;
-}
-
-if ($('#aside').exists()) {
-  try {
-    var adObj = $('#aside').html();
-    console.log(adObj);
-    var breakpoint = window.matchMedia('(min-width:769px)');
-
-    if (!breakpoint.matches === true) {
-      $('#aside').html('');
-      ObjAd(adObj, '#insert');
-    }
-  } catch (err) {
-    console.log(err);
+  function ObjAd(element, place) {
+    var out = element;
+    document.querySelector(place).innerHTML = out;
   }
-}
 
+  if ($('#aside').exists()) {
+    try {
+      var adObj = $('#aside').html();
+      console.log(adObj);
+      var breakpoint = window.matchMedia('(min-width:769px)');
+
+      if (!breakpoint.matches === true) {
+        $('#aside').html('');
+        ObjAd(adObj, '#insert');
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  }
+});
 $(function () {
   ScrollReveal({
     mobile: false
@@ -531,37 +532,7 @@ $(function () {
     } catch (err) {
       console.log(err);
     }
-  } // if ($('.group').length > 0) {
-  //     let temp = $('.group li')[$('.group li').length - 1];
-  //     $(temp).find('a').css('padding-right', '0px');
-  //     var $el, leftPos, newWidth,
-  //         $mainNav = $("#example-one");
-  //     $mainNav.append("<li id='magic-line'></li>");
-  //     var $magicLine = $("#magic-line");
-  //     $magicLine
-  //         .width($(".current_page_item").width())
-  //         .css("left", $(".current_page_item a").position().left)
-  //         .data("origLeft", $magicLine.position().left)
-  //         .data("origWidth", $magicLine.width());
-  //     $("#example-one li a").on('click', function () {
-  //         $el = $(this);
-  //         leftPos = $el.position().left;
-  //         newWidth = $el.parent().width();
-  //         $magicLine.stop().animate({
-  //             left: leftPos,
-  //             width: newWidth
-  //         });
-  //     });
-  //     $('.group li').each(function () {
-  //         $(this).on('click', function () {
-  //             $(this).find('input').prop('checked', true);
-  //             if ($(this).find('input').is(':checked')) {
-  //                 $(this).addClass('current_page_item').siblings().removeClass('current_page_item');
-  //             }
-  //         });
-  //     });
-  // }
-
+  }
 
   if ($('.filter-menu').length > 0) {
     var temp = $('.structure__menu li')[$('.group li').length - 1];
@@ -840,15 +811,14 @@ $(function () {
 
   if ($('.index__slider').exists()) {
     try {
-      var _breakpoint = window.matchMedia('(min-width:641px)');
-
+      var breakpoint = window.matchMedia('(min-width:641px)');
       var mySwiper;
 
       var breakpointChecker = function breakpointChecker() {
-        if (_breakpoint.matches === true) {
+        if (breakpoint.matches === true) {
           if (mySwiper !== undefined) mySwiper.destroy(true, true);
           return;
-        } else if (_breakpoint.matches === false) {
+        } else if (breakpoint.matches === false) {
           return enableSwiper();
         }
       };
@@ -886,8 +856,7 @@ $(function () {
         });
       };
 
-      _breakpoint.addListener(breakpointChecker);
-
+      breakpoint.addListener(breakpointChecker);
       breakpointChecker();
     } catch (err) {
       console.log(err);
@@ -1064,8 +1033,6 @@ $(function () {
     _map.scrollZoom.disable();
 
     _map.dragPan.disable();
-
-    _map.addControl(new mapboxgl.NavigationControl());
 
     var geoJson = {
       type: 'FeatureCollection',
@@ -1652,7 +1619,6 @@ $(function () {
     var bloc = document.querySelector(block);
     var qtySlide = swiperCont.slides.length;
     var parentEl = bloc.querySelectorAll('.swiper-menu');
-    console.log(qtySlide);
 
     if (qtySlide > 0) {
       for (var _i5 = 0; _i5 < parentEl.length; _i5++) {

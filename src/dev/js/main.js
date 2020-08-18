@@ -1,27 +1,29 @@
-//===== Function check element ==========//
-jQuery.fn.exists = function () {
-    return $(this).length;
-}
-
-function ObjAd(element, place) {
-    let out = element;
-    document.querySelector(place).innerHTML = out;
-}
-
-if ($('#aside').exists()) {
-    try {
-        let adObj = $('#aside').html();
-        console.log(adObj);
-        const breakpoint = window.matchMedia('(min-width:769px)');
-
-        if (!breakpoint.matches === true) {
-            $('#aside').html('');
-            ObjAd(adObj, '#insert');
-        }
-    } catch (err) {
-        console.log(err);
+document.addEventListener("DOMContentLoaded", function (event) {
+    //===== Function check element ==========//
+    jQuery.fn.exists = function () {
+        return $(this).length;
     }
-}
+
+    function ObjAd(element, place) {
+        let out = element;
+        document.querySelector(place).innerHTML = out;
+    }
+
+    if ($('#aside').exists()) {
+        try {
+            let adObj = $('#aside').html();
+            console.log(adObj);
+            const breakpoint = window.matchMedia('(min-width:769px)');
+
+            if (!breakpoint.matches === true) {
+                $('#aside').html('');
+                ObjAd(adObj, '#insert');
+            }
+        } catch (err) {
+            console.log(err);
+        }
+    }
+});
 
 $(() => {
 
@@ -499,7 +501,6 @@ $(() => {
                 if (scrollTop > $h) {
                     $target.addClass("map-fixed");
 
-
                     var wt = $(window).scrollTop();
                     var wh = $(window).height();
                     var et = $('.structure__note').offset().top;
@@ -512,7 +513,6 @@ $(() => {
                         $("#map-projects").addClass("map-fixed");
                         $('.structure__inner').removeClass('map-end');
                     }
-
                     return;
                 } else {
                     $target.removeClass("map-fixed");
@@ -523,43 +523,6 @@ $(() => {
             console.log(err);
         }
     }
-
-    // if ($('.group').length > 0) {
-    //     let temp = $('.group li')[$('.group li').length - 1];
-    //     $(temp).find('a').css('padding-right', '0px');
-
-
-    //     var $el, leftPos, newWidth,
-    //         $mainNav = $("#example-one");
-
-    //     $mainNav.append("<li id='magic-line'></li>");
-    //     var $magicLine = $("#magic-line");
-
-    //     $magicLine
-    //         .width($(".current_page_item").width())
-    //         .css("left", $(".current_page_item a").position().left)
-    //         .data("origLeft", $magicLine.position().left)
-    //         .data("origWidth", $magicLine.width());
-
-    //     $("#example-one li a").on('click', function () {
-    //         $el = $(this);
-    //         leftPos = $el.position().left;
-    //         newWidth = $el.parent().width();
-    //         $magicLine.stop().animate({
-    //             left: leftPos,
-    //             width: newWidth
-    //         });
-    //     });
-
-    //     $('.group li').each(function () {
-    //         $(this).on('click', function () {
-    //             $(this).find('input').prop('checked', true);
-    //             if ($(this).find('input').is(':checked')) {
-    //                 $(this).addClass('current_page_item').siblings().removeClass('current_page_item');
-    //             }
-    //         });
-    //     });
-    // }
 
     if ($('.filter-menu').length > 0) {
         let temp = $('.structure__menu li')[$('.group li').length - 1];
@@ -1079,7 +1042,6 @@ $(() => {
         map.scrollZoom.disable();
         map.dragPan.disable();
 
-        map.addControl(new mapboxgl.NavigationControl());
 
         let geoJson = {
             type: 'FeatureCollection',
@@ -1666,7 +1628,6 @@ $(() => {
 
     fixBloc('.structure__aside', '.structure__inner');
 
-
     function fixBloc(bloc, target) {
         if ($(bloc).exists) {
             try {
@@ -1689,9 +1650,6 @@ $(() => {
         }
     }
 
-
-
-
     if ($('.project-map__item').exists()) {
         $('.project-map__item').each(function () {
             $(this).on('click', function () {
@@ -1705,15 +1663,10 @@ $(() => {
         });
     }
 
-
     function createPag(block, swiperCont) {
-
         let bloc = document.querySelector(block);
         let qtySlide = swiperCont.slides.length;
         let parentEl = bloc.querySelectorAll('.swiper-menu');
-
-
-        console.log(qtySlide);
 
         if (qtySlide > 0) {
             for (let i = 0; i < parentEl.length; i++) {
@@ -1762,9 +1715,6 @@ $(() => {
                 $(this).addClass('swiper-menu__item--active');
             }
         });
-
-
-
     }
 
     if ($('.project-period__slider').exists()) {
