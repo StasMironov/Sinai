@@ -1264,10 +1264,15 @@ $(() => {
 
 
     if ($('#map-projects').length > 0) {
+
+        let centerMap = $('#map-projects').data('center');
+        // console.log(centerMap);
+
+
         let markerArr = [];
         mapboxgl.accessToken = 'pk.eyJ1IjoiYWRtaW5zaW5haSIsImEiOiJja2N2czJ2ejcwNzdoMzBtbDVneTh6NTNkIn0.pkiEoq-UDjbqvdDrB_zZCQ';
         let flying = false;
-        let mapCenter = [58.985550, 53.377120];
+        let mapCenter = centerMap;
         var map = new mapboxgl.Map({
             container: 'map-projects',
             style: 'mapbox://styles/mapbox/light-v10',
@@ -1282,153 +1287,137 @@ $(() => {
             showZoom: true
         });
 
-        map.addControl(nav, "top-left");
+        if ($('.structure__item').exists()) {
+            let temp = 0;
+            try {
+                $('.structure__item').each(function () {
+                    let coordinatesData = $(this).data('coordinates');
 
-        let geoJson = {
-            type: 'FeatureCollection',
-            features: [{
-                    "type": "Feature",
-                    "geometry": {
-                        "type": "Point",
-                        "coordinates": [58.985550, 53.377120]
-                    },
-                    "properties": {
-                        "title": "Магазин",
-                        "icon": {
-                            "iconUrl": "../img/icon/marker/house.png",
-                            "iconSize": [118, 118], // size of the icon
-                            "iconAnchor": [25, 25], // point of the icon which will correspond to marker's location
-                            "popupAnchor": [0, -25], // point from which the popup should open relative to the iconAnchor
-                            "className": "marker",
-                        }
-                    }
-                },
-                {
-                    "type": "Feature",
-                    "geometry": {
-                        "type": "Point",
-                        "coordinates": [59.089068, 53.379590]
-                    },
-                    "properties": {
-                        "title": "Школа",
-                        "icon": {
-                            "iconUrl": "../img/icon/marker/house.png",
-                            "iconSize": [118, 118], // size of the icon
-                            "iconAnchor": [25, 25], // point of the icon which will correspond to marker's location
-                            "popupAnchor": [0, -25], // point from which the popup should open relative to the iconAnchor
-                            "className": "marker",
-                        }
-                    }
-                },
-                {
-                    "type": "Feature",
-                    "geometry": {
-                        "type": "Point",
-                        "coordinates": [58.986310, 53.375217]
-                    },
-                    "properties": {
-                        "title": "Школа",
-                        "icon": {
-                            "iconUrl": "../img/icon/marker/house.png",
-                            "iconSize": [118, 118], // size of the icon
-                            "iconAnchor": [25, 25], // point of the icon which will correspond to marker's location
-                            "popupAnchor": [0, -25], // point from which the popup should open relative to the iconAnchor
-                            "className": "marker",
-                        }
-                    }
-                },
-                {
-                    "type": "Feature",
-                    "geometry": {
-                        "type": "Point",
-                        "coordinates": [58.987253, 53.376125]
-                    },
-                    "properties": {
-                        "title": "Школа",
-                        "icon": {
-                            "iconUrl": "../img/icon/marker/house.png",
-                            "iconSize": [118, 118], // size of the icon
-                            "iconAnchor": [25, 25], // point of the icon which will correspond to marker's location
-                            "popupAnchor": [0, -25], // point from which the popup should open relative to the iconAnchor
-                            "className": "marker",
-                        }
-                    }
-                }
-            ]
-        }
+                    var el = document.createElement('div');
+                    var doc = new DOMParser().parseFromString(
+                        '<svg width="80" height="80" viewBox="0 0 118 118" fill="none" xmlns="http://www.w3.org/2000/svg"><rect class="rect" y="59" width="83.4386" height="83.4386" transform="rotate(-45 0 59)" fill="#40424C"/><path d="M68.2258 75.368V45.0131C68.2258 44.0275 67.4259 43.2275 66.4402 43.2275H52.1556C51.1699 43.2275 50.37 44.0275 50.37 45.0131V75.368" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>                <path d="M50.3699 53.9409H43.2276C42.242 53.9409 41.442 54.7409 41.442 55.7265V75.3679" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>                <path d="M77.1537 75.3679V55.7265C77.1537 54.7409 76.3538 53.9409 75.3682 53.9409H68.2258" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M54.8339 68.2256H63.7618" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M61.9763 68.2256V75.3679" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M56.6195 75.3679V68.2256" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M55.7267 56.6194H62.869" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M55.7267 61.976H62.869" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M55.7267 51.2627H62.869" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M46.7988 61.976H50.37" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M46.7988 68.2256H50.37" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M68.2258 61.976H71.797" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M68.2258 68.2256H71.797" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/> <path d="M78.9393 75.3679H39.6565" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>', 'application/xml');
+                    el.appendChild(
+                        el.ownerDocument.importNode(doc.documentElement, true));
 
-        geoJson.features.forEach(function (marker) {
-            // create a DOM element for the marker
-            var el = document.createElement('div');
-            var doc = new DOMParser().parseFromString(
-                '<svg width="118" height="118" viewBox="0 0 118 118" fill="none" xmlns="http://www.w3.org/2000/svg"><rect class="rect" y="59" width="83.4386" height="83.4386" transform="rotate(-45 0 59)" fill="#40424C"/><path d="M68.2258 75.368V45.0131C68.2258 44.0275 67.4259 43.2275 66.4402 43.2275H52.1556C51.1699 43.2275 50.37 44.0275 50.37 45.0131V75.368" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>                <path d="M50.3699 53.9409H43.2276C42.242 53.9409 41.442 54.7409 41.442 55.7265V75.3679" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>                <path d="M77.1537 75.3679V55.7265C77.1537 54.7409 76.3538 53.9409 75.3682 53.9409H68.2258" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M54.8339 68.2256H63.7618" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M61.9763 68.2256V75.3679" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M56.6195 75.3679V68.2256" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M55.7267 56.6194H62.869" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M55.7267 61.976H62.869" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M55.7267 51.2627H62.869" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M46.7988 61.976H50.37" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M46.7988 68.2256H50.37" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M68.2258 61.976H71.797" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M68.2258 68.2256H71.797" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/> <path d="M78.9393 75.3679H39.6565" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>', 'application/xml');
-            el.appendChild(
-                el.ownerDocument.importNode(doc.documentElement, true));
-            el.className = 'marker';
-            el.style.width = marker.properties.icon.iconSize[0] + 'px';
-            el.style.height = marker.properties.icon.iconSize[1] + 'px';
+                    el.className = 'marker';
+                    markerArr.push(el);
 
-            el.addEventListener('click', function () {
-                window.location.href = this.getAttribute('data-href');
-            });
-
-            markerArr.push(el);
-            new mapboxgl.Marker(el)
-                .setLngLat(marker.geometry.coordinates) // sets a popup on this marker
-                .addTo(map);
-        });
-
-        let temp = 0;
-
-        if ($('.structure__item').length > 0) {
-            let idx = 0;
-            let projectsData = [];
-
-            $('.structure__item').each(function (i) {
-                markerArr[i].setAttribute('data-href', $(this).data('href'));
-
-                if ($(this).data('coordinates') != undefined) {
-                    projectsData.push($(this).data('coordinates'));
-                }
-
-
-                $(this).hover(function () {
-                    fly(i);
-                    temp = fly(i);
+                    new mapboxgl.Marker(el)
+                        .setLngLat(coordinatesData) // sets a popup on this marker
+                        .addTo(map);
                 });
-            });
 
-            map.on('moveend', function (e) {
-                if (flying) {
-                    markerArr[temp].classList.add('marker--active');
+                let projectsData = [];
 
-                    for (let i = 0; i < markerArr.length; i++) {
-                        if (i != temp) {
-                            markerArr[i].classList.remove('marker--active');
-                        }
+                $('.structure__item').each(function (i) {
+                    markerArr[i].setAttribute('data-href', $(this).data('href'));
+
+                    if ($(this).data('coordinates') != undefined) {
+                        projectsData.push($(this).data('coordinates'));
                     }
 
-                    map.fire('flyend');
-                }
-            });
-
-            map.on('flystart', function () {
-                flying = true;
-            });
-            map.on('flyend', function () {
-                flying = false;
-            });
-
-
-            function fly(i) {
-                map.flyTo({
-                    center: projectsData[i],
-                    essential: true // this animation is considered essential with respect to prefers-reduced-motion
+                    $(this).hover(function () {
+                        fly(i);
+                        temp = fly(i);
+                    });
                 });
-                map.fire('flystart');
-                return i;
+
+                map.on('moveend', function (e) {
+                    if (flying) {
+                        markerArr[temp].classList.add('marker--active');
+                        for (let i = 0; i < markerArr.length; i++) {
+                            if (i != temp) {
+                                markerArr[i].classList.remove('marker--active');
+                            }
+                        }
+                        map.fire('flyend');
+                    }
+                });
+
+                map.on('flystart', function () {
+                    flying = true;
+                });
+                map.on('flyend', function () {
+                    flying = false;
+                });
+
+                function fly(i) {
+                    map.flyTo({
+                        center: projectsData[i],
+                        zoom: 15.9,
+                        bearing: 0,
+                        essential: true // this animation is considered essential with respect to prefers-reduced-motion
+                    });
+                    map.fire('flystart');
+                    return i;
+                }
+
+                markerArr.forEach(element => {
+                    element.addEventListener('click', function () {
+                        let hrefPath = this.getAttribute('data-href');
+                        location = hrefPath;
+                    });
+                })
+
+            } catch (err) {
+                console.log(err);
             }
         }
+
+
+
+
+        // if ($('.structure__item').length > 0) {
+
+        //     let projectsData = [];
+
+        //     $('.structure__item').each(function (i) {
+        //         markerArr[i].setAttribute('data-href', $(this).data('href'));
+
+        //         if ($(this).data('coordinates') != undefined) {
+        //             projectsData.push($(this).data('coordinates'));
+        //         }
+
+
+        //         $(this).hover(function () {
+        //             fly(i);
+        //             temp = fly(i);
+        //         });
+        //     });
+
+        //     map.on('moveend', function (e) {
+        //         if (flying) {
+        //             markerArr[temp].classList.add('marker--active');
+
+        //             for (let i = 0; i < markerArr.length; i++) {
+        //                 if (i != temp) {
+        //                     markerArr[i].classList.remove('marker--active');
+        //                 }
+        //             }
+
+        //             map.fire('flyend');
+        //         }
+        //     });
+
+        //     map.on('flystart', function () {
+        //         flying = true;
+        //     });
+        //     map.on('flyend', function () {
+        //         flying = false;
+        //     });
+
+
+        //     function fly(i) {
+        //         map.flyTo({
+        //             center: projectsData[i],
+        //             essential: true // this animation is considered essential with respect to prefers-reduced-motion
+        //         });
+        //         map.fire('flystart');
+        //         return i;
+        //     }
+        // }
+
+
     }
 
     if ($('.form-project__field').exists) {
