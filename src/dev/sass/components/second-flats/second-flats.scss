@@ -60,6 +60,10 @@
             @media(max-width: 768px) {
                 flex-direction: row;
             }
+
+            @media(max-width: 600px) {
+                margin-top: 19px;
+            }
         }
 
         &--price {
@@ -69,22 +73,23 @@
             @media(max-width: 600px) {
                 margin-top: 7px;
                 padding: 9px 0 3px;
+                flex-direction: column !important;
             }
 
-            &:after {
-                @media(max-width: 600px) {
-                    position: absolute;
-                    content: "";
-                    height: 100%;
-                    background-color: $ochre-2;
-                    right: 0;
-                    top: 0;
-                    bottom: 0;
-                    left: -15px;
-                    width: calc(100% + 30px);
-                    z-index: -1;
-                }
-            }
+            // &:after {
+            //     @media(max-width: 600px) {
+            //         position: absolute;
+            //         content: "";
+            //         height: 100%;
+            //         background-color: $ochre-2;
+            //         right: 0;
+            //         top: 0;
+            //         bottom: 0;
+            //         left: -15px;
+            //         width: calc(100% + 30px);
+            //         z-index: -1;
+            //     }
+            // }
         }
     }
 
@@ -134,7 +139,28 @@
     }
 
     &__price {
+
         display: flex;
+
+        @media(max-width: 600px) {
+            position: relative;
+            padding: 7px 0 0px;
+        }
+
+        &:after {
+            @media(max-width: 600px) {
+                position: absolute;
+                content: "";
+                height: 100%;
+                background-color: $ochre-2;
+                right: 0;
+                top: 0;
+                bottom: 0;
+                left: -15px;
+                width: calc(100% + 30px);
+                z-index: -1;
+            }
+        }
     }
 
     &__adres {
@@ -181,7 +207,7 @@
 
                 @media(max-width: 600px) {
                     height: 15px;
-                    bottom: -5px;
+                    bottom: 0;
                 }
             }
         }
@@ -197,6 +223,16 @@
 
         span {
             font-weight: bold;
+        }
+    }
+
+    &__items {
+        max-height: 1856px;
+        overflow: auto;
+
+        @media(max-width: 768px) {
+            max-height: initial;
+            overflow: initial;
         }
     }
 
@@ -223,6 +259,20 @@
 
         &:last-child {
             border-bottom: none;
+            padding-bottom: 0;
+        }
+    }
+
+    &--land {
+        .second-flats__publish {
+            display: flex;
+            max-width: initial;
+        }
+
+        .second-flats__publish {
+            span {
+                margin-left: 5px;
+            }
         }
     }
 }

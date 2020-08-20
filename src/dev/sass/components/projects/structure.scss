@@ -321,7 +321,12 @@
 
     }
 
-    &__items {}
+    &__items {
+        &--projects {
+            max-height: 1208px;
+            overflow: auto;
+        }
+    }
 
     &__item {
         padding-bottom: 20px;
@@ -576,6 +581,7 @@
         align-items: center;
         margin-top: 37px;
         justify-content: space-between;
+        padding-left: 3px;
 
         @media(max-width: 1024px) {
             margin-top: 30px;
@@ -756,4 +762,6 @@
             max-width: 793px;
         }
     }
+
+
 }

@@ -193,10 +193,30 @@ $(() => {
         checkInput('#flats-savings', min, max, slider);
     }
 
-    $('#submit').on('click', function (event) {
-        event.preventDefault();
-        console.log($('.building-filter--second-flats'));
-    })
+    if ($('.structure__items--projects').exists()) {
+        $('.structure__items--projects').mCustomScrollbar({
+            theme: "minimal-dark",
+            mouseWheelPixels: 400
+        });
+    }
+
+    if ($('.second-flats__items').exists()) {
+        $(window).on('resize load', function () {
+            if ($(this).width() >= 768) {
+                $('.second-flats__items').mCustomScrollbar({
+                    theme: "minimal-dark",
+                    mouseWheelPixels: 400
+                });
+            }
+        });
+
+
+    }
+
+    // $('#submit').on('click', function (event) {
+    //     event.preventDefault();
+    //     console.log($('.building-filter--second-flats'));
+    // })
 
     $('[data-name="savings"]').on('click', function () {
         if ($(this).prop("checked")) {
@@ -473,6 +493,12 @@ $(() => {
         rangeSlider('#area', min, max, 10, '#send-result-area', '.building-filter__col');
     }
 
+    if ($('#distance').exists()) {
+        let min = $('#distance').closest('.building-filter__col').find('.building-filter__range').data('min');
+        let max = $('#distance').closest('.building-filter__col').find('.building-filter__range').data('max');
+        rangeSlider('#distance', min, max, 10, '#send-result-distance', '.building-filter__col');
+    }
+
     if ($('.burger-filter').exists()) {
         $('.burger-filter').on('click', function () {
             $(this).toggleClass('burger-filter--active');
@@ -491,37 +517,50 @@ $(() => {
         $('.structure__menu').width($('.structure__items').width());
     });
 
-    if ($('.structure__right').exists) {
+    if ($('.structure__map--projects').exists()) {
         try {
-            let $window = $(window),
-                $target = $("#map-projects"),
-                $h = $target.offset().top;
-            $window.on('scroll', function () {
-                let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-                if (scrollTop > $h) {
-                    $target.addClass("map-fixed");
-
-                    var wt = $(window).scrollTop();
-                    var wh = $(window).height();
-                    var et = $('.structure__note').offset().top;
-                    var eh = $('.structure__note').outerHeight();
-                    var dh = $(document).height();
-                    if (wt + wh >= et || wh + wt == dh || eh + et < wh) {
-                        $("#map-projects").removeClass("map-fixed");
-                        $('.structure__inner').addClass('map-end');
-                    } else {
-                        $("#map-projects").addClass("map-fixed");
-                        $('.structure__inner').removeClass('map-end');
-                    }
-                    return;
-                } else {
-                    $target.removeClass("map-fixed");
-                }
-                return;
-            });
+            fixMap('#map-projects', '.structure__note', '.structure__inner');
         } catch (err) {
             console.log(err);
         }
+    }
+
+    if ($('.structure__map--step-build').exists()) {
+        try {
+            fixMap('#map-projects', '.mf-edge', '.structure__inner');
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
+    function fixMap(map, edge, parentMap) {
+        let $window = $(window),
+            $target = $(map),
+            $h = $target.offset().top;
+
+        $window.on('scroll', function () {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            if (scrollTop > $h) {
+                $target.addClass("map-fixed");
+
+                var wt = $(window).scrollTop();
+                var wh = $(window).height();
+                var et = $(edge).offset().top;
+                var eh = $(edge).outerHeight();
+                var dh = $(document).height();
+                if (wt + wh >= et || wh + wt == dh || eh + et < wh) {
+                    $(map).removeClass("map-fixed");
+                    $(parentMap).addClass('map-end');
+                } else {
+                    $(map).addClass("map-fixed");
+                    $(parentMap).removeClass('map-end');
+                }
+                return;
+            } else {
+                $target.removeClass("map-fixed");
+            }
+            return;
+        });
     }
 
     if ($('.filter-menu').length > 0) {
@@ -1071,7 +1110,7 @@ $(() => {
                 '<svg width="118" height="118" viewBox="0 0 118 118" fill="none" xmlns="http://www.w3.org/2000/svg"><rect class="rect" y="59" width="83.4386" height="83.4386" transform="rotate(-45 0 59)" fill="#40424C"/><path d="M68.2258 75.368V45.0131C68.2258 44.0275 67.4259 43.2275 66.4402 43.2275H52.1556C51.1699 43.2275 50.37 44.0275 50.37 45.0131V75.368" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>                <path d="M50.3699 53.9409H43.2276C42.242 53.9409 41.442 54.7409 41.442 55.7265V75.3679" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>                <path d="M77.1537 75.3679V55.7265C77.1537 54.7409 76.3538 53.9409 75.3682 53.9409H68.2258" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M54.8339 68.2256H63.7618" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M61.9763 68.2256V75.3679" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M56.6195 75.3679V68.2256" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M55.7267 56.6194H62.869" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M55.7267 61.976H62.869" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M55.7267 51.2627H62.869" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M46.7988 61.976H50.37" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M46.7988 68.2256H50.37" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M68.2258 61.976H71.797" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M68.2258 68.2256H71.797" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/> <path d="M78.9393 75.3679H39.6565" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>', 'application/xml');
             el.appendChild(
                 el.ownerDocument.importNode(doc.documentElement, true));
-            el.className = 'marker';
+            el.className = 'marker marker--basic';
             el.style.width = marker.properties.icon.iconSize[0] + 'px';
             el.style.height = marker.properties.icon.iconSize[1] + 'px';
 
@@ -1081,9 +1120,9 @@ $(() => {
                 });
             });
 
-            $(el).hover(function () {
-                $(this).toggleClass('marker--active');
-            });
+            // $(el).hover(function () {
+            //     $(this).toggleClass('marker--active');
+            // });
 
             markerArr.push(el);
             new mapboxgl.Marker(el)
@@ -1158,9 +1197,8 @@ $(() => {
         let overlays = L.layerGroup().addTo(map);
         var layers;
 
-
         L.mapbox.featureLayer()
-            .loadURL('./js/json/markers.geojson')
+            .loadURL('./js/json/markers-project.geojson')
             .on('ready', function (e) {
                 layers = e.target;
                 showStations();
@@ -1220,8 +1258,6 @@ $(() => {
                     L.layerGroup().addTo(map);
                 }
             });
-
-
         }
     }
 
@@ -1290,6 +1326,23 @@ $(() => {
                     "geometry": {
                         "type": "Point",
                         "coordinates": [58.986310, 53.375217]
+                    },
+                    "properties": {
+                        "title": "Школа",
+                        "icon": {
+                            "iconUrl": "../img/icon/marker/house.png",
+                            "iconSize": [118, 118], // size of the icon
+                            "iconAnchor": [25, 25], // point of the icon which will correspond to marker's location
+                            "popupAnchor": [0, -25], // point from which the popup should open relative to the iconAnchor
+                            "className": "marker",
+                        }
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [58.987253, 53.376125]
                     },
                     "properties": {
                         "title": "Школа",

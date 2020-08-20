@@ -5,6 +5,10 @@
     &__map {
         height: 478px;
         margin-top: 50px;
+
+        .leaflet-control-container {
+            display: none;
+        }
     }
 
     &__filter {

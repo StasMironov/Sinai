@@ -7,12 +7,12 @@ block variables
 block content
 	.flats-filter.mf-margin
 		.flats-filter__container.b-container
-			.flats-filter__title.title-1 Продажа вторичного жилья
+			.flats-filter__title.title-1 Продажа земельного участка
 			.burger-filter
 				span.line
 				span.line
 				span.line
-			form(method="get").building-filter.building-filter--second-flats
+			form(method="get").building-filter.building-filter--second-flats.building-filter--land-point
 				.building-filter__row
 					.building-filter__col.building-filter__col--project
 						.building-filter__header Тип объекта
@@ -37,98 +37,6 @@ block content
 									.building-filter__unit
 										<input id="type4" type="radio" name="type" value="улица имени Газеты Правда, 79">
 										<label for="type4" title="улица имени Газеты Правда, 79">улица имени Газеты Правда, 79</label>
-					.building-filter__col.building-filter__col--area
-						.building-filter__header Район
-						.building-filter__box
-							.building-filter__case
-								.building-filter__wrp
-									.building-filter__text Район
-									.building-filter__img
-										<svg width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-											<path d="M1 5L5.24264 9.24264L9.48528 5" stroke="#1E202C" stroke-width="1.5"/>
-										</svg>
-								.building-filter__select
-									.building-filter__unit
-										<input id="period1" type="radio" name="period" value="2020" checked>
-										<label for="period1" type="radio" title="2020">2020</label>
-									.building-filter__unit
-										<input id="period2" type="radio" name="period" value="2019">
-										<label for="period2" title="2019">2019</label>
-									.building-filter__unit
-										<input id="period3" type="radio" name="period" value="2018">
-										<label for="period3" title="2018">2018</label>
-									.building-filter__unit
-										<input id="period4" type="radio" name="period" value="2017">
-										<label for="period4" title="2017">2017</label>
-					.building-filter__col.building-filter__col--from
-						.building-filter__header Этаж от
-						.building-filter__box
-							.building-filter__case
-								.building-filter__wrp
-									.building-filter__text 1
-									.building-filter__img
-										<svg width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-											<path d="M1 5L5.24264 9.24264L9.48528 5" stroke="#1E202C" stroke-width="1.5"/>
-										</svg>
-								.building-filter__select
-									.building-filter__unit
-										<input id="floor1" type="radio" name="floor" value="1" checked>
-										<label for="floor1" type="radio" title="1">1</label>
-									.building-filter__unit
-										<input id="floor2" type="radio" name="floor" value="2">
-										<label for="floor2" title="2">2</label>
-									.building-filter__unit
-										<input id="floor3" type="radio" name="floor" value="3">
-										<label for="floor3" title="3">3</label>
-									.building-filter__unit
-										<input id="floor4" type="radio" name="floor" value="4">
-										<label for="floor4" title="4">4</label>
-					.building-filter__col.building-filter__col--to
-						.building-filter__header Этаж до
-						.building-filter__box
-							.building-filter__case
-								.building-filter__wrp
-									.building-filter__text 1
-									.building-filter__img
-										<svg width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-											<path d="M1 5L5.24264 9.24264L9.48528 5" stroke="#1E202C" stroke-width="1.5"/>
-										</svg>
-								.building-filter__select
-									.building-filter__unit
-										<input id="period1" type="radio" name="floor-to" value="1" checked>
-										<label for="period1" type="radio" title="1">1</label>
-									.building-filter__unit
-										<input id="period2" type="radio" name="floor-to" value="2">
-										<label for="period2" title="2">2</label>
-									.building-filter__unit
-										<input id="period3" type="radio" name="floor-to" value="3">
-										<label for="period3" title="3">3</label>
-									.building-filter__unit
-										<input id="period4" type="radio" name="floor-to" value="4">
-										<label for="period4" title="4">4</label>
-					.building-filter__col.building-filter__col--room
-						.building-filter__header Комнат
-						.building-filter__box
-							.building-filter__case
-								.building-filter__wrp
-									.building-filter__text Комнат
-									.building-filter__img
-										<svg width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-											<path d="M1 5L5.24264 9.24264L9.48528 5" stroke="#1E202C" stroke-width="1.5"/>
-										</svg>
-								.building-filter__select
-									.building-filter__unit
-										<input id="room1" type="radio" name="room" value="1" checked>
-										<label for="room1">1</label>
-									.building-filter__unit
-										<input id="room2" type="radio" name="room" value="2">
-										<label for="room2">2</label>
-									.building-filter__unit
-										<input id="room3" type="radio" name="room" value="3">
-										<label for="room3">3</label>
-									.building-filterroomt
-										<input id="room4" type="radio" name="room" value="4">
-										<label for="room4">4</label>
 					.building-filter__col.building-filter__col--cost
 						.building-filter__header Цена
 						.building-filter__range(data-min="1500000" data-max="13500000")
@@ -136,62 +44,46 @@ block content
 							.building-filter__low
 						div#cost
 						<input type="hidden" name="send-cost" id="send-result-сost" />
-					.building-filter__col.building-filter__col--plan
-						.building-filter__header Планировка
+					.building-filter__col.building-filter__col--type
+						.building-filter__header Категория земель
 						.building-filter__box
 							.building-filter__case
 								.building-filter__wrp
-									.building-filter__text Планировка
+									.building-filter__text Все
 									.building-filter__img
 										<svg width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
 											<path d="M1 5L5.24264 9.24264L9.48528 5" stroke="#1E202C" stroke-width="1.5"/>
 										</svg>
 								.building-filter__select
 									.building-filter__unit
-										<input id="plan1" type="radio" name="plan" value="2020" checked>
-										<label for="plan1" type="radio" title="2020">2020</label>
+										<input id="category1" type="radio" name="category" value="Завенягина 1/2" checked>
+										<label for="category1" title="Завенягина 1">Завенягина 1/2</label>
 									.building-filter__unit
-										<input id="plan2" type="radio" name="plan" value="2019">
-										<label for="plan2" title="2019">2019</label>
+										<input id="category2" type="radio" name="category" value="улица имени Газеты Правда, 79">
+										<label for="category2" title="улица имени Газеты Правда, 79">улица имени Газеты Правда, 79</label>
 									.building-filter__unit
-										<input id="plan3" type="radio" name="plan" value="2018">
-										<label for="plan3" title="2018">2018</label>
+										<input id="category3" type="radio" name="category" value="Завенягина 1/2" checked>
+										<label for="category3" title="Завенягина 1">Завенягина 1/2</label>
 									.building-filter__unit
-										<input id="plan4" type="radio" name="plan" value="2017">
-										<label for="plan4" title="2017">2017</label>
-				.building-filter__row
-					.building-filter__col.building-filter__col--project
-						.building-filter__header Особенности
-						.building-filter__box
-							.building-filter__case
-								.building-filter__wrp
-									.building-filter__text Особенности
-									.building-filter__img
-										<svg width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-											<path d="M1 5L5.24264 9.24264L9.48528 5" stroke="#1E202C" stroke-width="1.5"/>
-										</svg>
-								.building-filter__select
-									.building-filter__unit
-										<input id="area1" type="radio" name="area" value="Все" checked>
-										<label for="area1">Все</label>
-									.building-filter__unit
-										<input id="area2" type="radio" name="area" value="Старт продаж">
-										<label for="area2">Старт продаж</label>
-									.building-filter__unit
-										<input id="area3" type="radio" name="area" value="Строительство">
-										<label for="area3">Строительство</label>
-									.building-filter__unit
-										<input id="area4" type="radio" name="area"  value="Завершенные">
-										<label for="area4">Завершенные</label>
-					.building-filter__col.building-filter__col--cost.building-filter__col--space
-						.building-filter__header Площадь
+										<input id="category4" type="radio" name="category" value="улица имени Газеты Правда, 79">
+										<label for="category4" title="улица имени Газеты Правда, 79">улица имени Газеты Правда, 79</label>
+					.building-filter__col.building-filter__col--cost
+						.building-filter__header Площадь, сот.
 						.building-filter__range(data-min="0" data-max="100")
 							.building-filter__up
 							.building-filter__low
 						div#area
 						<input type="hidden" name="send-area" id="send-result-area" />
+					.building-filter__col.building-filter__col--cost.building-filter__col--distance
+						.building-filter__header Расстояние до города, км.
+						.building-filter__range(data-min="0" data-max="200")
+							.building-filter__up
+							.building-filter__low
+						div#distance
+						<input type="hidden" name="send-distance" id="send-result-distance" />
+				.building-filter__row
 					.building-filter__button
-						.building-filter__txt Свободно <span>55</span> квартир
+						.building-filter__txt Свободно <span>55</span> участков
 						button.btn.btn--decor#submit
 							.btn__cover
 								.btn__button
@@ -266,77 +158,65 @@ block content
 					.flats-basic__text Сбросить фильтр
 			.structure__wrapper.structure__wrapper--content
 				.structure__left
-					.second-flats
+					.second-flats.second-flats--land
 						.second-flats__items
 							a(href="javascript:void(0);").second-flats__item
 								.second-flats__pic
-									img(src="./img/card/pic5.jpg" alt="")
+									img(src="./img/card/pic6.jpg" alt="")
 								.second-flats__content
 									.second-flats__box
 										.second-flats__bloc
 											.second-flats__area.title-3 1-к квартира, 23,5 м<sup>2</sup>
 											.second-flats__adres г. Магнитогорск, ул. Завенягина 123/2 р-н Орджоникидзевский
-										.second-flats__bloc.second-flats__bloc--floor
-											.second-flats__num 8/9 эт.
 									.second-flats__box.second-flats__box--price
 										.second-flats__price
 											.second-flats__unit.second-flats__unit--price 1 250 000 руб. 
 											.second-flats__unit 15 234 руб. за м<sup>2</sup>
 										.second-flats__wrp
 											.second-flats__publish дата публикации: <span>1 ч. назад</span>
-											.second-flats__num.second-flats__num--hide 8/9 эт
 							div#insert
 							a(href="javascript:void(0);").second-flats__item
 								.second-flats__pic
-									img(src="./img/card/pic5.jpg" alt="")
+									img(src="./img/card/pic6.jpg" alt="")
 								.second-flats__content
 									.second-flats__box
 										.second-flats__bloc
 											.second-flats__area.title-3 1-к квартира, 23,5 м<sup>2</sup>
 											.second-flats__adres г. Магнитогорск, ул. Завенягина 123/2 р-н Орджоникидзевский
-										.second-flats__bloc.second-flats__bloc--floor
-											.second-flats__num 8/9 эт.
 									.second-flats__box.second-flats__box--price
 										.second-flats__price
 											.second-flats__unit.second-flats__unit--price 1 250 000 руб. 
 											.second-flats__unit 15 234 руб. за м<sup>2</sup>
 										.second-flats__wrp
 											.second-flats__publish дата публикации: <span>1 ч. назад</span>
-											.second-flats__num.second-flats__num--hide 8/9 эт
 							a(href="javascript:void(0);").second-flats__item
 								.second-flats__pic
-									img(src="./img/card/pic5.jpg" alt="")
+									img(src="./img/card/pic6.jpg" alt="")
 								.second-flats__content
 									.second-flats__box
 										.second-flats__bloc
 											.second-flats__area.title-3 1-к квартира, 23,5 м<sup>2</sup>
 											.second-flats__adres г. Магнитогорск, ул. Завенягина 123/2 р-н Орджоникидзевский
-										.second-flats__bloc.second-flats__bloc--floor
-											.second-flats__num 8/9 эт.
 									.second-flats__box.second-flats__box--price
 										.second-flats__price
 											.second-flats__unit.second-flats__unit--price 1 250 000 руб. 
 											.second-flats__unit 15 234 руб. за м<sup>2</sup>
 										.second-flats__wrp
 											.second-flats__publish дата публикации: <span>1 ч. назад</span>
-											.second-flats__num.second-flats__num--hide 8/9 эт
 							a(href="javascript:void(0);").second-flats__item
 								.second-flats__pic
-									img(src="./img/card/pic5.jpg" alt="")
+									img(src="./img/card/pic6.jpg" alt="")
 								.second-flats__content
 									.second-flats__box
 										.second-flats__bloc
 											.second-flats__area.title-3 1-к квартира, 23,5 м<sup>2</sup>
 											.second-flats__adres г. Магнитогорск, ул. Завенягина 123/2 р-н Орджоникидзевский
-										.second-flats__bloc.second-flats__bloc--floor
-											.second-flats__num 8/9 эт.
 									.second-flats__box.second-flats__box--price
 										.second-flats__price
 											.second-flats__unit.second-flats__unit--price 1 250 000 руб. 
 											.second-flats__unit 15 234 руб. за м<sup>2</sup>
 										.second-flats__wrp
 											.second-flats__publish дата публикации: <span>1 ч. назад</span>
-											.second-flats__num.second-flats__num--hide 8/9 эт
 							include ../modules/preloader
 				.structure__right
 					.structure__aside

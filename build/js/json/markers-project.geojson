@@ -90,6 +90,60 @@
 			},
 			"name": "med"
 		}
+	},
+	{
+		"type": "Feature",
+		"geometry": {
+			"type": "Point",
+			"coordinates": [58.986565, 53.376330]
+		},
+		"properties": {
+			"title": "Остановка",
+			"icon": {
+				"iconUrl": "../img/icon/marker/bus.png",
+				"iconSize": [50, 50], 
+				"iconAnchor": [25, 25],
+				"popupAnchor": [0, -25],
+				"className": "marker"
+			},
+			"name": "bus"
+		}
+	},
+	{
+		"type": "Feature",
+		"geometry": {
+			"type": "Point",
+			"coordinates": [58.987303, 53.377161]
+		},
+		"properties": {
+			"title": "Спорт",
+			"icon": {
+				"iconUrl": "../img/icon/marker/sport.png",
+				"iconSize": [50, 50], 
+				"iconAnchor": [25, 25],
+				"popupAnchor": [0, -25],
+				"className": "marker"
+			},
+			"name": "sport"
+		}
+	},
+	{
+		"type": "Feature",
+		"geometry": {
+			"type": "Point",
+			"coordinates": [58.986757, 53.375813]
+		},
+		"properties": {
+			"title": "ТЦ",
+			"icon": {
+				"iconUrl": "../img/icon/marker/shop.png",
+				"iconSize": [50, 50], 
+				"iconAnchor": [25, 25],
+				"popupAnchor": [0, -25],
+				"className": "marker"
+			},
+			"name": "market"
+		}
 	}
   ]
 }

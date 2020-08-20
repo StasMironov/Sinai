@@ -272,6 +272,10 @@ button {
       fill: $ochre;
     }
   }
+
+  &--basic {
+    cursor: auto;
+  }
 }
 
 .mapboxgl-popup {
@@ -385,8 +389,8 @@ button {
 }
 
 
+@import "./components/loader.scss";
 @import "./components/include-obj.scss";
-
 @import "./components/share-bloc.scss";
 @import "./components/card-flats/card-location.scss";
 @import "./components/card-flats/card-flats.scss";
