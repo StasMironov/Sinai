@@ -1,0 +1,33 @@
+extends ../layout/main
+
+block variables
+	- var title = 'Главная страница'
+	- var pageClass = 'index-page';
+
+block content
+	.structure.mf-margin
+		.structure__container.b-container
+			.structure__title.title-1 Новости
+			.structure__quote Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+	.news
+		.news__container.b-container
+			.news__items
+				a(href="javascript:void(0);").news__item
+					.news__pic
+						img(src="/img/card/pic5.jpg" alt="")
+					.news__content
+						.news__article Пример заголовка в одну!
+						.news__txt Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas varius tortor nibh, sit amet tempor nibh finibus et. Aenean eu enim justo. 
+					.news__publish 14.10.19
+				a(href="javascript:void(0);").news__item
+					.news__pic
+						img(src="/img/card/pic5.jpg" alt="")
+					.news__content
+						.news__article Пример заголовка в одну!
+						.news__txt Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas varius tortor nibh, sit amet tempor nibh finibus et. Aenean eu enim justo. 
+					.news__publish 14.10.19
+				a(href="javascript:void(0);").news__item.news__item--ad
+					img(src="/img/ad.png" alt="")
+
+
+block script
