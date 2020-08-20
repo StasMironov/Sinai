@@ -11,23 +11,98 @@ block content
 			.structure__quote Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
 	.news
 		.news__container.b-container
-			.news__items
-				a(href="javascript:void(0);").news__item
-					.news__pic
-						img(src="/img/card/pic5.jpg" alt="")
-					.news__content
-						.news__article Пример заголовка в одну!
-						.news__txt Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas varius tortor nibh, sit amet tempor nibh finibus et. Aenean eu enim justo. 
-					.news__publish 14.10.19
-				a(href="javascript:void(0);").news__item
-					.news__pic
-						img(src="/img/card/pic5.jpg" alt="")
-					.news__content
-						.news__article Пример заголовка в одну!
-						.news__txt Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas varius tortor nibh, sit amet tempor nibh finibus et. Aenean eu enim justo. 
-					.news__publish 14.10.19
-				a(href="javascript:void(0);").news__item.news__item--ad
-					img(src="/img/ad.png" alt="")
+			.news__box
+				.news__items
+					a(href="javascript:void(0);").news__item
+						.news__pic
+							img(src="/img/card/pic5.jpg" alt="")
+						.news__content
+							.news__article Пример заголовка в одну!
+							.news__txt Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas varius tortor nibh, sit amet tempor nibh finibus et. Aenean eu enim justo. 
+							.news__publish 14.10.19
+					.news__item.news__item--hidden
+						.call-help.call-help--search 
+							.call-help__bloc
+								.call-help__container
+										.call-help__article Не хочу искать, перезвоните мне
+										form(method='get').form-project.form-project--call
+											.form-project__wrapper
+												.form-project__box
+													.form-project__group
+														.form-project__block
+															input(placeholder="Ваше имя" type="text" required).form-project__field
+														.form-project__block
+															input(placeholder="Ваша почта" type="text" required).form-project__field
+												.form-project__link Нажимая кнопку, Вы принимаете условия <a href="javascript:void(0)">пользовательского соглашения.</a>
+											button(type='submit' disabled).form-project__btn
+												.btn__txt жду звонка
+					a(href="javascript:void(0);").news__item
+						.news__pic
+							img(src="/img/card/pic5.jpg" alt="")
+						.news__content
+							.news__article Заголовок, к примеру, в две строчки!
+							.news__txt Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas varius tortor nibh, sit amet tempor nibh finibus et. Aenean eu enim justo. 
+							.news__publish 14.10.19
+					a(href="javascript:void(0);").news__item.news__item--ad
+						img(src="/img/ad.png" alt="")
+				.news__items
+					a(href="javascript:void(0);").news__item
+						.news__pic
+							img(src="/img/card/pic5.jpg" alt="")
+						.news__content
+							.news__article Пример заголовка в одну!
+							.news__txt Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas varius tortor nibh, sit amet tempor nibh finibus et. Aenean eu enim justo. 
+							.news__publish 14.10.19
+					a(href="javascript:void(0);").news__item
+						.news__pic
+							img(src="/img/card/pic5.jpg" alt="")
+						.news__content
+							.news__article Пример заголовка в одну!
+							.news__txt Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas varius tortor nibh, sit amet tempor nibh finibus et. Aenean eu enim justo. 
+							.news__publish 14.10.19
+					a(href="javascript:void(0);").news__item
+						.news__pic
+							img(src="/img/card/pic5.jpg" alt="")
+						.news__content
+							.news__article Пример заголовка в одну!
+							.news__txt Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas varius tortor nibh, sit amet tempor nibh finibus et. Aenean eu enim justo. 
+							.news__publish 14.10.19
+					a(href="javascript:void(0);").news__item
+						.news__pic
+							img(src="/img/card/pic5.jpg" alt="")
+						.news__content
+							.news__article Пример заголовка в одну!
+							.news__txt Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas varius tortor nibh, sit amet tempor nibh finibus et. Aenean eu enim justo. 
+							.news__publish 14.10.19
+					a(href="javascript:void(0);").news__item
+						.news__pic
+							img(src="/img/card/pic5.jpg" alt="")
+						.news__content
+							.news__article Пример заголовка в одну!
+							.news__txt Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas varius tortor nibh, sit amet tempor nibh finibus et. Aenean eu enim justo. 
+							.news__publish 14.10.19
+					a(href="javascript:void(0);").news__item
+						.news__pic
+							img(src="/img/card/pic5.jpg" alt="")
+						.news__content
+							.news__article Пример заголовка в одну!
+							.news__txt Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas varius tortor nibh, sit amet tempor nibh finibus et. Aenean eu enim justo. 
+							.news__publish 14.10.19
+					
 
-
+			include ../modules/preloader
+			.structure__note.structure__note--mf40
+				.structure__word Узнайте больше о проектах или запишитесь на экскурсию. Оставьте свой номер, и мы перезвоним вам в течение рабочего дня.	
+				a(href="").btn.btn--decor.btn--black
+					.btn__cover
+						.btn__button
+							.btn__line
+								+svg('arr')
+							.btn__figure
+								+svg('figure')
+								.btn__decor
+									+svg('arr')
+						.btn__button.btn__button--laptop 
+							+svg('phone')
+					.btn__txt Заказать обратный звонок
 block script

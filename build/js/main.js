@@ -7,19 +7,18 @@ document.addEventListener("DOMContentLoaded", function (event) {
   };
 
   function ObjAd(element, place) {
-    var out = element;
+    var adObj = $(element).html();
+    var out = adObj;
     document.querySelector(place).innerHTML = out;
+    $(element).html('');
   }
 
   if ($('#aside').exists()) {
     try {
-      var adObj = $('#aside').html();
-      console.log(adObj);
       var breakpoint = window.matchMedia('(min-width:769px)');
 
       if (!breakpoint.matches === true) {
-        $('#aside').html('');
-        ObjAd(adObj, '#insert');
+        ObjAd('#aside', '#insert');
       }
     } catch (err) {
       console.log(err);
