@@ -1,7 +1,16 @@
 .project {
 
     &__img {
+        display: block;
         height: 460px;
+
+        &:not(:first-child) {
+            margin-top: 50px;
+
+            @media(max-width: 1024px) {
+                margin-top: 40px;
+            }
+        }
 
         @media(max-width: 1235px) {
             height: 350px;

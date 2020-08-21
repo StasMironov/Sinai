@@ -390,6 +390,14 @@ button {
   }
 }
 
+.mapboxgl-ctrl-logo,
+.mapboxgl-ctrl-attrib-inner a,
+.mapboxgl-canvas,
+.mapboxgl-ctrl-bottom-left,
+.mapboxgl-ctrl {
+  pointer-events: none !important;
+}
+
 @import "./components/news/news.scss";
 @import "./components/loader.scss";
 @import "./components/include-obj.scss";

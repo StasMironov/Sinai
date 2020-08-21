@@ -8,6 +8,7 @@
     &__map {
         margin-top: 32px;
         height: 595px;
+        pointer-events: none;
 
         @media(max-width: 1235px) {
             height: 500px;
@@ -19,6 +20,7 @@
 
         #map-flat {
             height: 100%;
+            pointer-events: none;
         }
     }
 

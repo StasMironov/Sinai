@@ -604,6 +604,13 @@ $(function () {
   lightGallery(document.getElementById('lightgallery-cer'));
   lightGallery(document.getElementById('certificate__gallery'));
 
+  if ($('.content--project').exists()) {
+    var items = document.querySelector('.content--project');
+    lightGallery(items, {
+      "selector": ".project__img"
+    });
+  }
+
   if ($('.index-content__txt').exists()) {
     try {
       var truncate = document.querySelectorAll(".index-content__txt");
@@ -821,14 +828,7 @@ $(function () {
     } catch (err) {
       console.log(err);
     }
-  } // $('.index-news__slider').slick({
-  //     // centerMode: true,
-  //     // slidesToShow: 3,
-  //     slidesToShow: 2,
-  //     speed: 500,
-  //     dots: false,
-  // });
-
+  }
 
   if ($('.index-news__slider').exists()) {
     try {
@@ -1053,121 +1053,6 @@ $(function () {
     }
   });
 
-  if ($('#map-flat').exists()) {
-    var markerArr = [];
-    mapboxgl.accessToken = 'pk.eyJ1IjoiYWRtaW5zaW5haSIsImEiOiJja2N2czJ2ejcwNzdoMzBtbDVneTh6NTNkIn0.pkiEoq-UDjbqvdDrB_zZCQ';
-    var flying = false;
-    var mapCenter = [58.985550, 53.377120];
-
-    var _map = new mapboxgl.Map({
-      container: 'map-flat',
-      style: 'mapbox://styles/mapbox/light-v10',
-      center: mapCenter,
-      zoom: 15.5 // bearing: -17.6,
-
-    });
-
-    _map.scrollZoom.disable();
-
-    _map.dragPan.disable();
-
-    var geoJson = {
-      type: 'FeatureCollection',
-      features: [{
-        "type": "Feature",
-        "geometry": {
-          "type": "Point",
-          "coordinates": [58.985550, 53.377120]
-        },
-        "properties": {
-          "title": "Магазин",
-          "icon": {
-            "iconUrl": "../img/icon/marker/house.png",
-            "iconSize": [118, 118],
-            // size of the icon
-            "iconAnchor": [25, 25],
-            // point of the icon which will correspond to marker's location
-            "popupAnchor": [0, -25],
-            // point from which the popup should open relative to the iconAnchor
-            "className": "marker"
-          }
-        }
-      }]
-    };
-    geoJson.features.forEach(function (marker) {
-      // create a DOM element for the marker
-      var el = document.createElement('div');
-      var doc = new DOMParser().parseFromString('<svg width="118" height="118" viewBox="0 0 118 118" fill="none" xmlns="http://www.w3.org/2000/svg"><rect class="rect" y="59" width="83.4386" height="83.4386" transform="rotate(-45 0 59)" fill="#40424C"/><path d="M68.2258 75.368V45.0131C68.2258 44.0275 67.4259 43.2275 66.4402 43.2275H52.1556C51.1699 43.2275 50.37 44.0275 50.37 45.0131V75.368" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>                <path d="M50.3699 53.9409H43.2276C42.242 53.9409 41.442 54.7409 41.442 55.7265V75.3679" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>                <path d="M77.1537 75.3679V55.7265C77.1537 54.7409 76.3538 53.9409 75.3682 53.9409H68.2258" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M54.8339 68.2256H63.7618" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M61.9763 68.2256V75.3679" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M56.6195 75.3679V68.2256" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M55.7267 56.6194H62.869" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M55.7267 61.976H62.869" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M55.7267 51.2627H62.869" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M46.7988 61.976H50.37" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M46.7988 68.2256H50.37" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M68.2258 61.976H71.797" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M68.2258 68.2256H71.797" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/> <path d="M78.9393 75.3679H39.6565" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>', 'application/xml');
-      el.appendChild(el.ownerDocument.importNode(doc.documentElement, true));
-      el.className = 'marker marker--basic';
-      el.style.width = marker.properties.icon.iconSize[0] + 'px';
-      el.style.height = marker.properties.icon.iconSize[1] + 'px';
-      el.addEventListener('click', function () {
-        _map.flyTo({
-          center: marker.geometry.coordinates
-        });
-      }); // $(el).hover(function () {
-      //     $(this).toggleClass('marker--active');
-      // });
-
-      markerArr.push(el);
-      new mapboxgl.Marker(el).setLngLat(marker.geometry.coordinates) // sets a popup on this marker
-      .addTo(_map);
-    });
-    var _temp = 0;
-
-    if ($('.structure__item').length > 0) {
-      var fly = function fly(i) {
-        _map.flyTo({
-          center: projectsData[i],
-          essential: true // this animation is considered essential with respect to prefers-reduced-motion
-
-        });
-
-        _map.fire('flystart');
-
-        return i;
-      };
-
-      var idx = 0;
-      var projectsData = [];
-      $('.structure__item').each(function (i) {
-        markerArr[i].setAttribute('data-href', $(this).data('href'));
-
-        if ($(this).data('coordinates') != undefined) {
-          projectsData.push($(this).data('coordinates'));
-        }
-
-        $(this).hover(function () {
-          fly(i);
-          _temp = fly(i);
-        });
-      });
-
-      _map.on('moveend', function (e) {
-        if (flying) {
-          markerArr[_temp].classList.add('marker--active');
-
-          for (var _i3 = 0; _i3 < markerArr.length; _i3++) {
-            if (_i3 != _temp) {
-              markerArr[_i3].classList.remove('marker--active');
-            }
-          }
-
-          _map.fire('flyend');
-        }
-      });
-
-      _map.on('flystart', function () {
-        flying = true;
-      });
-
-      _map.on('flyend', function () {
-        flying = false;
-      });
-    }
-  }
-
   if ($('#map').length > 0) {
     var showAll = function showAll() {
       // then remove any previously-displayed marker groups
@@ -1179,7 +1064,7 @@ $(function () {
         var feature = marker.feature;
         marker.setIcon(L.icon(feature.properties.icon));
         clusterGroup.addLayer(layer);
-        L.layerGroup().addTo(_map2);
+        L.layerGroup().addTo(map);
       });
     };
 
@@ -1203,7 +1088,7 @@ $(function () {
           var feature = marker.feature;
           marker.setIcon(L.icon(feature.properties.icon));
           clusterGroup.addLayer(layer);
-          L.layerGroup().addTo(_map2);
+          L.layerGroup().addTo(map);
         } else if (list.has('all') == true) {
           var _marker = layer;
           var _feature = _marker.feature;
@@ -1211,20 +1096,19 @@ $(function () {
           _marker.setIcon(L.icon(_feature.properties.icon));
 
           clusterGroup.addLayer(layer);
-          L.layerGroup().addTo(_map2);
+          L.layerGroup().addTo(map);
         }
       });
     };
 
     L.mapbox.accessToken = 'pk.eyJ1IjoiYWRtaW5zaW5haSIsImEiOiJja2N2czJ2ejcwNzdoMzBtbDVneTh6NTNkIn0.pkiEoq-UDjbqvdDrB_zZCQ';
+    var map = L.mapbox.map('map').setView([53.376457, 58.986727], 17.95).addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/light-v10'));
 
-    var _map2 = L.mapbox.map('map').setView([53.376457, 58.986727], 17.95).addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/light-v10'));
-
-    if (_map2.scrollWheelZoom) {
-      _map2.scrollWheelZoom.disable();
+    if (map.scrollWheelZoom) {
+      map.scrollWheelZoom.disable();
     }
 
-    var overlays = L.layerGroup().addTo(_map2);
+    var overlays = L.layerGroup().addTo(map);
     var layers;
     L.mapbox.featureLayer().loadURL('./js/json/markers-project.geojson').on('ready', function (e) {
       layers = e.target;
@@ -1239,137 +1123,109 @@ $(function () {
     }
   }
 
-  if ($('#map-projects').length > 0) {
-    var centerMap = $('#map-projects').data('center'); // console.log(centerMap);
+  function createMap(mapBloc, itemEl) {
+    if ($("#".concat(mapBloc)).exists()) {
+      var centerMap = $("#".concat(mapBloc)).data('center');
+      var markerArr = [];
+      mapboxgl.accessToken = 'pk.eyJ1IjoiYWRtaW5zaW5haSIsImEiOiJja2N2czJ2ejcwNzdoMzBtbDVneTh6NTNkIn0.pkiEoq-UDjbqvdDrB_zZCQ';
+      var flying = false;
+      var mapCenter = centerMap;
 
-    var _markerArr = [];
-    mapboxgl.accessToken = 'pk.eyJ1IjoiYWRtaW5zaW5haSIsImEiOiJja2N2czJ2ejcwNzdoMzBtbDVneTh6NTNkIn0.pkiEoq-UDjbqvdDrB_zZCQ';
-    var _flying = false;
-    var _mapCenter = centerMap;
-    var map = new mapboxgl.Map({
-      container: 'map-projects',
-      style: 'mapbox://styles/mapbox/light-v10',
-      center: _mapCenter,
-      zoom: 15.9 // bearing: -17.6,
+      var _map = new mapboxgl.Map({
+        container: mapBloc,
+        //Без #
+        style: 'mapbox://styles/mapbox/light-v10',
+        center: mapCenter,
+        zoom: 15.9,
+        attributionControl: false
+      });
 
-    });
-    map.scrollZoom.disable();
-    var nav = new mapboxgl.NavigationControl({
-      showCompass: false,
-      showZoom: true
-    });
+      _map.scrollZoom.disable();
 
-    if ($('.structure__item').exists()) {
-      var _temp2 = 0;
+      var nav = new mapboxgl.NavigationControl({
+        showCompass: false,
+        showZoom: true
+      });
 
-      try {
-        var _fly = function _fly(i) {
-          map.flyTo({
-            center: _projectsData[i],
-            zoom: 15.9,
-            bearing: 0,
-            essential: true // this animation is considered essential with respect to prefers-reduced-motion
+      if ($(itemEl).exists()) {
+        var _temp = 0;
 
+        try {
+          var fly = function fly(i) {
+            _map.flyTo({
+              center: projectsData[i],
+              zoom: 15.9,
+              bearing: 0,
+              essential: true // this animation is considered essential with respect to prefers-reduced-motion
+
+            });
+
+            _map.fire('flystart');
+
+            return i;
+          };
+
+          $(itemEl).each(function () {
+            var coordinatesData = $(this).data('coordinates');
+            var el = document.createElement('div');
+            var doc = new DOMParser().parseFromString('<svg width="80" height="80" viewBox="0 0 118 118" fill="none" xmlns="http://www.w3.org/2000/svg"><rect class="rect" y="59" width="83.4386" height="83.4386" transform="rotate(-45 0 59)" fill="#40424C"/><path d="M68.2258 75.368V45.0131C68.2258 44.0275 67.4259 43.2275 66.4402 43.2275H52.1556C51.1699 43.2275 50.37 44.0275 50.37 45.0131V75.368" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>                <path d="M50.3699 53.9409H43.2276C42.242 53.9409 41.442 54.7409 41.442 55.7265V75.3679" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>                <path d="M77.1537 75.3679V55.7265C77.1537 54.7409 76.3538 53.9409 75.3682 53.9409H68.2258" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M54.8339 68.2256H63.7618" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M61.9763 68.2256V75.3679" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M56.6195 75.3679V68.2256" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M55.7267 56.6194H62.869" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M55.7267 61.976H62.869" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M55.7267 51.2627H62.869" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M46.7988 61.976H50.37" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M46.7988 68.2256H50.37" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M68.2258 61.976H71.797" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M68.2258 68.2256H71.797" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/> <path d="M78.9393 75.3679H39.6565" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>', 'application/xml');
+            el.appendChild(el.ownerDocument.importNode(doc.documentElement, true));
+            el.className = 'marker';
+            markerArr.push(el);
+            new mapboxgl.Marker(el).setLngLat(coordinatesData) // sets a popup on this marker
+            .addTo(_map);
           });
-          map.fire('flystart');
-          return i;
-        };
+          var projectsData = [];
+          $(itemEl).each(function (i) {
+            markerArr[i].setAttribute('data-href', $(this).data('href'));
 
-        $('.structure__item').each(function () {
-          var coordinatesData = $(this).data('coordinates');
-          var el = document.createElement('div');
-          var doc = new DOMParser().parseFromString('<svg width="80" height="80" viewBox="0 0 118 118" fill="none" xmlns="http://www.w3.org/2000/svg"><rect class="rect" y="59" width="83.4386" height="83.4386" transform="rotate(-45 0 59)" fill="#40424C"/><path d="M68.2258 75.368V45.0131C68.2258 44.0275 67.4259 43.2275 66.4402 43.2275H52.1556C51.1699 43.2275 50.37 44.0275 50.37 45.0131V75.368" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>                <path d="M50.3699 53.9409H43.2276C42.242 53.9409 41.442 54.7409 41.442 55.7265V75.3679" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>                <path d="M77.1537 75.3679V55.7265C77.1537 54.7409 76.3538 53.9409 75.3682 53.9409H68.2258" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M54.8339 68.2256H63.7618" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M61.9763 68.2256V75.3679" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M56.6195 75.3679V68.2256" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M55.7267 56.6194H62.869" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M55.7267 61.976H62.869" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M55.7267 51.2627H62.869" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M46.7988 61.976H50.37" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M46.7988 68.2256H50.37" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M68.2258 61.976H71.797" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M68.2258 68.2256H71.797" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/> <path d="M78.9393 75.3679H39.6565" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>', 'application/xml');
-          el.appendChild(el.ownerDocument.importNode(doc.documentElement, true));
-          el.className = 'marker';
-
-          _markerArr.push(el);
-
-          new mapboxgl.Marker(el).setLngLat(coordinatesData) // sets a popup on this marker
-          .addTo(map);
-        });
-        var _projectsData = [];
-        $('.structure__item').each(function (i) {
-          _markerArr[i].setAttribute('data-href', $(this).data('href'));
-
-          if ($(this).data('coordinates') != undefined) {
-            _projectsData.push($(this).data('coordinates'));
-          }
-
-          $(this).hover(function () {
-            _fly(i);
-
-            _temp2 = _fly(i);
-          });
-        });
-        map.on('moveend', function (e) {
-          if (_flying) {
-            _markerArr[_temp2].classList.add('marker--active');
-
-            for (var _i4 = 0; _i4 < _markerArr.length; _i4++) {
-              if (_i4 != _temp2) {
-                _markerArr[_i4].classList.remove('marker--active');
-              }
+            if ($(this).data('coordinates') != undefined) {
+              projectsData.push($(this).data('coordinates'));
             }
 
-            map.fire('flyend');
-          }
-        });
-        map.on('flystart', function () {
-          _flying = true;
-        });
-        map.on('flyend', function () {
-          _flying = false;
-        });
-
-        _markerArr.forEach(function (element) {
-          element.addEventListener('click', function () {
-            var hrefPath = this.getAttribute('data-href');
-            location = hrefPath;
+            $(this).hover(function () {
+              fly(i);
+              _temp = fly(i);
+            });
           });
-        });
-      } catch (err) {
-        console.log(err);
-      }
-    } // if ($('.structure__item').length > 0) {
-    //     let projectsData = [];
-    //     $('.structure__item').each(function (i) {
-    //         markerArr[i].setAttribute('data-href', $(this).data('href'));
-    //         if ($(this).data('coordinates') != undefined) {
-    //             projectsData.push($(this).data('coordinates'));
-    //         }
-    //         $(this).hover(function () {
-    //             fly(i);
-    //             temp = fly(i);
-    //         });
-    //     });
-    //     map.on('moveend', function (e) {
-    //         if (flying) {
-    //             markerArr[temp].classList.add('marker--active');
-    //             for (let i = 0; i < markerArr.length; i++) {
-    //                 if (i != temp) {
-    //                     markerArr[i].classList.remove('marker--active');
-    //                 }
-    //             }
-    //             map.fire('flyend');
-    //         }
-    //     });
-    //     map.on('flystart', function () {
-    //         flying = true;
-    //     });
-    //     map.on('flyend', function () {
-    //         flying = false;
-    //     });
-    //     function fly(i) {
-    //         map.flyTo({
-    //             center: projectsData[i],
-    //             essential: true // this animation is considered essential with respect to prefers-reduced-motion
-    //         });
-    //         map.fire('flystart');
-    //         return i;
-    //     }
-    // }
 
+          _map.on('moveend', function (e) {
+            if (flying) {
+              markerArr[_temp].classList.add('marker--active');
+
+              for (var _i3 = 0; _i3 < markerArr.length; _i3++) {
+                if (_i3 != _temp) {
+                  markerArr[_i3].classList.remove('marker--active');
+                }
+              }
+
+              _map.fire('flyend');
+            }
+          });
+
+          _map.on('flystart', function () {
+            flying = true;
+          });
+
+          _map.on('flyend', function () {
+            flying = false;
+          });
+
+          markerArr.forEach(function (element) {
+            element.addEventListener('click', function () {
+              var hrefPath = this.getAttribute('data-href');
+              location = hrefPath;
+            });
+          });
+        } catch (err) {
+          console.log(err);
+        }
+      }
+    }
   }
+
+  createMap('map-projects', '.structure__item');
+  createMap('map-flat', '#map-flat');
 
   if ($('.form-project__field').exists) {
     $('.form-project__field').each(function () {
@@ -1467,7 +1323,7 @@ $(function () {
 
   if ($('.project-period__slider').exists()) {
     try {
-      var projecPeriod = new Swiper('.project-period__slider', {
+      var _projecPeriod = new Swiper('.project-period__slider', {
         slidesPerView: '1',
         spaceBetween: 40,
         effect: 'fade',
@@ -1485,10 +1341,6 @@ $(function () {
             return "<span>".concat(("" + i).slice(-2), "</span>") + "/<span>".concat(("" + total).slice(-2), "</span>");
           }
         },
-        // pagination: {
-        //     el: '.project-period__pagination',
-        //     clickable: true
-        // },
         navigation: {
           nextEl: '.inner-slider__link--next',
           prevEl: '.inner-slider__link--prev'
@@ -1640,13 +1492,13 @@ $(function () {
     var parentEl = bloc.querySelectorAll('.swiper-menu');
 
     if (qtySlide > 0) {
-      for (var _i5 = 0; _i5 < parentEl.length; _i5++) {
+      for (var _i4 = 0; _i4 < parentEl.length; _i4++) {
         for (var j = 0; j < qtySlide; j++) {
           var itemSlide = document.createElement('div');
           itemSlide.classList.add('swiper-menu__item');
           itemSlide.setAttribute('data-index', j);
 
-          parentEl[_i5].appendChild(itemSlide);
+          parentEl[_i4].appendChild(itemSlide);
 
           if (j == 0) {
             itemSlide.classList.add('swiper-menu__item--active');
