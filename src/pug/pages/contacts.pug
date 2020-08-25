@@ -45,6 +45,10 @@ block content
 							.contacts__txt 455000, Челябинская область, г. Магнитогорск, у. Труда, 4
 						.contacts__row
 							.contacts__ic 
+								img(src="./img/icon/phone.png" alt="")
+							.contacts__txt Тел.: 8 (3519) 580-491, 580-492, 580-493
+						.contacts__row
+							.contacts__ic 
 								img(src="./img/icon/mail.png" alt="")
 							.contacts__txt E-mail: chsk@sinai-group.ru
 				.contacts__bloc
@@ -76,4 +80,40 @@ block content
 								+svg('vk')
 							a(href="javascript:void(0);").share-bloc__item
 								+svg('inst')
+				.project-department.project-department--include
+					.project-department__title.title-2 Офис продаж МФБ
+					.project-department__items
+						.project-department__item 
+							.project-department__bloc Отдел продаж:
+							.project-department__bloc +7 (231) 343-12-32
+						.project-department__item 
+							.project-department__bloc График работы: 
+							.project-department__bloc Пн.-Пт. 9:00-18:00
+						.project-department__item 
+							.project-department__bloc Адрес: 
+							.project-department__bloc г. Магнитогорск, ул. Завенягина 1/2
+					form(method='get').form-project.form-project--call
+						.form-project__box
+							.form-project__group
+								.form-project__block
+									input(placeholder="Ваше имя" type="text" required).form-project__field
+								.form-project__block
+									input(placeholder="Ваша почта" type="text" required).form-project__field
+							button(type='submit').btn.btn--decor
+								.btn__cover
+									.btn__button
+										.btn__line
+											+svg('arr')
+										.btn__figure
+											+svg('figure')
+											.btn__decor
+												+svg('arr')
+									.btn__button.btn__button--laptop 
+										+svg('phone')
+								.btn__txt Перезвоните мне
+						.form-project__cover
+							.form-project__agreement
+								<input type="checkbox" class="custom-checkbox" id="agr" name="agr" value="yes">
+								<label for="agr"><div>Нажимая кнопку, Вы принимаете условия <a href="javascript:void(0);">пользовательского соглашения.</a></div></label>
+	#map-contacts(data-center="[58.985550, 53.377120]" data-coordinates = "[58.985550, 53.377120]")
 block script

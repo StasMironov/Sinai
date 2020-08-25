@@ -398,12 +398,25 @@ button {
   pointer-events: none !important;
 }
 
+#map-contacts,
+.ads {
+  height: 438px;
+  margin-top: 70px;
+  pointer-events: none;
+
+  @media(max-width: 600px) {
+    margin-top: 40px;
+  }
+}
+
+@import "./components/404/notification";
 @import "./components/ads.scss";
 @import "./components/breadcrumb.scss";
 @import "./components/news/news.scss";
 @import "./components/loader.scss";
 @import "./components/include-obj.scss";
 @import "./components/share-bloc.scss";
+@import "./components/trade/trade.scss";
 @import "./components/card-flats/card-location.scss";
 @import "./components/card-flats/card-flats.scss";
 @import "./components/second-flats/second-flats.scss";

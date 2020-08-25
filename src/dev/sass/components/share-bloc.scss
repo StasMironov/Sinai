@@ -41,11 +41,11 @@
         transition: 400ms ease;
         cursor: pointer;
 
-        @media(max-width: 500px) {
-            height: 52px;
-            width: 52px;
-            max-width: 52px;
-        }
+        // @media(max-width: 500px) {
+        //     height: 52px;
+        //     width: 52px;
+        //     max-width: 52px;
+        // }
 
         &:not(:first-child) {
             margin-left: 24px;

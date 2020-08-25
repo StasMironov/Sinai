@@ -1283,6 +1283,7 @@ $(() => {
 
     createMap('map-projects', '.structure__item');
     createMap('map-flat', '#map-flat');
+    createMap('map-contacts', '#map-contacts');
 
     if ($('.form-project__field').exists) {
         $('.form-project__field').each(function () {
