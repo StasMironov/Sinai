@@ -1,4 +1,11 @@
-.contacts.contacts--about
+extends ../layout/main
+
+block variables
+	- var title = 'Главная страница'
+	- var pageClass = 'index-page';
+
+block content
+	.contacts.contacts--about
 		.contacts.b-container
 			.contacts__title.title-2 Контакты
 			.contacts__wrapper
@@ -62,3 +69,11 @@
 							.contacts__ic 
 								img(src="./img/icon/mail.png" alt="")
 							.contacts__txt E-mail: office@sinai-group.ru
+				.share-bloc
+					.share-bloc__box
+						.share-bloc__items
+							a(href="javascript:void(0);").share-bloc__item
+								+svg('vk')
+							a(href="javascript:void(0);").share-bloc__item
+								+svg('inst')
+block script

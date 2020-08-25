@@ -244,7 +244,9 @@
     }
 
     &--simple {
-        margin-top: 50px;
+        &:not(:first-child) {
+            margin-top: 50px;
+        }
 
         .inner-slider__inner {
             position: absolute;
@@ -260,11 +262,20 @@
         .project-period__slider {
             margin-top: 0;
         }
+
+        .inner-slider__inner {
+            @media(max-width: 640px) {
+                display: none;
+            }
+        }
     }
 
     &--big {
+        margin-top: 0;
+
         .project-period__slider {
             height: 595px;
+            margin-top: 0;
 
             @media(max-width: 1600px) {
                 height: 490px;

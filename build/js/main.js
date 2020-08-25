@@ -244,16 +244,59 @@ $(function () {
     }
   }
 
-  if ($('.form-project--call').exists()) {
+  if ($('.ads__slider').exists()) {
+    try {
+      var adsSlider = new Swiper('.ads__slider', {
+        spaceBetween: 20,
+        slidesPerView: 3,
+        autoHeight: true,
+        loop: true,
+        pagination: {
+          el: '.swiper-pagination',
+          type: 'progressbar'
+        },
+        autoplay: {
+          delay: 5000
+        },
+        breakpoints: {
+          320: {
+            slidesPerView: 1,
+            spaceBetween: 20,
+            slidesPerColumn: 2,
+            slidesPerColumnFill: 'row',
+            autoHeight: false,
+            loop: false
+          },
+          500: {
+            slidesPerView: 2,
+            spaceBetween: 20,
+            loop: false
+          },
+          993: {
+            slidesPerView: 3,
+            spaceBetween: 20
+          },
+          1920: {
+            slidesPerView: 3,
+            spaceBetween: 20
+          }
+        }
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  if ($('.form-project').exists()) {
     var stateButton = 0;
     $('.form-project__field').each(function () {
       $(this).on('input change', function () {
         stateButton = checkField('.form-project__field');
 
         if (stateButton) {
-          $('.form-project__btn').prop('disabled', false);
+          $('.call-help__btn').prop('disabled', false);
         } else {
-          $('.form-project__btn').prop('disabled', true);
+          $('.call-help__btn').prop('disabled', true);
         }
       });
     });
@@ -1444,29 +1487,36 @@ $(function () {
 
   $(window).on('resize load', function () {
     if ($(this).width() > 922) {
-      fixBloc('.menu-content', '.menu-content__inner');
+      fixBloc('.menu-content', '.menu-content__inner', true);
     }
   });
-  fixBloc('.structure__aside', '.structure__inner');
+  fixBloc('.mf-fix', '.structure__inner', false);
+  fixBloc('.mf-move', '.structure__inner', true);
 
-  function fixBloc(bloc, target) {
-    if ($(bloc).exists) {
+  function fixBloc(bloc, target, fix) {
+    if ($(bloc).exists()) {
       try {
-        var $window = $(window),
-            $target = $(target),
-            $h = $target.offset().top;
-        $window.on('scroll', function () {
-          var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        if (fix) {
+          var $window = $(window),
+              _$target = $(target),
+              $h = _$target.offset().top;
 
-          if (scrollTop > $h) {
-            $target.addClass("mf-fixed");
+          $window.on('scroll', function () {
+            var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+            if (scrollTop > $h) {
+              _$target.addClass("mf-fixed");
+
+              return;
+            } else {
+              _$target.removeClass("mf-fixed");
+            }
+
             return;
-          } else {
-            $target.removeClass("mf-fixed");
-          }
-
-          return;
-        });
+          });
+        } else {
+          $target.removeClass("mf-fixed");
+        }
       } catch (err) {
         console.log(err);
       }

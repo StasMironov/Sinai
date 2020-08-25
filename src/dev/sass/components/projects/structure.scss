@@ -358,7 +358,8 @@
     &__quote {
         max-width: 692px;
         width: 100%;
-        margin-top: 13px;
+        line-height: 27px;
+        margin-top: 17px;
     }
 
     &__top {
@@ -764,6 +765,18 @@
 
         .structure__left {
             max-width: 793px;
+        }
+    }
+
+    &--news {
+        #insert {
+            @media(max-width: 768px) {
+                display: none;
+            }
+        }
+
+        .structure__right {
+            margin-top: 68px;
         }
     }
 

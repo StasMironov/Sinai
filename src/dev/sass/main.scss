@@ -97,7 +97,7 @@ input::-ms-clear {
 .title-1 {
   font-weight: bold;
   font-size: 50px;
-  line-height: 108%;
+  line-height: 50px;
   color: $black-1;
   letter-spacing: 1px;
 
@@ -120,7 +120,7 @@ input::-ms-clear {
   font-size: 40px;
   line-height: 120%;
   color: $black-1;
-  letter-spacing: 1.3px;
+  letter-spacing: 1px;
 
   @media(max-width: 1024px) {
     font-size: 32px;
@@ -398,6 +398,8 @@ button {
   pointer-events: none !important;
 }
 
+@import "./components/ads.scss";
+@import "./components/breadcrumb.scss";
 @import "./components/news/news.scss";
 @import "./components/loader.scss";
 @import "./components/include-obj.scss";

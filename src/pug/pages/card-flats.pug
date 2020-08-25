@@ -12,10 +12,6 @@ block content
 			.flats-filter__box
 				.flats-filter__unit.flats-filter__unit--price 1 250 000 руб.
 				.flats-filter__unit 15 234 руб. за м<sup>2</sup>
-			.burger-filter
-				span.line
-				span.line
-				span.line
 	.structure.structure--simple
 		.structure__container.b-container
 			.structure__wrapper.structure__wrapper--content
@@ -31,6 +27,7 @@ block content
 									.swiper-slide(data-slide='3')
 										img(src='./img/card/pic3.jpg' alt='' )
 								.inner-slider__inner
+									.inner-slider__num
 									.inner-slider__wrapper.inner-slider__wrapper--build
 										.inner-slider__pagination.button
 											.inner-slider__in
@@ -82,24 +79,9 @@ block content
 						.include-obj__title.title-3 Похожие объявления
 						include ../modules/flats
 				.structure__right
-					.structure__aside
+					.structure__aside.mf-move
 						.structure__inner
-							#aside
-								.call-help.call-help--search 
-									.call-help__bloc
-										.call-help__container
-												.call-help__article Не хочу искать, перезвоните мне
-												form(method='get').form-project.form-project--call
-													.form-project__wrapper
-														.form-project__box
-															.form-project__group
-																.form-project__block
-																	input(placeholder="Ваше имя" type="text" required).form-project__field
-																.form-project__block
-																	input(placeholder="Ваша почта" type="text" required).form-project__field
-														.form-project__link Нажимая кнопку, Вы принимаете условия <a href="javascript:void(0)">пользовательского соглашения.</a>
-													button(type='submit' disabled).form-project__btn
-														.btn__txt жду звонка
+							include ../modules/call-panel
 							a(href="javascript:void(0);").ad
 								img(src="./img/card/ad.jpg" alt="")
 				
