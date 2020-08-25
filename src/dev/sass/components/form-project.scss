@@ -411,15 +411,67 @@
 
 
     &--call {
+        margin-top: 30px;
+
+        @media (max-width: 768px) {
+            max-width: initial;
+            min-width: initial;
+        }
+
+        @media (max-width: 600px) {
+            margin-top: 20px;
+        }
+
+        .form-project__agreement {
+            @media (max-width: 600px) {
+                margin-top: 21px;
+            }
+        }
+
         .form-project__group {
             flex-direction: row;
+            max-width: 529px;
+            margin-right: 10px;
+
+            @media(max-width: 600px) {
+                flex-direction: column;
+                max-width: initial;
+                margin-right: 0;
+            }
+        }
+
+        .form-project__box {
+            justify-content: space-between;
         }
 
         .form-project__block {
+            &:first-child {
+                max-width: 233px;
+                width: 100%;
+                margin-right: 24px;
+
+                @media(max-width: 600px) {
+                    max-width: inherit;
+                    margin-right: 0;
+                }
+            }
+
             &:last-child {
                 max-width: 272px;
                 width: 100%;
                 margin-top: 0;
+
+                @media(max-width: 600px) {
+                    max-width: inherit;
+                    margin-right: 0;
+                    margin-top: 21px;
+                }
+            }
+
+            input {
+                &::placeholder {
+                    text-align: left;
+                }
             }
         }
     }
