@@ -36,6 +36,9 @@ body {
   background-color: #fff;
   word-wrap: break-word;
   height: auto !important;
+  outline: none;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-tap-highlight-color: transparent;
 }
 
 .b-container {
@@ -69,7 +72,7 @@ a {
   display: inline;
   color: inherit;
   text-decoration: none;
-  transition: linear 0.3s;
+  // transition: linear 0.3s;
 }
 
 .clearfix::after,
@@ -409,8 +412,44 @@ button {
   }
 }
 
+
+.overlay {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  top: 0;
+  right: 0;
+  overflow: auto;
+  opacity: 0;
+  // transform: translateX(100%);
+  transition: .2s .1s linear;
+  background: rgba(0, 0, 0, .5);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#7F000000, endColorstr=#7F000000);
+  zoom: 1;
+  z-index: 700;
+  visibility: hidden;
+
+  &--show {
+    opacity: 1;
+    visibility: visible;
+    //transform: translateY(0%);
+
+    .menu {
+      transform: translateY(0%);
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+}
+
+
+
+@import "./components/burger.scss";
+@import "./components/thank/thank.scss";
+@import "./components/agreement/agreement.scss";
 @import "./components/404/notification";
 @import "./components/ads.scss";
+@import "./components/menu.scss";
 @import "./components/breadcrumb.scss";
 @import "./components/news/news.scss";
 @import "./components/loader.scss";

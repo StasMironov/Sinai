@@ -1,8 +1,25 @@
+
+//===== Function check element ==========//
+jQuery.fn.exists = function () {
+    return $(this).length;
+}
+
+// if ($('.logo').exists()) {
+//     $(window).on('resize load', function () {
+//         const breakpoint = window.matchMedia('(max-width:620px)');
+//         if (breakpoint.matches === true) {
+
+//             let src = $('.logo img').data('logo');
+//             console.log(src);
+//             $('.logo img').attr('src', src);
+//         }
+//     });
+// }
+
 document.addEventListener("DOMContentLoaded", function (event) {
-    //===== Function check element ==========//
-    jQuery.fn.exists = function () {
-        return $(this).length;
-    }
+
+
+
 
     function ObjAd(element, place) {
         let adObj = $(element).html();
@@ -22,6 +39,8 @@ document.addEventListener("DOMContentLoaded", function (event) {
             console.log(err);
         }
     }
+
+
 });
 
 $(() => {
@@ -29,6 +48,8 @@ $(() => {
     ScrollReveal({
         mobile: false
     });
+
+
 
     function rangeSlider(block, min, max, steps, input, parent) {
         if ($(block).exists()) {
@@ -160,6 +181,97 @@ $(() => {
         // console.log(sumLoan);
     }
 
+    if ($('.menu__item--menu').exists()) {
+        $('.menu__item--menu').on('click', function () {
+            $(this).toggleClass('menu__item--active');
+
+            let height = 0;
+
+            $('.menu__ref').each(function () {
+                height += $(this).outerHeight();
+            });
+
+            if ($('.menu__sub').hasClass('menu__sub--active')) {
+                $('.menu__sub').removeClass('menu__sub--active').css(
+                    {
+                        'max-height': 0
+                    }
+                );
+            }
+            else {
+                $('.menu__sub').addClass('menu__sub--active').css(
+                    {
+                        'max-height': height
+                    },
+                );
+
+
+            }
+
+        });
+    }
+
+    if ($('.burger').length > 0) {
+        $('.burger').on('click', function () {
+            $(this).toggleClass('burger--active');
+            if ($('.overlay').exists()) {
+                $('.overlay').toggleClass('overlay--show');
+                $('html').css('overflow', 'hidden');
+
+                if ($('.menu__item').exists()) {
+                    ScrollReveal().reveal('.menu__item', {
+                        delay: 100,
+                        interval: 100,
+                        origin: 'bottom'
+                    },
+                        ScrollReveal().reveal('.share-bloc__items', {
+                            delay: 800,
+                            interval: 500,
+                            enter: 'left'
+                        })
+                    );
+                }
+            }
+        });
+    }
+
+
+
+    if ($('.menu__close').exists()) {
+        $('.menu__close').on('click', () => {
+            $('.overlay').toggleClass('overlay--show');
+            $('.burger').toggleClass('burger--active');
+            $('html').css('overflow', 'auto');
+            $('.menu__sub').removeClass('menu__sub--active').css(
+                {
+                    'max-height': 0
+                }
+            );
+        });
+    }
+
+    if ($('.header__item--menu').exists()) {
+        $('.header__item--menu').on('mouseenter', function () {
+            $(this).find('.header__link').addClass('header__link--hover');
+        });
+        //mouseleave
+
+        $('.header__item--menu').on('mouseleave', function () {
+            $(this).find('.header__link').removeClass('header__link--hover');
+        });
+    }
+
+    if ($('.overlay').exists()) {
+        $('.overlay').click(function (e) {
+            console.log(e.target.className.indexOf('overlay'));
+            if (e.target.className.indexOf('overlay') != -1) {
+                $(this).toggleClass('overlay--show');
+                $('.burger').toggleClass('burger--active');
+                $('html').css('overflow', 'auto');
+            }
+        });
+    }
+
     if ($('#price').exists()) {
         let min = $('#price').closest('.flats-calc__item').find('.flats-calc__block').data('min');
         let max = $('#price').closest('.flats-calc__item').find('.flats-calc__block').data('max');
@@ -208,9 +320,9 @@ $(() => {
                 });
             }
         });
-
-
     }
+
+
 
     // $('#submit').on('click', function (event) {
     //     event.preventDefault();

@@ -61,4 +61,31 @@
             fill: white;
         }
     }
+
+    &--header {
+
+        @media(max-width: 600px) {
+            margin-top: 30px;
+        }
+
+        .share-bloc__item {
+            height: 31px;
+            width: calc(50% - 5px);
+            max-width: 31px;
+
+            &:not(:first-child) {
+                margin-left: 6px;
+            }
+
+            .b-svg {
+                height: 20px;
+                width: 20px;
+            }
+        }
+
+        .share-bloc__items {
+            align-items: center;
+            justify-content: center;
+        }
+    }
 }
