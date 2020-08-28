@@ -200,7 +200,7 @@ $(function () {
             delay: 100,
             interval: 100,
             origin: 'bottom'
-          }, ScrollReveal().reveal('.share-bloc__items', {
+          }, ScrollReveal().reveal('.share-bloc--header .share-bloc__items', {
             delay: 800,
             interval: 500,
             enter: 'left'

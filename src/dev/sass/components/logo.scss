@@ -6,6 +6,7 @@
 
     &__bloc {
         padding-top: 6px;
+        white-space: nowrap;
 
         @media(max-width: 620px) {
             display: none;
@@ -24,6 +25,16 @@
         svg {
             height: 100%;
             width: 100%;
+        }
+
+        &--menu {
+            width: 102px;
+            height: 48px;
+
+            @media(max-width: 600px) {
+                width: 77px;
+                height: 48px;
+            }
         }
     }
 

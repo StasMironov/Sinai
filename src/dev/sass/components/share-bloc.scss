@@ -86,6 +86,51 @@
         .share-bloc__items {
             align-items: center;
             justify-content: center;
+
+            @media(max-width: 500px) {
+                justify-content: flex-start;
+            }
+        }
+    }
+
+    &--footer {
+        margin-top: 0;
+        height: 100%;
+
+        .share-bloc__items {
+            flex-direction: column;
+            justify-content: space-between;
+            margin-top: 0;
+        }
+
+        .share-bloc__item {
+            width: initial;
+            height: 18px;
+            width: 18px;
+            margin-right: 9px;
+            background-color: white;
+
+            .b-svg {
+                height: 12px;
+                width: 12px;
+                fill: black;
+            }
+        }
+
+        .share-bloc__soc {
+            display: flex;
+            align-items: center;
+
+            &:hover {
+                .share-bloc__txt {
+                    color: $ochre;
+                }
+            }
+        }
+
+        .share-bloc__txt {
+            line-height: inherit;
+            transition: .3s linear;
         }
     }
 }
