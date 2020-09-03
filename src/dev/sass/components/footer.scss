@@ -147,4 +147,53 @@
             }
         }
     }
+
+    #btnUp {
+        cursor: pointer;
+        background-color: #34558b;
+        width: 38px;
+        height: 38px;
+        text-align: center;
+        border-radius: 4px;
+        position: fixed;
+        bottom: 40px;
+        right: 58px;
+        transition: background-color .3s, opacity .5s, visibility .5s;
+        opacity: 0;
+        visibility: hidden;
+        z-index: 100;
+        align-items: center;
+        justify-content: center;
+        display: flex;
+        box-shadow: 2px 2px 4px rgba(0, 0, 0, .15);
+
+        @media(max-width: 768px) {
+            right: 20px;
+        }
+
+        path {
+            transition: fill 400ms ease;
+        }
+
+        rect {
+            transition: 400ms ease;
+        }
+
+        &:hover {
+            path {
+                fill: $ochre;
+            }
+
+            rect {
+                stroke: $ochre;
+                fill: black;
+                stroke-width: 1.5px;
+            }
+        }
+    }
+
+    .showBtn {
+        opacity: 1 !important;
+        visibility: visible !important;
+    }
 }

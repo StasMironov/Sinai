@@ -80,6 +80,10 @@
         align-items: center;
         margin-top: 67px;
 
+        @media(max-width: 768px) {
+            margin-top: 40px;
+        }
+
         @media(max-width: 500px) {
             align-items: flex-start;
         }

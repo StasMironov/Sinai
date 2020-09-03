@@ -95,4 +95,8 @@
     .btn--slide {
         transform: translateY(20px);
     }
+
+    .swiper-slide {
+        z-index: -1;
+    }
 }

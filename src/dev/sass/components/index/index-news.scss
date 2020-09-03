@@ -185,30 +185,26 @@
     }
 
     .swiper-slide {
-        width: 263px;
-        min-width: 263px;
+        // width: 263px;
+        // min-width: 263px;
         transition: .3s;
         height: 422px;
 
         @media(max-width: 640px) {
             height: auto;
         }
-
-        @media(max-width: 500px) {
-            min-width: 100%;
-        }
     }
 
     .swiper-slide-active {
-        width: 451px;
+        // width: 451px;
 
-        @media(max-width: 992px) {
-            width: 263px;
-        }
+        // @media(max-width: 992px) {
+        //     width: 263px;
+        // }
 
-        @media(max-width: 500px) {
-            width: 100%;
-        }
+        // @media(max-width: 500px) {
+        //     width: 100%;
+        // }
     }
 
     // * {

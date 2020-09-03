@@ -25,6 +25,10 @@
             padding-top: 44px;
             padding-bottom: 70px;
         }
+
+        @media(max-width: 600px) {
+            padding-bottom: 40px;
+        }
     }
 
     &__title {
