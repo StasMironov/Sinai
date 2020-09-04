@@ -1777,10 +1777,18 @@ $(() => {
         if (qtySlide > 0) {
             for (let i = 0; i < parentEl.length; i++) {
                 for (let j = 0; j < qtySlide; j++) {
+
                     let itemSlide = document.createElement('div');
                     itemSlide.classList.add('swiper-menu__item');
                     itemSlide.setAttribute('data-index', j);
+
+                    if (j == 0) {
+                        itemSlide.classList.add('swiper-menu__item--active');
+                    }
+
                     parentEl[i].appendChild(itemSlide);
+
+
                 }
             }
 
@@ -1788,12 +1796,28 @@ $(() => {
         }
     }
 
-    function checkPag(contecst, slider) {
+    function checkPag(contecst, sliderBox, slider) {
         //console.log(contecst);
         //console.log(slider);
         let contecsts = contecst;
         const index = $(contecsts).data('index');
         slider.slideTo(index);
+        let arrItem = $(sliderBox).find('.swiper-menu__item');
+
+
+        for (let i = 0; i < arrItem.length; i++) {
+            if ($(arrItem[i]).data('index') == index) {
+                arrItem[i].classList.add('swiper-menu__item--active')
+            }
+            else {
+                arrItem[i].classList.remove('swiper-menu__item--active')
+            }
+
+
+        }
+
+
+
 
 
         $(contecst).addClass('swiper-menu__item--active');
@@ -1826,11 +1850,14 @@ $(() => {
                             `/<span>${("" + total).slice(-2)}</span>`;
                     },
                 },
+                onTouchMove: function (projectImg, event) {
+                    alert(projectImg);
+                }
             });
 
             createPag('.inner-slider', projectImg);
             $('.inner-slider .swiper-menu').on('click', '.swiper-menu__item', function () {
-                checkPag(this, projectImg);
+                checkPag(this, '.inner-slider', projectImg);
 
                 // console.log($(this))
 
