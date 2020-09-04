@@ -401,16 +401,22 @@ button {
   pointer-events: none !important;
 }
 
-#map-contacts,
-.ads {
+#map-contacts {
   height: 438px;
   margin-top: 70px;
+
+  margin-bottom: -70px;
   pointer-events: none;
 
   @media(max-width: 600px) {
     margin-top: 40px;
   }
 }
+
+// #map-contacts {
+  //   margin-bottom: -70px;
+  //   pointer-events: none;
+  // }
 
 
 .overlay {

@@ -252,7 +252,8 @@
         display: flex;
         flex-direction: column;
         content: "";
-        width: 385px;
+        width: 100%;
+        max-width: 385px;
         min-height: 385px;
         background: rgba(30, 32, 44, 0.58);
         backdrop-filter: blur(8px);
@@ -299,6 +300,8 @@
 
         .b-svg {
             margin-right: 12px;
+            width: 30px;
+            height: 17px;
 
 
             .fill {
@@ -392,6 +395,10 @@
         display: flex;
         justify-content: center;
         margin-top: 24px;
+
+        @media(max-width: 600px) {
+            display: none;
+        }
     }
 
 }

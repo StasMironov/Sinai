@@ -222,6 +222,7 @@
         margin-left: auto;
         letter-spacing: 0.3px;
         position: relative;
+        transition: .3s;
 
         @media(max-width: 768px) {
             margin-left: 0;
@@ -352,6 +353,10 @@
             .structure__status {
                 background-color: $ochre;
             }
+        }
+
+        a {
+            display: block;
         }
     }
 

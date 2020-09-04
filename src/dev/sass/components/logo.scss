@@ -1,7 +1,6 @@
 .logo {
     display: inline-flex;
     margin-right: 47px;
-    width: 214px;
     height: 48px;
 
     &__bloc {
@@ -15,6 +14,9 @@
 
     &__img {
         margin-right: 8px;
+        width: 105px;
+        max-width: 100%;
+        height: 48px;
 
         @media(max-width: 620px) {
             margin-right: 8px;
