@@ -1106,20 +1106,7 @@ $(() => {
     if ($('.index__slider').exists()) {
         try {
 
-            let isSafari = !!navigator.userAgent.match(/Version\/[\d\.]+.*Safari/);
 
-            if (isSafari) {
-                $(window).on('resize load', function () {
-                    let heigthSlider = 0;
-                    $('.index__slider').children().each(function () {
-                        heigthSlider += $(this).height();
-
-                    });
-                    console.log(heigthSlider);
-                    $('.index__slider').height(heigthSlider);
-                }
-                )
-            }
 
             const breakpoint = window.matchMedia('(min-width:641px)');
             let mySwiper;
@@ -1129,6 +1116,19 @@ $(() => {
                     if (mySwiper !== undefined) mySwiper.destroy(true, true);
                     return;
                 } else if (breakpoint.matches === false) {
+                    let isSafari = !!navigator.userAgent.match(/Version\/[\d\.]+.*Safari/);
+
+                    if (isSafari) {
+                        $(window).on('resize load', function () {
+                            let heigthSlider = 0;
+                            $('.index__slider').children().each(function () {
+                                heigthSlider += $(this).height();
+                            });
+                            console.log(heigthSlider);
+                            $('.index__slider').height(heigthSlider);
+                        }
+                        )
+                    }
                     return enableSwiper();
                 }
             };

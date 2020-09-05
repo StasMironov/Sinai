@@ -1070,19 +1070,6 @@ $(function () {
 
   if ($('.index__slider').exists()) {
     try {
-      var isSafari = !!navigator.userAgent.match(/Version\/[\d\.]+.*Safari/);
-
-      if (isSafari) {
-        $(window).on('resize load', function () {
-          var heigthSlider = 0;
-          $('.index__slider').children().each(function () {
-            heigthSlider += $(this).height();
-          });
-          console.log(heigthSlider);
-          $('.index__slider').height(heigthSlider);
-        });
-      }
-
       var breakpoint = window.matchMedia('(min-width:641px)');
       var mySwiper;
 
@@ -1091,6 +1078,19 @@ $(function () {
           if (mySwiper !== undefined) mySwiper.destroy(true, true);
           return;
         } else if (breakpoint.matches === false) {
+          var isSafari = !!navigator.userAgent.match(/Version\/[\d\.]+.*Safari/);
+
+          if (isSafari) {
+            $(window).on('resize load', function () {
+              var heigthSlider = 0;
+              $('.index__slider').children().each(function () {
+                heigthSlider += $(this).height();
+              });
+              console.log(heigthSlider);
+              $('.index__slider').height(heigthSlider);
+            });
+          }
+
           return enableSwiper();
         }
       };
