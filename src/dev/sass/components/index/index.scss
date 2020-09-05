@@ -4,7 +4,7 @@
         justify-content: space-between;
         position: absolute;
         width: calc(100% + 360px);
-        height: 100%;
+        //height: 100%;
 
         @media(max-width: 992px) {
             position: relative;
@@ -79,6 +79,7 @@
 
     &__slider {
         margin-top: 70px;
+        height: auto;
 
         .index__special {
             min-height: 766px;
@@ -172,6 +173,11 @@
 
         .swiper-pagination-bullet-active {
             opacity: 1;
+        }
+
+        .swiper-wrapper {
+            // min-height: 100px !important;
+            // height: auto;
         }
     }
 
@@ -397,8 +403,8 @@
         margin-top: 24px;
 
         @media(max-width: 600px) {
-            display: none;
-        }
+    display: none;
+}
     }
 
 }

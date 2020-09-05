@@ -8,6 +8,10 @@
         display: flex;
         justify-content: space-between;
         margin-top: 18px;
+
+        @media(max-width: 690px) {
+            flex-direction: column;
+        }
     }
 
     &__logo {
@@ -34,6 +38,7 @@
 
         @media(max-width: 640px) {
             flex-direction: column;
+            padding: 40px 0 25px;
         }
     }
 
@@ -43,16 +48,10 @@
 
     &__bloc {
         &--logo {
-
-
-            @media(max-width: 1300px) {}
-
-            @media(max-width: 992px) {}
-
-            @media(max-width: 768px) {}
+            @media(max-width: 640px) {
+                margin-right: 23px;
+            }
         }
-
-        @media(max-width: 768px) {}
     }
 
     &__phone {
@@ -92,12 +91,33 @@
         display: flex;
         flex-wrap: wrap;
         justify-content: space-between;
+
+        @media(max-width: 380px) {
+            flex-direction: column;
+        }
+    }
+
+    &__unit {
+        @media(max-width: 380px) {
+            display: flex;
+        }
+
+        &:not(:first-child) {
+            @media(max-width: 380px) {
+                margin-top: 25px;
+            }
+        }
     }
 
     &__link {
         display: block;
         width: auto;
         transition: .3s linear;
+
+        @media(max-width: 380px) {
+            width: 50%;
+            white-space: nowrap;
+        }
 
 
         &--active {
@@ -109,7 +129,9 @@
         }
     }
 
-    &__unit {}
+    &__ph {
+        line-height: 28px;
+    }
 
     &__bottom {
 
@@ -124,27 +146,21 @@
         width: 100%;
         max-width: 430px;
 
-        @media(max-width: 992px) {
-            // max-width: 600px;
-        }
-
         @media(max-width: 768px) {
-            //  max-width: 325px;
             margin-right: 25px;
         }
 
         @media(max-width: 640px) {
             margin-top: 20px;
         }
-    }
 
-    &__ref {
-        &--phone {
-            @media(max-width: 1124px) {
-                display: none;
-            }
+        @media(max-width: 380px) {
+            max-width: 230px;
+            margin-top: 43px;
         }
     }
+
+
 
     #btnUp {
         cursor: pointer;

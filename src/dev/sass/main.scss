@@ -414,9 +414,9 @@ button {
 }
 
 // #map-contacts {
-  //   margin-bottom: -70px;
-  //   pointer-events: none;
-  // }
+//   margin-bottom: -70px;
+//   pointer-events: none;
+// }
 
 
 .overlay {
@@ -447,6 +447,11 @@ button {
     }
   }
 }
+
+// html.sr .load-hidden {
+  //   visibility: hidden
+  // }
+
 
 
 @import "./components/footer.scss";

@@ -4,7 +4,12 @@ jQuery.fn.exists = function () {
     return $(this).length;
 }
 
+ScrollReveal({ mobile: false });
+
+
 document.addEventListener("DOMContentLoaded", function (event) {
+    const isSafari = !!navigator.userAgent.match(/Version\/[\d\.]+.*Safari/);
+
     if ($('.index-slider').exists()) {
         try {
             let projectContent = new Swiper('.index-slider', {
@@ -29,18 +34,11 @@ document.addEventListener("DOMContentLoaded", function (event) {
                         spaceBetween: 10,
                         touchRatio: 1,
                     },
-                    600: {
-                        autoplay: {
-                            delay: 1000
-                        }
-                    },
                     320: {
                         slidesPerView: 1,
                         spaceBetween: 10,
                         touchRatio: 1,
-                        autoplay: {
-                            delay: 1000
-                        }
+
 
                     }
                 }
@@ -54,7 +52,34 @@ document.addEventListener("DOMContentLoaded", function (event) {
         let adObj = $(element).html();
         let out = adObj;
         document.querySelector(place).innerHTML = out;
-        $(element).html('');
+        // console.log($(element))
+        $(element).remove();
+    }
+
+    if ($('.footer__bloc')) {
+        try {
+            const breakpoint = window.matchMedia('(min-width:641px)');
+
+            if (!breakpoint.matches === true) {
+                ObjAd('.footer__bloc--share', '.footer__share');
+            }
+        }
+        catch (err) {
+            console.log(err);
+        }
+    }
+
+    if ($('.footer__ref--phone').exists()) {
+        try {
+            const breakpoint = window.matchMedia('(min-width:1125px)');
+
+            if (!breakpoint.matches === true) {
+                ObjAd('.footer__ref--phone', '.footer__ph');
+            }
+        }
+        catch (err) {
+            console.log(err);
+        }
     }
 
     if ($('#aside').exists()) {
@@ -68,7 +93,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
             console.log(err);
         }
     }
-
 
 });
 
@@ -203,6 +227,8 @@ $(() => {
         //console.log(monthPay);
         // console.log(sumLoan);
     }
+
+
 
     if ($('#btnUp').exists()) {
         var btn = $('#btnUp');
@@ -1079,6 +1105,22 @@ $(() => {
 
     if ($('.index__slider').exists()) {
         try {
+
+            let isSafari = !!navigator.userAgent.match(/Version\/[\d\.]+.*Safari/);
+
+            if (isSafari) {
+                $(window).on('resize load', function () {
+                    let heigthSlider = 0;
+                    $('.index__slider').children().each(function () {
+                        heigthSlider += $(this).height();
+
+                    });
+                    console.log(heigthSlider);
+                    $('.index__slider').height(heigthSlider);
+                }
+                )
+            }
+
             const breakpoint = window.matchMedia('(min-width:641px)');
             let mySwiper;
 
@@ -1100,8 +1142,11 @@ $(() => {
                     grabCursor: true,
                     effect: 'slide',
                     slidesPerColumn: 3,
-                    // autoHeight: true,
-
+                    autoHeight: true,
+                    loop: true,
+                    autoplay: {
+                        delay: 5000,
+                    },
                     pagination: {
                         el: '.index__pag',
                         clickable: true
@@ -1109,7 +1154,7 @@ $(() => {
                     breakpoints: {
                         1920: {
                             slidesPerColumn: 3,
-                            spaceBetween: 16
+                            spaceBetween: 16,
                         },
                         640: {
                             slidesPerColumn: 1,
@@ -1120,11 +1165,14 @@ $(() => {
                             slidesPerColumn: 1,
                             slidesPerView: 1,
                             spaceBetween: 16,
-
                         }
                     }
                 });
+
+
             };
+
+
 
             breakpoint.addListener(breakpointChecker);
             breakpointChecker();
@@ -1787,7 +1835,7 @@ $(() => {
         let qtySlide = swiperCont.slides.length;
         let parentEl = bloc.querySelectorAll('.swiper-menu');
 
-        console.log(parentEl)
+        //console.log(parentEl)
 
         if (qtySlide > 0) {
             for (let i = 0; i < parentEl.length; i++) {
