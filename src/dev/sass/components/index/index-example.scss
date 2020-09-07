@@ -28,6 +28,10 @@
                 margin-top: 24px;
             }
         }
+
+        .mf-element {
+            margin-left: 0;
+        }
     }
 
     &__container {
@@ -145,6 +149,7 @@
 
     &__items {
         display: flex;
+        margin-top: 24px;
     }
 
     &__item {
@@ -213,4 +218,8 @@
     }
 
     .inner-slider__wrapper {}
+
+    .mf-include {
+        margin-top: 0;
+    }
 }

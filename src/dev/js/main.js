@@ -49,12 +49,49 @@ document.addEventListener("DOMContentLoaded", function (event) {
     }
 
     function ObjAd(element, place) {
-        let adObj = $(element).html();
-        let out = adObj;
-        document.querySelector(place).innerHTML = out;
-        console.log($(adObj))
-        $(element).remove();
+        // let adObj = $(element).html();
+        // let out = adObj;
+        // document.querySelector(place).innerHTML = out;
+        // console.log($(adObj))
+        // $(element).remove();
+
+        console.log($(element).length);
+
+        $(element).each(function (index) {
+            let adObj = $(this).html();
+            let out = adObj;
+            $(place).html(out);
+            $(this).remove();
+        });
     }
+
+    if ($('.inner-slider .mf-include')) {
+        try {
+            const breakpoint = window.matchMedia('(min-width:641px)');
+
+            if (!breakpoint.matches === true) {
+                ObjAd('.inner-slider .mf-element', '.inner-slider .mf-include');
+            }
+        }
+        catch (err) {
+            console.log(err);
+        }
+    }
+
+    if ($('.index-example .mf-include')) {
+        try {
+            const breakpoint = window.matchMedia('(min-width:641px)');
+
+            if (!breakpoint.matches === true) {
+                ObjAd('.index-example .mf-element', '.index-example .mf-include');
+            }
+        }
+        catch (err) {
+            console.log(err);
+        }
+    }
+
+    //.index-example__right
 
     if ($('.footer__bloc')) {
         try {
@@ -1045,7 +1082,7 @@ $(() => {
 
     if ($('.index-example__slider').exists()) {
         try {
-            let projectCer = new Swiper('.index-example__slider', {
+            let projectEx = new Swiper('.index-example__slider', {
                 slidesPerView: 1,
                 effect: 'fade',
                 fadeEffect: {
@@ -1064,6 +1101,21 @@ $(() => {
                             `/<span>${("" + total).slice(-2)}</span>`;
                     },
                 },
+                on: {
+                    slideChangeTransitionStart: function () {
+                        // console.log(this.activeIndex);
+                        updatePag('.index-example__slider .swiper-menu', this.activeIndex)
+                    },
+                    slideChangeTransitionEnd: function () {
+                        // console.log(this.activeIndex);
+                        updatePag('.index-example__slider .swiper-menu', this.activeIndex)
+                    },
+                },
+            });
+
+            createPag('.index-example__slider', projectEx);
+            $('.index-example__slider .swiper-menu').on('click', '.swiper-menu__item', function () {
+                checkPag(this, '.index-example__slider', projectEx);
             });
         } catch (err) {
             console.log(err);
@@ -1915,15 +1967,6 @@ $(() => {
             createPag('.inner-slider', projectImg);
             $('.inner-slider .swiper-menu').on('click', '.swiper-menu__item', function () {
                 checkPag(this, '.inner-slider', projectImg);
-
-                //console.log($(this))
-
-                // if ($(this).data('index') != index) {
-                //     $(this).removeClass('swiper-menu__item--active');
-                // } else {
-                //     $(this).addClass('swiper-menu__item--active');
-                // }
-
             });
         } catch (err) {
             console.log('Ошибка ' + err.name + ":" + err.message + "\n" + err.stack);

@@ -41,3 +41,13 @@
 .mf-bg {
     background-color: $gray-3;
 }
+
+.mf-element {
+    margin-left: auto;
+}
+
+.mf-include {
+    @media(max-width: 640px) {
+        margin-top: 16px;
+    }
+}

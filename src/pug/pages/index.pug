@@ -462,7 +462,7 @@ block content
 				.swiper-slide
 					.inner-slider__container.b-container
 						.inner-slider__pic(style="background-image: url(./img/index/p4.jpg)")
-						.mf-include test
+						.mf-include 
 						.inner-slider__box
 							.inner-slider__cover
 								.inner-slider__act
@@ -488,10 +488,12 @@ block content
 								img(src="./img/icon/plane.svg" alt="")
 								.inner-slider__word Выбрать планировку
 							.inner-slider__pagination
-							.swiper-menu#inner-pag
+							.mf-element
+								.swiper-menu
 				.swiper-slide
 					.inner-slider__container.b-container
 						.inner-slider__pic(style="background-image: url(./img/index/p3.jpg)")
+						.mf-include 
 						.inner-slider__box
 							.inner-slider__cover
 								.inner-slider__act
@@ -516,8 +518,9 @@ block content
 							.inner-slider__ref
 								img(src="./img/icon/plane.svg" alt="")
 								.inner-slider__word Выбрать планировку
-							.inner-slider__pagination
-							.swiper-menu
+							.inner-slider__paginationA
+							.mf-element
+								.swiper-menu
 		
 
 				
@@ -531,6 +534,7 @@ block content
 							.index-example__left
 								img(src="./img/index/p9.png" alt="")
 							.index-example__right
+								.mf-include 
 								.index-example__items
 									.index-example__item
 										.index-example__header Улица:
@@ -559,7 +563,8 @@ block content
 												</svg>
 										.btn__txt Выбрать свою планировку
 						.index-example__pagination
-							.swiper-menu 
+							.mf-element
+								.swiper-menu 
 							a(href="flats-floors.html").btn.btn--white
 									.btn__cover
 										.btn__button
@@ -581,6 +586,7 @@ block content
 							.index-example__left
 								img(src="./img/index/p9.png" alt="")
 							.index-example__right
+								.mf-include 
 								.index-example__items
 									.index-example__item
 										.index-example__header Улица:
@@ -609,7 +615,8 @@ block content
 											</svg>
 									.btn__txt Выбрать свою планировку
 						.index-example__pagination
-							.swiper-menu 
+							.mf-element
+								.swiper-menu 
 							a(href="flats-floors.html").btn.btn--white
 									.btn__cover
 										.btn__button
