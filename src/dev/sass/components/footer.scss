@@ -1,13 +1,13 @@
 .footer {
-    color: white;
+    color     : white;
     background: $black-1;
     margin-top: 70px;
 
     &__wrapper {
-        width: 100%;
-        display: flex;
+        width          : 100%;
+        display        : flex;
         justify-content: space-between;
-        margin-top: 18px;
+        margin-top     : 18px;
 
         @media(max-width: 690px) {
             flex-direction: column;
@@ -19,10 +19,10 @@
     }
 
     &__top {
-        display: flex;
+        display        : flex;
         justify-content: space-between;
-        padding: 40px 0 36px;
-        border-bottom: 1px solid $gray-1;
+        padding        : 40px 0 36px;
+        border-bottom  : 1px solid $gray-1;
 
         @media(max-width: 1300px) {
             // justify-content: space-between;
@@ -38,7 +38,7 @@
 
         @media(max-width: 640px) {
             flex-direction: column;
-            padding: 40px 0 25px;
+            padding       : 40px 0 25px;
         }
     }
 
@@ -81,15 +81,15 @@
         }
 
         @media(max-width: 768px) {
-            display: flex;
+            display       : flex;
             flex-direction: column;
-            margin-right: 25px;
+            margin-right  : 25px;
         }
     }
 
     &__items {
-        display: flex;
-        flex-wrap: wrap;
+        display        : flex;
+        flex-wrap      : wrap;
         justify-content: space-between;
 
         @media(max-width: 380px) {
@@ -110,12 +110,12 @@
     }
 
     &__link {
-        display: block;
-        width: auto;
+        display   : block;
+        width     : auto;
         transition: .3s linear;
 
         @media(max-width: 380px) {
-            width: 50%;
+            width      : 50%;
             white-space: nowrap;
         }
 
@@ -131,6 +131,10 @@
 
     &__ph {
         line-height: 28px;
+
+        @media(max-width: 500px) {
+            width: 222px;
+        }
     }
 
     &__bottom {
@@ -143,7 +147,7 @@
     }
 
     &__box {
-        width: 100%;
+        width    : 100%;
         max-width: 430px;
 
         @media(max-width: 768px) {
@@ -155,7 +159,7 @@
         }
 
         @media(max-width: 380px) {
-            max-width: 230px;
+            max-width : 230px;
             margin-top: 43px;
         }
     }
@@ -163,23 +167,23 @@
 
 
     #btnUp {
-        cursor: pointer;
+        cursor          : pointer;
         background-color: #34558b;
-        width: 38px;
-        height: 38px;
-        text-align: center;
-        border-radius: 4px;
-        position: fixed;
-        bottom: 40px;
-        right: 58px;
-        transition: background-color .3s, opacity .5s, visibility .5s;
-        opacity: 0;
-        visibility: hidden;
-        z-index: 100;
-        align-items: center;
-        justify-content: center;
-        display: flex;
-        box-shadow: 2px 2px 4px rgba(0, 0, 0, .15);
+        width           : 38px;
+        height          : 38px;
+        text-align      : center;
+        border-radius   : 4px;
+        position        : fixed;
+        bottom          : 40px;
+        right           : 58px;
+        transition      : background-color .3s, opacity .5s, visibility .5s;
+        opacity         : 0;
+        visibility      : hidden;
+        z-index         : 100;
+        align-items     : center;
+        justify-content : center;
+        display         : flex;
+        box-shadow      : 2px 2px 4px rgba(0, 0, 0, .15);
 
         @media(max-width: 768px) {
             right: 20px;
@@ -199,15 +203,15 @@
             }
 
             rect {
-                stroke: $ochre;
-                fill: black;
+                stroke      : $ochre;
+                fill        : black;
                 stroke-width: 1.5px;
             }
         }
     }
 
     .showBtn {
-        opacity: 1 !important;
+        opacity   : 1 !important;
         visibility: visible !important;
     }
 }

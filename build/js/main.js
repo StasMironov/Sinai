@@ -50,8 +50,8 @@ document.addEventListener("DOMContentLoaded", function (event) {
   function ObjAd(element, place) {
     var adObj = $(element).html();
     var out = adObj;
-    document.querySelector(place).innerHTML = out; // console.log($(element))
-
+    document.querySelector(place).innerHTML = out;
+    console.log($(adObj));
     $(element).remove();
   }
 
@@ -67,11 +67,23 @@ document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
 
-  if ($('.footer__ref--phone').exists()) {
+  if ($('.footer__bloc')) {
     try {
-      var _breakpoint = window.matchMedia('(min-width:1125px)');
+      var _breakpoint = window.matchMedia('(min-width:641px)');
 
       if (!_breakpoint.matches === true) {
+        ObjAd('.footer__bloc--share', '.footer__share');
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  if ($('.footer__ref--phone').exists()) {
+    try {
+      var _breakpoint2 = window.matchMedia('(min-width:1125px)');
+
+      if (!_breakpoint2.matches === true) {
         ObjAd('.footer__ref--phone', '.footer__ph');
       }
     } catch (err) {
@@ -81,9 +93,9 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
   if ($('#aside').exists()) {
     try {
-      var _breakpoint2 = window.matchMedia('(min-width:769px)');
+      var _breakpoint3 = window.matchMedia('(min-width:769px)');
 
-      if (!_breakpoint2.matches === true) {
+      if (!_breakpoint3.matches === true) {
         ObjAd('#aside', '#insert');
       }
     } catch (err) {
@@ -951,8 +963,8 @@ $(function () {
         spaceBetween: 42,
         effect: 'slide',
         loop: true,
-        autautoplay: {
-          delay: 1000,
+        autoplay: {
+          delay: 5000,
           disableOnInteraction: false
         },
         fadeEffect: {
@@ -1032,8 +1044,8 @@ $(function () {
         slidesPerView: 3,
         spaceBetween: 40,
         loop: true,
-        autautoplay: {
-          delay: 1000,
+        autoplay: {
+          delay: 5000,
           disableOnInteraction: false
         },
         pagination: {
@@ -1778,19 +1790,17 @@ $(function () {
     var index = $(contecsts).data('index');
     slider.slideTo(index);
     var arrItem = $(sliderBox).find('.swiper-menu__item');
-
-    for (var _i5 = 0; _i5 < arrItem.length; _i5++) {
-      if ($(arrItem[_i5]).data('index') == index) {
-        arrItem[_i5].classList.add('swiper-menu__item--active');
-      } else {
-        arrItem[_i5].classList.remove('swiper-menu__item--active');
-      }
-    }
-
-    $(contecst).addClass('swiper-menu__item--active');
+    updatePag(slider, index);
   }
 
-  if ($('.inner-slider').exists()) {}
+  function updatePag(slider, index) {
+    var arrItem = $(slider).find('.swiper-menu__item');
+    $(arrItem).each(function () {
+      if ($(this).data('index') == index) {
+        $(this).addClass('swiper-menu__item--active').siblings().removeClass('swiper-menu__item--active');
+      }
+    });
+  }
 
   if ($('.inner-slider').exists()) {
     try {
@@ -1813,14 +1823,21 @@ $(function () {
             return "<span>".concat(("" + i).slice(-2), "</span>") + "/<span>".concat(("" + total).slice(-2), "</span>");
           }
         },
-        onTouchMove: function onTouchMove(projectImg, event) {
-          alert(projectImg);
+        on: {
+          slideChangeTransitionStart: function slideChangeTransitionStart() {
+            // console.log(this.activeIndex);
+            updatePag('.inner-slider .swiper-menu', this.activeIndex);
+          },
+          slideChangeTransitionEnd: function slideChangeTransitionEnd() {
+            // console.log(this.activeIndex);
+            updatePag('.inner-slider .swiper-menu', this.activeIndex);
+          }
         }
       });
 
       createPag('.inner-slider', _projectImg);
       $('.inner-slider .swiper-menu').on('click', '.swiper-menu__item', function () {
-        checkPag(this, '.inner-slider', _projectImg); // console.log($(this))
+        checkPag(this, '.inner-slider', _projectImg); //console.log($(this))
         // if ($(this).data('index') != index) {
         //     $(this).removeClass('swiper-menu__item--active');
         // } else {

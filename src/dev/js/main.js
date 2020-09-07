@@ -52,8 +52,21 @@ document.addEventListener("DOMContentLoaded", function (event) {
         let adObj = $(element).html();
         let out = adObj;
         document.querySelector(place).innerHTML = out;
-        // console.log($(element))
+        console.log($(adObj))
         $(element).remove();
+    }
+
+    if ($('.footer__bloc')) {
+        try {
+            const breakpoint = window.matchMedia('(min-width:641px)');
+
+            if (!breakpoint.matches === true) {
+                ObjAd('.footer__bloc--share', '.footer__share');
+            }
+        }
+        catch (err) {
+            console.log(err);
+        }
     }
 
     if ($('.footer__bloc')) {
@@ -915,8 +928,6 @@ $(() => {
         }
     }
 
-
-
     if ($('.index-project__content').exists() && $('.index-project__img').exists()) {
         try {
             let projectContent = new Swiper('.index-project__content', {
@@ -956,8 +967,6 @@ $(() => {
         }
     }
 
-
-
     if ($('.index-project__example').exists()) {
         try {
             let projectEx = new Swiper('.index-project__example', {
@@ -985,8 +994,8 @@ $(() => {
                 spaceBetween: 42,
                 effect: 'slide',
                 loop: true,
-                autautoplay: {
-                    delay: 1000,
+                autoplay: {
+                    delay: 5000,
                     disableOnInteraction: false,
                 },
                 fadeEffect: {
@@ -1067,8 +1076,8 @@ $(() => {
                 slidesPerView: 3,
                 spaceBetween: 40,
                 loop: true,
-                autautoplay: {
-                    delay: 1000,
+                autoplay: {
+                    delay: 5000,
                     disableOnInteraction: false,
                 },
                 pagination: {
@@ -1105,9 +1114,6 @@ $(() => {
 
     if ($('.index__slider').exists()) {
         try {
-
-
-
             const breakpoint = window.matchMedia('(min-width:641px)');
             let mySwiper;
 
@@ -1168,12 +1174,7 @@ $(() => {
                         }
                     }
                 });
-
-
             };
-
-
-
             breakpoint.addListener(breakpointChecker);
             breakpointChecker();
         } catch (err) {
@@ -1184,7 +1185,6 @@ $(() => {
     if ($('.button').exists()) {
         try {
             let btnBg = document.querySelectorAll('.button');
-
 
             for (let i = 0; i < btnBg.length; i++) {
                 btnBg[i].addEventListener('mousemove', function (e) {
@@ -1231,7 +1231,6 @@ $(() => {
         catch (err) {
             console.log(err);
         }
-
     }
 
     function setHeaderHeight(child, parent) {
@@ -1867,28 +1866,16 @@ $(() => {
         slider.slideTo(index);
         let arrItem = $(sliderBox).find('.swiper-menu__item');
 
-
-        for (let i = 0; i < arrItem.length; i++) {
-            if ($(arrItem[i]).data('index') == index) {
-                arrItem[i].classList.add('swiper-menu__item--active')
-            }
-            else {
-                arrItem[i].classList.remove('swiper-menu__item--active')
-            }
-
-
-        }
-
-
-
-
-
-        $(contecst).addClass('swiper-menu__item--active');
-
+        updatePag(slider, index)
     }
 
-    if ($('.inner-slider').exists()) {
-
+    function updatePag(slider, index) {
+        let arrItem = $(slider).find('.swiper-menu__item');
+        $(arrItem).each(function () {
+            if ($(this).data('index') == index) {
+                $(this).addClass('swiper-menu__item--active').siblings().removeClass('swiper-menu__item--active');
+            }
+        })
     }
 
     if ($('.inner-slider').exists()) {
@@ -1913,16 +1900,23 @@ $(() => {
                             `/<span>${("" + total).slice(-2)}</span>`;
                     },
                 },
-                onTouchMove: function (projectImg, event) {
-                    alert(projectImg);
-                }
+                on: {
+                    slideChangeTransitionStart: function () {
+                        // console.log(this.activeIndex);
+                        updatePag('.inner-slider .swiper-menu', this.activeIndex)
+                    },
+                    slideChangeTransitionEnd: function () {
+                        // console.log(this.activeIndex);
+                        updatePag('.inner-slider .swiper-menu', this.activeIndex)
+                    },
+                },
             });
 
             createPag('.inner-slider', projectImg);
             $('.inner-slider .swiper-menu').on('click', '.swiper-menu__item', function () {
                 checkPag(this, '.inner-slider', projectImg);
 
-                // console.log($(this))
+                //console.log($(this))
 
                 // if ($(this).data('index') != index) {
                 //     $(this).removeClass('swiper-menu__item--active');
