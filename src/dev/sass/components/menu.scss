@@ -130,6 +130,7 @@
     &__item {
         cursor: pointer;
         transition: .3s linear;
+        opacity: 0;
 
         &:not(:first-child) {
             margin-top: 35px;

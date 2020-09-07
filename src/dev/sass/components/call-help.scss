@@ -212,4 +212,33 @@
             max-width: 280px;
         }
     }
+
+    &--popup {
+        max-width: 776px;
+        width: 100%;
+        margin-top: 0;
+
+        .call-help__bloc {
+            padding: 64px 156px 0;
+            margin-top: 0;
+        }
+
+        .call-help__btn {
+            width: calc(100% + 312px);
+            margin-left: -156px;
+            margin-top: 41px;
+        }
+
+        .form-project {
+            margin-top: 26px;
+        }
+
+        .form-project__group {
+            max-width: 100%;
+        }
+
+        .form-project__group .form-project__block:last-child {
+            max-width: 100%;
+        }
+    }
 }
