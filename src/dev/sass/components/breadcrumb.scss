@@ -8,10 +8,14 @@
         letter-spacing: -0.3px;
         transition: 400ms ease;
 
-        // &:hover {
-        //     color: $black-1;
-        //     opacity: 1;
-        // }
+        &:hover {
+            color: $black-1;
+            opacity: 1;
+
+            // &:after {
+ //     opacity: .5;
+ // }
+        }
 
         &:not(:last-child) {
             margin-right: 23px;

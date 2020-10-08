@@ -2043,4 +2043,15 @@ $(function () {
   // }
   // //console.log(projecPeriod);
 
+
+  if ($('.flats-basic__nav').exists()) {
+    try {
+      $('.flats-basic__nav').mCustomScrollbar({
+        theme: "minimal-dark",
+        mouseWheelPixels: 400
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  }
 });
