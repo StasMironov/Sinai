@@ -14,7 +14,8 @@
 									.building-filter__up 2 190 000
 									.building-filter__low 32 000 000
 								.flats-calc__range#price
-								<input type="hidden" name="send-price" id="send-result-price">
+								<input type="hidden" name="send-price-min" id="send-result-price-min">
+								<input type="hidden" name="send-price-max" id="send-result-price-max">
 				.flats-calc__row
 					.flats-calc__article Первый взнос
 					.flats-calc__box
@@ -26,7 +27,8 @@
 									.building-filter__up 2 190 000
 									.building-filter__low 32 000 000
 								.flats-calc__range#donat
-								<input type="hidden" name="send-donat" id="send-result-donat">
+								<input type="hidden" name="send-donat-min" id="send-result-donat-min">
+								<input type="hidden" name="send-donat-max" id="send-result-donat-max">
 				.flats-calc__row
 					.flats-calc__article Срок кредита
 					.flats-calc__box
@@ -38,7 +40,8 @@
 									.building-filter__up 1
 									.building-filter__low 30
 								.flats-calc__range#period
-								<input type="hidden" name="send-period" id="send-result-period">
+								<input type="hidden" name="send-period-min" id="send-result-period-min">
+								<input type="hidden" name="send-period-max" id="send-result-period-max">
 				.flats-calc__row.flats-calc__row--savings
 					.flats-calc__article Сумма материнского капитала
 					.flats-calc__box
@@ -50,7 +53,8 @@
 									.building-filter__up 0
 									.building-filter__low 616 617
 								.flats-calc__range#savings
-								<input type="hidden" name="send-savings" id="send-result-savings">
+								<input type="hidden" name="send-savings-min" id="send-result-savings-min">
+								<input type="hidden" name="send-savings-max" id="send-result-savings-max">
 				input(type="hidden")#calc-rezult
 			.flats-calc__special
 				//- .flats-calc__check
@@ -61,7 +65,7 @@
 					<label for="select2" >Есть материнский капитал</label>
 			.flats-calc__about
 				.flats-calc__unit
-					a(href="").btn.btn--decor
+					.btn.btn--decor.btn--call
 						.btn__cover
 							.btn__button
 								.btn__line

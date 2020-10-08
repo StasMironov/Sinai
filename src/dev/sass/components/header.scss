@@ -2,22 +2,16 @@
     min-height: 76px;
     position: relative;
 
-
     &__inner {
         display: flex;
         align-items: center;
         height: auto;
         width: 100%;
-        z-index: 200;
+        z-index: 212;
         background-color: white;
         transition: .4s;
         min-height: 76px;
     }
-
-    // height: auto;
-    // position: fixed;
-    // width: 100%;
-    // z-index: 200;
 
     &__container {
         padding-top: 14px;

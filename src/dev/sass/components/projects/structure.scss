@@ -173,6 +173,8 @@
             flex-direction: column;
             padding: 30px 16px 30px 16px;
             margin-top: 24px;
+            margin-left: -16px;
+            width: calc(100% + 32px);
         }
 
         .btn {
@@ -191,7 +193,8 @@
 
                     .b-svg {
                         stroke: $black-1;
-                        fill: none;
+                        fill: transparent;
+                        transition: .3s linear;
                     }
                 }
             }

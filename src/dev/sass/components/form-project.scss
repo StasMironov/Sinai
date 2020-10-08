@@ -43,6 +43,10 @@
             margin-top: 30px;
         }
 
+        .custom-checkbox {
+            opacity: 0;
+        }
+
         .custom-checkbox+label {
             font-style: normal;
             font-weight: normal;
@@ -132,6 +136,12 @@
             flex-direction: column;
             max-width: 100%;
         }
+
+        .btn__txt {
+            @media(max-width: 1024px) {
+                white-space: nowrap;
+            }
+        }
     }
 
     &__items {
@@ -196,6 +206,25 @@
             line-height: 26px;
             letter-spacing: 0.3px;
             color: $gray-1;
+            text-align: center;
+        }
+
+        &::-webkit-input-placeholder {
+            text-align: center;
+        }
+
+        &:-moz-placeholder {
+            /* Firefox 18- */
+            text-align: center;
+        }
+
+        &::-moz-placeholder {
+            /* Firefox 19+ */
+            text-align: center;
+        }
+
+        &:-ms-input-placeholder {
+            text-align: center;
         }
 
         &:focus,

@@ -218,19 +218,84 @@
         width: 100%;
         margin-top: 0;
 
+        @media(max-width: 768px) {
+            max-width: 387px;
+            width: 100%;
+        }
+
+        @media(max-width: 600px) {
+            max-width: 285px;
+            width: 100%;
+        }
+
         .call-help__bloc {
             padding: 64px 156px 0;
             margin-top: 0;
+
+            @media(max-width: 768px) {
+                padding: 46px 61px 0;
+            }
+
+            @media(max-width: 600px) {
+                padding: 46px 11px 0;
+            }
+        }
+
+        .call-help__article {
+
+            @media(max-width: 768px) {
+                max-width: 200px;
+                margin: 0 auto;
+            }
+
+            @media(max-width: 600px) {
+                max-width: 180px;
+            }
         }
 
         .call-help__btn {
             width: calc(100% + 312px);
             margin-left: -156px;
             margin-top: 41px;
+
+
+            @media(max-width: 1024px) {
+                padding: 30px 100px;
+            }
+
+            @media(max-width: 768px) {
+                width: calc(100% + 122px);
+                margin-left: -61px;
+                margin-top: 20px;
+            }
+
+            @media(max-width: 750px) {
+                min-width: initial;
+                max-width: initial;
+            }
+
+            @media(max-width: 600px) {
+                min-height: 90px;
+                width: calc(100% + 22px);
+                margin-left: -11px;
+                padding: 30px 65px;
+            }
+
+        }
+
+        .call-help__box:last-child {
+            @media(max-width: 768px) {
+                margin-top: 15px;
+            }
         }
 
         .form-project {
             margin-top: 26px;
+            min-width: 100%;
+
+            @media(max-width: 768px) {
+                margin-top: 20px;
+            }
         }
 
         .form-project__group {
@@ -239,6 +304,26 @@
 
         .form-project__group .form-project__block:last-child {
             max-width: 100%;
+
+            @media(max-width: 768px) {
+                margin-top: 16px;
+            }
+        }
+
+        .call-help__link {
+            @media(max-width: 768px) {
+                padding-top: 0;
+                margin: 0 auto;
+                max-width: 260px;
+            }
+        }
+
+        input {
+            &::placeholder {
+                @media(max-width: 768px) {
+                    text-align: center !important;
+                }
+            }
         }
     }
 }

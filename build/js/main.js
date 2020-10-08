@@ -48,12 +48,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
   }
 
   function ObjAd(element, place) {
-    // let adObj = $(element).html();
-    // let out = adObj;
-    // document.querySelector(place).innerHTML = out;
-    // console.log($(adObj))
-    // $(element).remove();
-    console.log($(element).length);
     $(element).each(function (index) {
       var adObj = $(this).html();
       var out = adObj;
@@ -136,7 +130,38 @@ document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 $(function () {
-  function rangeSlider(block, min, max, steps, input, parent) {
+  // function rangeSlider(block, min, max, steps, input, parent) {
+  //     if ($(block).exists()) {
+  //         try {
+  //             var slider = document.querySelector(block);
+  //             noUiSlider.create(slider, {
+  //                 start: [min, max],
+  //                 connect: true,
+  //                 step: steps,
+  //                 format: wNumb({
+  //                     decimals: 0
+  //                 }),
+  //                 range: {
+  //                     'min': min,
+  //                     'max': max
+  //                 }
+  //             });
+  //             let handle = $(block).closest(parent);
+  //             var skipValues = [
+  //                 $(handle).find('.building-filter__up'),
+  //                 $(handle).find('.building-filter__low')
+  //             ];
+  //             slider.noUiSlider.on('update', function (values, i) {
+  //                 $(skipValues[i]).text(values[i]);
+  //                 $(input).val(values);
+  //             });
+  //             return slider;
+  //         } catch (err) {
+  //             console.log(err);
+  //         }
+  //     }
+  // }
+  function rangeSlider(block, min, max, steps, input_min, input_max, parent) {
     if ($(block).exists()) {
       try {
         var slider = document.querySelector(block);
@@ -153,10 +178,12 @@ $(function () {
           }
         });
         var handle = $(block).closest(parent);
+        console.log(handle);
         var skipValues = [$(handle).find('.building-filter__up'), $(handle).find('.building-filter__low')];
         slider.noUiSlider.on('update', function (values, i) {
           $(skipValues[i]).text(values[i]);
-          $(input).val(values);
+          $(input_min).val(values[0]);
+          $(input_max).val(values[1]);
         });
         return slider;
       } catch (err) {
@@ -166,12 +193,10 @@ $(function () {
   }
 
   function checkVal(bloc, rangeBloc, sendBbox) {
-    var inputVal = $(rangeBloc).closest('.flats-calc__item').find('.flats-calc__block').data('min');
+    var inputVal = $(rangeBloc).closest('.flats-calc__item').find('.flats-calc__block').data('min'); // console.log($(bloc).val());
 
     if ($(bloc).val() != '') {
       inputVal = $(sendBbox).val();
-      inputVal = inputVal.split(',');
-      inputVal = inputVal[0];
     }
 
     return inputVal;
@@ -179,7 +204,7 @@ $(function () {
 
   function checkInput(bloc, min, max, slider) {
     if ($(bloc).exists()) {
-      calcPay(checkVal(bloc, '#price', '#send-result-price'), checkVal(bloc, '#donat', '#send-result-donat'), checkVal(bloc, '#period', '#send-result-period'), checkVal(bloc, '#savings', '#send-result-savings'));
+      calcPay(checkVal(bloc, '#price', '#send-result-price-min'), checkVal(bloc, '#donat', '#send-result-donat-min'), checkVal(bloc, '#period', '#send-result-period-min'), checkVal(bloc, '#savings', '#send-result-savings-min'));
       $(bloc).on('change', function () {
         if ($(this).val() > max) {
           slider.noUiSlider.set(max);
@@ -198,11 +223,11 @@ $(function () {
         // let firstDonat = checkVal(bloc, '#donat', '#send-result-donat');
         // let periodLoan = checkVal(bloc, '#period', '#send-result-period');
 
-        calcPay(checkVal(bloc, '#price', '#send-result-price'), checkVal(bloc, '#donat', '#send-result-donat'), checkVal(bloc, '#period', '#send-result-period'), checkVal(bloc, '#savings', '#send-result-savings'));
+        calcPay(checkVal(bloc, '#price', '#send-result-price-min'), checkVal(bloc, '#donat', '#send-result-donat-min'), checkVal(bloc, '#period', '#send-result-period-min'), checkVal(bloc, '#savings', '#send-result-savings-min'));
       });
       slider.noUiSlider.on('slide', function (values, handle) {
         $(bloc).val(values[0]);
-        calcPay(checkVal(bloc, '#price', '#send-result-price'), checkVal(bloc, '#donat', '#send-result-donat'), checkVal(bloc, '#period', '#send-result-period'), checkVal(bloc, '#savings', '#send-result-savings'));
+        calcPay(checkVal(bloc, '#price', '#send-result-price-min'), checkVal(bloc, '#donat', '#send-result-donat-min'), checkVal(bloc, '#period', '#send-result-period-min'), checkVal(bloc, '#savings', '#send-result-savings-min'));
       });
 
       if (bloc === '#flats-savings') {
@@ -245,7 +270,8 @@ $(function () {
       sumLoan = sumLoan - mCapital - monthPay;
       kofPay = percentRate * Math.pow(1 + percentRate, periodLoan) / (Math.pow(1 + percentRate, periodLoan) - 1);
       monthPay = Math.ceil(kofPay * sumLoan); //payment = percent + sumLoan + 
-      //console.log(monthPay);
+
+      $('#calc-rezult').val(monthPay); // console.log(monthPay);
     } else {
       kofPay = percentRate * Math.pow(1 + percentRate, periodLoan) / (Math.pow(1 + percentRate, periodLoan) - 1);
       kofPay = kofPay.toFixed(5);
@@ -262,6 +288,82 @@ $(function () {
     // console.log(sumLoan);
 
   }
+
+  if ($('.index-project__item').exists()) {
+    ScrollReveal().reveal('.index-project__item', {
+      delay: 600,
+      interval: 600,
+      distance: '150px',
+      enter: 'bottom',
+      origin: 'bottom',
+      duration: 600,
+      easing: 'ease-in',
+      mobile: false
+    });
+  }
+
+  if ($('.index-project__unit .title-2').exists()) {
+    ScrollReveal().reveal('.index-project__unit .title-2', {
+      delay: 500,
+      enter: 'center',
+      origin: 'center',
+      duration: 500,
+      easing: 'ease-in',
+      mobile: false
+    });
+  }
+
+  if ($('.index-project__paragraph').exists()) {
+    ScrollReveal().reveal('.index-project__paragraph', {
+      delay: 800,
+      interval: 600,
+      enter: 'center',
+      origin: 'center',
+      duration: 600,
+      easing: 'ease-in',
+      mobile: false
+    });
+  }
+
+  if ($('.index-certificate__left').exists()) {
+    ScrollReveal().reveal('.index-certificate__left', {
+      delay: 1000,
+      interval: 600,
+      distance: '150px',
+      enter: 'left',
+      origin: 'left',
+      duration: 600,
+      easing: 'ease-in',
+      mobile: false
+    });
+  }
+
+  if ($('.index-news__info').exists()) {
+    ScrollReveal().reveal('.index-news__info', {
+      delay: 500,
+      interval: 500,
+      enter: 'center',
+      origin: 'center',
+      duration: 500,
+      easing: 'ease-in',
+      mobile: false
+    });
+  }
+
+  if ($('.flats-basic__item').exists()) {
+    ScrollReveal().reveal('.flats-basic__item', {
+      interval: 500
+    });
+  }
+
+  if ($('.news__item').exists()) {
+    ScrollReveal().reveal('.news__item', {
+      interval: 500
+    });
+  } // flats-basic__item
+  // index-news__info
+  //index-certificate__left
+
 
   if ($('.header__inner').exists) {
     try {
@@ -349,26 +451,23 @@ $(function () {
   if ($('.burger').length > 0) {
     $('.burger').on('click', function () {
       $(this).toggleClass('burger--active');
+      $('.menu').toggleClass('menu--show');
+      $('html').css('overflow', 'hidden');
+      var duration = 0;
+      $('.menu__item').each(function (index) {
+        duration += 70 * index;
+      });
 
-      if ($('.overlay').exists()) {
-        $('.overlay').toggleClass('overlay--show');
-        $('html').css('overflow', 'hidden');
-        var duration = 0;
+      if ($('.menu__item').exists()) {
         $('.menu__item').each(function (index) {
-          duration += 70 * index;
+          $(this).delay(150 * index).animate({
+            "opacity": "1"
+          }, 150);
         });
-
-        if ($('.menu__item').exists()) {
-          $('.menu__item').each(function (index) {
-            $(this).delay(150 * index).animate({
-              "opacity": "1"
-            }, 150);
-          });
-          setTimeout(function () {
-            $('.header .share-bloc__items').addClass('share-bloc__items--active').removeClass('share-bloc__items--mf');
-          }, duration);
-          console.log(duration);
-        }
+        setTimeout(function () {
+          $('.header .share-bloc__items').addClass('share-bloc__items--active').removeClass('share-bloc__items--mf');
+        }, duration);
+        console.log(duration);
       }
     });
   }
@@ -439,8 +538,9 @@ $(function () {
 
   if ($('.menu__close').exists()) {
     $('.menu__close').on('click', function () {
-      $('.overlay').toggleClass('overlay--show');
       $('.burger').toggleClass('burger--active');
+      $('.menu').toggleClass('menu--show');
+      $('.menu__item--menu').removeClass('menu__item--active');
       $('html').css('overflow', 'auto');
       $('.menu__sub').removeClass('menu__sub--active').css({
         'max-height': 0
@@ -470,15 +570,26 @@ $(function () {
     $('.overlay').click(function (e) {
       // console.log(e.target.className.indexOf('overlay'));
       if (e.target.className.indexOf('overlay') != -1) {
-        $(this).toggleClass('overlay--show');
-        $('.burger').toggleClass('burger--active');
+        $(this).removeClass('overlay--show');
         $('html').css('overflow', 'auto');
+        $('.popup').removeClass('popup--show');
+      }
+    });
+  }
+
+  if ($('.menu').exists()) {
+    $('.menu').click(function (e) {
+      // console.log(e.target.className.indexOf('overlay'));
+      if (e.target.className.indexOf('menu--show') != -1) {
+        $('.burger').removeClass('burger--active');
+        $('html').css('overflow', 'auto');
+        $('.menu').removeClass('menu--show');
 
         if (!$('.burger').hasClass('burger--active')) {
           $('.menu__item').animate({
             'opacity': '0'
           }, 0.001);
-          $('.header .share-bloc__items').removeClass('share-bloc__items--active').addClass('share-bloc__items--mf'); //$('.header .share-bloc__items').removeClass('header share-bloc__items--active');
+          $('.header .share-bloc__items').removeClass('share-bloc__items--active').addClass('share-bloc__items--mf'); // $('.menu__item--menu').removeClass('menu__item--active');
         }
       }
     });
@@ -487,7 +598,7 @@ $(function () {
   if ($('#price').exists()) {
     var min = $('#price').closest('.flats-calc__item').find('.flats-calc__block').data('min');
     var max = $('#price').closest('.flats-calc__item').find('.flats-calc__block').data('max');
-    var slider = rangeSlider('#price', min, max, 10000, '#send-result-price', '.flats-calc__item');
+    var slider = rangeSlider('#price', min, max, 10000, '#send-result-price-min', '#send-result-price-max', '.flats-calc__item');
     $('#flat-price').val(min);
     checkInput('#flat-price', min, max, slider);
   }
@@ -497,7 +608,7 @@ $(function () {
 
     var _max = $('#donat').closest('.flats-calc__item').find('.flats-calc__block').data('max');
 
-    var _slider = rangeSlider('#donat', _min, _max, 1000, '#send-result-donat', '.flats-calc__item');
+    var _slider = rangeSlider('#donat', _min, _max, 1000, '#send-result-donat-min', '#send-result-donat-max', '.flats-calc__item');
 
     $('#flats-donat').val(_min);
     checkInput('#flats-donat', _min, _max, _slider);
@@ -508,7 +619,7 @@ $(function () {
 
     var _max2 = $('#period').closest('.flats-calc__item').find('.flats-calc__block').data('max');
 
-    var _slider2 = rangeSlider('#period', _min2, _max2, 1, '#send-result-period', '.flats-calc__item');
+    var _slider2 = rangeSlider('#period', _min2, _max2, 1, '#send-result-period-min', '#send-result-period-max', '.flats-calc__item');
 
     $('#flats-period').val(_min2);
     checkInput('#flats-period', _min2, _max2, _slider2);
@@ -519,7 +630,7 @@ $(function () {
 
     var _max3 = $('#savings').closest('.flats-calc__item').find('.flats-calc__block').data('max');
 
-    var _slider3 = rangeSlider('#savings', _min3, _max3, 1, '#send-result-savings', '.flats-calc__item');
+    var _slider3 = rangeSlider('#savings', _min3, _max3, 1, '#send-result-savings-min', '#send-result-savings-max', '.flats-calc__item');
 
     $('#flats-savings').val(_max3);
     checkInput('#flats-savings', _min3, _max3, _slider3);
@@ -615,19 +726,29 @@ $(function () {
   }
 
   if ($('.form-project').exists()) {
-    var stateButton = 0;
-    $('.form-project__field').each(function () {
-      $(this).on('input change', function () {
-        stateButton = checkField('.form-project__field');
+    $('.call-help').each(function () {
+      var fieldS = $(this).find('.form-project__field');
+      var btn = $(this).find('.call-help__btn');
+      var stateButton = 0;
+      var form = $(this).find('.form-project');
+      $(btn).on('click', function () {
+        $(form).submit();
+      });
+      $(fieldS).each(function () {
+        $(this).on('input change', function () {
+          stateButton = checkField(fieldS);
+          console.log(stateButton);
 
-        if (stateButton) {
-          $('.call-help__btn').prop('disabled', false);
-        } else {
-          $('.call-help__btn').prop('disabled', true);
-        }
+          if (stateButton) {
+            $(btn).prop('disabled', false);
+          } else {
+            $(btn).prop('disabled', true);
+          }
+        });
       });
     });
-  }
+  } //console.log($('.form-project'));
+
 
   if ($('#plan-slider').exists()) {
     try {
@@ -856,7 +977,7 @@ $(function () {
 
     var _max4 = $('#cost').closest('.building-filter__col').find('.building-filter__range').data('max');
 
-    rangeSlider('#cost', _min4, _max4, 100000, '#send-result-сost', '.building-filter__col');
+    rangeSlider('#cost', _min4, _max4, 100000, '#send-result-сost-min', '#send-result-сost-max', '.building-filter__col');
   }
 
   if ($('#area').exists()) {
@@ -864,7 +985,7 @@ $(function () {
 
     var _max5 = $('#area').closest('.building-filter__col').find('.building-filter__range').data('max');
 
-    rangeSlider('#area', _min5, _max5, 10, '#send-result-area', '.building-filter__col');
+    rangeSlider('#area', _min5, _max5, 10, '#send-result-area-min', '#send-result-area-max', '.building-filter__col');
   }
 
   if ($('#distance').exists()) {
@@ -872,13 +993,19 @@ $(function () {
 
     var _max6 = $('#distance').closest('.building-filter__col').find('.building-filter__range').data('max');
 
-    rangeSlider('#distance', _min6, _max6, 10, '#send-result-distance', '.building-filter__col');
+    rangeSlider('#distance', _min6, _max6, 10, '#send-result-distance-min', '#send-result-distance-max', '.building-filter__col');
   }
 
   if ($('.burger-filter').exists()) {
     $('.burger-filter').on('click', function () {
       $(this).toggleClass('burger-filter--active');
       $('.building-filter').toggleClass('building-filter--active');
+
+      if ($(this).hasClass('burger-filter--active')) {
+        $('html').css('overflow', "hidden");
+      } else {
+        $('html').css('overflow', "auto");
+      }
     });
   }
 
@@ -894,6 +1021,7 @@ $(function () {
       $('.btn--call').on('click', function () {
         $('.overlay').addClass('overlay--show');
         $('html').css('overflow', 'hidden');
+        $('.popup').addClass('popup--show');
       });
     } catch (err) {
       console.log(err);
@@ -1351,67 +1479,7 @@ $(function () {
     } catch (err) {
       console.log(err);
     }
-  } // $('.project-period__slider .swiper-menu').on('click', '.swiper-menu__item', function () {
-  //     checkPag(this, projectCer);
-  // });
-  // $('.index-example .swiper-menu').on('click', '.swiper-menu__item', function () {
-  //     checkPag(this, projecPeriod);
-  // });
-  // if ($('.index-example .swiper-menu').exists()) {
-  //     try {
-  //         $('.index-example .swiper-menu').on('click', '.swiper-menu__item', function () {
-  //             checkPag(this, projectCer);
-  //         });
-  //     } catch (err) {
-  //         console.log(err);
-  //     }
-  // }
-  // if ($('.swiper-menu').exists()) {
-  //     try {
-  //         $('.swiper-menu').on('click', '.swiper-menu__item', function () {
-  //             checkPag(this, projectImg);
-  //         });
-  //     } catch (err) {
-  //         console.log(err);
-  //     }
-  // }
-  // function checkPag(contecst, slider) {
-  //     let contecsts = contecst;
-  //     const index = $(contecsts).data('index');
-  //     slider.slideTo(index);
-  //     let temp = $(contecsts).attr('index', index);
-  //     for (let i = 0; i < temp.length; i++) {
-  //         $(contecsts).closest('.swiper-wrapper').find('.swiper-menu').each(function () {
-  //             $(this).find('.swiper-menu__item').each(function () {
-  //                 if ($(this).data('index') != index) {
-  //                     $(this).removeClass('swiper-menu__item--active');
-  //                 } else {
-  //                     $(this).addClass('swiper-menu__item--active');
-  //                 }
-  //             });
-  //         });
-  //     }
-  // }
-  // function createPag(block) {
-  //     console.log(block);
-  //     let bloc = document.querySelector(block);
-  //     let qtySlide = projectImg.slides.length;
-  //     let parentEl = bloc.querySelectorAll('.swiper-menu');
-  //     if (qtySlide > 0) {
-  //         for (let i = 0; i < parentEl.length; i++) {
-  //             for (let j = 0; j < qtySlide; j++) {
-  //                 let itemSlide = document.createElement('div');
-  //                 itemSlide.classList.add('swiper-menu__item');
-  //                 itemSlide.setAttribute('data-index', j);
-  //                 parentEl[i].appendChild(itemSlide);
-  //                 if (j == 0) {
-  //                     itemSlide.classList.add('swiper-menu__item--active');
-  //                 }
-  //             }
-  //         }
-  //     }
-  // }
-
+  }
 
   function getCoords(elem) {
     var box = elem[0].getBoundingClientRect();

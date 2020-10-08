@@ -39,6 +39,10 @@
             margin-right: 14px;
         }
 
+        & input {
+            opacity: 0;
+        }
+
         & input[type=checkbox] {
             position: absolute;
             height: 100%;

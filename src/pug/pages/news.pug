@@ -94,18 +94,6 @@ block content
 							.news__txt Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas varius tortor nibh, sit amet tempor nibh finibus et. Aenean eu enim justo. 
 							.news__publish 14.10.19
 			include ../modules/preloader
-			.structure__note.structure__note--mf40
-				.structure__word Узнайте больше о проектах или запишитесь на экскурсию. Оставьте свой номер, и мы перезвоним вам в течение рабочего дня.	
-				a(href="").btn.btn--decor.btn--black
-					.btn__cover
-						.btn__button
-							.btn__line
-								+svg('arr')
-							.btn__figure
-								+svg('figure')
-								.btn__decor
-									+svg('arr')
-						.btn__button.btn__button--laptop 
-							+svg('phone')
-					.btn__txt Заказать обратный звонок
+			.b-container
+				include ../modules/call.pug
 block script

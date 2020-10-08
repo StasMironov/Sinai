@@ -1,20 +1,57 @@
 .menu {
-    width: 100%;
-    background-color: white;
-    position: absolute;
-    transform: translateX(100%);
-    transition: .4s .1s linear;
-    min-height: 100vh;
+    position: fixed;
+    bottom: 0;
+    left: auto;
+    top: 0;
     right: 0;
+    overflow: auto;
     opacity: 0;
+    transition: .2s .1s linear;
+    zoom: 1;
+    z-index: 710;
     visibility: hidden;
-    width: 61vw;
-    max-width: 464px;
-    min-height: 100vh;
+    width: 100%;
+    max-width: 100%;
 
     @media(max-width:600px) {
         width: 100vh;
         max-width: 100%;
+    }
+
+    &--show {
+        width: 100%;
+        max-width: 100%;
+        background: rgba(0, 0, 0, .5);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#7F000000, endColorstr=#7F000000);
+        opacity: 1;
+        visibility: visible;
+
+        .menu__wrapper {
+            transform: translateX(0%);
+            opacity: 1;
+            visibility: visible;
+        }
+    }
+
+    &__wrapper {
+        width: 100%;
+        background-color: white;
+        position: absolute;
+
+        transition: .4s .1s linear;
+        min-height: 100vh;
+        right: 0;
+        opacity: 0;
+        visibility: hidden;
+        width: 61vw;
+        max-width: 464px;
+        min-height: 100vh;
+        transform: translateX(100%);
+
+        @media(max-width:600px) {
+            width: 100vh;
+            max-width: 100%;
+        }
     }
 
     &__txt {
@@ -186,7 +223,7 @@
 
         &--phone {
             @media(max-width:600px) {
-                margin-top: 67px !important;
+                //margin-top: 67px !important;
             }
         }
     }

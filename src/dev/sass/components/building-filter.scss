@@ -11,7 +11,7 @@
         transition: .35s ease-in-out;
         margin-top: 0;
         padding: 40px 16px;
-        z-index: 2;
+        z-index: 210;
         overflow: scroll;
         transform: translate(110%);
     }
@@ -245,7 +245,7 @@
         }
 
         &:last-child {
-            justify-content: normal;
+            justify-content: flex-start;
         }
     }
 

@@ -26,13 +26,13 @@ block content
 										</svg>
 								.building-filter__select
 									.building-filter__unit
-										<input id="type1" type="radio" name="type" value="Завенягина 1/2" checked>
+										<input id="type1" type="radio" name="type" value="Завенягина 1/2">
 										<label for="type1" title="Завенягина 1">Завенягина 1/2</label>
 									.building-filter__unit
 										<input id="type2" type="radio" name="type" value="улица имени Газеты Правда, 79">
 										<label for="type2" title="улица имени Газеты Правда, 79">улица имени Газеты Правда, 79</label>
 									.building-filter__unit
-										<input id="type3" type="radio" name="type" value="Завенягина 1/2" checked>
+										<input id="type3" type="radio" name="type" value="Завенягина 1/2">
 										<label for="type3" title="Завенягина 1">Завенягина 1/2</label>
 									.building-filter__unit
 										<input id="type4" type="radio" name="type" value="улица имени Газеты Правда, 79">
@@ -49,7 +49,7 @@ block content
 										</svg>
 								.building-filter__select
 									.building-filter__unit
-										<input id="period1" type="radio" name="period" value="2020" checked>
+										<input id="period1" type="radio" name="period" value="2020">
 										<label for="period1" type="radio" title="2020">2020</label>
 									.building-filter__unit
 										<input id="period2" type="radio" name="period" value="2019">
@@ -72,7 +72,7 @@ block content
 										</svg>
 								.building-filter__select
 									.building-filter__unit
-										<input id="floor1" type="radio" name="floor" value="1" checked>
+										<input id="floor1" type="radio" name="floor" value="1">
 										<label for="floor1" type="radio" title="1">1</label>
 									.building-filter__unit
 										<input id="floor2" type="radio" name="floor" value="2">
@@ -95,7 +95,7 @@ block content
 										</svg>
 								.building-filter__select
 									.building-filter__unit
-										<input id="period1" type="radio" name="floor-to" value="1" checked>
+										<input id="period1" type="radio" name="floor-to" value="1">
 										<label for="period1" type="radio" title="1">1</label>
 									.building-filter__unit
 										<input id="period2" type="radio" name="floor-to" value="2">
@@ -118,7 +118,7 @@ block content
 										</svg>
 								.building-filter__select
 									.building-filter__unit
-										<input id="room1" type="radio" name="room" value="1" checked>
+										<input id="room1" type="radio" name="room" value="1">
 										<label for="room1">1</label>
 									.building-filter__unit
 										<input id="room2" type="radio" name="room" value="2">
@@ -135,7 +135,8 @@ block content
 							.building-filter__up
 							.building-filter__low
 						div#cost
-						<input type="hidden" name="send-cost" id="send-result-сost" />
+						<input type="hidden" name="send-cost-min" id="send-result-сost-min" />
+						<input type="hidden" name="send-cost-max" id="send-result-сost-max" />
 					.building-filter__col.building-filter__col--plan
 						.building-filter__header Планировка
 						.building-filter__box
@@ -148,7 +149,7 @@ block content
 										</svg>
 								.building-filter__select
 									.building-filter__unit
-										<input id="plan1" type="radio" name="plan" value="2020" checked>
+										<input id="plan1" type="radio" name="plan" value="2020">
 										<label for="plan1" type="radio" title="2020">2020</label>
 									.building-filter__unit
 										<input id="plan2" type="radio" name="plan" value="2019">
@@ -172,7 +173,7 @@ block content
 										</svg>
 								.building-filter__select
 									.building-filter__unit
-										<input id="area1" type="radio" name="area" value="Все" checked>
+										<input id="area1" type="radio" name="area" value="Все">
 										<label for="area1">Все</label>
 									.building-filter__unit
 										<input id="area2" type="radio" name="area" value="Старт продаж">
@@ -189,7 +190,8 @@ block content
 							.building-filter__up
 							.building-filter__low
 						div#area
-						<input type="hidden" name="send-area" id="send-result-area" />
+						<input type="hidden" name="send-area-min" id="send-result-area-min" />
+						<input type="hidden" name="send-area-max" id="send-result-area-max" />
 					.building-filter__button
 						.building-filter__txt Свободно <span>55</span> квартир
 						button.btn.btn--decor#submit
@@ -218,16 +220,16 @@ block content
 								</svg>
 						.filter-sort__select
 							.filter-sort__unit
-								<input id="sorts1" type="radio" name="sorts" value="pay-min" checked>
+								<input id="sorts1" type="radio" name="sorts" value="pay-min">
 								<label for="sorts1" title="Цена (минимальная)">Цена (минимальная)</label>
 							.filter-sort__unit
-								<input id="sorts2" type="radio" name="sorts" value="pay-max" checked>
+								<input id="sorts2" type="radio" name="sorts" value="pay-max">
 								<label for="sorts2" title="Цена (максимальная)">Цена (максимальная)</label>
 							.filter-sort__unit
-								<input id="sorts3" type="radio" name="sorts" value="publish-min" checked>
+								<input id="sorts3" type="radio" name="sorts" value="publish-min">
 								<label for="sorts3" title="Площадь (минимальная)">Дата публикации (минимальная)</label>
 							.filter-sort__unit
-								<input id="sorts4" type="radio" name="sorts" value="publish-max" checked>
+								<input id="sorts4" type="radio" name="sorts" value="publish-max">
 								<label for="sorts4" title="Площадь (максимальная)">Дата публикации (максимальная)</label>
 	
 	.structure.structure--content.mf-bg

@@ -437,11 +437,11 @@ button {
     visibility: visible;
     //transform: translateY(0%);
 
-    .menu {
-      transform: translateY(0%);
-      opacity: 1;
-      visibility: visible;
-    }
+    // .menu {
+    //   transform: translateY(0%);
+    //   opacity: 1;
+    //   visibility: visible;
+    // }
 
     .popup {
       transform: scale(1);
@@ -451,7 +451,9 @@ button {
 
 }
 
-
+html.sr .flats-basic__item {
+  visibility: hidden;
+}
 
 
 @import "./components/popup.scss";

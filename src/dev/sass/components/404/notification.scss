@@ -1,11 +1,5 @@
 .notification {
-    // position: relative;
-    // background-repeat: no-repeat;
-    // background-image: url(../img/card/404.png);
-    // -webkit-background-size: auto 100%;
-    // background-size: auto 757px;
-    // background-position: center bottom;
-    // height: 100vh;
+    margin-bottom: -70px;
 
     &__bloc {
         display: flex;
@@ -63,8 +57,9 @@
         }
 
         @media(max-width: 768px) {
-            background-size: auto 72%;
-            background-position: 0%;
+            background-size: auto 97%;
+            background-position: 0 bottom;
+            height: 480px;
         }
     }
 

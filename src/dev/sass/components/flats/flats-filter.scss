@@ -1,4 +1,7 @@
 .flats-filter {
+
+
+
     &__date {
         letter-spacing: 1.3px;
         margin-top: 30px;
@@ -60,6 +63,12 @@
                     bottom: -3px;
                 }
             }
+        }
+    }
+
+    .btn--decor {
+        @media(max-width: 922px) {
+            padding: 0;
         }
     }
 }
