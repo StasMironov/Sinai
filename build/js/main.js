@@ -634,29 +634,34 @@ $(function () {
 
     $('#flats-savings').val(_max3);
     checkInput('#flats-savings', _min3, _max3, _slider3);
-  }
+  } // if ($('.structure__items--projects').exists()) {
+  //     $('.structure__items--projects').mCustomScrollbar({
+  //         theme: "minimal-dark",
+  //         mouseWheelPixels: 400,
+  //         callbacks: {
+  //             onTotalScroll: function () {
+  //                 console.log('End');
+  //             }
+  //         }
+  //     });
+  // }
 
-  if ($('.structure__items--projects').exists()) {
-    $('.structure__items--projects').mCustomScrollbar({
-      theme: "minimal-dark",
-      mouseWheelPixels: 400
-    });
-  }
 
   if ($('.second-flats__items').exists()) {
     $(window).on('resize load', function () {
       if ($(this).width() >= 768) {
         $('.second-flats__items').mCustomScrollbar({
           theme: "minimal-dark",
-          mouseWheelPixels: 400
+          mouseWheelPixels: 500,
+          callbacks: {
+            onTotalScroll: function onTotalScroll() {
+              console.log('End');
+            }
+          }
         });
       }
     });
-  } // $('#submit').on('click', function (event) {
-  //     event.preventDefault();
-  //     console.log($('.building-filter--second-flats'));
-  // })
-
+  }
 
   $('[data-name="savings"]').on('click', function () {
     if ($(this).prop("checked")) {
@@ -2048,7 +2053,11 @@ $(function () {
     try {
       $('.flats-basic__nav').mCustomScrollbar({
         theme: "minimal-dark",
-        mouseWheelPixels: 400
+        mouseWheelPixels: 400,
+        // scrollInertia: 0,
+        mouseWheel: {
+          preventDefault: true
+        }
       });
     } catch (err) {
       console.log(err);

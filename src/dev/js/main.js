@@ -8,6 +8,7 @@ ScrollReveal({ mobile: false });
 
 
 document.addEventListener("DOMContentLoaded", function (event) {
+
     const isSafari = !!navigator.userAgent.match(/Version\/[\d\.]+.*Safari/);
 
     if ($('.index-slider').exists()) {
@@ -662,30 +663,34 @@ $(() => {
         checkInput('#flats-savings', min, max, slider);
     }
 
-    if ($('.structure__items--projects').exists()) {
-        $('.structure__items--projects').mCustomScrollbar({
-            theme: "minimal-dark",
-            mouseWheelPixels: 400
-        });
-    }
+    // if ($('.structure__items--projects').exists()) {
+    //     $('.structure__items--projects').mCustomScrollbar({
+    //         theme: "minimal-dark",
+    //         mouseWheelPixels: 400,
+    //         callbacks: {
+    //             onTotalScroll: function () {
+    //                 console.log('End');
+    //             }
+    //         }
+    //     });
+    // }
+
 
     if ($('.second-flats__items').exists()) {
         $(window).on('resize load', function () {
             if ($(this).width() >= 768) {
                 $('.second-flats__items').mCustomScrollbar({
                     theme: "minimal-dark",
-                    mouseWheelPixels: 400
+                    mouseWheelPixels: 500,
+                    callbacks: {
+                        onTotalScroll: function () {
+                            console.log('End');
+                        }
+                    }
                 });
             }
         });
     }
-
-
-
-    // $('#submit').on('click', function (event) {
-    //     event.preventDefault();
-    //     console.log($('.building-filter--second-flats'));
-    // })
 
     $('[data-name="savings"]').on('click', function () {
         if ($(this).prop("checked")) {
@@ -2116,7 +2121,9 @@ $(() => {
         try {
             $('.flats-basic__nav').mCustomScrollbar({
                 theme: "minimal-dark",
-                mouseWheelPixels: 400
+                mouseWheelPixels: 400,
+                // scrollInertia: 0,
+                mouseWheel: { preventDefault: true }
             });
         }
         catch (err) {
