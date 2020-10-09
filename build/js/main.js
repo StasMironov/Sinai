@@ -645,23 +645,22 @@ $(function () {
   //         }
   //     });
   // }
+  // if ($('.second-flats__items').exists()) {
+  //     $(window).on('resize load', function () {
+  //         if ($(this).width() >= 768) {
+  //             $('.second-flats__items').mCustomScrollbar({
+  //                 theme: "minimal-dark",
+  //                 mouseWheelPixels: 500,
+  //                 callbacks: {
+  //                     onTotalScroll: function () {
+  //                         console.log('End');
+  //                     }
+  //                 }
+  //             });
+  //         }
+  //     });
+  // }
 
-
-  if ($('.second-flats__items').exists()) {
-    $(window).on('resize load', function () {
-      if ($(this).width() >= 768) {
-        $('.second-flats__items').mCustomScrollbar({
-          theme: "minimal-dark",
-          mouseWheelPixels: 500,
-          callbacks: {
-            onTotalScroll: function onTotalScroll() {
-              console.log('End');
-            }
-          }
-        });
-      }
-    });
-  }
 
   $('[data-name="savings"]').on('click', function () {
     if ($(this).prop("checked")) {
