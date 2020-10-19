@@ -21,6 +21,59 @@
             width: 100%;
             height: auto;
         }
+
+        .st1 {
+            transition: .3s ease;
+        }
+
+        g {
+            transition: .3s ease;
+        }
+
+        .default {
+            polygon.st1 {
+                // opacity: .3;
+                fill: rgba(0, 0, 0, 0.02);
+            }
+        }
+
+        .hover {
+
+            // opacity: .07;
+            // fill: black;
+
+        }
+
+        .hide {
+            polygon.st1 {
+                fill: rgba(0, 0, 0, 0);
+                pointer-events: none;
+            }
+        }
+
+        .hover {
+            polygon.st1 {
+                // fill: red;
+            }
+        }
+
+        .hover .active {
+            cursor: pointer;
+            pointer-events: all;
+
+            & .st1 {
+                fill: rgba(0, 0, 0, 0);
+                stroke-width: 4px;
+                stroke: $ochre;
+            }
+
+            &:hover {
+                & .st1 {
+                    fill: rgba(216, 187, 84, 0.6);
+                    stroke-width: 0;
+                }
+            }
+        }
     }
 
     &__grid {

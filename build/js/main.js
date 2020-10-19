@@ -165,6 +165,14 @@ $(function () {
     if ($(block).exists()) {
       try {
         var slider = document.querySelector(block);
+        var rangeBloc = $(block).closest(parent).find('.building-filter__range');
+
+        if (localStorage.getItem('minVal')) {
+          console.log(localStorage.getItem('minVal'));
+        } // console.log(rangeBloc.data('min'));
+        //building-filter__range
+
+
         noUiSlider.create(slider, {
           start: [min, max],
           connect: true,
@@ -177,10 +185,13 @@ $(function () {
             'max': max
           }
         });
-        var handle = $(block).closest(parent);
-        console.log(handle);
+        var handle = $(block).closest(parent); // console.log(handle);
+
         var skipValues = [$(handle).find('.building-filter__up'), $(handle).find('.building-filter__low')];
         slider.noUiSlider.on('update', function (values, i) {
+          localStorage.setItem('minVal', values[0]);
+          localStorage.setItem('maxVal', values[1]);
+          console.log($(block).siblings('.building-filter__range'));
           $(skipValues[i]).text(values[i]);
           $(input_min).val(values[0]);
           $(input_max).val(values[1]);
@@ -2060,6 +2071,29 @@ $(function () {
       });
     } catch (err) {
       console.log(err);
+    }
+  }
+
+  if ($('.flats-basic__floor').exists()) {
+    var grpHover = document.querySelectorAll('.flats-basic__floor .hover g');
+    var grpDefault = document.querySelectorAll('.flats-basic__floor .default g');
+
+    for (var _i5 = 0; _i5 < grpHover.length; _i5++) {
+      grpHover[_i5].setAttribute('id', 'h' + _i5);
+
+      grpDefault[_i5].setAttribute('id', 'd' + _i5);
+
+      grpHover[_i5].onclick = function () {
+        var url = this.getAttribute('data-url');
+        document.location.host;
+        location.assign(document.location.href + url);
+      };
+
+      if (!grpHover[_i5].classList.contains('active') && !grpHover[_i5].classList.contains('current')) {
+        grpHover[_i5].classList.add('hide');
+      } else {
+        grpDefault[_i5].classList.add('hide');
+      }
     }
   }
 });

@@ -180,6 +180,18 @@ $(() => {
         if ($(block).exists()) {
             try {
                 var slider = document.querySelector(block);
+
+                let rangeBloc = $(block).closest(parent).find('.building-filter__range');
+
+
+                if (localStorage.getItem('minVal')) {
+                    console.log(localStorage.getItem('minVal'));
+                }
+
+                // console.log(rangeBloc.data('min'));
+
+                //building-filter__range
+
                 noUiSlider.create(slider, {
                     start: [min, max],
                     connect: true,
@@ -194,7 +206,7 @@ $(() => {
                 });
 
                 let handle = $(block).closest(parent);
-                console.log(handle);
+                // console.log(handle);
 
                 var skipValues = [
                     $(handle).find('.building-filter__up'),
@@ -204,6 +216,13 @@ $(() => {
 
 
                 slider.noUiSlider.on('update', function (values, i) {
+
+                    localStorage.setItem('minVal', values[0]);
+                    localStorage.setItem('maxVal', values[1]);
+
+                    console.log($(block).siblings('.building-filter__range'));
+
+
                     $(skipValues[i]).text(values[i]);
                     $(input_min).val(values[0]);
                     $(input_max).val(values[1]);
@@ -231,6 +250,8 @@ $(() => {
             calcPay(checkVal(bloc, '#price', '#send-result-price-min'), checkVal(bloc, '#donat', '#send-result-donat-min'), checkVal(bloc, '#period', '#send-result-period-min'), checkVal(bloc, '#savings', '#send-result-savings-min'));
 
             $(bloc).on('change', function () {
+
+
                 if ($(this).val() > max) {
                     slider.noUiSlider.set(max);
                     $(this).val(max);
@@ -244,8 +265,9 @@ $(() => {
                 slider.noUiSlider.set([this.value, null]);
                 slider.noUiSlider.on('update', function (values, handle) {
                     $(bloc).val(values[0]);
-
                 });
+
+
 
                 // let priceFlat = checkVal(bloc, '#price', '#send-result-price');
                 // let firstDonat = checkVal(bloc, '#donat', '#send-result-donat');
@@ -255,6 +277,7 @@ $(() => {
             });
 
             slider.noUiSlider.on('slide', function (values, handle) {
+
                 $(bloc).val(values[0]);
                 calcPay(checkVal(bloc, '#price', '#send-result-price-min'), checkVal(bloc, '#donat', '#send-result-donat-min'), checkVal(bloc, '#period', '#send-result-period-min'), checkVal(bloc, '#savings', '#send-result-savings-min'));
             });
@@ -2128,6 +2151,29 @@ $(() => {
         }
         catch (err) {
             console.log(err);
+        }
+    }
+
+    if ($('.flats-basic__floor').exists()) {
+        let grpHover = document.querySelectorAll('.flats-basic__floor .hover g');
+        let grpDefault = document.querySelectorAll('.flats-basic__floor .default g');
+
+        for (let i = 0; i < grpHover.length; i++) {
+            grpHover[i].setAttribute('id', 'h' + i);
+            grpDefault[i].setAttribute('id', 'd' + i);
+
+            grpHover[i].onclick = function () {
+                const url = this.getAttribute('data-url');
+                document.location.host
+                location.assign(document.location.href + url);
+            }
+
+            if (!grpHover[i].classList.contains('active') && !grpHover[i].classList.contains('current')) {
+                grpHover[i].classList.add('hide');
+            }
+            else {
+                grpDefault[i].classList.add('hide');
+            }
         }
     }
 });
