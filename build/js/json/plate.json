@@ -1,0 +1,126 @@
+{
+    "entranceCount": "2",
+    "floorsCount": 10,
+    "entrances": [
+        {
+            "floors": {
+                "7": {
+                    "flats": [
+                        {
+                            "id": 2,
+                            "rooms": 3,
+                            "status": 1,
+                            "statusName": "Свободно"
+                        },
+                        {
+                            "id": 5,
+                            "rooms": 2,
+                            "status": 1,
+                            "statusName": "Свободно"
+                        },
+                        {
+                            "id": 8,
+                            "rooms": 3,
+                            "status": 1,
+                            "statusName": "Продано"
+                        },
+                        {
+                            "id": 13,
+                            "rooms": 1,
+                            "status": 1,
+                            "statusName": "Свободно"
+                        }
+                    ]
+                },
+                "6": {
+                    "flats": [
+                        {
+                            "id": 2,
+                            "rooms": 3,
+                            "status": 1,
+                            "statusName": "Свободно"
+                        },
+                        {
+                            "id": 5,
+                            "rooms": 2,
+                            "status": 1,
+                            "statusName": "Свободно"
+                        },
+                        {
+                            "id": 8,
+                            "rooms": 3,
+                            "status": 1,
+                            "statusName": "Продано"
+                        },
+                        {
+                            "id": 13,
+                            "rooms": 1,
+                            "status": 1,
+                            "statusName": "Свободно"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "floors": {
+                "7": {
+                    "flats": [
+                        {
+                            "id": 2,
+                            "rooms": 3,
+                            "status": 1,
+                            "statusName": "Свободно"
+                        },
+                        {
+                            "id": 5,
+                            "rooms": 2,
+                            "status": 1,
+                            "statusName": "Свободно"
+                        },
+                        {
+                            "id": 8,
+                            "rooms": 3,
+                            "status": 1,
+                            "statusName": "Продано"
+                        },
+                        {
+                            "id": 13,
+                            "rooms": 1,
+                            "status": 1,
+                            "statusName": "Свободно"
+                        }
+                    ]
+                },
+                "6": {
+                    "flats": [
+                        {
+                            "id": 2,
+                            "rooms": 3,
+                            "status": 1,
+                            "statusName": "Свободно"
+                        },
+                        {
+                            "id": 5,
+                            "rooms": 2,
+                            "status": 1,
+                            "statusName": "Свободно"
+                        },
+                        {
+                            "id": 8,
+                            "rooms": 3,
+                            "status": 1,
+                            "statusName": "Продано"
+                        },
+                        {
+                            "id": 13,
+                            "rooms": 1,
+                            "status": 1,
+                            "statusName": "Свободно"
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}

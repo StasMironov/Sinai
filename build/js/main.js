@@ -130,6 +130,39 @@ document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 $(function () {
+  function loadJSON(callback) {
+    var xobj = new XMLHttpRequest();
+    xobj.overrideMimeType("application/json");
+    xobj.open('GET', './js/json/plate.json', true); // Replace 'my_data' with the path to your file
+
+    xobj.onreadystatechange = function () {
+      if (xobj.readyState == 4 && xobj.status == "200") {
+        // Required use of an anonymous callback as .open will NOT return a value but simply returns undefined in asynchronous mode
+        callback(xobj.responseText);
+      }
+    };
+
+    xobj.send(null);
+  }
+
+  loadJSON(function (response) {
+    // Parse JSON string into object
+    var flatsInfo = JSON.parse(response);
+    var parentBloc = document.getElementById('plate');
+    console.log(flatsInfo.entranceCount);
+
+    for (var _i = 0; _i < flatsInfo.entranceCount; _i++) {
+      var corpus = document.createElement('div');
+      var labelCorpus = document.createElement('div');
+      corpus.setAttribute('class', 'flats-plate__item');
+      labelCorpus.setAttribute('class', 'flats-plate__label');
+      corpus.append(labelCorpus);
+      parentBloc.append(corpus);
+    }
+  }); // let temp = fetch("./js/json/plate.json")
+  //     .then(response => response.json())
+  //     .then(json => json);
+  // console.log(temp);
   // function rangeSlider(block, min, max, steps, input, parent) {
   //     if ($(block).exists()) {
   //         try {
@@ -161,6 +194,7 @@ $(function () {
   //         }
   //     }
   // }
+
   function rangeSlider(block, min, max, steps, input_min, input_max, parent) {
     if ($(block).exists()) {
       try {
@@ -1139,8 +1173,8 @@ $(function () {
     try {
       var truncate = document.querySelectorAll(".index-content__txt");
 
-      for (var _i = 0; _i < truncate.length; _i++) {
-        $clamp(truncate[_i], {
+      for (var _i2 = 0; _i2 < truncate.length; _i2++) {
+        $clamp(truncate[_i2], {
           clamp: 4,
           // Число строк
           useNativeClamp: false
@@ -1422,20 +1456,20 @@ $(function () {
       (function () {
         var btnBg = document.querySelectorAll('.button');
 
-        var _loop = function _loop(_i2) {
-          btnBg[_i2].addEventListener('mousemove', function (e) {
+        var _loop = function _loop(_i3) {
+          btnBg[_i3].addEventListener('mousemove', function (e) {
             var event = e;
             this.classList.add('button-bg');
-            bgMove(btnBg[_i2], event);
+            bgMove(btnBg[_i3], event);
           });
 
-          btnBg[_i2].addEventListener('mouseleave', function () {
+          btnBg[_i3].addEventListener('mouseleave', function () {
             this.classList.remove('button-bg');
           });
         };
 
-        for (var _i2 = 0; _i2 < btnBg.length; _i2++) {
-          _loop(_i2);
+        for (var _i3 = 0; _i3 < btnBg.length; _i3++) {
+          _loop(_i3);
         }
       })();
     } catch (err) {
@@ -1666,9 +1700,9 @@ $(function () {
             if (flying) {
               markerArr[_temp].classList.add('marker--active');
 
-              for (var _i3 = 0; _i3 < markerArr.length; _i3++) {
-                if (_i3 != _temp) {
-                  markerArr[_i3].classList.remove('marker--active');
+              for (var _i4 = 0; _i4 < markerArr.length; _i4++) {
+                if (_i4 != _temp) {
+                  markerArr[_i4].classList.remove('marker--active');
                 }
               }
 
@@ -1978,7 +2012,7 @@ $(function () {
     var parentEl = bloc.querySelectorAll('.swiper-menu'); //console.log(parentEl)
 
     if (qtySlide > 0) {
-      for (var _i4 = 0; _i4 < parentEl.length; _i4++) {
+      for (var _i5 = 0; _i5 < parentEl.length; _i5++) {
         for (var j = 0; j < qtySlide; j++) {
           var itemSlide = document.createElement('div');
           itemSlide.classList.add('swiper-menu__item');
@@ -1988,7 +2022,7 @@ $(function () {
             itemSlide.classList.add('swiper-menu__item--active');
           }
 
-          parentEl[_i4].appendChild(itemSlide);
+          parentEl[_i5].appendChild(itemSlide);
         }
       }
     }
@@ -2078,22 +2112,33 @@ $(function () {
     var grpHover = document.querySelectorAll('.flats-basic__floor .hover g');
     var grpDefault = document.querySelectorAll('.flats-basic__floor .default g');
 
-    for (var _i5 = 0; _i5 < grpHover.length; _i5++) {
-      grpHover[_i5].setAttribute('id', 'h' + _i5);
+    for (var _i6 = 0; _i6 < grpHover.length; _i6++) {
+      grpHover[_i6].setAttribute('id', 'h' + _i6);
 
-      grpDefault[_i5].setAttribute('id', 'd' + _i5);
+      grpDefault[_i6].setAttribute('id', 'd' + _i6);
 
-      grpHover[_i5].onclick = function () {
+      grpHover[_i6].onclick = function () {
         var url = this.getAttribute('data-url');
         document.location.host;
-        location.assign(document.location.href + url);
+        location.assign(document.location.origin + url);
       };
 
-      if (!grpHover[_i5].classList.contains('active') && !grpHover[_i5].classList.contains('current')) {
-        grpHover[_i5].classList.add('hide');
+      if (!grpHover[_i6].classList.contains('active') && !grpHover[_i6].classList.contains('current')) {
+        grpHover[_i6].classList.add('hide');
       } else {
-        grpDefault[_i5].classList.add('hide');
+        grpDefault[_i6].classList.add('hide');
       }
     }
+  }
+
+  if ($('.plate-box__slider').exists()) {
+    var plateSlider = new Swiper('.plate-box__slider', {
+      slidesPerView: '1',
+      spaceBetween: 40,
+      effect: 'fade',
+      fadeEffect: {
+        crossFade: true
+      }
+    });
   }
 });

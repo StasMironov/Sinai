@@ -140,6 +140,45 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
 $(() => {
 
+    function loadJSON(callback) {
+
+        var xobj = new XMLHttpRequest();
+        xobj.overrideMimeType("application/json");
+        xobj.open('GET', './js/json/plate.json', true); // Replace 'my_data' with the path to your file
+        xobj.onreadystatechange = function () {
+            if (xobj.readyState == 4 && xobj.status == "200") {
+                // Required use of an anonymous callback as .open will NOT return a value but simply returns undefined in asynchronous mode
+                callback(xobj.responseText);
+            }
+        };
+        xobj.send(null);
+    }
+
+    loadJSON(function (response) {
+        // Parse JSON string into object
+        let flatsInfo = JSON.parse(response);
+        let parentBloc = document.getElementById('plate');
+
+        console.log(flatsInfo.entranceCount);
+
+        for (let i = 0; i < flatsInfo.entranceCount; i++) {
+            let corpus = document.createElement('div');
+            let labelCorpus = document.createElement('div');
+            corpus.setAttribute('class', 'flats-plate__item');
+            labelCorpus.setAttribute('class', 'flats-plate__label');
+
+            corpus.append(labelCorpus);
+            parentBloc.append(corpus);
+
+        }
+    });
+
+    // let temp = fetch("./js/json/plate.json")
+    //     .then(response => response.json())
+    //     .then(json => json);
+
+    // console.log(temp);
+
     // function rangeSlider(block, min, max, steps, input, parent) {
     //     if ($(block).exists()) {
     //         try {
@@ -2165,7 +2204,7 @@ $(() => {
             grpHover[i].onclick = function () {
                 const url = this.getAttribute('data-url');
                 document.location.host
-                location.assign(document.location.href + url);
+                location.assign(document.location.origin + url);
             }
 
             if (!grpHover[i].classList.contains('active') && !grpHover[i].classList.contains('current')) {
@@ -2175,5 +2214,16 @@ $(() => {
                 grpDefault[i].classList.add('hide');
             }
         }
+    }
+
+    if ($('.plate-box__slider').exists()) {
+        let plateSlider = new Swiper('.plate-box__slider', {
+            slidesPerView: '1',
+            spaceBetween: 40,
+            effect: 'fade',
+            fadeEffect: {
+                crossFade: true
+            },
+        });
     }
 });
