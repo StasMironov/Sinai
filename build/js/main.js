@@ -148,16 +148,109 @@ $(function () {
   loadJSON(function (response) {
     // Parse JSON string into object
     var flatsInfo = JSON.parse(response);
-    var parentBloc = document.getElementById('plate');
-    console.log(flatsInfo.entranceCount);
+    var parentBloc = document.getElementById('plate'); // console.log(flatsInfo.entrances);
 
-    for (var _i = 0; _i < flatsInfo.entranceCount; _i++) {
+    for (var key in flatsInfo.entrances) {
+      //console.log(key);
       var corpus = document.createElement('div');
       var labelCorpus = document.createElement('div');
-      corpus.setAttribute('class', 'flats-plate__item');
-      labelCorpus.setAttribute('class', 'flats-plate__label');
+      var wrapperPlate = document.createElement('div');
+      corpus.setAttribute('class', 'plate-box__item');
+      wrapperPlate.setAttribute('class', 'plate-box__grid');
+      labelCorpus.setAttribute('class', 'plate-box__label');
+      corpus.append(wrapperPlate);
       corpus.append(labelCorpus);
       parentBloc.append(corpus);
+      labelCorpus.textContent = key;
+      var floorsCorpus = flatsInfo.entrances[key].floors; // Этажи с квартирами в каждом подъезде
+
+      var properties = Object.keys(floorsCorpus).reverse();
+
+      for (var j = 0; j < properties.length; j++) {
+        var flats = floorsCorpus[properties[j]].flats;
+        var boxFlats = document.createElement('div');
+        boxFlats.setAttribute('class', 'plate-box__case');
+        wrapperPlate.append(boxFlats);
+
+        for (var k = 0; k < flats.length; k++) {
+          //Вывод квартир
+          var plate = document.createElement('div');
+          var status = flats[k].status;
+          plate.setAttribute('class', 'plate-box__flat');
+          var plateObj = {
+            status: flats[k].statusName,
+            rooms: flats[k].rooms,
+            about: flats[k].about,
+            scheme: flats[k].scheme,
+            price: flats[k].price
+          };
+          plateObj = JSON.stringify(plateObj); // plateObj = JSON.parse(plateObj);
+          //console.log(plateObj);
+
+          plate.setAttribute('data-flat', plateObj); //console.log(flats[k].statusName);
+
+          plate.textContent = flats[k].rooms;
+          boxFlats.append(plate);
+
+          switch (status) {
+            case 1:
+              plate.classList.add('plate-box__flat--free');
+              break;
+
+            case 2:
+              plate.classList.add('plate-box__flat--take');
+              break;
+
+            case 3:
+              plate.classList.add('plate-box__flat--sold');
+              break;
+
+            case 4:
+              plate.classList.add('plate-box__flat--booked');
+              break;
+          }
+        }
+      }
+    }
+
+    if ($('.plate-box__flat').exists()) {
+      $('.plate-box__flat').each(function () {
+        $(this).on('mouseenter', function () {
+          var coordsTop = $('.plate-box__canvas').position().top - 70,
+              coordsLeft = $('.plate-box__canvas').position().left - 385;
+          var popup = '<div class="plate-popup"><div class="plate-popup__inner">';
+          popup += '<div class="plate-popup__top">';
+          popup += '<div class="plate-popup__unit plate-popup__unit--qty">2к квартира</div>';
+          popup += '<div class="plate-popup__unit plate-popup__unit--price">от 2,5 млн</div>';
+          popup += '</div>';
+          popup += '<div class="plate-popup__bottom">';
+          popup += '<div class="plate-popup__status">Свободно</div>';
+          popup += '<div class="plate-popup__func"><a class="plate-popup__link plate-popup__link--about" href="javascript:void(0);">Подробнее</a><a class="plate-popup__link plate-popup__link--scheme" href="javascript:void(0);">Планировка</a></div>';
+          popup += '</div>';
+          popup += '</div>';
+          popup += '</div>';
+          $(this).append(popup);
+          $('.plate-popup').addClass('plate-popup--show').css({
+            'top': coordsTop,
+            'left': coordsLeft
+          });
+          var dataObj = $(this).data("flat"),
+              rooms = dataObj.rooms,
+              status = dataObj.status,
+              aboutLink = dataObj.about,
+              scheme = dataObj.scheme,
+              price = dataObj.price;
+          $('.plate-popup__unit--qty').text(rooms);
+          $('.plate-popup__unit--price').text(price);
+          $('.plate-popup__status').text(status);
+          $('.plate-popup__link--about').attr('href', aboutLink);
+          $('.plate-popup__link--scheme').attr('href', scheme);
+          console.log(dataObj.rooms);
+        });
+        $(this).on('mouseleave', function () {
+          $('.plate-popup').remove();
+        });
+      });
     }
   }); // let temp = fetch("./js/json/plate.json")
   //     .then(response => response.json())
@@ -1173,8 +1266,8 @@ $(function () {
     try {
       var truncate = document.querySelectorAll(".index-content__txt");
 
-      for (var _i2 = 0; _i2 < truncate.length; _i2++) {
-        $clamp(truncate[_i2], {
+      for (var _i = 0; _i < truncate.length; _i++) {
+        $clamp(truncate[_i], {
           clamp: 4,
           // Число строк
           useNativeClamp: false
@@ -1456,20 +1549,20 @@ $(function () {
       (function () {
         var btnBg = document.querySelectorAll('.button');
 
-        var _loop = function _loop(_i3) {
-          btnBg[_i3].addEventListener('mousemove', function (e) {
+        var _loop = function _loop(_i2) {
+          btnBg[_i2].addEventListener('mousemove', function (e) {
             var event = e;
             this.classList.add('button-bg');
-            bgMove(btnBg[_i3], event);
+            bgMove(btnBg[_i2], event);
           });
 
-          btnBg[_i3].addEventListener('mouseleave', function () {
+          btnBg[_i2].addEventListener('mouseleave', function () {
             this.classList.remove('button-bg');
           });
         };
 
-        for (var _i3 = 0; _i3 < btnBg.length; _i3++) {
-          _loop(_i3);
+        for (var _i2 = 0; _i2 < btnBg.length; _i2++) {
+          _loop(_i2);
         }
       })();
     } catch (err) {
@@ -1534,7 +1627,8 @@ $(function () {
     var box = elem[0].getBoundingClientRect();
     return {
       top: box.top + pageYOffset,
-      bottom: box.bottom + pageYOffset
+      bottom: box.bottom + pageYOffset,
+      left: box.left
     };
   }
 
@@ -1700,9 +1794,9 @@ $(function () {
             if (flying) {
               markerArr[_temp].classList.add('marker--active');
 
-              for (var _i4 = 0; _i4 < markerArr.length; _i4++) {
-                if (_i4 != _temp) {
-                  markerArr[_i4].classList.remove('marker--active');
+              for (var _i3 = 0; _i3 < markerArr.length; _i3++) {
+                if (_i3 != _temp) {
+                  markerArr[_i3].classList.remove('marker--active');
                 }
               }
 
@@ -2012,7 +2106,7 @@ $(function () {
     var parentEl = bloc.querySelectorAll('.swiper-menu'); //console.log(parentEl)
 
     if (qtySlide > 0) {
-      for (var _i5 = 0; _i5 < parentEl.length; _i5++) {
+      for (var _i4 = 0; _i4 < parentEl.length; _i4++) {
         for (var j = 0; j < qtySlide; j++) {
           var itemSlide = document.createElement('div');
           itemSlide.classList.add('swiper-menu__item');
@@ -2022,7 +2116,7 @@ $(function () {
             itemSlide.classList.add('swiper-menu__item--active');
           }
 
-          parentEl[_i5].appendChild(itemSlide);
+          parentEl[_i4].appendChild(itemSlide);
         }
       }
     }
@@ -2112,21 +2206,21 @@ $(function () {
     var grpHover = document.querySelectorAll('.flats-basic__floor .hover g');
     var grpDefault = document.querySelectorAll('.flats-basic__floor .default g');
 
-    for (var _i6 = 0; _i6 < grpHover.length; _i6++) {
-      grpHover[_i6].setAttribute('id', 'h' + _i6);
+    for (var _i5 = 0; _i5 < grpHover.length; _i5++) {
+      grpHover[_i5].setAttribute('id', 'h' + _i5);
 
-      grpDefault[_i6].setAttribute('id', 'd' + _i6);
+      grpDefault[_i5].setAttribute('id', 'd' + _i5);
 
-      grpHover[_i6].onclick = function () {
+      grpHover[_i5].onclick = function () {
         var url = this.getAttribute('data-url');
         document.location.host;
         location.assign(document.location.origin + url);
       };
 
-      if (!grpHover[_i6].classList.contains('active') && !grpHover[_i6].classList.contains('current')) {
-        grpHover[_i6].classList.add('hide');
+      if (!grpHover[_i5].classList.contains('active') && !grpHover[_i5].classList.contains('current')) {
+        grpHover[_i5].classList.add('hide');
       } else {
-        grpDefault[_i6].classList.add('hide');
+        grpDefault[_i5].classList.add('hide');
       }
     }
   }

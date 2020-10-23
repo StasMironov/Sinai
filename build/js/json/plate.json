@@ -1,126 +1,112 @@
 {
     "entranceCount": "2",
     "floorsCount": 10,
-    "entrances": [
-        {
+    "entrances": {
+        "1д": {
             "floors": {
-                "7": {
+                "3": {
                     "flats": [
                         {
                             "id": 2,
                             "rooms": 3,
-                            "status": 1,
-                            "statusName": "Свободно"
+                            "status": 3,
+                            "statusName": "Продано",
+                            "about": "/about",
+                            "scheme": "/scheme",
+                            "price": 2.5
                         },
                         {
                             "id": 5,
                             "rooms": 2,
-                            "status": 1,
-                            "statusName": "Свободно"
-                        },
-                        {
-                            "id": 8,
-                            "rooms": 3,
-                            "status": 1,
-                            "statusName": "Продано"
-                        },
-                        {
-                            "id": 13,
-                            "rooms": 1,
-                            "status": 1,
-                            "statusName": "Свободно"
+                            "status": 2,
+                            "statusName": "На рассмотрении",
+                            "about": "/about",
+                            "scheme": "/scheme",
+                            "price": 1.5
                         }
                     ]
                 },
-                "6": {
+                "2": {
                     "flats": [
                         {
                             "id": 2,
                             "rooms": 3,
                             "status": 1,
-                            "statusName": "Свободно"
+                            "statusName": "Свободно",
+                            "about": "/about",
+                            "scheme": "/scheme",
+                            "price": 2.5
                         },
                         {
                             "id": 5,
                             "rooms": 2,
-                            "status": 1,
-                            "statusName": "Свободно"
+                            "status": 2,
+                            "statusName": "На рассмотрении",
+                            "about": "/about",
+                            "scheme": "/scheme",
+                            "price": 1.5
                         },
                         {
                             "id": 8,
                             "rooms": 3,
-                            "status": 1,
-                            "statusName": "Продано"
+                            "status": 3,
+                            "statusName": "Продано",
+                            "about": "/about",
+                            "scheme": "/scheme",
+                            "price": 2.5
                         },
                         {
                             "id": 13,
                             "rooms": 1,
-                            "status": 1,
-                            "statusName": "Свободно"
-                        }
-                    ]
-                }
-            }
-        },
-        {
-            "floors": {
-                "7": {
-                    "flats": [
-                        {
-                            "id": 2,
-                            "rooms": 3,
-                            "status": 1,
-                            "statusName": "Свободно"
-                        },
-                        {
-                            "id": 5,
-                            "rooms": 2,
-                            "status": 1,
-                            "statusName": "Свободно"
-                        },
-                        {
-                            "id": 8,
-                            "rooms": 3,
-                            "status": 1,
-                            "statusName": "Продано"
-                        },
-                        {
-                            "id": 13,
-                            "rooms": 1,
-                            "status": 1,
-                            "statusName": "Свободно"
+                            "status": 4,
+                            "statusName": "Забронировано",
+                            "about": "/about",
+                            "scheme": "/scheme",
+                            "price": 1
                         }
                     ]
                 },
-                "6": {
+                "1": {
                     "flats": [
                         {
                             "id": 2,
-                            "rooms": 3,
+                            "rooms": 4,
                             "status": 1,
-                            "statusName": "Свободно"
+                            "statusName": "Свободно",
+                            "about": "/about",
+                            "scheme": "/scheme",
+                            "price": 5
                         },
                         {
                             "id": 5,
                             "rooms": 2,
                             "status": 1,
-                            "statusName": "Свободно"
+                            "statusName": "Свободно",
+                            "about": "/about",
+                            "scheme": "/scheme",
+                            "price": 1.5
                         },
                         {
                             "id": 8,
                             "rooms": 3,
                             "status": 1,
-                            "statusName": "Продано"
+                            "statusName": "Продано",
+                            "about": "/about",
+                            "scheme": "/scheme",
+                            "price": 3.5
                         },
                         {
                             "id": 13,
                             "rooms": 1,
                             "status": 1,
-                            "statusName": "Свободно"
+                            "statusName": "Свободно",
+                            "about": "/about",
+                            "scheme": "/scheme",
+                            "price": 1
                         }
                     ]
                 }
             }
         }
-    ]
+    }
 }

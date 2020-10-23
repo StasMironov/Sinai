@@ -141,7 +141,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
 $(() => {
 
     function loadJSON(callback) {
-
         var xobj = new XMLHttpRequest();
         xobj.overrideMimeType("application/json");
         xobj.open('GET', './js/json/plate.json', true); // Replace 'my_data' with the path to your file
@@ -159,16 +158,124 @@ $(() => {
         let flatsInfo = JSON.parse(response);
         let parentBloc = document.getElementById('plate');
 
-        console.log(flatsInfo.entranceCount);
+        // console.log(flatsInfo.entrances);
 
-        for (let i = 0; i < flatsInfo.entranceCount; i++) {
+        for (let key in flatsInfo.entrances) {
+            //console.log(key);
             let corpus = document.createElement('div');
             let labelCorpus = document.createElement('div');
-            corpus.setAttribute('class', 'flats-plate__item');
-            labelCorpus.setAttribute('class', 'flats-plate__label');
+            let wrapperPlate = document.createElement('div');
 
+            corpus.setAttribute('class', 'plate-box__item');
+            wrapperPlate.setAttribute('class', 'plate-box__grid');
+            labelCorpus.setAttribute('class', 'plate-box__label');
+            corpus.append(wrapperPlate);
             corpus.append(labelCorpus);
             parentBloc.append(corpus);
+            labelCorpus.textContent = key;
+
+            let floorsCorpus = flatsInfo.entrances[key].floors; // Этажи с квартирами в каждом подъезде
+            let properties = Object.keys(floorsCorpus).reverse();
+
+            for (let j = 0; j < properties.length; j++) {
+
+                let flats = floorsCorpus[properties[j]].flats;
+                let boxFlats = document.createElement('div');
+                boxFlats.setAttribute('class', 'plate-box__case');
+                wrapperPlate.append(boxFlats);
+
+                for (let k = 0; k < flats.length; k++) { //Вывод квартир
+                    let plate = document.createElement('div');
+                    let status = flats[k].status;
+                    plate.setAttribute('class', 'plate-box__flat');
+
+                    let plateObj = {
+                        status: flats[k].statusName,
+                        rooms: flats[k].rooms,
+                        about: flats[k].about,
+                        scheme: flats[k].scheme,
+                        price: flats[k].price
+                    }
+
+                    plateObj = JSON.stringify(plateObj);
+                    // plateObj = JSON.parse(plateObj);
+                    //console.log(plateObj);
+
+                    plate.setAttribute('data-flat', plateObj);
+                    //console.log(flats[k].statusName);
+                    plate.textContent = flats[k].rooms;
+                    boxFlats.append(plate);
+
+                    switch (status) {
+                        case 1:
+                            plate.classList.add('plate-box__flat--free');
+                            break;
+                        case 2:
+                            plate.classList.add('plate-box__flat--take');
+                            break;
+                        case 3:
+                            plate.classList.add('plate-box__flat--sold');
+                            break;
+                        case 4:
+                            plate.classList.add('plate-box__flat--booked');
+                            break;
+                    }
+                }
+            }
+        }
+
+        if ($('.plate-box__flat').exists()) {
+            $('.plate-box__flat').each(function () {
+                $(this).on('mouseenter', function () {
+                    let coordsTop = $('.plate-box__canvas').position().top - 70,
+                        coordsLeft = $('.plate-box__canvas').position().left - 385;
+                    let popup = '<div class="plate-popup"><div class="plate-popup__inner">';
+                    popup += '<div class="plate-popup__top">';
+                    popup += '<div class="plate-popup__unit plate-popup__unit--qty">2к квартира</div>';
+                    popup += '<div class="plate-popup__unit plate-popup__unit--price">от 2,5 млн</div>';
+                    popup += '</div>';
+                    popup += '<div class="plate-popup__bottom">';
+                    popup += '<div class="plate-popup__status">Свободно</div>';
+                    popup += '<div class="plate-popup__func"><a class="plate-popup__link plate-popup__link--about" href="javascript:void(0);">Подробнее</a><a class="plate-popup__link plate-popup__link--scheme" href="javascript:void(0);">Планировка</a></div>';
+                    popup += '</div>';
+                    popup += '</div>';
+                    popup += '</div>';
+
+                    $(this).append(popup);
+
+
+                    $('.plate-popup').addClass('plate-popup--show').css({
+                        'top': coordsTop,
+                        'left': coordsLeft,
+                    });
+
+                    let dataObj = $(this).data("flat"),
+                        rooms = dataObj.rooms,
+                        status = dataObj.status,
+                        aboutLink = dataObj.about,
+                        scheme = dataObj.scheme,
+                        price = dataObj.price;
+
+                    $('.plate-popup__unit--qty').text(rooms);
+                    $('.plate-popup__unit--price').text(price);
+                    $('.plate-popup__status').text(status);
+                    $('.plate-popup__link--about').attr('href', aboutLink);
+                    $('.plate-popup__link--scheme').attr('href', scheme);
+
+
+
+
+
+
+                    console.log(dataObj.rooms);
+
+                });
+
+                $(this).on('mouseleave', function () {
+                    $('.plate-popup').remove();
+                });
+
+            });
 
         }
     });
@@ -1590,7 +1697,8 @@ $(() => {
 
         return {
             top: box.top + pageYOffset,
-            bottom: box.bottom + pageYOffset
+            bottom: box.bottom + pageYOffset,
+            left: box.left
         };
     }
 
