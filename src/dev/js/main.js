@@ -158,10 +158,7 @@ $(() => {
         let flatsInfo = JSON.parse(response);
         let parentBloc = document.getElementById('plate');
 
-        // console.log(flatsInfo.entrances);
-
         for (let key in flatsInfo.entrances) {
-            //console.log(key);
             let corpus = document.createElement('div');
             let labelCorpus = document.createElement('div');
             let wrapperPlate = document.createElement('div');
@@ -198,11 +195,7 @@ $(() => {
                     }
 
                     plateObj = JSON.stringify(plateObj);
-                    // plateObj = JSON.parse(plateObj);
-                    //console.log(plateObj);
-
                     plate.setAttribute('data-flat', plateObj);
-                    //console.log(flats[k].statusName);
                     plate.textContent = flats[k].rooms;
                     boxFlats.append(plate);
 
@@ -228,7 +221,7 @@ $(() => {
             $('.plate-box__flat').each(function () {
                 $(this).on('mouseenter', function () {
                     let coordsTop = $('.plate-box__canvas').position().top - 70,
-                        coordsLeft = $('.plate-box__canvas').position().left - 385;
+                        coordsLeft = $('.plate-box__canvas').position().left - 380;
                     let popup = '<div class="plate-popup"><div class="plate-popup__inner">';
                     popup += '<div class="plate-popup__top">';
                     popup += '<div class="plate-popup__unit plate-popup__unit--qty">2к квартира</div>';
@@ -243,42 +236,42 @@ $(() => {
 
                     $(this).append(popup);
 
-
                     $('.plate-popup').addClass('plate-popup--show').css({
                         'top': coordsTop,
                         'left': coordsLeft,
                     });
 
                     let dataObj = $(this).data("flat"),
-                        rooms = dataObj.rooms,
+                        rooms = `${dataObj.rooms}к квартира`,
                         status = dataObj.status,
                         aboutLink = dataObj.about,
                         scheme = dataObj.scheme,
-                        price = dataObj.price;
+                        price = `от ${dataObj.price} млн`;
 
                     $('.plate-popup__unit--qty').text(rooms);
                     $('.plate-popup__unit--price').text(price);
                     $('.plate-popup__status').text(status);
                     $('.plate-popup__link--about').attr('href', aboutLink);
                     $('.plate-popup__link--scheme').attr('href', scheme);
-
-
-
-
-
-
-                    console.log(dataObj.rooms);
-
                 });
 
                 $(this).on('mouseleave', function () {
                     $('.plate-popup').remove();
                 });
-
             });
-
         }
     });
+
+    if ($('.plate-box__right').exists()) {
+        const breakpoint = window.matchMedia('(min-width:1301px)');
+        if (!breakpoint.matches === true) {
+            $('.plate-box__right').mCustomScrollbar({
+                theme: "dark",
+                mouseWheelPixels: 90,
+                axis: "x" // horizontal scrollbar
+            });
+        }
+    }
 
     // let temp = fetch("./js/json/plate.json")
     //     .then(response => response.json())
@@ -2329,8 +2322,36 @@ $(() => {
             slidesPerView: '1',
             spaceBetween: 40,
             effect: 'fade',
+            pagination: '.pag-shoes',
+            paginationClickable: true,
             fadeEffect: {
                 crossFade: true
+            },
+            touchRatio: 0,
+            paginationType: "custom",
+            paginationCustomRender: function (swiper, current, total) {
+                console.log(1);
+                var names = [];
+                $(".swiper-wrapper .swiper-slide").each(function (i) {
+                    names.push($(this).data("name"));
+                });
+
+
+                var text = "<span style='background-color:black;padding:20px;'>";
+                for (let i = 1; i <= total; i++) {
+                    if (current == i) {
+                        text += "<span style='border-top:1px solid green;margin-right:4px;color:green;padding:10px;'>" + names[i] + "</span>";
+                    } else {
+                        text += "<span style='border-top:1px solid white;margin-right:4px;color:white;padding:10px;'>" + names[i] + "</span>";
+                    }
+
+                }
+                text += "</span>";
+                return text;
+            },
+            navigation: {
+                nextEl: '.plate-box__arrow.plate-box__arrow--next',
+                prevEl: '.plate-box__arrow.plate-box__arrow--prev',
             },
         });
     }

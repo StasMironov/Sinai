@@ -25,6 +25,11 @@
         display: block;
         font-weight: 700;
         text-transform: uppercase;
+        transition: .4s ease;
+
+        &:hover {
+            color: $ochre;
+        }
     }
 
     &__inner {
@@ -80,7 +85,7 @@
 
     &--show {
         opacity: 1;
- visibility: visible;
+        visibility: visible;
     }
 
 

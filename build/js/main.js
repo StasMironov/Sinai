@@ -148,10 +148,9 @@ $(function () {
   loadJSON(function (response) {
     // Parse JSON string into object
     var flatsInfo = JSON.parse(response);
-    var parentBloc = document.getElementById('plate'); // console.log(flatsInfo.entrances);
+    var parentBloc = document.getElementById('plate');
 
     for (var key in flatsInfo.entrances) {
-      //console.log(key);
       var corpus = document.createElement('div');
       var labelCorpus = document.createElement('div');
       var wrapperPlate = document.createElement('div');
@@ -184,11 +183,8 @@ $(function () {
             scheme: flats[k].scheme,
             price: flats[k].price
           };
-          plateObj = JSON.stringify(plateObj); // plateObj = JSON.parse(plateObj);
-          //console.log(plateObj);
-
-          plate.setAttribute('data-flat', plateObj); //console.log(flats[k].statusName);
-
+          plateObj = JSON.stringify(plateObj);
+          plate.setAttribute('data-flat', plateObj);
           plate.textContent = flats[k].rooms;
           boxFlats.append(plate);
 
@@ -217,7 +213,7 @@ $(function () {
       $('.plate-box__flat').each(function () {
         $(this).on('mouseenter', function () {
           var coordsTop = $('.plate-box__canvas').position().top - 70,
-              coordsLeft = $('.plate-box__canvas').position().left - 385;
+              coordsLeft = $('.plate-box__canvas').position().left - 380;
           var popup = '<div class="plate-popup"><div class="plate-popup__inner">';
           popup += '<div class="plate-popup__top">';
           popup += '<div class="plate-popup__unit plate-popup__unit--qty">2к квартира</div>';
@@ -235,24 +231,36 @@ $(function () {
             'left': coordsLeft
           });
           var dataObj = $(this).data("flat"),
-              rooms = dataObj.rooms,
+              rooms = "".concat(dataObj.rooms, "\u043A \u043A\u0432\u0430\u0440\u0442\u0438\u0440\u0430"),
               status = dataObj.status,
               aboutLink = dataObj.about,
               scheme = dataObj.scheme,
-              price = dataObj.price;
+              price = "\u043E\u0442 ".concat(dataObj.price, " \u043C\u043B\u043D");
           $('.plate-popup__unit--qty').text(rooms);
           $('.plate-popup__unit--price').text(price);
           $('.plate-popup__status').text(status);
           $('.plate-popup__link--about').attr('href', aboutLink);
           $('.plate-popup__link--scheme').attr('href', scheme);
-          console.log(dataObj.rooms);
         });
         $(this).on('mouseleave', function () {
           $('.plate-popup').remove();
         });
       });
     }
-  }); // let temp = fetch("./js/json/plate.json")
+  });
+
+  if ($('.plate-box__right').exists()) {
+    var breakpoint = window.matchMedia('(min-width:1301px)');
+
+    if (!breakpoint.matches === true) {
+      $('.plate-box__right').mCustomScrollbar({
+        theme: "dark",
+        mouseWheelPixels: 90,
+        axis: "x" // horizontal scrollbar
+
+      });
+    }
+  } // let temp = fetch("./js/json/plate.json")
   //     .then(response => response.json())
   //     .then(json => json);
   // console.log(temp);
@@ -287,6 +295,7 @@ $(function () {
   //         }
   //     }
   // }
+
 
   function rangeSlider(block, min, max, steps, input_min, input_max, parent) {
     if ($(block).exists()) {
@@ -1475,14 +1484,15 @@ $(function () {
 
   if ($('.index__slider').exists()) {
     try {
-      var breakpoint = window.matchMedia('(min-width:641px)');
+      var _breakpoint6 = window.matchMedia('(min-width:641px)');
+
       var mySwiper;
 
       var breakpointChecker = function breakpointChecker() {
-        if (breakpoint.matches === true) {
+        if (_breakpoint6.matches === true) {
           if (mySwiper !== undefined) mySwiper.destroy(true, true);
           return;
-        } else if (breakpoint.matches === false) {
+        } else if (_breakpoint6.matches === false) {
           var isSafari = !!navigator.userAgent.match(/Version\/[\d\.]+.*Safari/);
 
           if (isSafari) {
@@ -1537,7 +1547,8 @@ $(function () {
         });
       };
 
-      breakpoint.addListener(breakpointChecker);
+      _breakpoint6.addListener(breakpointChecker);
+
       breakpointChecker();
     } catch (err) {
       console.log(err);
@@ -2230,8 +2241,35 @@ $(function () {
       slidesPerView: '1',
       spaceBetween: 40,
       effect: 'fade',
+      pagination: '.pag-shoes',
+      paginationClickable: true,
       fadeEffect: {
         crossFade: true
+      },
+      touchRatio: 0,
+      paginationType: "custom",
+      paginationCustomRender: function paginationCustomRender(swiper, current, total) {
+        console.log(1);
+        var names = [];
+        $(".swiper-wrapper .swiper-slide").each(function (i) {
+          names.push($(this).data("name"));
+        });
+        var text = "<span style='background-color:black;padding:20px;'>";
+
+        for (var _i6 = 1; _i6 <= total; _i6++) {
+          if (current == _i6) {
+            text += "<span style='border-top:1px solid green;margin-right:4px;color:green;padding:10px;'>" + names[_i6] + "</span>";
+          } else {
+            text += "<span style='border-top:1px solid white;margin-right:4px;color:white;padding:10px;'>" + names[_i6] + "</span>";
+          }
+        }
+
+        text += "</span>";
+        return text;
+      },
+      navigation: {
+        nextEl: '.plate-box__arrow.plate-box__arrow--next',
+        prevEl: '.plate-box__arrow.plate-box__arrow--prev'
       }
     });
   }

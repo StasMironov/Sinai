@@ -112,13 +112,34 @@ block content
 							.plate-box__status.plate-box__status--free
 								.plate-box__square
 								.plate-box__txt Свободно
+							
 						.plate-box__box
-							.plate-box__arrow-.plate-box__arrow--prev
+							.plate-box__arrow.plate-box__arrow--prev
+								+svg('arr_flats')
 							.plate-box__text Завенягина 1/2
-							.plate-box__arrow-.plate-box__arrow--next
+							.plate-box__arrow.plate-box__arrow--next
+								+svg('arr_flats')
 					.plate-box__slider
 						.swiper-wrapper
-							.plate-box__wrapper.swiper-slide
+							.plate-box__wrapper.swiper-slide(data-name="LEVEL1")
+								.plate-box__left
+									.plate-box__word Этажи
+									.plate-box__set
+										.plate-box__num 12
+										.plate-box__num 11
+										.plate-box__num 10
+										.plate-box__num 9
+										.plate-box__num 8
+										.plate-box__num 7
+										.plate-box__num 6
+										.plate-box__num 5
+										.plate-box__num 4
+										.plate-box__num 3
+										.plate-box__num 2
+										.plate-box__num 1 
+								.plate-box__right
+									#plate.plate-box__canvas
+							.plate-box__wrapper.swiper-slide(data-name="LEVEL2")
 								.plate-box__left
 									.plate-box__word Этажи
 									.plate-box__set
@@ -146,7 +167,7 @@ block content
 										//- 			.plate-popup__func
 										//- 				a(href="javascript:void(0);").plate-popup__link.plate-popup__link--about Подробнее
 										//- 				a(href="javascript:void(0);").plate-popup__link.plate-popup__link--scheme Планировка
-
+						<div class="swiper-pagination pag-shoes"></div>	
 
 											
 
