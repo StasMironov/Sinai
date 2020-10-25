@@ -214,6 +214,13 @@ $(function () {
         $(this).on('mouseenter', function () {
           var coordsTop = $('.plate-box__canvas').position().top - 70,
               coordsLeft = $('.plate-box__canvas').position().left - 380;
+          var breakpoint = window.matchMedia('(min-width:1236px)');
+
+          if (!breakpoint.matches === true) {
+            coordsLeft = $('.plate-box__canvas').position().left - 120;
+            coordsTop = $('.plate-box__canvas').position().top - 184;
+          }
+
           var popup = '<div class="plate-popup"><div class="plate-popup__inner">';
           popup += '<div class="plate-popup__top">';
           popup += '<div class="plate-popup__unit plate-popup__unit--qty">2к квартира</div>';

@@ -514,6 +514,12 @@
                 max-width: 100%;
             }
         }
+
+        &--plate {
+            @media(max-width: 540px) {
+                max-width: 100%;
+            }
+        }
     }
 
     &__nav {

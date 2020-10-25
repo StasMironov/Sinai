@@ -17,6 +17,10 @@
         justify-content: space-between;
         margin-top: 16px;
         color: $black-1;
+
+        @media(max-width: 1024px) {
+            margin-top: 24px;
+        }
     }
 
 
@@ -30,6 +34,10 @@
         &:hover {
             color: $ochre;
         }
+
+        @media(max-width: 1024px) {
+            font-size: 14px;
+        }
     }
 
     &__inner {
@@ -40,6 +48,10 @@
         // background-color: #d92d2d;
         box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.2);
         width: 285px;
+
+        @media(max-width: 1024px) {
+            padding-right: 0;
+        }
 
         &:after {
             position: absolute;
@@ -52,6 +64,18 @@
             margin: auto;
             height: 0;
             background-image: url(../img/icon/tr.png);
+
+            @media(max-width: 1235px) {
+                position: absolute;
+                content: "";
+                border: 10px solid transparent;
+                border-top: 18px solid white;
+                right: 50%;
+                top: auto;
+                bottom: -28px;
+                margin: auto;
+                height: 0;
+            }
         }
     }
 
