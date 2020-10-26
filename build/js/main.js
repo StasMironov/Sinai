@@ -8,6 +8,16 @@ jQuery.fn.exists = function () {
 ScrollReveal({
   mobile: false
 });
+var projectFunc = {
+  ObjAd: function ObjAd(element, place) {
+    $(element).each(function (index) {
+      var adObj = $(this).html();
+      var out = adObj;
+      $(place).html(out);
+      $(this).remove();
+    });
+  }
+};
 document.addEventListener("DOMContentLoaded", function (event) {
   var isSafari = !!navigator.userAgent.match(/Version\/[\d\.]+.*Safari/);
 
@@ -53,6 +63,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
       var out = adObj;
       $(place).html(out);
       $(this).remove();
+      console.log(element);
     });
   }
 
@@ -170,6 +181,7 @@ $(function () {
         var boxFlats = document.createElement('div');
         boxFlats.setAttribute('class', 'plate-box__case');
         wrapperPlate.append(boxFlats);
+        console.log(j);
 
         for (var k = 0; k < flats.length; k++) {
           //Вывод квартир
@@ -181,7 +193,8 @@ $(function () {
             rooms: flats[k].rooms,
             about: flats[k].about,
             scheme: flats[k].scheme,
-            price: flats[k].price
+            price: flats[k].price,
+            floor: j
           };
           plateObj = JSON.stringify(plateObj);
           plate.setAttribute('data-flat', plateObj);
@@ -210,49 +223,97 @@ $(function () {
     }
 
     if ($('.plate-box__flat').exists()) {
-      $('.plate-box__flat').each(function () {
-        $(this).on('mouseenter', function () {
-          var coordsTop = $('.plate-box__canvas').position().top - 70,
-              coordsLeft = $('.plate-box__canvas').position().left - 380;
-          var breakpoint = window.matchMedia('(min-width:1236px)');
+      var breakpointMobile = window.matchMedia('(min-width:641px)');
 
-          if (!breakpoint.matches === true) {
-            coordsLeft = $('.plate-box__canvas').position().left - 120;
-            coordsTop = $('.plate-box__canvas').position().top - 184;
-          }
-
-          var popup = '<div class="plate-popup"><div class="plate-popup__inner">';
-          popup += '<div class="plate-popup__top">';
-          popup += '<div class="plate-popup__unit plate-popup__unit--qty">2к квартира</div>';
-          popup += '<div class="plate-popup__unit plate-popup__unit--price">от 2,5 млн</div>';
-          popup += '</div>';
-          popup += '<div class="plate-popup__bottom">';
-          popup += '<div class="plate-popup__status">Свободно</div>';
-          popup += '<div class="plate-popup__func"><a class="plate-popup__link plate-popup__link--about" href="javascript:void(0);">Подробнее</a><a class="plate-popup__link plate-popup__link--scheme" href="javascript:void(0);">Планировка</a></div>';
-          popup += '</div>';
-          popup += '</div>';
-          popup += '</div>';
-          $(this).append(popup);
-          $('.plate-popup').addClass('plate-popup--show').css({
-            'top': coordsTop,
-            'left': coordsLeft
+      if (!breakpointMobile.matches === true) {
+        $('.plate-box__flat').each(function () {
+          $(this).on('click', function () {
+            $('.overlay-plate').addClass('overlay-plate--show');
+            var dataObj = $(this).data("flat"),
+                rooms = "".concat(dataObj.rooms, "\u043A \u043A\u0432\u0430\u0440\u0442\u0438\u0440\u0430"),
+                status = dataObj.status,
+                aboutLink = dataObj.about,
+                scheme = dataObj.scheme,
+                price = "\u043E\u0442 ".concat(dataObj.price, " \u043C\u043B\u043D");
+            $('.popup-plate__unit--room').text(rooms);
+            $('.popup-plate__unit--price').text(price);
+            $('.popup-plate__status').text(status);
+            $('.popup-plate__link--about').attr('href', aboutLink);
+            $('.popup-plate__link--scheme').attr('href', scheme);
           });
-          var dataObj = $(this).data("flat"),
-              rooms = "".concat(dataObj.rooms, "\u043A \u043A\u0432\u0430\u0440\u0442\u0438\u0440\u0430"),
-              status = dataObj.status,
-              aboutLink = dataObj.about,
-              scheme = dataObj.scheme,
-              price = "\u043E\u0442 ".concat(dataObj.price, " \u043C\u043B\u043D");
-          $('.plate-popup__unit--qty').text(rooms);
-          $('.plate-popup__unit--price').text(price);
-          $('.plate-popup__status').text(status);
-          $('.plate-popup__link--about').attr('href', aboutLink);
-          $('.plate-popup__link--scheme').attr('href', scheme);
         });
-        $(this).on('mouseleave', function () {
-          $('.plate-popup').remove();
+
+        if ($('.overlay-plate').exists()) {
+          $('.overlay-plate').click(function (e) {
+            // console.log(e.target.className.indexOf('overlay'));
+            if (e.target.className.indexOf('overlay-plate') != -1) {
+              $(this).removeClass('overlay-plate--show');
+              $('html').css('overflow', 'auto');
+              $('.overlay-plate').removeClass('overlay-plate--show');
+            }
+          });
+        }
+
+        if ($('.popup-plate__close').exists()) {
+          $('.popup-plate___close').click(function (e) {
+            $('.overlay-plate').removeClass('overlay-plate--show');
+          });
+        }
+      }
+
+      var breakpointDesk = window.matchMedia('(max-width: 640px)');
+
+      if (!breakpointDesk.matches === true) {
+        $('.plate-box__flat').each(function () {
+          $(this).on('mouseenter', function () {
+            var coordsTop = $('.plate-box__canvas').position().top - 70,
+                coordsLeft = $('.plate-box__canvas').position().left - 385;
+            var breakpoint = window.matchMedia('(min-width:1236px)');
+            var breakpointLaptop = window.matchMedia('(min-width:1025px)');
+
+            if (!breakpoint.matches === true) {
+              coordsLeft = $('.plate-box__canvas').position().left - 120;
+              coordsTop = $('.plate-box__canvas').position().top - 184;
+            }
+
+            if (!breakpointLaptop.matches === true) {
+              coordsLeft = $('.plate-box__canvas').position().left - 125;
+              coordsTop = $('.plate-box__canvas').position().top - 175;
+            }
+
+            var popup = '<div class="plate-popup"><div class="plate-popup__inner">';
+            popup += '<div class="plate-popup__top">';
+            popup += '<div class="plate-popup__unit plate-popup__unit--qty">2к квартира</div>';
+            popup += '<div class="plate-popup__unit plate-popup__unit--price">от 2,5 млн</div>';
+            popup += '</div>';
+            popup += '<div class="plate-popup__bottom">';
+            popup += '<div class="plate-popup__status">Свободно</div>';
+            popup += '<div class="plate-popup__func"><a class="plate-popup__link plate-popup__link--about" href="javascript:void(0);">Подробнее</a><a class="plate-popup__link plate-popup__link--scheme" href="javascript:void(0);">Планировка</a></div>';
+            popup += '</div>';
+            popup += '</div>';
+            popup += '</div>';
+            $(this).append(popup);
+            $('.plate-popup').addClass('plate-popup--show').css({
+              'top': coordsTop,
+              'left': coordsLeft
+            });
+            var dataObj = $(this).data("flat"),
+                rooms = "".concat(dataObj.rooms, "\u043A \u043A\u0432\u0430\u0440\u0442\u0438\u0440\u0430"),
+                status = dataObj.status,
+                aboutLink = dataObj.about,
+                scheme = dataObj.scheme,
+                price = "\u043E\u0442 ".concat(dataObj.price, " \u043C\u043B\u043D");
+            $('.plate-popup__unit--qty').text(rooms);
+            $('.plate-popup__unit--price').text(price);
+            $('.plate-popup__status').text(status);
+            $('.plate-popup__link--about').attr('href', aboutLink);
+            $('.plate-popup__link--scheme').attr('href', scheme);
+          });
+          $(this).on('mouseleave', function () {
+            $('.plate-popup').remove();
+          });
         });
-      });
+      }
     }
   });
 
@@ -2244,6 +2305,41 @@ $(function () {
   }
 
   if ($('.plate-box__slider').exists()) {
+    if ($('.plate-control').exists()) {
+      try {
+        var _breakpoint7 = window.matchMedia('(min-width:993px)');
+
+        var breakpointLaptop = window.matchMedia('(min-width:769px)');
+
+        if (!_breakpoint7.matches === true) {
+          projectFunc.ObjAd('.plate-box__control', '#insert');
+        }
+
+        if (!breakpointLaptop.matches === true) {
+          console.log('laptop');
+          projectFunc.ObjAd('#insert', '#control-laptop');
+        }
+
+        var plateControl = new Swiper('.plate-control', {
+          spaceBetween: 10,
+          slidesPerView: 1,
+          freeMode: true,
+          watchSlidesVisibility: true,
+          watchSlidesProgress: true,
+          effect: 'fade',
+          fadeEffect: {
+            crossFade: true
+          },
+          navigation: {
+            nextEl: '.plate-control__arrow.plate-control__arrow--next',
+            prevEl: '.plate-control__arrow.plate-control__arrow--prev'
+          }
+        });
+      } catch (err) {
+        console.log(err);
+      }
+    }
+
     var plateSlider = new Swiper('.plate-box__slider', {
       slidesPerView: '1',
       spaceBetween: 40,
@@ -2254,30 +2350,12 @@ $(function () {
         crossFade: true
       },
       touchRatio: 0,
-      paginationType: "custom",
-      paginationCustomRender: function paginationCustomRender(swiper, current, total) {
-        console.log(1);
-        var names = [];
-        $(".swiper-wrapper .swiper-slide").each(function (i) {
-          names.push($(this).data("name"));
-        });
-        var text = "<span style='background-color:black;padding:20px;'>";
-
-        for (var _i6 = 1; _i6 <= total; _i6++) {
-          if (current == _i6) {
-            text += "<span style='border-top:1px solid green;margin-right:4px;color:green;padding:10px;'>" + names[_i6] + "</span>";
-          } else {
-            text += "<span style='border-top:1px solid white;margin-right:4px;color:white;padding:10px;'>" + names[_i6] + "</span>";
-          }
-        }
-
-        text += "</span>";
-        return text;
-      },
       navigation: {
         nextEl: '.plate-box__arrow.plate-box__arrow--next',
         prevEl: '.plate-box__arrow.plate-box__arrow--prev'
       }
     });
+    plateControl.controller.control = plateSlider;
+    plateSlider.controller.control = plateControl;
   }
 });

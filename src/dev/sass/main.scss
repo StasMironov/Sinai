@@ -447,8 +447,39 @@ button {
       transform: scale(1);
     }
   }
+}
 
 
+.overlay-plate {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  top: 0;
+  right: 0;
+  overflow: auto;
+  opacity: 0;
+  transition: .2s .1s linear;
+  background: rgba(0, 0, 0, .5);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#7F000000, endColorstr=#7F000000);
+  zoom: 1;
+  z-index: 700;
+  visibility: hidden;
+
+  &--show {
+    opacity: 1;
+    visibility: visible;
+    //transform: translateY(0%);
+
+    // .menu {
+    //   transform: translateY(0%);
+    //   opacity: 1;
+    //   visibility: visible;
+    // }
+
+    .popup-plate {
+      transform: scale(1);
+    }
+  }
 }
 
 html.sr .flats-basic__item {
@@ -456,8 +487,8 @@ html.sr .flats-basic__item {
 }
 
 
-
-
+@import "./components/popup-plate.scss";
+@import "./components/plate/plate-control.scss";
 @import "./components/plate/plate-popup.scss";
 @import "./components/plate/plate-box.scss";
 @import "./components/popup.scss";

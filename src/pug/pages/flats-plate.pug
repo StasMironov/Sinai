@@ -95,6 +95,7 @@ block content
 					button(type="reset").flats-basic__close
 						.flats-basic__ic 
 						.flats-basic__text Сбросить фильтр
+				#insert
 			.flats-basic__box.flats-basic__box--plate
 				#placeholder
 				.plate-box
@@ -112,18 +113,28 @@ block content
 							.plate-box__status.plate-box__status--free
 								.plate-box__square
 								.plate-box__txt Свободно
-							
-						.plate-box__box
-							.plate-box__arrow.plate-box__arrow--prev
-								+svg('arr_flats')
-							.plate-box__text Завенягина 1/2
-							.plate-box__arrow.plate-box__arrow--next
-								+svg('arr_flats')
+						.plate-box__control.plate-box__control-desk
+							.plate-control
+								.swiper-wrapper
+									.swiper-slide
+										.plate-control__text Завенягина 1/2
+									.swiper-slide
+										.plate-control__text Завенягина 1/3
+								.plate-control__arrow.plate-control__arrow--prev
+									+svg('arr_flats')
+								.plate-control__arrow.plate-control__arrow--next
+									+svg('arr_flats')
+					//- .plate-box__box
+					//- 	a(href="javascript:void(0);").plate-box__arrow.plate-box__arrow--prev
+					//- 		+svg('arr_flats')
+					//- 	.plate-box__text Завенягина 1/2
+					//- 	a(href="javascript:void(0);").plate-box__arrow.plate-box__arrow--next
+					//- 			+svg('arr_flats')
 					.plate-box__slider
+						.plate-box__word Этажи
 						.swiper-wrapper
-							.plate-box__wrapper.swiper-slide(data-name="LEVEL1")
+							.plate-box__wrapper.swiper-slide
 								.plate-box__left
-									.plate-box__word Этажи
 									.plate-box__set
 										.plate-box__num 12
 										.plate-box__num 11
@@ -139,9 +150,8 @@ block content
 										.plate-box__num 1 
 								.plate-box__right
 									#plate.plate-box__canvas
-							.plate-box__wrapper.swiper-slide(data-name="LEVEL2")
+							.plate-box__wrapper.swiper-slide
 								.plate-box__left
-									.plate-box__word Этажи
 									.plate-box__set
 										.plate-box__num 12
 										.plate-box__num 11
@@ -155,19 +165,9 @@ block content
 										.plate-box__num 3
 										.plate-box__num 2
 										.plate-box__num 1 
-								.plate-box__right
-									#plate.plate-box__canvas
-										//- .plate-popup
-										//- 	.plate-popup__inner
-										//- 		.plate-popup__top
-										//- 			.plate-popup__unit.plate-popup__unit--qty 2к квартира
-										//- 			.plate-popup__unit.plate-popup__unit--price от 2,5 млн
-										//- 		.plate-popup__bottom 
-										//- 			.plate-popup__status Свободно
-										//- 			.plate-popup__func
-										//- 				a(href="javascript:void(0);").plate-popup__link.plate-popup__link--about Подробнее
-										//- 				a(href="javascript:void(0);").plate-popup__link.plate-popup__link--scheme Планировка
-						<div class="swiper-pagination pag-shoes"></div>	
+								//- .plate-box__right
+								//- 	#plate.plate-box__canvas
+						#control-laptop
 
 											
 

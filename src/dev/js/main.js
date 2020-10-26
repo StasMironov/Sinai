@@ -7,6 +7,17 @@ ScrollReveal({
     mobile: false
 });
 
+const projectFunc = {
+    ObjAd: function (element, place) {
+        $(element).each(function (index) {
+            let adObj = $(this).html();
+            let out = adObj;
+            $(place).html(out);
+            $(this).remove();
+        });
+    }
+}
+
 
 document.addEventListener("DOMContentLoaded", function (event) {
 
@@ -56,6 +67,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
             let out = adObj;
             $(place).html(out);
             $(this).remove();
+            console.log(element);
         });
     }
 
@@ -176,18 +188,21 @@ $(() => {
                 let boxFlats = document.createElement('div');
                 boxFlats.setAttribute('class', 'plate-box__case');
                 wrapperPlate.append(boxFlats);
+                console.log(j);
 
                 for (let k = 0; k < flats.length; k++) { //Вывод квартир
                     let plate = document.createElement('div');
                     let status = flats[k].status;
                     plate.setAttribute('class', 'plate-box__flat');
 
+
                     let plateObj = {
                         status: flats[k].statusName,
                         rooms: flats[k].rooms,
                         about: flats[k].about,
                         scheme: flats[k].scheme,
-                        price: flats[k].price
+                        price: flats[k].price,
+                        floor: j
                     }
 
                     plateObj = JSON.stringify(plateObj);
@@ -214,54 +229,109 @@ $(() => {
         }
 
         if ($('.plate-box__flat').exists()) {
-            $('.plate-box__flat').each(function () {
-                $(this).on('mouseenter', function () {
-                    let coordsTop = $('.plate-box__canvas').position().top - 70,
-                        coordsLeft = $('.plate-box__canvas').position().left - 380;
+            let breakpointMobile = window.matchMedia('(min-width:641px)');
 
-                    const breakpoint = window.matchMedia('(min-width:1236px)');
-                    if (!breakpoint.matches === true) {
-                        coordsLeft = $('.plate-box__canvas').position().left - 120;
-                        coordsTop = $('.plate-box__canvas').position().top - 184;
-                    }
+            if (!breakpointMobile.matches === true) {
+                $('.plate-box__flat').each(function () {
+                    $(this).on('click', function () {
+                        $('.overlay-plate').addClass('overlay-plate--show');
 
-                    let popup = '<div class="plate-popup"><div class="plate-popup__inner">';
-                    popup += '<div class="plate-popup__top">';
-                    popup += '<div class="plate-popup__unit plate-popup__unit--qty">2к квартира</div>';
-                    popup += '<div class="plate-popup__unit plate-popup__unit--price">от 2,5 млн</div>';
-                    popup += '</div>';
-                    popup += '<div class="plate-popup__bottom">';
-                    popup += '<div class="plate-popup__status">Свободно</div>';
-                    popup += '<div class="plate-popup__func"><a class="plate-popup__link plate-popup__link--about" href="javascript:void(0);">Подробнее</a><a class="plate-popup__link plate-popup__link--scheme" href="javascript:void(0);">Планировка</a></div>';
-                    popup += '</div>';
-                    popup += '</div>';
-                    popup += '</div>';
+                        let dataObj = $(this).data("flat"),
+                            rooms = `${dataObj.rooms}к квартира`,
+                            status = dataObj.status,
+                            aboutLink = dataObj.about,
+                            scheme = dataObj.scheme,
+                            price = `от ${dataObj.price} млн`;
 
-                    $(this).append(popup);
+                        $('.popup-plate__unit--room').text(rooms);
+                        $('.popup-plate__unit--price').text(price);
+                        $('.popup-plate__status').text(status);
+                        $('.popup-plate__link--about').attr('href', aboutLink);
+                        $('.popup-plate__link--scheme').attr('href', scheme);
+                    });
+                });
 
-                    $('.plate-popup').addClass('plate-popup--show').css({
-                        'top': coordsTop,
-                        'left': coordsLeft,
+                if ($('.overlay-plate').exists()) {
+                    $('.overlay-plate').click(function (e) {
+                        // console.log(e.target.className.indexOf('overlay'));
+                        if (e.target.className.indexOf('overlay-plate') != -1) {
+                            $(this).removeClass('overlay-plate--show');
+                            $('html').css('overflow', 'auto');
+                            $('.overlay-plate').removeClass('overlay-plate--show');
+                        }
+                    });
+                }
+
+                if ($('.popup-plate__close').exists()) {
+                    $('.popup-plate___close').click(function (e) {
+                        $('.overlay-plate').removeClass('overlay-plate--show');
+                    });
+                }
+
+            }
+
+            let breakpointDesk = window.matchMedia('(max-width: 640px)');
+            if (!breakpointDesk.matches === true) {
+                $('.plate-box__flat').each(function () {
+                    $(this).on('mouseenter', function () {
+                        let coordsTop = $('.plate-box__canvas').position().top - 70,
+                            coordsLeft = $('.plate-box__canvas').position().left - 385;
+
+                        let breakpoint = window.matchMedia('(min-width:1236px)');
+                        let breakpointLaptop = window.matchMedia('(min-width:1025px)');
+
+                        if (!breakpoint.matches === true) {
+                            coordsLeft = $('.plate-box__canvas').position().left - 120;
+                            coordsTop = $('.plate-box__canvas').position().top - 184;
+                        }
+
+                        if (!breakpointLaptop.matches === true) {
+                            coordsLeft = $('.plate-box__canvas').position().left - 125;
+                            coordsTop = $('.plate-box__canvas').position().top - 175;
+                        }
+
+                        let popup = '<div class="plate-popup"><div class="plate-popup__inner">';
+                        popup += '<div class="plate-popup__top">';
+                        popup += '<div class="plate-popup__unit plate-popup__unit--qty">2к квартира</div>';
+                        popup += '<div class="plate-popup__unit plate-popup__unit--price">от 2,5 млн</div>';
+                        popup += '</div>';
+                        popup += '<div class="plate-popup__bottom">';
+                        popup += '<div class="plate-popup__status">Свободно</div>';
+                        popup += '<div class="plate-popup__func"><a class="plate-popup__link plate-popup__link--about" href="javascript:void(0);">Подробнее</a><a class="plate-popup__link plate-popup__link--scheme" href="javascript:void(0);">Планировка</a></div>';
+                        popup += '</div>';
+                        popup += '</div>';
+                        popup += '</div>';
+
+                        $(this).append(popup);
+
+                        $('.plate-popup').addClass('plate-popup--show').css({
+                            'top': coordsTop,
+                            'left': coordsLeft,
+                        });
+
+
+
+                        let dataObj = $(this).data("flat"),
+                            rooms = `${dataObj.rooms}к квартира`,
+                            status = dataObj.status,
+                            aboutLink = dataObj.about,
+                            scheme = dataObj.scheme,
+                            price = `от ${dataObj.price} млн`;
+
+                        $('.plate-popup__unit--qty').text(rooms);
+                        $('.plate-popup__unit--price').text(price);
+                        $('.plate-popup__status').text(status);
+                        $('.plate-popup__link--about').attr('href', aboutLink);
+                        $('.plate-popup__link--scheme').attr('href', scheme);
                     });
 
-                    let dataObj = $(this).data("flat"),
-                        rooms = `${dataObj.rooms}к квартира`,
-                        status = dataObj.status,
-                        aboutLink = dataObj.about,
-                        scheme = dataObj.scheme,
-                        price = `от ${dataObj.price} млн`;
-
-                    $('.plate-popup__unit--qty').text(rooms);
-                    $('.plate-popup__unit--price').text(price);
-                    $('.plate-popup__status').text(status);
-                    $('.plate-popup__link--about').attr('href', aboutLink);
-                    $('.plate-popup__link--scheme').attr('href', scheme);
+                    $(this).on('mouseleave', function () {
+                        $('.plate-popup').remove();
+                    });
                 });
+            }
 
-                $(this).on('mouseleave', function () {
-                    $('.plate-popup').remove();
-                });
-            });
+
         }
     });
 
@@ -609,7 +679,7 @@ $(() => {
             } else {
                 $('.menu__sub').addClass('menu__sub--active').css({
                     'max-height': height
-                }, );
+                });
             }
         });
     }
@@ -698,25 +768,25 @@ $(() => {
     if ($('.index__info').exists()) {
         // console.log($('.index__info'));
         ScrollReveal().reveal('.index__info', {
-                delay: 600,
+            delay: 600,
+            //interval: 3000,
+            distance: '150px',
+            enter: 'bottom',
+            origin: 'bottom',
+            duration: 1000,
+            easing: 'ease-in',
+            mobile: false
+        },
+            ScrollReveal().reveal('.index__right', {
+                delay: 1500,
                 //interval: 3000,
                 distance: '150px',
                 enter: 'bottom',
                 origin: 'bottom',
                 duration: 1000,
-                easing: 'ease-in',
+                easing: 'ease-in-out',
                 mobile: false
-            },
-            ScrollReveal().reveal('.index__right', {
-                    delay: 1500,
-                    //interval: 3000,
-                    distance: '150px',
-                    enter: 'bottom',
-                    origin: 'bottom',
-                    duration: 1000,
-                    easing: 'ease-in-out',
-                    mobile: false
-                }
+            }
 
             ))
     }
@@ -2313,7 +2383,47 @@ $(() => {
         }
     }
 
+
+
     if ($('.plate-box__slider').exists()) {
+
+        if ($('.plate-control').exists()) {
+            try {
+                let breakpoint = window.matchMedia('(min-width:993px)');
+                let breakpointLaptop = window.matchMedia('(min-width:769px)');
+
+                if (!breakpoint.matches === true) {
+                    projectFunc.ObjAd('.plate-box__control', '#insert');
+                }
+
+                if (!breakpointLaptop.matches === true) {
+                    console.log('laptop');
+                    projectFunc.ObjAd('#insert', '#control-laptop');
+                }
+
+                var plateControl = new Swiper('.plate-control', {
+                    spaceBetween: 10,
+                    slidesPerView: 1,
+                    freeMode: true,
+                    watchSlidesVisibility: true,
+                    watchSlidesProgress: true,
+                    effect: 'fade',
+                    fadeEffect: {
+                        crossFade: true
+                    },
+
+                    navigation: {
+                        nextEl: '.plate-control__arrow.plate-control__arrow--next',
+                        prevEl: '.plate-control__arrow.plate-control__arrow--prev',
+                    },
+                });
+            } catch (err) {
+                console.log(err);
+            }
+        }
+
+
+
         let plateSlider = new Swiper('.plate-box__slider', {
             slidesPerView: '1',
             spaceBetween: 40,
@@ -2324,31 +2434,13 @@ $(() => {
                 crossFade: true
             },
             touchRatio: 0,
-            paginationType: "custom",
-            paginationCustomRender: function (swiper, current, total) {
-                console.log(1);
-                var names = [];
-                $(".swiper-wrapper .swiper-slide").each(function (i) {
-                    names.push($(this).data("name"));
-                });
-
-
-                var text = "<span style='background-color:black;padding:20px;'>";
-                for (let i = 1; i <= total; i++) {
-                    if (current == i) {
-                        text += "<span style='border-top:1px solid green;margin-right:4px;color:green;padding:10px;'>" + names[i] + "</span>";
-                    } else {
-                        text += "<span style='border-top:1px solid white;margin-right:4px;color:white;padding:10px;'>" + names[i] + "</span>";
-                    }
-
-                }
-                text += "</span>";
-                return text;
-            },
             navigation: {
                 nextEl: '.plate-box__arrow.plate-box__arrow--next',
                 prevEl: '.plate-box__arrow.plate-box__arrow--prev',
             },
         });
+
+        plateControl.controller.control = plateSlider;
+        plateSlider.controller.control = plateControl;
     }
 });
