@@ -141,181 +141,183 @@ document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 $(function () {
-  function loadJSON(callback) {
-    var xobj = new XMLHttpRequest();
-    xobj.overrideMimeType("application/json");
-    xobj.open('GET', './js/json/plate.json', true); // Replace 'my_data' with the path to your file
+  if ($('#plate').exists()) {
+    var loadJSON = function loadJSON(callback) {
+      var xobj = new XMLHttpRequest();
+      xobj.overrideMimeType("application/json");
+      xobj.open('GET', './js/json/plate.json', true); // Replace 'my_data' with the path to your file
 
-    xobj.onreadystatechange = function () {
-      if (xobj.readyState == 4 && xobj.status == "200") {
-        // Required use of an anonymous callback as .open will NOT return a value but simply returns undefined in asynchronous mode
-        callback(xobj.responseText);
-      }
+      xobj.onreadystatechange = function () {
+        if (xobj.readyState == 4 && xobj.status == "200") {
+          // Required use of an anonymous callback as .open will NOT return a value but simply returns undefined in asynchronous mode
+          callback(xobj.responseText);
+        }
+      };
+
+      xobj.send(null);
     };
 
-    xobj.send(null);
-  }
+    loadJSON(function (response) {
+      // Parse JSON string into object
+      var flatsInfo = JSON.parse(response);
+      var parentBloc = document.getElementById('plate');
 
-  loadJSON(function (response) {
-    // Parse JSON string into object
-    var flatsInfo = JSON.parse(response);
-    var parentBloc = document.getElementById('plate');
+      for (var key in flatsInfo.entrances) {
+        var corpus = document.createElement('div');
+        var labelCorpus = document.createElement('div');
+        var wrapperPlate = document.createElement('div');
+        corpus.setAttribute('class', 'plate-box__item');
+        wrapperPlate.setAttribute('class', 'plate-box__grid');
+        labelCorpus.setAttribute('class', 'plate-box__label');
+        corpus.append(wrapperPlate);
+        corpus.append(labelCorpus);
+        parentBloc.append(corpus);
+        labelCorpus.textContent = key;
+        var floorsCorpus = flatsInfo.entrances[key].floors; // Этажи с квартирами в каждом подъезде
 
-    for (var key in flatsInfo.entrances) {
-      var corpus = document.createElement('div');
-      var labelCorpus = document.createElement('div');
-      var wrapperPlate = document.createElement('div');
-      corpus.setAttribute('class', 'plate-box__item');
-      wrapperPlate.setAttribute('class', 'plate-box__grid');
-      labelCorpus.setAttribute('class', 'plate-box__label');
-      corpus.append(wrapperPlate);
-      corpus.append(labelCorpus);
-      parentBloc.append(corpus);
-      labelCorpus.textContent = key;
-      var floorsCorpus = flatsInfo.entrances[key].floors; // Этажи с квартирами в каждом подъезде
+        var properties = Object.keys(floorsCorpus).reverse();
 
-      var properties = Object.keys(floorsCorpus).reverse();
+        for (var j = 0; j < properties.length; j++) {
+          var flats = floorsCorpus[properties[j]].flats;
+          var boxFlats = document.createElement('div');
+          boxFlats.setAttribute('class', 'plate-box__case');
+          wrapperPlate.append(boxFlats);
+          console.log(j);
 
-      for (var j = 0; j < properties.length; j++) {
-        var flats = floorsCorpus[properties[j]].flats;
-        var boxFlats = document.createElement('div');
-        boxFlats.setAttribute('class', 'plate-box__case');
-        wrapperPlate.append(boxFlats);
-        console.log(j);
+          for (var k = 0; k < flats.length; k++) {
+            //Вывод квартир
+            var plate = document.createElement('div');
+            var status = flats[k].status;
+            plate.setAttribute('class', 'plate-box__flat');
+            var plateObj = {
+              status: flats[k].statusName,
+              rooms: flats[k].rooms,
+              about: flats[k].about,
+              scheme: flats[k].scheme,
+              price: flats[k].price,
+              floor: j
+            };
+            plateObj = JSON.stringify(plateObj);
+            plate.setAttribute('data-flat', plateObj);
+            plate.textContent = flats[k].rooms;
+            boxFlats.append(plate);
 
-        for (var k = 0; k < flats.length; k++) {
-          //Вывод квартир
-          var plate = document.createElement('div');
-          var status = flats[k].status;
-          plate.setAttribute('class', 'plate-box__flat');
-          var plateObj = {
-            status: flats[k].statusName,
-            rooms: flats[k].rooms,
-            about: flats[k].about,
-            scheme: flats[k].scheme,
-            price: flats[k].price,
-            floor: j
-          };
-          plateObj = JSON.stringify(plateObj);
-          plate.setAttribute('data-flat', plateObj);
-          plate.textContent = flats[k].rooms;
-          boxFlats.append(plate);
+            switch (status) {
+              case 1:
+                plate.classList.add('plate-box__flat--free');
+                break;
 
-          switch (status) {
-            case 1:
-              plate.classList.add('plate-box__flat--free');
-              break;
+              case 2:
+                plate.classList.add('plate-box__flat--take');
+                break;
 
-            case 2:
-              plate.classList.add('plate-box__flat--take');
-              break;
+              case 3:
+                plate.classList.add('plate-box__flat--sold');
+                break;
 
-            case 3:
-              plate.classList.add('plate-box__flat--sold');
-              break;
-
-            case 4:
-              plate.classList.add('plate-box__flat--booked');
-              break;
+              case 4:
+                plate.classList.add('plate-box__flat--booked');
+                break;
+            }
           }
         }
       }
-    }
 
-    if ($('.plate-box__flat').exists()) {
-      var breakpointMobile = window.matchMedia('(min-width:641px)');
+      if ($('.plate-box__flat').exists()) {
+        var breakpointMobile = window.matchMedia('(min-width:641px)');
 
-      if (!breakpointMobile.matches === true) {
-        $('.plate-box__flat').each(function () {
-          $(this).on('click', function () {
-            $('.overlay-plate').addClass('overlay-plate--show');
-            var dataObj = $(this).data("flat"),
-                rooms = "".concat(dataObj.rooms, "\u043A \u043A\u0432\u0430\u0440\u0442\u0438\u0440\u0430"),
-                status = dataObj.status,
-                aboutLink = dataObj.about,
-                scheme = dataObj.scheme,
-                price = "\u043E\u0442 ".concat(dataObj.price, " \u043C\u043B\u043D");
-            $('.popup-plate__unit--room').text(rooms);
-            $('.popup-plate__unit--price').text(price);
-            $('.popup-plate__status').text(status);
-            $('.popup-plate__link--about').attr('href', aboutLink);
-            $('.popup-plate__link--scheme').attr('href', scheme);
-          });
-        });
-
-        if ($('.overlay-plate').exists()) {
-          $('.overlay-plate').click(function (e) {
-            // console.log(e.target.className.indexOf('overlay'));
-            if (e.target.className.indexOf('overlay-plate') != -1) {
-              $(this).removeClass('overlay-plate--show');
-              $('html').css('overflow', 'auto');
-              $('.overlay-plate').removeClass('overlay-plate--show');
-            }
-          });
-        }
-
-        if ($('.popup-plate__close').exists()) {
-          $('.popup-plate___close').click(function (e) {
-            $('.overlay-plate').removeClass('overlay-plate--show');
-          });
-        }
-      }
-
-      var breakpointDesk = window.matchMedia('(max-width: 640px)');
-
-      if (!breakpointDesk.matches === true) {
-        $('.plate-box__flat').each(function () {
-          $(this).on('mouseenter', function () {
-            var coordsTop = $('.plate-box__canvas').position().top - 70,
-                coordsLeft = $('.plate-box__canvas').position().left - 385;
-            var breakpoint = window.matchMedia('(min-width:1236px)');
-            var breakpointLaptop = window.matchMedia('(min-width:1025px)');
-
-            if (!breakpoint.matches === true) {
-              coordsLeft = $('.plate-box__canvas').position().left - 120;
-              coordsTop = $('.plate-box__canvas').position().top - 184;
-            }
-
-            if (!breakpointLaptop.matches === true) {
-              coordsLeft = $('.plate-box__canvas').position().left - 125;
-              coordsTop = $('.plate-box__canvas').position().top - 175;
-            }
-
-            var popup = '<div class="plate-popup"><div class="plate-popup__inner">';
-            popup += '<div class="plate-popup__top">';
-            popup += '<div class="plate-popup__unit plate-popup__unit--qty">2к квартира</div>';
-            popup += '<div class="plate-popup__unit plate-popup__unit--price">от 2,5 млн</div>';
-            popup += '</div>';
-            popup += '<div class="plate-popup__bottom">';
-            popup += '<div class="plate-popup__status">Свободно</div>';
-            popup += '<div class="plate-popup__func"><a class="plate-popup__link plate-popup__link--about" href="javascript:void(0);">Подробнее</a><a class="plate-popup__link plate-popup__link--scheme" href="javascript:void(0);">Планировка</a></div>';
-            popup += '</div>';
-            popup += '</div>';
-            popup += '</div>';
-            $(this).append(popup);
-            $('.plate-popup').addClass('plate-popup--show').css({
-              'top': coordsTop,
-              'left': coordsLeft
+        if (!breakpointMobile.matches === true) {
+          $('.plate-box__flat').each(function () {
+            $(this).on('click', function () {
+              $('.overlay-plate').addClass('overlay-plate--show');
+              var dataObj = $(this).data("flat"),
+                  rooms = "".concat(dataObj.rooms, "\u043A \u043A\u0432\u0430\u0440\u0442\u0438\u0440\u0430"),
+                  status = dataObj.status,
+                  aboutLink = dataObj.about,
+                  scheme = dataObj.scheme,
+                  price = "\u043E\u0442 ".concat(dataObj.price, " \u043C\u043B\u043D");
+              $('.popup-plate__unit--room').text(rooms);
+              $('.popup-plate__unit--price').text(price);
+              $('.popup-plate__status').text(status);
+              $('.popup-plate__link--about').attr('href', aboutLink);
+              $('.popup-plate__link--scheme').attr('href', scheme);
             });
-            var dataObj = $(this).data("flat"),
-                rooms = "".concat(dataObj.rooms, "\u043A \u043A\u0432\u0430\u0440\u0442\u0438\u0440\u0430"),
-                status = dataObj.status,
-                aboutLink = dataObj.about,
-                scheme = dataObj.scheme,
-                price = "\u043E\u0442 ".concat(dataObj.price, " \u043C\u043B\u043D");
-            $('.plate-popup__unit--qty').text(rooms);
-            $('.plate-popup__unit--price').text(price);
-            $('.plate-popup__status').text(status);
-            $('.plate-popup__link--about').attr('href', aboutLink);
-            $('.plate-popup__link--scheme').attr('href', scheme);
           });
-          $(this).on('mouseleave', function () {
-            $('.plate-popup').remove();
+
+          if ($('.overlay-plate').exists()) {
+            $('.overlay-plate').click(function (e) {
+              // console.log(e.target.className.indexOf('overlay'));
+              if (e.target.className.indexOf('overlay-plate') != -1) {
+                $(this).removeClass('overlay-plate--show');
+                $('html').css('overflow', 'auto');
+                $('.overlay-plate').removeClass('overlay-plate--show');
+              }
+            });
+          }
+
+          if ($('.popup-plate__close').exists()) {
+            $('.popup-plate___close').click(function (e) {
+              $('.overlay-plate').removeClass('overlay-plate--show');
+            });
+          }
+        }
+
+        var breakpointDesk = window.matchMedia('(max-width: 640px)');
+
+        if (!breakpointDesk.matches === true) {
+          $('.plate-box__flat').each(function () {
+            $(this).on('mouseenter', function () {
+              var coordsTop = $('.plate-box__canvas').position().top - 70,
+                  coordsLeft = $('.plate-box__canvas').position().left - 385;
+              var breakpoint = window.matchMedia('(min-width:1236px)');
+              var breakpointLaptop = window.matchMedia('(min-width:1025px)');
+
+              if (!breakpoint.matches === true) {
+                coordsLeft = $('.plate-box__canvas').position().left - 120;
+                coordsTop = $('.plate-box__canvas').position().top - 184;
+              }
+
+              if (!breakpointLaptop.matches === true) {
+                coordsLeft = $('.plate-box__canvas').position().left - 125;
+                coordsTop = $('.plate-box__canvas').position().top - 175;
+              }
+
+              var popup = '<div class="plate-popup"><div class="plate-popup__inner">';
+              popup += '<div class="plate-popup__top">';
+              popup += '<div class="plate-popup__unit plate-popup__unit--qty">2к квартира</div>';
+              popup += '<div class="plate-popup__unit plate-popup__unit--price">от 2,5 млн</div>';
+              popup += '</div>';
+              popup += '<div class="plate-popup__bottom">';
+              popup += '<div class="plate-popup__status">Свободно</div>';
+              popup += '<div class="plate-popup__func"><a class="plate-popup__link plate-popup__link--about" href="javascript:void(0);">Подробнее</a><a class="plate-popup__link plate-popup__link--scheme" href="javascript:void(0);">Планировка</a></div>';
+              popup += '</div>';
+              popup += '</div>';
+              popup += '</div>';
+              $(this).append(popup);
+              $('.plate-popup').addClass('plate-popup--show').css({
+                'top': coordsTop,
+                'left': coordsLeft
+              });
+              var dataObj = $(this).data("flat"),
+                  rooms = "".concat(dataObj.rooms, "\u043A \u043A\u0432\u0430\u0440\u0442\u0438\u0440\u0430"),
+                  status = dataObj.status,
+                  aboutLink = dataObj.about,
+                  scheme = dataObj.scheme,
+                  price = "\u043E\u0442 ".concat(dataObj.price, " \u043C\u043B\u043D");
+              $('.plate-popup__unit--qty').text(rooms);
+              $('.plate-popup__unit--price').text(price);
+              $('.plate-popup__status').text(status);
+              $('.plate-popup__link--about').attr('href', aboutLink);
+              $('.plate-popup__link--scheme').attr('href', scheme);
+            });
+            $(this).on('mouseleave', function () {
+              $('.plate-popup').remove();
+            });
           });
-        });
+        }
       }
-    }
-  });
+    });
+  }
 
   if ($('.plate-box__right').exists()) {
     var breakpoint = window.matchMedia('(min-width:1301px)');
@@ -1714,12 +1716,26 @@ $(function () {
   function moveModal() {
     var floorEl = $("[data-floor]");
     floorEl.each(function () {
-      $(this).on('mousemove', function () {
+      $(this).on('mouseenter', function () {
+        var objFlat = {};
         var top = getCoords($(this));
-        var parent = getCoords($('.object__inner'));
         $('.module').addClass('module--active');
         var heightEl = $(this)[0].getBoundingClientRect().height;
         $('.module').css('top', top.top - $('.header').height() - heightEl / 2.9);
+        objFlat.floor = $(this).data('floor');
+        objFlat.section = $(this).data('section'); //objFlat.room = $(this).data('flat')["room"];
+        // objFlat.qty = $(this).data('flat')["qty"];
+        // objFlat.price = $(this).data('flat')["price"];
+
+        $('.module__floor').text("\u042D\u0442\u0430\u0436 ".concat(objFlat.floor, ","));
+        $('.module__section').text("\u0441\u0435\u043A\u0446\u0438\u044F ".concat(objFlat.section));
+        var flat = $(this).data('flat');
+        var parent = $('.module__bottom');
+        Object.keys(flat).map(function (elem) {
+          console.log(flat[elem]);
+          var rowEl = document.createElement('div');
+          rowEl.setAttribute("class", "module__row");
+        }); //console.log(Object.keys($(this).data('flat')));
       });
       $(this).on('mouseleave', function () {
         $('.module').removeClass('module--active');
