@@ -1717,25 +1717,53 @@ $(function () {
     var floorEl = $("[data-floor]");
     floorEl.each(function () {
       $(this).on('mouseenter', function () {
+        $('.module__row').remove();
         var objFlat = {};
         var top = getCoords($(this));
         $('.module').addClass('module--active');
         var heightEl = $(this)[0].getBoundingClientRect().height;
         $('.module').css('top', top.top - $('.header').height() - heightEl / 2.9);
         objFlat.floor = $(this).data('floor');
-        objFlat.section = $(this).data('section'); //objFlat.room = $(this).data('flat')["room"];
-        // objFlat.qty = $(this).data('flat')["qty"];
-        // objFlat.price = $(this).data('flat')["price"];
-
+        objFlat.section = $(this).data('section');
         $('.module__floor').text("\u042D\u0442\u0430\u0436 ".concat(objFlat.floor, ","));
         $('.module__section').text("\u0441\u0435\u043A\u0446\u0438\u044F ".concat(objFlat.section));
         var flat = $(this).data('flat');
         var parent = $('.module__bottom');
-        Object.keys(flat).map(function (elem) {
-          console.log(flat[elem]);
+
+        if (flat == undefined) {
           var rowEl = document.createElement('div');
           rowEl.setAttribute("class", "module__row");
-        }); //console.log(Object.keys($(this).data('flat')));
+          var cellEl = document.createElement('div');
+          cellEl.setAttribute("class", "module__cell");
+          cellEl.textContent = "Нет квартир на продажу";
+          rowEl.append(cellEl);
+          parent.append(rowEl);
+        }
+
+        Object.keys(flat).map(function (elem) {
+          var rowEl = document.createElement('div');
+          rowEl.setAttribute("class", "module__row");
+          var cellEl = document.createElement('div');
+          cellEl.setAttribute("class", "module__cell");
+          cellEl.textContent = "".concat(elem, "-\u043A\u043E\u043C\u043D\u0430\u0442\u043D\u044B\u0435");
+          rowEl.append(cellEl);
+
+          for (var key in flat[elem]) {
+            var _cellEl = document.createElement('div');
+
+            _cellEl.setAttribute("class", "module__cell");
+
+            if (key == "price") {
+              _cellEl.textContent = "\u043E\u0442 ".concat(flat[elem][key], " \u043C\u043B\u043D");
+            } else {
+              _cellEl.textContent = flat[elem][key];
+            }
+
+            rowEl.append(_cellEl);
+          }
+
+          parent.append(rowEl);
+        });
       });
       $(this).on('mouseleave', function () {
         $('.module').removeClass('module--active');

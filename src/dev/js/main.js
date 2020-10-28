@@ -1773,6 +1773,8 @@ $(() => {
 
         floorEl.each(function () {
             $(this).on('mouseenter', function () {
+                $('.module__row').remove();
+
                 let objFlat = {};
                 let top = getCoords($(this));
                 $('.module').addClass('module--active');
@@ -1781,9 +1783,6 @@ $(() => {
 
                 objFlat.floor = $(this).data('floor');
                 objFlat.section = $(this).data('section');
-                //objFlat.room = $(this).data('flat')["room"];
-                // objFlat.qty = $(this).data('flat')["qty"];
-                // objFlat.price = $(this).data('flat')["price"];
 
                 $('.module__floor').text(`Этаж ${objFlat.floor},`);
                 $('.module__section').text(`секция ${objFlat.section}`);
@@ -1791,22 +1790,40 @@ $(() => {
                 let flat = $(this).data('flat');
                 let parent = $('.module__bottom');
 
-                Object.keys(flat).map(elem => {
-                    console.log(flat[elem]);
+                if (flat == undefined) {
                     let rowEl = document.createElement('div');
                     rowEl.setAttribute("class", "module__row");
 
+                    let cellEl = document.createElement('div');
+                    cellEl.setAttribute("class", "module__cell");
+                    cellEl.textContent = "Нет квартир на продажу";
+                    rowEl.append(cellEl);
+                    parent.append(rowEl);
+                }
 
+                Object.keys(flat).map(elem => {
+                    let rowEl = document.createElement('div');
+                    rowEl.setAttribute("class", "module__row");
 
+                    let cellEl = document.createElement('div');
+                    cellEl.setAttribute("class", "module__cell");
+                    cellEl.textContent = `${elem}-комнатные`;
+                    rowEl.append(cellEl);
 
+                    for (let key in flat[elem]) {
+                        let cellEl = document.createElement('div');
+                        cellEl.setAttribute("class", "module__cell");
 
+                        if (key == "price") {
+                            cellEl.textContent = `от ${flat[elem][key]} млн`;
+                        } else {
+                            cellEl.textContent = flat[elem][key];
+                        }
+
+                        rowEl.append(cellEl);
+                    }
+                    parent.append(rowEl);
                 })
-
-                //console.log(Object.keys($(this).data('flat')));
-
-
-
-
             });
 
             $(this).on('mouseleave', function () {
