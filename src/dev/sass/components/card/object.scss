@@ -54,11 +54,10 @@
 
     &__panel {
         position: absolute;
-        height: 288px;
+        min-height: 288px;
         left: 0;
         bottom: 0;
-        width: 935px;
-        height: 288px;
+        min-width: 935px;
         background: rgba(30, 32, 44, .54);
         padding: 70px 204px 85px 343px;
 
@@ -70,18 +69,23 @@
         @media(max-width: 1235px) {
             width: 690px;
             padding: 70px 204px 60px 98px;
-            height: 254px;
+            min-height: 254px;
         }
 
         @media(max-width: 1024px) {
             padding: 40px 204px 40px 98px;
-            height: 190px;
+            min-height: 190px;
             width: 100%;
+            min-width: initial;
+        }
+
+        @media(max-width: 992px) {
+            padding: 40px 175px 40px 80px;
         }
 
         @media(max-width: 640px) {
             padding: 35px 16px;
-            height: 173px;
+            minheight: 173px;
             width: 100%;
         }
     }

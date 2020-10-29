@@ -15,8 +15,55 @@ const projectFunc = {
             $(place).html(out);
             $(this).remove();
         });
+    },
+    showPeriod: function (elem) { // Слайдер на детальной странице проекта
+        if ($(elem).exists()) {
+            try {
+                let projectPeriod = new Swiper(elem, {
+                    slidesPerView: '1',
+                    spaceBetween: 40,
+                    effect: 'fade',
+                    autoplay: {
+                        delay: 5000
+                    },
+                    fadeEffect: {
+                        crossFade: true
+                    },
+                    pagination: {
+                        el: '.inner-slider__num',
+                        type: "custom",
+                        renderCustom: function (swiper, current, total) {
+                            let i = current ? current : 0;
+                            return `<span>${("" + i).slice(-2)}</span>` +
+                                `/<span>${("" + total).slice(-2)}</span>`;
+                        },
+                    },
+                    navigation: {
+                        nextEl: '.inner-slider__link--next',
+                        prevEl: '.inner-slider__link--prev'
+                    },
+                });
+                if ($('.project-period__unit').exists()) {
+                    $('.project-period__unit').each(function () {
+
+                        $(this).on('click', function () {
+                            $('.project-period__text').text($(this).text());
+                            $('.project-period__box').removeClass('project-period__box--active');
+                        });
+                    });
+                }
+
+                return projectPeriod;
+            }
+            catch (err) {
+                console.log(err);
+            }
+        }
     }
 }
+
+
+
 
 
 document.addEventListener("DOMContentLoaded", function (event) {
@@ -147,6 +194,8 @@ document.addEventListener("DOMContentLoaded", function (event) {
 });
 
 $(() => {
+
+    projectFunc.showPeriod('.project-period__slider');
 
     if ($('#plate').exists()) {
         function loadJSON(callback) {
@@ -2121,59 +2170,7 @@ $(() => {
         });
     }
 
-    if ($('.project-period__slider').exists()) {
-        try {
-            let projecPeriod = new Swiper('.project-period__slider', {
-                slidesPerView: '1',
-                spaceBetween: 40,
-                effect: 'fade',
-                autoplay: {
-                    delay: 5000
-                },
-                fadeEffect: {
-                    crossFade: true
-                },
-                pagination: {
-                    el: '.inner-slider__num',
-                    type: "custom",
-                    renderCustom: function (swiper, current, total) {
-                        let i = current ? current : 0;
-                        return `<span>${("" + i).slice(-2)}</span>` +
-                            `/<span>${("" + total).slice(-2)}</span>`;
-                    },
-                },
-                navigation: {
-                    nextEl: '.inner-slider__link--next',
-                    prevEl: '.inner-slider__link--prev'
-                },
-            });
-            if ($('.project-period__unit').exists()) {
-                $('.project-period__unit').each(function () {
 
-                    let dataVal = 0;
-                    let dataSlide = 0;
-
-                    $(this).on('click', function () {
-                        $('.project-period__text').text($(this).text());
-                        $('.project-period__box').removeClass('project-period__box--active');
-
-                        dataVal = $(this).find('input').data('period');
-
-                        $('.project-period__slider .swiper-slide').each(function () {
-                            dataSlide = $(this).data('slide');
-
-                            if (dataSlide == dataVal) {
-                                projecPeriod.slideTo(dataSlide - 1);
-                                return false;
-                            }
-                        });
-                    });
-                });
-            }
-        } catch (err) {
-            console.log(err);
-        }
-    }
 
     $(document).click(function (e) {
         var elem = $('.project-period__box');

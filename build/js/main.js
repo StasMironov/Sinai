@@ -16,6 +16,49 @@ var projectFunc = {
       $(place).html(out);
       $(this).remove();
     });
+  },
+  showPeriod: function showPeriod(elem) {
+    // Слайдер на детальной странице проекта
+    if ($(elem).exists()) {
+      try {
+        var projectPeriod = new Swiper(elem, {
+          slidesPerView: '1',
+          spaceBetween: 40,
+          effect: 'fade',
+          autoplay: {
+            delay: 5000
+          },
+          fadeEffect: {
+            crossFade: true
+          },
+          pagination: {
+            el: '.inner-slider__num',
+            type: "custom",
+            renderCustom: function renderCustom(swiper, current, total) {
+              var i = current ? current : 0;
+              return "<span>".concat(("" + i).slice(-2), "</span>") + "/<span>".concat(("" + total).slice(-2), "</span>");
+            }
+          },
+          navigation: {
+            nextEl: '.inner-slider__link--next',
+            prevEl: '.inner-slider__link--prev'
+          }
+        });
+
+        if ($('.project-period__unit').exists()) {
+          $('.project-period__unit').each(function () {
+            $(this).on('click', function () {
+              $('.project-period__text').text($(this).text());
+              $('.project-period__box').removeClass('project-period__box--active');
+            });
+          });
+        }
+
+        return projectPeriod;
+      } catch (err) {
+        console.log(err);
+      }
+    }
   }
 };
 document.addEventListener("DOMContentLoaded", function (event) {
@@ -141,6 +184,8 @@ document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 $(function () {
+  projectFunc.showPeriod('.project-period__slider');
+
   if ($('#plate').exists()) {
     var loadJSON = function loadJSON(callback) {
       var xobj = new XMLHttpRequest();
@@ -2044,56 +2089,6 @@ $(function () {
         $(this).closest('.building-filter__col').siblings().find('.project-period__box').removeClass('project-period__box--active');
       });
     });
-  }
-
-  if ($('.project-period__slider').exists()) {
-    try {
-      var projecPeriod = new Swiper('.project-period__slider', {
-        slidesPerView: '1',
-        spaceBetween: 40,
-        effect: 'fade',
-        autoplay: {
-          delay: 5000
-        },
-        fadeEffect: {
-          crossFade: true
-        },
-        pagination: {
-          el: '.inner-slider__num',
-          type: "custom",
-          renderCustom: function renderCustom(swiper, current, total) {
-            var i = current ? current : 0;
-            return "<span>".concat(("" + i).slice(-2), "</span>") + "/<span>".concat(("" + total).slice(-2), "</span>");
-          }
-        },
-        navigation: {
-          nextEl: '.inner-slider__link--next',
-          prevEl: '.inner-slider__link--prev'
-        }
-      });
-
-      if ($('.project-period__unit').exists()) {
-        $('.project-period__unit').each(function () {
-          var dataVal = 0;
-          var dataSlide = 0;
-          $(this).on('click', function () {
-            $('.project-period__text').text($(this).text());
-            $('.project-period__box').removeClass('project-period__box--active');
-            dataVal = $(this).find('input').data('period');
-            $('.project-period__slider .swiper-slide').each(function () {
-              dataSlide = $(this).data('slide');
-
-              if (dataSlide == dataVal) {
-                projecPeriod.slideTo(dataSlide - 1);
-                return false;
-              }
-            });
-          });
-        });
-      }
-    } catch (err) {
-      console.log(err);
-    }
   }
 
   $(document).click(function (e) {
