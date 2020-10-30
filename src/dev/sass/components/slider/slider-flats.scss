@@ -157,12 +157,14 @@
             margin: 15px 0;
         }
 
-        .swiper-pagination-bullet {
+        .slider-flats__bullet {
             cursor: pointer;
             padding: 0 9px;
-            display: flex;
-            align-items: center;
-            background: transparent;
+            opacity: .3;
+
+            &--active {
+                opacity: 1;
+            }
 
             @media(max-width: 500px) {
                 padding: 0;

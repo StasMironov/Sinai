@@ -1332,33 +1332,6 @@ $(() => {
         }
     }
 
-    if ($('.slider-flats').exists()) {
-        try {
-            let flatsSlider = new Swiper('.slider-flats', {
-                slidesPerView: 1,
-                spaceBetween: 10,
-                touchRatio: 0,
-                effect: 'fade',
-                fadeEffect: {
-                    crossFade: true
-                },
-                pagination: {
-                    el: '.slider-flats__pagination',
-                    clickable: true,
-                    renderBullet: function (index, className) {
-                        return '<span class="' + className + '">' + (index + 1) + '</span>';
-                    }
-                },
-                navigation: {
-                    nextEl: '.slider-flats__arrow--next',
-                    prevEl: '.slider-flats__arrow--prev',
-                }
-            });
-        } catch (err) {
-            console.log('Ошибка ' + err.name + ":" + err.message + "\n" + err.stack);
-        }
-    }
-
     if ($('#cost').exists()) {
         let min = $('#cost').closest('.building-filter__col').find('.building-filter__range').data('min');
         let max = $('#cost').closest('.building-filter__col').find('.building-filter__range').data('max');
