@@ -59,8 +59,15 @@ const projectFunc = {
                 console.log(err);
             }
         }
+    },
+    linkFloors: function () {
+        const url = this.getAttribute('data-url');
+        document.location.host
+        location.assign(document.location.origin + url);
     }
 }
+
+
 
 
 
@@ -2418,11 +2425,7 @@ $(() => {
             grpHover[i].setAttribute('id', 'h' + i);
             grpDefault[i].setAttribute('id', 'd' + i);
 
-            grpHover[i].onclick = function () {
-                const url = this.getAttribute('data-url');
-                document.location.host
-                location.assign(document.location.origin + url);
-            }
+            grpHover[i].onclick = projectFunc.linkFloors;
 
             if (!grpHover[i].classList.contains('active') && !grpHover[i].classList.contains('current')) {
                 grpHover[i].classList.add('hide');

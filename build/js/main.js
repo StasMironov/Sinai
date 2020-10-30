@@ -59,6 +59,11 @@ var projectFunc = {
         console.log(err);
       }
     }
+  },
+  linkFloors: function linkFloors() {
+    var url = this.getAttribute('data-url');
+    document.location.host;
+    location.assign(document.location.origin + url);
   }
 };
 document.addEventListener("DOMContentLoaded", function (event) {
@@ -2329,11 +2334,7 @@ $(function () {
 
       grpDefault[_i5].setAttribute('id', 'd' + _i5);
 
-      grpHover[_i5].onclick = function () {
-        var url = this.getAttribute('data-url');
-        document.location.host;
-        location.assign(document.location.origin + url);
-      };
+      grpHover[_i5].onclick = projectFunc.linkFloors;
 
       if (!grpHover[_i5].classList.contains('active') && !grpHover[_i5].classList.contains('current')) {
         grpHover[_i5].classList.add('hide');
