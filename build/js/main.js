@@ -654,8 +654,18 @@ $(function () {
   }
 
   if ($('.flats-basic__item').exists()) {
-    ScrollReveal().reveal('.flats-basic__item', {
-      interval: 500
+    // gsap.set(
+    //     '.flats-basic__item',
+    //     {
+    //         y: -200,
+    //     }
+    // );
+    gsap.from('.flats-basic__item', {
+      y: -200,
+      opacity: 1,
+      // duration: 10,
+      stagger: 0.5 // stagger: 0.5
+
     });
   }
 
