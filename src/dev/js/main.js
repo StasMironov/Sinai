@@ -60,13 +60,48 @@ const projectFunc = {
             }
         }
     },
-    linkFloors: function () {
+    linkFloors: function () { //Переход в квартиру, при клике по области
         const url = this.getAttribute('data-url');
         document.location.host
         location.assign(document.location.origin + url);
+    },
+    urlGenerator: function (name, value) {
+        var getParamsUrl = document.location.search,
+            foundGetParams = false;
+
+        if (getParamsUrl !== '') {
+            var arrGetParamsUrl = (getParamsUrl.replace(/^\?/, '')).split('&');
+
+            var newGetParamsUrl = arrGetParamsUrl.map(function (item2) {
+                item2 = item2.split('=');
+                if (item2[0] == name) {
+                    foundGetParams = true;
+                    return item2[0] + '=' + value;
+                } else {
+                    return item2[0] + '=' + item2[1];
+                }
+            });
+
+            getParamsUrl = '?';
+
+            for (var i = 0; i < newGetParamsUrl.length; i++) {
+                if (i == 0) {
+                    getParamsUrl += newGetParamsUrl[i];
+                } else {
+                    getParamsUrl += '&' + newGetParamsUrl[i];
+                }
+            }
+
+            if (!foundGetParams) {
+                getParamsUrl += '&' + name + '=' + value;
+            }
+        } else {
+            getParamsUrl += '?' + name + '=' + value;
+        }
+
+        history.pushState(null, null, document.location.pathname + getParamsUrl);
     }
 }
-
 
 
 
