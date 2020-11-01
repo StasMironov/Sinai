@@ -229,9 +229,10 @@ $(function () {
 
   if ($('#plate').exists()) {
     var loadJSON = function loadJSON(callback) {
+      var dataPlate = $('#plate').data('plate');
       var xobj = new XMLHttpRequest();
       xobj.overrideMimeType("application/json");
-      xobj.open('GET', './js/json/plate.json', true); // Replace 'my_data' with the path to your file
+      xobj.open('GET', dataPlate, true); // Replace 'my_data' with the path to your file
 
       xobj.onreadystatechange = function () {
         if (xobj.readyState == 4 && xobj.status == "200") {
@@ -268,7 +269,6 @@ $(function () {
           var boxFlats = document.createElement('div');
           boxFlats.setAttribute('class', 'plate-box__case');
           wrapperPlate.append(boxFlats);
-          console.log(j);
 
           for (var k = 0; k < flats.length; k++) {
             //Вывод квартир
@@ -406,16 +406,18 @@ $(function () {
   }
 
   if ($('.plate-box__right').exists()) {
-    var breakpoint = window.matchMedia('(min-width:1301px)');
+    $(window).on('resize load', function () {
+      if ($(this).width() <= 1300) {
+        $('.plate-box__right').mCustomScrollbar({
+          theme: "dark",
+          mouseWheelPixels: 90,
+          axis: "x" // horizontal scrollbar
 
-    if (!breakpoint.matches === true) {
-      $('.plate-box__right').mCustomScrollbar({
-        theme: "dark",
-        mouseWheelPixels: 90,
-        axis: "x" // horizontal scrollbar
-
-      });
-    }
+        });
+      } else {
+        $('.plate-box__right').mCustomScrollbar('destroy');
+      }
+    });
   } // let temp = fetch("./js/json/plate.json")
   //     .then(response => response.json())
   //     .then(json => json);
@@ -654,18 +656,12 @@ $(function () {
   }
 
   if ($('.flats-basic__item').exists()) {
-    // gsap.set(
-    //     '.flats-basic__item',
-    //     {
-    //         y: -200,
-    //     }
-    // );
     gsap.from('.flats-basic__item', {
-      y: -200,
-      opacity: 1,
-      // duration: 10,
-      stagger: 0.5 // stagger: 0.5
-
+      yPercent: -50,
+      ease: "sine.out",
+      opacity: 0,
+      stagger: 0.8,
+      duration: 0.8
     });
   }
 
@@ -1623,15 +1619,14 @@ $(function () {
 
   if ($('.index__slider').exists()) {
     try {
-      var _breakpoint6 = window.matchMedia('(min-width:641px)');
-
+      var breakpoint = window.matchMedia('(min-width:641px)');
       var mySwiper;
 
       var breakpointChecker = function breakpointChecker() {
-        if (_breakpoint6.matches === true) {
+        if (breakpoint.matches === true) {
           if (mySwiper !== undefined) mySwiper.destroy(true, true);
           return;
-        } else if (_breakpoint6.matches === false) {
+        } else if (breakpoint.matches === false) {
           var isSafari = !!navigator.userAgent.match(/Version\/[\d\.]+.*Safari/);
 
           if (isSafari) {
@@ -1686,8 +1681,7 @@ $(function () {
         });
       };
 
-      _breakpoint6.addListener(breakpointChecker);
-
+      breakpoint.addListener(breakpointChecker);
       breakpointChecker();
     } catch (err) {
       console.log(err);
@@ -2366,55 +2360,62 @@ $(function () {
   if ($('.plate-box__slider').exists()) {
     if ($('.plate-control').exists()) {
       try {
-        var _breakpoint7 = window.matchMedia('(min-width:993px)');
+        var _temp2 = $('.plate-control');
 
-        var breakpointLaptop = window.matchMedia('(min-width:769px)');
-
-        if (!_breakpoint7.matches === true) {
-          projectFunc.ObjAd('.plate-box__control', '#insert');
-        }
-
-        if (!breakpointLaptop.matches === true) {
-          console.log('laptop');
-          projectFunc.ObjAd('#insert', '#control-laptop');
-        }
-
-        var plateControl = new Swiper('.plate-control', {
-          spaceBetween: 10,
-          slidesPerView: 1,
-          freeMode: true,
-          watchSlidesVisibility: true,
-          watchSlidesProgress: true,
-          effect: 'fade',
-          fadeEffect: {
-            crossFade: true
-          },
-          navigation: {
-            nextEl: '.plate-control__arrow.plate-control__arrow--next',
-            prevEl: '.plate-control__arrow.plate-control__arrow--prev'
+        var created = false;
+        var createdL = false;
+        $(window).on('resize load', function () {
+          if ($(this).width() <= 992) {
+            console.log('990');
+            $('#insert').append($(_temp2));
+            $('.plate-box__list').next('.plate-control').remove();
+            created = true;
           }
+
+          if ($(this).width() > 992) {
+            if (created) {
+              $('.plate-box__list').after(_temp2);
+              $('#insert').children().remove();
+              created = false;
+            }
+          }
+
+          if ($(this).width() <= 768) {
+            projectFunc.ObjAd('#insert', '#control-laptop');
+            createdL = true;
+          }
+
+          if ($(this).width() > 768 && $(this).width() < 992) {
+            if (created) {
+              $('.flats-basic__filter').after(_temp2);
+              $('#control-laptop').children().remove();
+              createdL = false;
+            }
+          } // if{
+          //     $('.plate-box__list').after(temp);
+          // }
+
         });
       } catch (err) {
         console.log(err);
       }
-    }
+    } // let plateSlider = new Swiper('.plate-box__slider', {
+    //     slidesPerView: '1',
+    //     spaceBetween: 40,
+    //     effect: 'fade',
+    //     pagination: '.pag-shoes',
+    //     paginationClickable: true,
+    //     fadeEffect: {
+    //         crossFade: true
+    //     },
+    //     touchRatio: 0,
+    //     navigation: {
+    //         nextEl: '.plate-box__arrow.plate-box__arrow--next',
+    //         prevEl: '.plate-box__arrow.plate-box__arrow--prev',
+    //     },
+    // });
+    // plateControl.controller.control = plateSlider;
+    // plateSlider.controller.control = plateControl;
 
-    var plateSlider = new Swiper('.plate-box__slider', {
-      slidesPerView: '1',
-      spaceBetween: 40,
-      effect: 'fade',
-      pagination: '.pag-shoes',
-      paginationClickable: true,
-      fadeEffect: {
-        crossFade: true
-      },
-      touchRatio: 0,
-      navigation: {
-        nextEl: '.plate-box__arrow.plate-box__arrow--next',
-        prevEl: '.plate-box__arrow.plate-box__arrow--prev'
-      }
-    });
-    plateControl.controller.control = plateSlider;
-    plateSlider.controller.control = plateControl;
   }
 });

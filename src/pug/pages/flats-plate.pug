@@ -118,11 +118,9 @@ block content
 								.swiper-wrapper
 									.swiper-slide
 										.plate-control__text Завенягина 1/2
-									.swiper-slide
-										.plate-control__text Завенягина 1/3
-								.plate-control__arrow.plate-control__arrow--prev
+								a(href="javascript:void(0);").plate-control__arrow.plate-control__arrow--prev
 									+svg('arr_flats')
-								.plate-control__arrow.plate-control__arrow--next
+								a(href="javascript:void(0);").plate-control__arrow.plate-control__arrow--next
 									+svg('arr_flats')
 					//- .plate-box__box
 					//- 	a(href="javascript:void(0);").plate-box__arrow.plate-box__arrow--prev
@@ -149,24 +147,7 @@ block content
 										.plate-box__num 2
 										.plate-box__num 1 
 								.plate-box__right
-									#plate.plate-box__canvas
-							.plate-box__wrapper.swiper-slide
-								.plate-box__left
-									.plate-box__set
-										.plate-box__num 12
-										.plate-box__num 11
-										.plate-box__num 10
-										.plate-box__num 9
-										.plate-box__num 8
-										.plate-box__num 7
-										.plate-box__num 6
-										.plate-box__num 5
-										.plate-box__num 4
-										.plate-box__num 3
-										.plate-box__num 2
-										.plate-box__num 1 
-								//- .plate-box__right
-								//- 	#plate.plate-box__canvas
+									#plate.plate-box__canvas(data-plate="./js/json/plate.json")
 						#control-laptop
 
 											
