@@ -1,6 +1,10 @@
 .flats-info {
     height: 100%;
 
+    &__txt {
+        white-space: nowrap;
+    }
+
     &__items {
         display: flex;
         flex-wrap: wrap;

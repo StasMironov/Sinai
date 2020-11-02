@@ -356,7 +356,7 @@ $(function () {
               var coordsTop = $('.plate-box__canvas').position().top - 70,
                   coordsLeft = $('.plate-box__canvas').position().left - 385;
               var breakpoint = window.matchMedia('(min-width:1236px)');
-              var breakpointLaptop = window.matchMedia('(min-width:1025px)');
+              var breakpointLaptop = window.matchMedia('(min-width:1236px)');
 
               if (!breakpoint.matches === true) {
                 coordsLeft = $('.plate-box__canvas').position().left - 120;
@@ -2366,7 +2366,6 @@ $(function () {
         var createdL = false;
         $(window).on('resize load', function () {
           if ($(this).width() <= 992) {
-            console.log('990');
             $('#insert').append($(_temp2));
             $('.plate-box__list').next('.plate-control').remove();
             created = true;

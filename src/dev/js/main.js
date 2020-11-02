@@ -370,7 +370,7 @@ $(() => {
                                 coordsLeft = $('.plate-box__canvas').position().left - 385;
 
                             let breakpoint = window.matchMedia('(min-width:1236px)');
-                            let breakpointLaptop = window.matchMedia('(min-width:1025px)');
+                            let breakpointLaptop = window.matchMedia('(min-width:1236px)');
 
                             if (!breakpoint.matches === true) {
                                 coordsLeft = $('.plate-box__canvas').position().left - 120;
@@ -400,8 +400,6 @@ $(() => {
                                 'top': coordsTop,
                                 'left': coordsLeft,
                             });
-
-
 
                             let dataObj = $(this).data("flat"),
                                 rooms = `${dataObj.rooms}к квартира`,
@@ -2462,7 +2460,6 @@ $(() => {
 
                 $(window).on('resize load', function () {
                     if ($(this).width() <= 992) {
-                        console.log('990')
                         $('#insert').append($(temp))
                         $('.plate-box__list').next('.plate-control').remove();
                         created = true;
