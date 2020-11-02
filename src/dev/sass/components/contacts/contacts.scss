@@ -8,15 +8,15 @@
     }
 
     &__ic {
+        display: flex;
+        align-items: center;
+        justify-content: center;
         min-width: 24px;
         height: 24px;
         margin-right: 8px;
 
         img {
             display: block;
-            height: 100%;
-            width: 100%;
-            object-fit: contain;
         }
     }
 
@@ -29,10 +29,18 @@
 
     &__wrapper {
         margin-top: 25px;
+
+        @media(max-width: 640px) {
+            margin-top: 33px;
+        }
     }
 
     &__box {
         margin-top: 12px;
+
+        @media(max-width: 640px) {
+            margin-top: 15px;
+        }
     }
 
     &__txt {
@@ -44,6 +52,10 @@
     &__row {
         &:not(:first-child) {
             margin-top: 7px;
+
+            @media(max-width: 640px) {
+                margin-top: 28px;
+            }
         }
     }
 
