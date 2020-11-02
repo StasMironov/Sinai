@@ -417,11 +417,6 @@ const projectFunc = {
     }
 }
 
-
-
-
-
-
 document.addEventListener("DOMContentLoaded", function (event) {
 
     const isSafari = !!navigator.userAgent.match(/Version\/[\d\.]+.*Safari/);
@@ -470,7 +465,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
             let out = adObj;
             $(place).html(out);
             $(this).remove();
-            console.log(element);
         });
     }
 
@@ -553,6 +547,30 @@ $(() => {
 
     projectFunc.showPeriod('.project-period__slider');
     projectFunc.plateGen();
+
+    if ($('.btn--share').exists()) {
+        $('.btn--share').on('click', function () {
+            $('.overlay-share').addClass('overlay-share--show');
+            $('html').css('overflow', 'hidden');
+        })
+    }
+
+    if ($('.popup-share__close').exists()) {
+        $('.popup-share__close').on('click', function () {
+            $('.overlay-share').removeClass('overlay-share--show');
+            $('html').css('overflow', 'auto');
+        })
+    }
+
+    if ($('.overlay-share').exists()) {
+        $('.overlay-share').click(function (e) {
+            console.log(e.target.className.indexOf('overlay-share'));
+            if (e.target.className.indexOf('overlay-share') != -1) {
+                $(this).removeClass('overlay-share--show');
+                $('html').css('overflow', 'auto');
+            }
+        });
+    }
 
     if ($('.plate-box__right').exists()) {
         $(window).on('resize load', function () {
@@ -1264,7 +1282,6 @@ $(() => {
 
                 spaceBetween: 20,
                 slidesPerView: 'auto',
-                loop: true,
                 autoHeight: true,
                 navigation: {
                     nextEl: '.index-project__link--pf_next',
