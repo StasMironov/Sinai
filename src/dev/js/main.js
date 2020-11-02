@@ -16,6 +16,320 @@ const projectFunc = {
             $(this).remove();
         });
     },
+    fixMap: function (map, edge, parentMap) {
+        let $window = $(window),
+            $target = $(map),
+            $h = $target.offset().top;
+
+        $window.on('scroll', function () {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            if (scrollTop > $h) {
+                $target.addClass("map-fixed");
+
+                var wt = $(window).scrollTop();
+                var wh = $(window).height();
+                var et = $(edge).offset().top;
+                var eh = $(edge).outerHeight();
+                var dh = $(document).height();
+                if (wt + wh >= et || wh + wt == dh || eh + et < wh) {
+                    $(map).removeClass("map-fixed");
+                    $(parentMap).addClass('map-end');
+                } else {
+                    $(map).addClass("map-fixed");
+                    $(parentMap).removeClass('map-end');
+                }
+                return;
+            } else {
+                $target.removeClass("map-fixed");
+            }
+            return;
+        });
+    },
+    createMap: function(mapBloc, itemEl) {
+        if ($(`#${mapBloc}`).exists()) {
+            let centerMap = $(`#${mapBloc}`).data('center');
+            let markerArr = [];
+            mapboxgl.accessToken = 'pk.eyJ1IjoiYWRtaW5zaW5haSIsImEiOiJja2N2czJ2ejcwNzdoMzBtbDVneTh6NTNkIn0.pkiEoq-UDjbqvdDrB_zZCQ';
+            let flying = false;
+            let mapCenter = centerMap;
+
+            const map = new mapboxgl.Map({
+                container: mapBloc, //Без #
+                style: 'mapbox://styles/mapbox/light-v10',
+                center: mapCenter,
+                zoom: 15.9,
+                attributionControl: false,
+            });
+
+            map.scrollZoom.disable();
+            let nav = new mapboxgl.NavigationControl({
+                showCompass: false,
+                showZoom: true
+            });
+
+            if ($(itemEl).exists()) {
+                let temp = 0;
+                try {
+                    $(itemEl).each(function () {
+                        let coordinatesData = $(this).data('coordinates');
+                        let el = document.createElement('div');
+                        let doc = new DOMParser().parseFromString(
+                            '<svg width="80" height="80" viewBox="0 0 118 118" fill="none" xmlns="http://www.w3.org/2000/svg"><rect class="rect" y="59" width="83.4386" height="83.4386" transform="rotate(-45 0 59)" fill="#40424C"/><path d="M68.2258 75.368V45.0131C68.2258 44.0275 67.4259 43.2275 66.4402 43.2275H52.1556C51.1699 43.2275 50.37 44.0275 50.37 45.0131V75.368" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>                <path d="M50.3699 53.9409H43.2276C42.242 53.9409 41.442 54.7409 41.442 55.7265V75.3679" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>                <path d="M77.1537 75.3679V55.7265C77.1537 54.7409 76.3538 53.9409 75.3682 53.9409H68.2258" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M54.8339 68.2256H63.7618" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M61.9763 68.2256V75.3679" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M56.6195 75.3679V68.2256" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M55.7267 56.6194H62.869" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M55.7267 61.976H62.869" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M55.7267 51.2627H62.869" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M46.7988 61.976H50.37" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M46.7988 68.2256H50.37" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M68.2258 61.976H71.797" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M68.2258 68.2256H71.797" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/> <path d="M78.9393 75.3679H39.6565" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>', 'application/xml');
+                        el.appendChild(
+                            el.ownerDocument.importNode(doc.documentElement, true));
+                        el.className = 'marker';
+                        markerArr.push(el);
+
+                        new mapboxgl.Marker(el)
+                            .setLngLat(coordinatesData) // sets a popup on this marker
+                            .addTo(map);
+                    });
+
+                    let projectsData = [];
+
+                    $(itemEl).each(function (i) {
+                        markerArr[i].setAttribute('data-href', $(this).data('href'));
+
+                        if ($(this).data('coordinates') != undefined) {
+                            projectsData.push($(this).data('coordinates'));
+                        }
+
+                        $(this).hover(function () {
+                            fly(i);
+                            temp = fly(i);
+                        });
+                    });
+
+                    map.on('moveend', function (e) {
+                        if (flying) {
+                            markerArr[temp].classList.add('marker--active');
+                            for (let i = 0; i < markerArr.length; i++) {
+                                if (i != temp) {
+                                    markerArr[i].classList.remove('marker--active');
+                                }
+                            }
+                            map.fire('flyend');
+                        }
+                    });
+
+                    map.on('flystart', function () {
+                        flying = true;
+                    });
+                    map.on('flyend', function () {
+                        flying = false;
+                    });
+
+                    function fly(i) {
+                        map.flyTo({
+                            center: projectsData[i],
+                            zoom: 15.9,
+                            bearing: 0,
+                            essential: true // this animation is considered essential with respect to prefers-reduced-motion
+                        });
+                        map.fire('flystart');
+                        return i;
+                    }
+
+                    markerArr.forEach(element => {
+                        element.addEventListener('click', function () {
+                            let hrefPath = this.getAttribute('data-href');
+                            location = hrefPath;
+                        });
+                    });
+                } catch (err) {
+                    console.log(err);
+                }
+            }
+        }
+    },
+    plateGen: function() {
+        if ($('#plate').exists()) {
+            function loadJSON(callback) {
+                let dataPlate = $('#plate').data('plate');
+                var xobj = new XMLHttpRequest();
+                xobj.overrideMimeType("application/json");
+                xobj.open('GET', dataPlate, true); // Replace 'my_data' with the path to your file
+                xobj.onreadystatechange = function () {
+                    if (xobj.readyState == 4 && xobj.status == "200") {
+                        // Required use of an anonymous callback as .open will NOT return a value but simply returns undefined in asynchronous mode
+                        callback(xobj.responseText);
+                    }
+                };
+                xobj.send(null);
+            }
+    
+            loadJSON(function (response) {
+                // Parse JSON string into object
+                let flatsInfo = JSON.parse(response);
+                let parentBloc = document.getElementById('plate');
+    
+                for (let key in flatsInfo.entrances) {
+                    let corpus = document.createElement('div');
+                    let labelCorpus = document.createElement('div');
+                    let wrapperPlate = document.createElement('div');
+    
+                    corpus.setAttribute('class', 'plate-box__item');
+                    wrapperPlate.setAttribute('class', 'plate-box__grid');
+                    labelCorpus.setAttribute('class', 'plate-box__label');
+                    corpus.append(wrapperPlate);
+                    corpus.append(labelCorpus);
+                    parentBloc.append(corpus);
+                    labelCorpus.textContent = key;
+    
+                    let floorsCorpus = flatsInfo.entrances[key].floors; // Этажи с квартирами в каждом подъезде
+                    let properties = Object.keys(floorsCorpus).reverse();
+    
+                    for (let j = 0; j < properties.length; j++) {
+    
+                        let flats = floorsCorpus[properties[j]].flats;
+                        let boxFlats = document.createElement('div');
+                        boxFlats.setAttribute('class', 'plate-box__case');
+                        wrapperPlate.append(boxFlats);
+    
+                        for (let k = 0; k < flats.length; k++) { //Вывод квартир
+                            let plate = document.createElement('div');
+                            let status = flats[k].status;
+                            plate.setAttribute('class', 'plate-box__flat');
+    
+    
+                            let plateObj = {
+                                status: flats[k].statusName,
+                                rooms: flats[k].rooms,
+                                about: flats[k].about,
+                                scheme: flats[k].scheme,
+                                price: flats[k].price,
+                                floor: j
+                            }
+    
+                            plateObj = JSON.stringify(plateObj);
+                            plate.setAttribute('data-flat', plateObj);
+                            plate.textContent = flats[k].rooms;
+                            boxFlats.append(plate);
+    
+                            switch (status) {
+                                case 1:
+                                    plate.classList.add('plate-box__flat--free');
+                                    break;
+                                case 2:
+                                    plate.classList.add('plate-box__flat--take');
+                                    break;
+                                case 3:
+                                    plate.classList.add('plate-box__flat--sold');
+                                    break;
+                                case 4:
+                                    plate.classList.add('plate-box__flat--booked');
+                                    break;
+                            }
+                        }
+                    }
+                }
+    
+                if ($('.plate-box__flat').exists()) {
+                    let breakpointMobile = window.matchMedia('(min-width:641px)');
+    
+                    if (!breakpointMobile.matches === true) {
+                        $('.plate-box__flat').each(function () {
+                            $(this).on('click', function () {
+                                $('.overlay-plate').addClass('overlay-plate--show');
+    
+                                let dataObj = $(this).data("flat"),
+                                    rooms = `${dataObj.rooms}к квартира`,
+                                    status = dataObj.status,
+                                    aboutLink = dataObj.about,
+                                    scheme = dataObj.scheme,
+                                    price = `от ${dataObj.price} млн`;
+    
+                                $('.popup-plate__unit--room').text(rooms);
+                                $('.popup-plate__unit--price').text(price);
+                                $('.popup-plate__status').text(status);
+                                $('.popup-plate__link--about').attr('href', aboutLink);
+                                $('.popup-plate__link--scheme').attr('href', scheme);
+                            });
+                        });
+    
+                        if ($('.overlay-plate').exists()) {
+                            $('.overlay-plate').click(function (e) {
+                                // console.log(e.target.className.indexOf('overlay'));
+                                if (e.target.className.indexOf('overlay-plate') != -1) {
+                                    $(this).removeClass('overlay-plate--show');
+                                    $('html').css('overflow', 'auto');
+                                    $('.overlay-plate').removeClass('overlay-plate--show');
+                                }
+                            });
+                        }
+    
+                        if ($('.popup-plate__close').exists()) {
+                            $('.popup-plate___close').click(function (e) {
+                                $('.overlay-plate').removeClass('overlay-plate--show');
+                            });
+                        }
+    
+                    }
+    
+                    let breakpointDesk = window.matchMedia('(max-width: 640px)');
+                    if (!breakpointDesk.matches === true) {
+                        $('.plate-box__flat').each(function () {
+                            $(this).on('mouseenter', function () {
+                                let coordsTop = $('.plate-box__canvas').position().top - 70,
+                                    coordsLeft = $('.plate-box__canvas').position().left - 385;
+    
+                                let breakpoint = window.matchMedia('(min-width:1236px)');
+                                let breakpointLaptop = window.matchMedia('(min-width:1025px)');
+    
+                                if (!breakpoint.matches === true) {
+                                    coordsLeft = $('.plate-box__canvas').position().left - 120;
+                                    coordsTop = $('.plate-box__canvas').position().top - 184;
+                                }
+    
+                                if (!breakpointLaptop.matches === true) {
+                                    coordsLeft = $('.plate-box__canvas').position().left - 125;
+                                    coordsTop = $('.plate-box__canvas').position().top - 175;
+                                }
+    
+                                let popup = '<div class="plate-popup"><div class="plate-popup__inner">';
+                                popup += '<div class="plate-popup__top">';
+                                popup += '<div class="plate-popup__unit plate-popup__unit--qty">2к квартира</div>';
+                                popup += '<div class="plate-popup__unit plate-popup__unit--price">от 2,5 млн</div>';
+                                popup += '</div>';
+                                popup += '<div class="plate-popup__bottom">';
+                                popup += '<div class="plate-popup__status">Свободно</div>';
+                                popup += '<div class="plate-popup__func"><a class="plate-popup__link plate-popup__link--about" href="javascript:void(0);">Подробнее</a><a class="plate-popup__link plate-popup__link--scheme" href="javascript:void(0);">Планировка</a></div>';
+                                popup += '</div>';
+                                popup += '</div>';
+                                popup += '</div>';
+    
+                                $(this).append(popup);
+    
+                                $('.plate-popup').addClass('plate-popup--show').css({
+                                    'top': coordsTop,
+                                    'left': coordsLeft,
+                                });
+    
+    
+    
+                                let dataObj = $(this).data("flat"),
+                                    rooms = `${dataObj.rooms}к квартира`,
+                                    status = dataObj.status,
+                                    aboutLink = dataObj.about,
+                                    scheme = dataObj.scheme,
+                                    price = `от ${dataObj.price} млн`;
+    
+                                $('.plate-popup__unit--qty').text(rooms);
+                                $('.plate-popup__unit--price').text(price);
+                                $('.plate-popup__status').text(status);
+                                $('.plate-popup__link--about').attr('href', aboutLink);
+                                $('.plate-popup__link--scheme').attr('href', scheme);
+                            });
+    
+                            $(this).on('mouseleave', function () {
+                                $('.plate-popup').remove();
+                            });
+                        });
+                    }
+                }
+            });
+        }
+    },
     showPeriod: function (elem) { // Слайдер на детальной странице проекта
         if ($(elem).exists()) {
             try {
@@ -239,192 +553,7 @@ $(() => {
 
     projectFunc.showPeriod('.project-period__slider');
 
-    if ($('#plate').exists()) {
-        function loadJSON(callback) {
-            let dataPlate = $('#plate').data('plate');
-            var xobj = new XMLHttpRequest();
-            xobj.overrideMimeType("application/json");
-            xobj.open('GET', dataPlate, true); // Replace 'my_data' with the path to your file
-            xobj.onreadystatechange = function () {
-                if (xobj.readyState == 4 && xobj.status == "200") {
-                    // Required use of an anonymous callback as .open will NOT return a value but simply returns undefined in asynchronous mode
-                    callback(xobj.responseText);
-                }
-            };
-            xobj.send(null);
-        }
-
-        loadJSON(function (response) {
-            // Parse JSON string into object
-            let flatsInfo = JSON.parse(response);
-            let parentBloc = document.getElementById('plate');
-
-            for (let key in flatsInfo.entrances) {
-                let corpus = document.createElement('div');
-                let labelCorpus = document.createElement('div');
-                let wrapperPlate = document.createElement('div');
-
-                corpus.setAttribute('class', 'plate-box__item');
-                wrapperPlate.setAttribute('class', 'plate-box__grid');
-                labelCorpus.setAttribute('class', 'plate-box__label');
-                corpus.append(wrapperPlate);
-                corpus.append(labelCorpus);
-                parentBloc.append(corpus);
-                labelCorpus.textContent = key;
-
-                let floorsCorpus = flatsInfo.entrances[key].floors; // Этажи с квартирами в каждом подъезде
-                let properties = Object.keys(floorsCorpus).reverse();
-
-                for (let j = 0; j < properties.length; j++) {
-
-                    let flats = floorsCorpus[properties[j]].flats;
-                    let boxFlats = document.createElement('div');
-                    boxFlats.setAttribute('class', 'plate-box__case');
-                    wrapperPlate.append(boxFlats);
-
-                    for (let k = 0; k < flats.length; k++) { //Вывод квартир
-                        let plate = document.createElement('div');
-                        let status = flats[k].status;
-                        plate.setAttribute('class', 'plate-box__flat');
-
-
-                        let plateObj = {
-                            status: flats[k].statusName,
-                            rooms: flats[k].rooms,
-                            about: flats[k].about,
-                            scheme: flats[k].scheme,
-                            price: flats[k].price,
-                            floor: j
-                        }
-
-                        plateObj = JSON.stringify(plateObj);
-                        plate.setAttribute('data-flat', plateObj);
-                        plate.textContent = flats[k].rooms;
-                        boxFlats.append(plate);
-
-                        switch (status) {
-                            case 1:
-                                plate.classList.add('plate-box__flat--free');
-                                break;
-                            case 2:
-                                plate.classList.add('plate-box__flat--take');
-                                break;
-                            case 3:
-                                plate.classList.add('plate-box__flat--sold');
-                                break;
-                            case 4:
-                                plate.classList.add('plate-box__flat--booked');
-                                break;
-                        }
-                    }
-                }
-            }
-
-            if ($('.plate-box__flat').exists()) {
-                let breakpointMobile = window.matchMedia('(min-width:641px)');
-
-                if (!breakpointMobile.matches === true) {
-                    $('.plate-box__flat').each(function () {
-                        $(this).on('click', function () {
-                            $('.overlay-plate').addClass('overlay-plate--show');
-
-                            let dataObj = $(this).data("flat"),
-                                rooms = `${dataObj.rooms}к квартира`,
-                                status = dataObj.status,
-                                aboutLink = dataObj.about,
-                                scheme = dataObj.scheme,
-                                price = `от ${dataObj.price} млн`;
-
-                            $('.popup-plate__unit--room').text(rooms);
-                            $('.popup-plate__unit--price').text(price);
-                            $('.popup-plate__status').text(status);
-                            $('.popup-plate__link--about').attr('href', aboutLink);
-                            $('.popup-plate__link--scheme').attr('href', scheme);
-                        });
-                    });
-
-                    if ($('.overlay-plate').exists()) {
-                        $('.overlay-plate').click(function (e) {
-                            // console.log(e.target.className.indexOf('overlay'));
-                            if (e.target.className.indexOf('overlay-plate') != -1) {
-                                $(this).removeClass('overlay-plate--show');
-                                $('html').css('overflow', 'auto');
-                                $('.overlay-plate').removeClass('overlay-plate--show');
-                            }
-                        });
-                    }
-
-                    if ($('.popup-plate__close').exists()) {
-                        $('.popup-plate___close').click(function (e) {
-                            $('.overlay-plate').removeClass('overlay-plate--show');
-                        });
-                    }
-
-                }
-
-                let breakpointDesk = window.matchMedia('(max-width: 640px)');
-                if (!breakpointDesk.matches === true) {
-                    $('.plate-box__flat').each(function () {
-                        $(this).on('mouseenter', function () {
-                            let coordsTop = $('.plate-box__canvas').position().top - 70,
-                                coordsLeft = $('.plate-box__canvas').position().left - 385;
-
-                            let breakpoint = window.matchMedia('(min-width:1236px)');
-                            let breakpointLaptop = window.matchMedia('(min-width:1025px)');
-
-                            if (!breakpoint.matches === true) {
-                                coordsLeft = $('.plate-box__canvas').position().left - 120;
-                                coordsTop = $('.plate-box__canvas').position().top - 184;
-                            }
-
-                            if (!breakpointLaptop.matches === true) {
-                                coordsLeft = $('.plate-box__canvas').position().left - 125;
-                                coordsTop = $('.plate-box__canvas').position().top - 175;
-                            }
-
-                            let popup = '<div class="plate-popup"><div class="plate-popup__inner">';
-                            popup += '<div class="plate-popup__top">';
-                            popup += '<div class="plate-popup__unit plate-popup__unit--qty">2к квартира</div>';
-                            popup += '<div class="plate-popup__unit plate-popup__unit--price">от 2,5 млн</div>';
-                            popup += '</div>';
-                            popup += '<div class="plate-popup__bottom">';
-                            popup += '<div class="plate-popup__status">Свободно</div>';
-                            popup += '<div class="plate-popup__func"><a class="plate-popup__link plate-popup__link--about" href="javascript:void(0);">Подробнее</a><a class="plate-popup__link plate-popup__link--scheme" href="javascript:void(0);">Планировка</a></div>';
-                            popup += '</div>';
-                            popup += '</div>';
-                            popup += '</div>';
-
-                            $(this).append(popup);
-
-                            $('.plate-popup').addClass('plate-popup--show').css({
-                                'top': coordsTop,
-                                'left': coordsLeft,
-                            });
-
-
-
-                            let dataObj = $(this).data("flat"),
-                                rooms = `${dataObj.rooms}к квартира`,
-                                status = dataObj.status,
-                                aboutLink = dataObj.about,
-                                scheme = dataObj.scheme,
-                                price = `от ${dataObj.price} млн`;
-
-                            $('.plate-popup__unit--qty').text(rooms);
-                            $('.plate-popup__unit--price').text(price);
-                            $('.plate-popup__status').text(status);
-                            $('.plate-popup__link--about').attr('href', aboutLink);
-                            $('.plate-popup__link--scheme').attr('href', scheme);
-                        });
-
-                        $(this).on('mouseleave', function () {
-                            $('.plate-popup').remove();
-                        });
-                    });
-                }
-            }
-        });
-    }
+    projectFunc.plateGen();
 
     if ($('.plate-box__right').exists()) {
         $(window).on('resize load', function () {
@@ -1383,7 +1512,7 @@ $(() => {
 
     if ($('.structure__map--projects').exists()) {
         try {
-            fixMap('#map-projects', '.structure__note', '.structure__inner');
+            projectFunc.fixMap('#map-projects', '.structure__note', '.structure__inner');
         } catch (err) {
             console.log(err);
         }
@@ -1391,40 +1520,10 @@ $(() => {
 
     if ($('.structure__map--step-build').exists()) {
         try {
-            fixMap('#map-projects', '.mf-edge', '.structure__inner');
+            projectFunc.fixMap('#map-projects', '.mf-edge', '.structure__inner');
         } catch (err) {
             console.log(err);
         }
-    }
-
-    function fixMap(map, edge, parentMap) {
-        let $window = $(window),
-            $target = $(map),
-            $h = $target.offset().top;
-
-        $window.on('scroll', function () {
-            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            if (scrollTop > $h) {
-                $target.addClass("map-fixed");
-
-                var wt = $(window).scrollTop();
-                var wh = $(window).height();
-                var et = $(edge).offset().top;
-                var eh = $(edge).outerHeight();
-                var dh = $(document).height();
-                if (wt + wh >= et || wh + wt == dh || eh + et < wh) {
-                    $(map).removeClass("map-fixed");
-                    $(parentMap).addClass('map-end');
-                } else {
-                    $(map).addClass("map-fixed");
-                    $(parentMap).removeClass('map-end');
-                }
-                return;
-            } else {
-                $target.removeClass("map-fixed");
-            }
-            return;
-        });
     }
 
     if ($('.filter-menu').length > 0) {
@@ -1986,107 +2085,11 @@ $(() => {
         }
     }
 
-    function createMap(mapBloc, itemEl) {
-        if ($(`#${mapBloc}`).exists()) {
-            let centerMap = $(`#${mapBloc}`).data('center');
-            let markerArr = [];
-            mapboxgl.accessToken = 'pk.eyJ1IjoiYWRtaW5zaW5haSIsImEiOiJja2N2czJ2ejcwNzdoMzBtbDVneTh6NTNkIn0.pkiEoq-UDjbqvdDrB_zZCQ';
-            let flying = false;
-            let mapCenter = centerMap;
+    
 
-            const map = new mapboxgl.Map({
-                container: mapBloc, //Без #
-                style: 'mapbox://styles/mapbox/light-v10',
-                center: mapCenter,
-                zoom: 15.9,
-                attributionControl: false,
-            });
-
-            map.scrollZoom.disable();
-            let nav = new mapboxgl.NavigationControl({
-                showCompass: false,
-                showZoom: true
-            });
-
-            if ($(itemEl).exists()) {
-                let temp = 0;
-                try {
-                    $(itemEl).each(function () {
-                        let coordinatesData = $(this).data('coordinates');
-                        let el = document.createElement('div');
-                        let doc = new DOMParser().parseFromString(
-                            '<svg width="80" height="80" viewBox="0 0 118 118" fill="none" xmlns="http://www.w3.org/2000/svg"><rect class="rect" y="59" width="83.4386" height="83.4386" transform="rotate(-45 0 59)" fill="#40424C"/><path d="M68.2258 75.368V45.0131C68.2258 44.0275 67.4259 43.2275 66.4402 43.2275H52.1556C51.1699 43.2275 50.37 44.0275 50.37 45.0131V75.368" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>                <path d="M50.3699 53.9409H43.2276C42.242 53.9409 41.442 54.7409 41.442 55.7265V75.3679" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>                <path d="M77.1537 75.3679V55.7265C77.1537 54.7409 76.3538 53.9409 75.3682 53.9409H68.2258" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M54.8339 68.2256H63.7618" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M61.9763 68.2256V75.3679" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M56.6195 75.3679V68.2256" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M55.7267 56.6194H62.869" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M55.7267 61.976H62.869" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M55.7267 51.2627H62.869" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M46.7988 61.976H50.37" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M46.7988 68.2256H50.37" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M68.2258 61.976H71.797" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M68.2258 68.2256H71.797" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/> <path d="M78.9393 75.3679H39.6565" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>', 'application/xml');
-                        el.appendChild(
-                            el.ownerDocument.importNode(doc.documentElement, true));
-                        el.className = 'marker';
-                        markerArr.push(el);
-
-                        new mapboxgl.Marker(el)
-                            .setLngLat(coordinatesData) // sets a popup on this marker
-                            .addTo(map);
-                    });
-
-                    let projectsData = [];
-
-                    $(itemEl).each(function (i) {
-                        markerArr[i].setAttribute('data-href', $(this).data('href'));
-
-                        if ($(this).data('coordinates') != undefined) {
-                            projectsData.push($(this).data('coordinates'));
-                        }
-
-                        $(this).hover(function () {
-                            fly(i);
-                            temp = fly(i);
-                        });
-                    });
-
-                    map.on('moveend', function (e) {
-                        if (flying) {
-                            markerArr[temp].classList.add('marker--active');
-                            for (let i = 0; i < markerArr.length; i++) {
-                                if (i != temp) {
-                                    markerArr[i].classList.remove('marker--active');
-                                }
-                            }
-                            map.fire('flyend');
-                        }
-                    });
-
-                    map.on('flystart', function () {
-                        flying = true;
-                    });
-                    map.on('flyend', function () {
-                        flying = false;
-                    });
-
-                    function fly(i) {
-                        map.flyTo({
-                            center: projectsData[i],
-                            zoom: 15.9,
-                            bearing: 0,
-                            essential: true // this animation is considered essential with respect to prefers-reduced-motion
-                        });
-                        map.fire('flystart');
-                        return i;
-                    }
-
-                    markerArr.forEach(element => {
-                        element.addEventListener('click', function () {
-                            let hrefPath = this.getAttribute('data-href');
-                            location = hrefPath;
-                        });
-                    });
-                } catch (err) {
-                    console.log(err);
-                }
-            }
-        }
-    }
-
-    createMap('map-projects', '.structure__item');
-    createMap('map-flat', '#map-flat');
-    createMap('map-contacts', '#map-contacts');
+    projectFunc.createMap('map-projects', '.structure__item');
+    projectFunc.createMap('map-flat', '#map-flat');
+    projectFunc.createMap('map-contacts', '#map-contacts');
 
     if ($('.form-project__field').exists) {
         $('.form-project__field').each(function () {
