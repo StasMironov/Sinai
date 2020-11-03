@@ -805,7 +805,8 @@ $(function () {
 
   if ($('.flats-basic__item').exists()) {
     gsap.from('.flats-basic__item', {
-      yPercent: -50,
+      scale: 0,
+      // yPercent: -50,
       ease: "sine.out",
       opacity: 0,
       stagger: 0.8,
@@ -814,8 +815,60 @@ $(function () {
   }
 
   if ($('.news__item').exists()) {
-    ScrollReveal().reveal('.news__item', {
-      interval: 500
+    gsap.from('.news__item', {
+      scale: 0,
+      ease: "sine.out",
+      opacity: 0,
+      stagger: 0.8,
+      duration: 0.8
+    });
+  }
+
+  if ($('.trade__tiitle').exists()) {
+    var timeline = gsap.timeline();
+    timeline.fromTo('.trade__tiitle', {
+      opacity: 0,
+      y: -100
+    }, {
+      duration: 1,
+      opacity: 1,
+      y: 0,
+      delay: 0.5
+    }).fromTo('.trade__txt', {
+      opacity: 0,
+      y: -100
+    }, {
+      duration: 1,
+      opacity: 1,
+      y: 0,
+      stagger: 1
+    });
+  }
+
+  if ($('.about__item').exists()) {
+    var _timeline = gsap.timeline();
+
+    gsap.set('.about__item', {
+      opacity: 0,
+      x: -100
+    });
+    gsap.set('.about__quote', {
+      opacity: 0,
+      y: -100
+    });
+
+    _timeline.to('.about__item', {
+      scale: 1,
+      ease: "sine.out",
+      opacity: 1,
+      stagger: 0.8,
+      duration: 0.8,
+      delay: 0.5,
+      x: 0
+    }).to('.about__quote', {
+      duration: 0.8,
+      opacity: 1,
+      y: 0
     });
   } // flats-basic__item
   // index-news__info
