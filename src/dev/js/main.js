@@ -1179,7 +1179,6 @@ $(() => {
                 $('html').css('overflow', 'auto');
                 $('.menu').removeClass('menu--show');
 
-
                 if (!$('.burger').hasClass('burger--active')) {
                     $('.menu__item').animate({
                         'opacity': '0'
