@@ -12,37 +12,37 @@ block content
 				span.line
 				span.line
 				span.line
-			form(method="get").building-filter.building-filter--second-flats
+			form(method="get" id="ds_form").building-filter.building-filter--second-flats
 				.building-filter__row
 					.building-filter__col.building-filter__col--project
 						.building-filter__header Тип объекта
 						.building-filter__box
 							.building-filter__case
 								.building-filter__wrp
-									.building-filter__text Все
+									.building-filter__text(data-title="type") Все
 									.building-filter__img
 										<svg width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
 											<path d="M1 5L5.24264 9.24264L9.48528 5" stroke="#1E202C" stroke-width="1.5"/>
 										</svg>
 								.building-filter__select
 									.building-filter__unit
-										<input id="type1" type="radio" name="type" value="Завенягина 1/2">
+										<input id="type1" type="radio" name="type" value="1">
 										<label for="type1" title="Завенягина 1">Завенягина 1/2</label>
 									.building-filter__unit
-										<input id="type2" type="radio" name="type" value="улица имени Газеты Правда, 79">
+										<input id="type2" type="radio" name="type" value="2">
 										<label for="type2" title="улица имени Газеты Правда, 79">улица имени Газеты Правда, 79</label>
 									.building-filter__unit
-										<input id="type3" type="radio" name="type" value="Завенягина 1/2">
+										<input id="type3" type="radio" name="type" value="3">
 										<label for="type3" title="Завенягина 1">Завенягина 1/2</label>
 									.building-filter__unit
-										<input id="type4" type="radio" name="type" value="улица имени Газеты Правда, 79">
-										<label for="type4" title="улица имени Газеты Правда, 79">улица имени Газеты Правда, 79</label>
+										<input id="type4" type="radio" name="type" value="4">
+										<label for="type4" title="улица имени Газеты Правда, 78">улица имени Газеты Правда, 79</label>
 					.building-filter__col.building-filter__col--area
 						.building-filter__header Район
 						.building-filter__box
 							.building-filter__case
 								.building-filter__wrp
-									.building-filter__text Район
+									.building-filter__text(data-title="area") Район
 									.building-filter__img
 										<svg width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
 											<path d="M1 5L5.24264 9.24264L9.48528 5" stroke="#1E202C" stroke-width="1.5"/>
@@ -65,7 +65,7 @@ block content
 						.building-filter__box
 							.building-filter__case
 								.building-filter__wrp
-									.building-filter__text 1
+									.building-filter__text(data-title="floor-s") 1
 									.building-filter__img
 										<svg width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
 											<path d="M1 5L5.24264 9.24264L9.48528 5" stroke="#1E202C" stroke-width="1.5"/>
@@ -88,7 +88,7 @@ block content
 						.building-filter__box
 							.building-filter__case
 								.building-filter__wrp
-									.building-filter__text 1
+									.building-filter__text(data-title="floor-f")  1
 									.building-filter__img
 										<svg width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
 											<path d="M1 5L5.24264 9.24264L9.48528 5" stroke="#1E202C" stroke-width="1.5"/>
@@ -150,7 +150,7 @@ block content
 										<label for="flrs2" title="2">2</label>
 									.building-filter__unit
 										<input id="flrs3" type="radio" name="room-to" value="3">
-										<label for=flrsd3" title="3">3</label>
+										<label for=flrs3" title="3">3</label>
 									.building-filter__unit
 										<input id="flrs4" type="radio" name="room-to" value="4">
 										<label for="flrs4" title="4">4</label>

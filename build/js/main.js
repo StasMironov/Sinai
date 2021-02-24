@@ -403,7 +403,51 @@ var projectFunc = {
     history.pushState(null, null, document.location.pathname + getParamsUrl);
   }
 };
+
+if ($('#ds_form').exists()) {
+  try {
+    var ds = '';
+    ds = document.getElementById('ds_form');
+
+    ds.onchange = function () {
+      var json = JSON.stringify(Array.from(new FormData(ds))); // console.log(json);
+
+      localStorage.setItem(ds.id, json);
+    };
+  } catch (err) {
+    console.log(err);
+  }
+}
+
 document.addEventListener("DOMContentLoaded", function (event) {
+  var values = JSON.parse(localStorage.getItem(ds.id));
+  var titleEl = document.querySelectorAll('.building-filter__text');
+  console.log(titleEl);
+
+  for (var i = 0; i < values.length; ++i) {
+    var el = ds[values[i][0]]; //  console.log(el);
+
+    if (NodeList.prototype.isPrototypeOf(el)) {
+      //  console.log(el.length);
+      el.forEach(function (element, i) {
+        values.forEach(function (_, index) {
+          if (values[index][1] == element.value && values[index][0] == element.name) {
+            element.setAttribute("checked", "");
+          } // titleEl[index].textContent = element.value;
+
+        });
+      });
+    } else {
+      if (el.type === "checkbox") el.setAttribute("checked", "");else //console.log(el)
+        el.value = values[i][1];
+    } // console.log(el === typeof ('RadioNodeList'));
+    //if (el.type === "checkbox")
+    //el.setAttribute("checked", "");
+    // else
+    //    el.value = values[i][1];
+
+  }
+
   var isSafari = !!navigator.userAgent.match(/Version\/[\d\.]+.*Safari/);
 
   if ($('.index-slider').exists()) {
@@ -544,8 +588,6 @@ $(function () {
 
   if ($('.overlay-share').exists()) {
     $('.overlay-share').click(function (e) {
-      console.log(e.target.className.indexOf('overlay-share'));
-
       if (e.target.className.indexOf('overlay-share') != -1) {
         $(this).removeClass('overlay-share--show');
         $('html').css('overflow', 'auto');
@@ -609,9 +651,8 @@ $(function () {
         var slider = document.querySelector(block);
         var rangeBloc = $(block).closest(parent).find('.building-filter__range');
 
-        if (localStorage.getItem('minVal')) {
-          console.log(localStorage.getItem('minVal'));
-        } // console.log(rangeBloc.data('min'));
+        if (localStorage.getItem('minVal')) {} // console.log(localStorage.getItem('minVal'));
+        // console.log(rangeBloc.data('min'));
         //building-filter__range
 
 
@@ -632,8 +673,8 @@ $(function () {
         var skipValues = [$(handle).find('.building-filter__up'), $(handle).find('.building-filter__low')];
         slider.noUiSlider.on('update', function (values, i) {
           localStorage.setItem('minVal', values[0]);
-          localStorage.setItem('maxVal', values[1]);
-          console.log($(block).siblings('.building-filter__range'));
+          localStorage.setItem('maxVal', values[1]); // console.log($(block).siblings('.building-filter__range'));
+
           $(skipValues[i]).text(values[i]);
           $(input_min).val(values[0]);
           $(input_max).val(values[1]);
@@ -977,7 +1018,6 @@ $(function () {
         setTimeout(function () {
           $('.header .share-bloc__items').addClass('share-bloc__items--active').removeClass('share-bloc__items--mf');
         }, duration);
-        console.log(duration);
       }
     });
   }
@@ -1251,7 +1291,6 @@ $(function () {
       $(fieldS).each(function () {
         $(this).on('input change', function () {
           stateButton = checkField(fieldS);
-          console.log(stateButton);
 
           if (stateButton) {
             $(btn).prop('disabled', false);
@@ -1803,7 +1842,6 @@ $(function () {
               $('.index__slider').children().each(function () {
                 heigthSlider += $(this).height();
               });
-              console.log(heigthSlider);
               $('.index__slider').height(heigthSlider);
             });
           }
