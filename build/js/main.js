@@ -414,39 +414,52 @@ if ($('#ds_form').exists()) {
 
       localStorage.setItem(ds.id, json);
     };
+
+    document.addEventListener("DOMContentLoaded", function () {
+      var values = JSON.parse(localStorage.getItem(ds.id));
+
+      if (values) {
+        for (var i = 0; i < values.length; ++i) {
+          var el = ds[values[i][0]];
+          console.log(ds[values[i][0]]);
+
+          if (NodeList.prototype.isPrototypeOf(el)) {
+            // RadioList
+            el.forEach(function (element, i) {
+              values.forEach(function (_, index) {
+                if (values[index][1] == element.value && values[index][0] == element.name) {
+                  element.setAttribute("checked", "");
+                }
+              });
+            });
+          } else {
+            if (el.type === "checkbox") el.setAttribute("checked", "");else el.value = values[i][1];
+          }
+        }
+      }
+    });
   } catch (err) {
     console.log(err);
   }
 }
 
+var arrTitle;
 document.addEventListener("DOMContentLoaded", function (event) {
-  var values = JSON.parse(localStorage.getItem(ds.id));
-  var titleEl = document.querySelectorAll('.building-filter__text');
-  console.log(titleEl);
-
-  for (var i = 0; i < values.length; ++i) {
-    var el = ds[values[i][0]]; //  console.log(el);
-
-    if (NodeList.prototype.isPrototypeOf(el)) {
-      //  console.log(el.length);
-      el.forEach(function (element, i) {
-        values.forEach(function (_, index) {
-          if (values[index][1] == element.value && values[index][0] == element.name) {
-            element.setAttribute("checked", "");
-          } // titleEl[index].textContent = element.value;
-
-        });
-      });
-    } else {
-      if (el.type === "checkbox") el.setAttribute("checked", "");else //console.log(el)
-        el.value = values[i][1];
-    } // console.log(el === typeof ('RadioNodeList'));
-    //if (el.type === "checkbox")
-    //el.setAttribute("checked", "");
-    // else
-    //    el.value = values[i][1];
-
+  if (localStorage.getItem('titleCol') !== null) {
+    arrTitle = JSON.parse(localStorage.getItem('titleCol'));
+  } else {
+    arrTitle = [];
   }
+
+  var titleCol = document.querySelectorAll('.building-filter__col');
+  var titleVal = JSON.parse(localStorage.getItem('titleCol'));
+  titleCol.forEach(function (element, index) {
+    titleVal.forEach(function (index, elem) {
+      if (element.getAttribute('data-id') == titleVal[elem]['id']) {
+        $(element).find('.building-filter__text').text(titleVal[elem]['title']);
+      }
+    });
+  }); //localStorage.setItem('titleCol', JSON.stringify(arrTitle));
 
   var isSafari = !!navigator.userAgent.match(/Version\/[\d\.]+.*Safari/);
 
@@ -645,19 +658,14 @@ $(function () {
   // }
 
 
-  function rangeSlider(block, min, max, steps, input_min, input_max, parent) {
+  function rangeSlider(block, min, max, min_step, max_step, steps, input_min, input_max, parent) {
     if ($(block).exists()) {
       try {
         var slider = document.querySelector(block);
-        var rangeBloc = $(block).closest(parent).find('.building-filter__range');
-
-        if (localStorage.getItem('minVal')) {} // console.log(localStorage.getItem('minVal'));
-        // console.log(rangeBloc.data('min'));
-        //building-filter__range
-
+        var rangeBloc = $(block).closest(parent).find('.building-filter__range'); // console.log(max_step)
 
         noUiSlider.create(slider, {
-          start: [min, max],
+          start: [min_step, max_step],
           connect: true,
           step: steps,
           format: wNumb({
@@ -668,16 +676,13 @@ $(function () {
             'max': max
           }
         });
-        var handle = $(block).closest(parent); // console.log(handle);
+        var handle = $(block).closest(parent);
+        var skipValues = [$(handle).find('.building-filter__up'), $(handle).find('.building-filter__low')]; // console.log(slider.noUiSlider);
 
-        var skipValues = [$(handle).find('.building-filter__up'), $(handle).find('.building-filter__low')];
         slider.noUiSlider.on('update', function (values, i) {
-          localStorage.setItem('minVal', values[0]);
-          localStorage.setItem('maxVal', values[1]); // console.log($(block).siblings('.building-filter__range'));
-
           $(skipValues[i]).text(values[i]);
-          $(input_min).val(values[0]);
-          $(input_max).val(values[1]);
+          $(input_min).val(values[0]).trigger('change');
+          $(input_max).val(values[1]).trigger('change');
         });
         return slider;
       } catch (err) {
@@ -1497,12 +1502,37 @@ $(function () {
     }
   }
 
+  function setRange(idVal, min_step, max_step) {
+    var min_s = min_step,
+        max_s = max_step;
+
+    if (localStorage.getItem(ds.id) !== null) {
+      var values = JSON.parse(localStorage.getItem(ds.id)); // console.log(values)
+
+      values.forEach(function (element, index) {// switch (element[0]) {
+        //     case `send-${idVal}-min`:
+        //         min_s = element[1];
+        //         break;
+        //     case `send-${idVal}-max`:
+        //         max_s = element[1];
+        //         break;
+        // }
+      });
+    }
+
+    return [min_s, max_s];
+  }
+
   if ($('#cost').exists()) {
     var _min4 = $('#cost').closest('.building-filter__col').find('.building-filter__range').data('min');
 
     var _max4 = $('#cost').closest('.building-filter__col').find('.building-filter__range').data('max');
 
-    rangeSlider('#cost', _min4, _max4, 100000, '#send-result-сost-min', '#send-result-сost-max', '.building-filter__col');
+    var min_step = $('#cost').closest('.building-filter__col').find('.building-filter__range').data('min');
+    var max_step = $('#cost').closest('.building-filter__col').find('.building-filter__range').data('max'); // let steps = setRange('cost', min_step, max_step);
+    // console.log(steps);
+
+    rangeSlider('#cost', _min4, _max4, 0, 8000000, 100000, '#send-result-сost-min', '#send-result-сost-max', '.building-filter__col');
   }
 
   if ($('#area').exists()) {
@@ -1510,7 +1540,14 @@ $(function () {
 
     var _max5 = $('#area').closest('.building-filter__col').find('.building-filter__range').data('max');
 
-    rangeSlider('#area', _min5, _max5, 10, '#send-result-area-min', '#send-result-area-max', '.building-filter__col');
+    var _min_step = $('#area').closest('.building-filter__col').find('.building-filter__range').data('min');
+
+    var _max_step = $('#area').closest('.building-filter__col').find('.building-filter__range').data('max');
+
+    var steps = setRange('area', _min_step, _max_step);
+    console.log(steps[1]); // function rangeSlider(block, min, max, min_step, max_step, steps, input_min, input_max, parent) {
+
+    rangeSlider('#area', _min5, _max5, steps[0], steps[1], 10, '#send-result-area-min', '#send-result-area-max', '.building-filter__col');
   }
 
   if ($('#distance').exists()) {
@@ -2198,9 +2235,15 @@ $(function () {
 
   if ($('.building-filter__unit').length > 0) {
     $('.building-filter__unit').each(function () {
-      $(this).on('click', function () {
+      $(this).one('click', function () {
         $(this).closest('.building-filter__case').find('.building-filter__text').text($(this).text());
         $('.building-filter__case').removeClass('building-filter__case--active');
+        var objEl = {};
+        objEl.id = $(this).closest('.building-filter__col').data('id');
+        objEl.title = $(this).text();
+        arrTitle.push(objEl);
+        localStorage.setItem('titleCol', JSON.stringify(arrTitle));
+        console.log(arrTitle);
       });
     });
   }

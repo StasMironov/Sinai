@@ -422,67 +422,72 @@ if ($('#ds_form').exists()) {
         var ds = '';
         ds = document.getElementById('ds_form');
 
+
         ds.onchange = () => {
             let json = JSON.stringify(Array.from(new FormData(ds)));
-
             // console.log(json);
+
             localStorage.setItem(ds.id, json);
         };
+
+        document.addEventListener("DOMContentLoaded", () => {
+            let values = JSON.parse(localStorage.getItem(ds.id));
+
+            if (values) {
+                for (let i = 0; i < values.length; ++i) {
+                    let el = ds[values[i][0]];
+                    console.log(ds[values[i][0]]);
+
+
+                    if (NodeList.prototype.isPrototypeOf(el)) { // RadioList
+                        el.forEach((element, i) => {
+                            values.forEach((_, index) => {
+                                if ((values[index][1] == element.value) && (values[index][0] == element.name)) {
+                                    element.setAttribute("checked", "");
+                                }
+                            });
+                        });
+                    }
+                    else {
+
+                        if (el.type === "checkbox")
+                            el.setAttribute("checked", "");
+                        else
+                            el.value = values[i][1];
+                    }
+                }
+            }
+
+
+        });
     }
     catch (err) {
         console.log(err);
     }
 }
-
+var arrTitle;
 document.addEventListener("DOMContentLoaded", function (event) {
 
-    let values = JSON.parse(localStorage.getItem(ds.id));
-
-    const titleEl = document.querySelectorAll('.building-filter__text');
-
-    console.log(titleEl);
-
-
-
-    for (let i = 0; i < values.length; ++i) {
-        let el = ds[values[i][0]];
-        //  console.log(el);
-
-        if (NodeList.prototype.isPrototypeOf(el)) {
-            //  console.log(el.length);
-
-
-            el.forEach((element, i) => {
-
-                values.forEach((_, index) => {
-                    if ((values[index][1] == element.value) && (values[index][0] == element.name)) {
-                        element.setAttribute("checked", "");
-
-
-
-
-                    }
-                    // titleEl[index].textContent = element.value;
-                });
-            });
-        }
-        else {
-            if (el.type === "checkbox")
-                el.setAttribute("checked", "");
-            else
-                //console.log(el)
-                el.value = values[i][1];
-        }
-
-        // console.log(el === typeof ('RadioNodeList'));
-
-
-
-        //if (el.type === "checkbox")
-        //el.setAttribute("checked", "");
-        // else
-        //    el.value = values[i][1];
+    if (localStorage.getItem('titleCol') !== null) {
+        arrTitle = JSON.parse(localStorage.getItem('titleCol'))
     }
+    else {
+        arrTitle = [];
+    }
+
+    let titleCol = document.querySelectorAll('.building-filter__col');
+    let titleVal = JSON.parse(localStorage.getItem('titleCol'));
+
+    titleCol.forEach((element, index) => {
+        titleVal.forEach((index, elem) => {
+            if (element.getAttribute('data-id') == titleVal[elem]['id']) {
+                $(element).find('.building-filter__text').text(titleVal[elem]['title']);
+            }
+        })
+
+    })
+
+    //localStorage.setItem('titleCol', JSON.stringify(arrTitle));
 
     const isSafari = !!navigator.userAgent.match(/Version\/[\d\.]+.*Safari/);
 
@@ -695,24 +700,17 @@ $(() => {
     //     }
     // }
 
-    function rangeSlider(block, min, max, steps, input_min, input_max, parent) {
+    function rangeSlider(block, min, max, min_step, max_step, steps, input_min, input_max, parent) {
         if ($(block).exists()) {
             try {
                 var slider = document.querySelector(block);
 
                 let rangeBloc = $(block).closest(parent).find('.building-filter__range');
 
-
-                if (localStorage.getItem('minVal')) {
-                    // console.log(localStorage.getItem('minVal'));
-                }
-
-                // console.log(rangeBloc.data('min'));
-
-                //building-filter__range
+                // console.log(max_step)
 
                 noUiSlider.create(slider, {
-                    start: [min, max],
+                    start: [min_step, max_step],
                     connect: true,
                     step: steps,
                     format: wNumb({
@@ -725,26 +723,20 @@ $(() => {
                 });
 
                 let handle = $(block).closest(parent);
-                // console.log(handle);
 
                 var skipValues = [
                     $(handle).find('.building-filter__up'),
                     $(handle).find('.building-filter__low')
                 ];
 
-
+                // console.log(slider.noUiSlider);
 
                 slider.noUiSlider.on('update', function (values, i) {
-
-                    localStorage.setItem('minVal', values[0]);
-                    localStorage.setItem('maxVal', values[1]);
-
-                    // console.log($(block).siblings('.building-filter__range'));
-
-
                     $(skipValues[i]).text(values[i]);
-                    $(input_min).val(values[0]);
-                    $(input_max).val(values[1]);
+                    $(input_min).val(values[0]).trigger('change');
+                    $(input_max).val(values[1]).trigger('change');
+
+
                 });
 
                 return slider;
@@ -1607,17 +1599,66 @@ $(() => {
         }
     }
 
+    function setRange(idVal, min_step, max_step) {
+        let min_s = min_step,
+            max_s = max_step;
+
+        if (localStorage.getItem(ds.id) !== null) {
+
+            let values = JSON.parse(localStorage.getItem(ds.id));
+
+            // console.log(values)
+
+            values.forEach((element, index) => {
+
+
+
+                // switch (element[0]) {
+                //     case `send-${idVal}-min`:
+                //         min_s = element[1];
+                //         break;
+                //     case `send-${idVal}-max`:
+                //         max_s = element[1];
+                //         break;
+                // }
+
+
+            });
+
+        }
+        return [min_s, max_s];
+    }
+
     if ($('#cost').exists()) {
+
         let min = $('#cost').closest('.building-filter__col').find('.building-filter__range').data('min');
         let max = $('#cost').closest('.building-filter__col').find('.building-filter__range').data('max');
 
-        rangeSlider('#cost', min, max, 100000, '#send-result-сost-min', '#send-result-сost-max', '.building-filter__col');
+        let min_step = $('#cost').closest('.building-filter__col').find('.building-filter__range').data('min');
+        let max_step = $('#cost').closest('.building-filter__col').find('.building-filter__range').data('max');
+
+        // let steps = setRange('cost', min_step, max_step);
+        // console.log(steps);
+
+        rangeSlider('#cost', min, max, 0, 8000000, 100000, '#send-result-сost-min', '#send-result-сost-max', '.building-filter__col');
     }
 
     if ($('#area').exists()) {
         let min = $('#area').closest('.building-filter__col').find('.building-filter__range').data('min');
         let max = $('#area').closest('.building-filter__col').find('.building-filter__range').data('max');
-        rangeSlider('#area', min, max, 10, '#send-result-area-min', '#send-result-area-max', '.building-filter__col');
+
+        let min_step = $('#area').closest('.building-filter__col').find('.building-filter__range').data('min');
+        let max_step = $('#area').closest('.building-filter__col').find('.building-filter__range').data('max');
+
+
+
+        let steps = setRange('area', min_step, max_step);
+
+        console.log(steps[1]);
+        // function rangeSlider(block, min, max, min_step, max_step, steps, input_min, input_max, parent) {
+
+
+        rangeSlider('#area', min, max, steps[0], steps[1], 10, '#send-result-area-min', '#send-result-area-max', '.building-filter__col');
     }
 
     if ($('#distance').exists()) {
@@ -2327,13 +2368,32 @@ $(() => {
     }
 
     if ($('.building-filter__unit').length > 0) {
+
+
+
         $('.building-filter__unit').each(function () {
 
-            $(this).on('click', function () {
+            $(this).one('click', function () {
                 $(this).closest('.building-filter__case').find('.building-filter__text').text($(this).text());
                 $('.building-filter__case').removeClass('building-filter__case--active');
+                let objEl = {};
+
+                objEl.id = $(this).closest('.building-filter__col').data('id');
+                objEl.title = $(this).text();
+
+                arrTitle.push(objEl);
+
+                localStorage.setItem('titleCol', JSON.stringify(arrTitle));
+
+
+
+
+
+                console.log(arrTitle);
+
             });
         });
+
     }
 
 

@@ -14,12 +14,12 @@ block content
 				span.line
 			form(method="get" id="ds_form").building-filter.building-filter--second-flats
 				.building-filter__row
-					.building-filter__col.building-filter__col--project
+					.building-filter__col.building-filter__col--project(data-id="0")
 						.building-filter__header Тип объекта
 						.building-filter__box
 							.building-filter__case
 								.building-filter__wrp
-									.building-filter__text(data-title="type") Все
+									.building-filter__text Все
 									.building-filter__img
 										<svg width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
 											<path d="M1 5L5.24264 9.24264L9.48528 5" stroke="#1E202C" stroke-width="1.5"/>
@@ -37,12 +37,12 @@ block content
 									.building-filter__unit
 										<input id="type4" type="radio" name="type" value="4">
 										<label for="type4" title="улица имени Газеты Правда, 78">улица имени Газеты Правда, 79</label>
-					.building-filter__col.building-filter__col--area
+					.building-filter__col.building-filter__col--area(data-id="1")
 						.building-filter__header Район
 						.building-filter__box
 							.building-filter__case
 								.building-filter__wrp
-									.building-filter__text(data-title="area") Район
+									.building-filter__text Район
 									.building-filter__img
 										<svg width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
 											<path d="M1 5L5.24264 9.24264L9.48528 5" stroke="#1E202C" stroke-width="1.5"/>
@@ -60,12 +60,12 @@ block content
 									.building-filter__unit
 										<input id="period4" type="radio" name="period" value="2017">
 										<label for="period4" title="2017">2017</label>
-					.building-filter__col.building-filter__col--from
+					.building-filter__col.building-filter__col--from(data-id="2")
 						.building-filter__header Этаж от
 						.building-filter__box
 							.building-filter__case
 								.building-filter__wrp
-									.building-filter__text(data-title="floor-s") 1
+									.building-filter__text 1
 									.building-filter__img
 										<svg width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
 											<path d="M1 5L5.24264 9.24264L9.48528 5" stroke="#1E202C" stroke-width="1.5"/>
@@ -83,12 +83,12 @@ block content
 									.building-filter__unit
 										<input id="floor4" type="radio" name="floor" value="4">
 										<label for="floor4" title="4">4</label>
-					.building-filter__col.building-filter__col--to
+					.building-filter__col.building-filter__col--to(data-id="3")
 						.building-filter__header Этаж до
 						.building-filter__box
 							.building-filter__case
 								.building-filter__wrp
-									.building-filter__text(data-title="floor-f")  1
+									.building-filter__text  1
 									.building-filter__img
 										<svg width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
 											<path d="M1 5L5.24264 9.24264L9.48528 5" stroke="#1E202C" stroke-width="1.5"/>
@@ -107,7 +107,7 @@ block content
 										<input id="periods4" type="radio" name="floor-to" value="4">
 										<label for="periods4">4</label>
 										
-					.building-filter__col.building-filter__col--from
+					.building-filter__col.building-filter__col--from(data-id="4")
 						.building-filter__header Комнат от
 						.building-filter__box
 							.building-filter__case
@@ -131,7 +131,7 @@ block content
 										<input id="flr4" type="radio" name="room" value="4">
 										<label for="flr4">4</label>
 
-					.building-filter__col.building-filter__col--to
+					.building-filter__col.building-filter__col--to(data-id="5")
 						.building-filter__header Комнат до
 						.building-filter__box
 							.building-filter__case
@@ -144,7 +144,7 @@ block content
 								.building-filter__select
 									.building-filter__unit
 										<input id="flrs1" type="radio" name="room-to" value="1">
-										<label for="flr1s" type="radio" title="1">1</label>
+										<label for="flrs1" type="radio" title="1">1</label>
 									.building-filter__unit
 										<input id="flrs2" type="radio" name="room-to" value="2">
 										<label for="flrs2" title="2">2</label>
@@ -154,30 +154,8 @@ block content
 									.building-filter__unit
 										<input id="flrs4" type="radio" name="room-to" value="4">
 										<label for="flrs4" title="4">4</label>
-					//- .building-filter__col.building-filter__col--room
-					//- 	.building-filter__header Комнат
-					//- 	.building-filter__box
-					//- 		.building-filter__case
-					//- 			.building-filter__wrp
-					//- 				.building-filter__text Комнат
-					//- 				.building-filter__img
-					//- 					<svg width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-					//- 						<path d="M1 5L5.24264 9.24264L9.48528 5" stroke="#1E202C" stroke-width="1.5"/>
-					//- 					</svg>
-					//- 			.building-filter__select
-					//- 				.building-filter__unit
-					//- 					<input id="room1" type="radio" name="room" value="1">
-					//- 					<label for="room1">1</label>
-					//- 				.building-filter__unit
-					//- 					<input id="room2" type="radio" name="room" value="2">
-					//- 					<label for="room2">2</label>
-					//- 				.building-filter__unit
-					//- 					<input id="room3" type="radio" name="room" value="3">
-					//- 					<label for="room3">3</label>
-					//- 				.building-filterroomt
-					//- 					<input id="room4" type="radio" name="room" value="4">
-					//- 					<label for="room4">4</label>
-					.building-filter__col.building-filter__col--cost
+					
+					.building-filter__col.building-filter__col--cost(data-id="6")
 						.building-filter__header Цена
 						.building-filter__range(data-min="1500000" data-max="13500000")
 							.building-filter__up
@@ -185,7 +163,7 @@ block content
 						div#cost
 						<input type="hidden" name="send-cost-min" id="send-result-сost-min" />
 						<input type="hidden" name="send-cost-max" id="send-result-сost-max" />
-					.building-filter__col.building-filter__col--plan
+					.building-filter__col.building-filter__col--plan(data-id="7")
 						.building-filter__header Планировка
 						.building-filter__box
 							.building-filter__case
@@ -209,7 +187,7 @@ block content
 										<input id="plan4" type="radio" name="plan" value="2017">
 										<label for="plan4" title="2017">2017</label>
 				.building-filter__row
-					.building-filter__col.building-filter__col--project
+					.building-filter__col.building-filter__col--project(data-id="8")
 						.building-filter__header Особенности
 						.building-filter__box
 							.building-filter__case
@@ -232,7 +210,7 @@ block content
 									.building-filter__unit
 										<input id="area4" type="radio" name="area"  value="Завершенные">
 										<label for="area4">Завершенные</label>
-					.building-filter__col.building-filter__col--cost.building-filter__col--space
+					.building-filter__col.building-filter__col--cost.building-filter__col--space(data-id="9")
 						.building-filter__header Площадь
 						.building-filter__range(data-min="0" data-max="100")
 							.building-filter__up
@@ -241,15 +219,15 @@ block content
 						<input type="hidden" name="send-area-min" id="send-result-area-min" />
 						<input type="hidden" name="send-area-max" id="send-result-area-max" />
 
-					.building-filter__col.building-filter__col--object
+					.building-filter__col.building-filter__col--object(data-id="10")
 						.building-filter__header Объект на
 						.building-filter__cover
 							<label class="building-filter__checkbox">
-								<input name="obj1" type="checkbox">
+								<input name="obj1" type="checkbox" value="arenda">
 								<span>Аренду</span>
 							</label>
-							<label class="building-filter__checkbox">
-								<input name="obj2" type="checkbox">
+							<label class="building-filter__checkbox" >
+								<input name="obj2" type="checkbox" value="sale">
 								<span>Продажу</span>
 							</label>
 							
