@@ -8,6 +8,7 @@ ScrollReveal({
 });
 
 const projectFunc = {
+    arrTitle: '',
     ObjAd: function (element, place) {
         $(element).each(function (index) {
             let adObj = $(this).html();
@@ -436,7 +437,7 @@ if ($('#ds_form').exists()) {
             if (values) {
                 for (let i = 0; i < values.length; ++i) {
                     let el = ds[values[i][0]];
-                    console.log(ds[values[i][0]]);
+                   // console.log(ds[values[i][0]]);
 
 
                     if (NodeList.prototype.isPrototypeOf(el)) { // RadioList
@@ -465,27 +466,80 @@ if ($('#ds_form').exists()) {
         console.log(err);
     }
 }
-var arrTitle;
+
+if ($('#ds_landplot').exists()) {
+    try {
+        var ds = '';
+        ds = document.getElementById('ds_landplot');
+
+
+        ds.onchange = () => {
+            let json = JSON.stringify(Array.from(new FormData(ds)));
+            // console.log(json);
+
+            localStorage.setItem(ds.id, json);
+        };
+
+        document.addEventListener("DOMContentLoaded", () => {
+            let values = JSON.parse(localStorage.getItem(ds.id));
+
+            if (values) {
+                for (let i = 0; i < values.length; ++i) {
+                    let el = ds[values[i][0]];
+                   // console.log(ds[values[i][0]]);
+
+
+                    if (NodeList.prototype.isPrototypeOf(el)) { // RadioList
+                        el.forEach((element, i) => {
+                            values.forEach((_, index) => {
+                                if ((values[index][1] == element.value) && (values[index][0] == element.name)) {
+                                    element.setAttribute("checked", "");
+                                }
+                            });
+                        });
+                    }
+                    else {
+
+                        if (el.type === "checkbox")
+                            el.setAttribute("checked", "");
+                        else
+                            el.value = values[i][1];
+                    }
+                }
+            }
+
+
+        });
+    }
+    catch (err) {
+        console.log(err);
+    }
+}
+
+//ds_landplot
+
 document.addEventListener("DOMContentLoaded", function (event) {
 
     if (localStorage.getItem('titleCol') !== null) {
-        arrTitle = JSON.parse(localStorage.getItem('titleCol'))
+       projectFunc.arrTitle = JSON.parse(localStorage.getItem('titleCol'))
+
+        let titleCol = document.querySelectorAll('.building-filter__col');
+        let titleVal = JSON.parse(localStorage.getItem('titleCol'));
+
+        titleCol.forEach((element, index) => {
+            titleVal.forEach((index, elem) => {
+                if (element.getAttribute('data-id') == titleVal[elem]['id']) {
+                    $(element).find('.building-filter__text').text(titleVal[elem]['title']);
+                }
+            })
+
+        })
     }
     else {
-        arrTitle = [];
+        projectFunc.arrTitle = [];
     }
 
-    let titleCol = document.querySelectorAll('.building-filter__col');
-    let titleVal = JSON.parse(localStorage.getItem('titleCol'));
-
-    titleCol.forEach((element, index) => {
-        titleVal.forEach((index, elem) => {
-            if (element.getAttribute('data-id') == titleVal[elem]['id']) {
-                $(element).find('.building-filter__text').text(titleVal[elem]['title']);
-            }
-        })
-
-    })
+    
 
     //localStorage.setItem('titleCol', JSON.stringify(arrTitle));
 
@@ -733,10 +787,8 @@ $(() => {
 
                 slider.noUiSlider.on('update', function (values, i) {
                     $(skipValues[i]).text(values[i]);
-                    $(input_min).val(values[0]).trigger('change');
-                    $(input_max).val(values[1]).trigger('change');
-
-
+                    $(input_min).val(values[0]).change();
+                    $(input_max).val(values[1]).change();
                 });
 
                 return slider;
@@ -1607,20 +1659,29 @@ $(() => {
 
             let values = JSON.parse(localStorage.getItem(ds.id));
 
-            // console.log(values)
+           
 
             values.forEach((element, index) => {
 
+                console.log(element);
 
+                if(element[0] == `send-${idVal}-max` && element[1] > 0){
+                    console.log('true');
 
-                // switch (element[0]) {
-                //     case `send-${idVal}-min`:
-                //         min_s = element[1];
-                //         break;
-                //     case `send-${idVal}-max`:
-                //         max_s = element[1];
-                //         break;
-                // }
+                    max_s = element[1];
+                }
+
+                switch (element[0]) {
+                    case `send-${idVal}-min`:
+                        min_s = element[1];
+                        break;
+                    case `send-${idVal}-max`:
+                        if(element[1] > 0){
+                           max_s = element[1]; 
+                        }
+                        console.log(max_step)
+                        break;
+                }
 
 
             });
@@ -1633,29 +1694,19 @@ $(() => {
 
         let min = $('#cost').closest('.building-filter__col').find('.building-filter__range').data('min');
         let max = $('#cost').closest('.building-filter__col').find('.building-filter__range').data('max');
-
         let min_step = $('#cost').closest('.building-filter__col').find('.building-filter__range').data('min');
         let max_step = $('#cost').closest('.building-filter__col').find('.building-filter__range').data('max');
+        let steps = setRange('cost', min_step, max_step);
 
-        // let steps = setRange('cost', min_step, max_step);
-        // console.log(steps);
-
-        rangeSlider('#cost', min, max, 0, 8000000, 100000, '#send-result-сost-min', '#send-result-сost-max', '.building-filter__col');
+        rangeSlider('#cost', min, max, steps[0], steps[1], 100000, '#send-result-сost-min', '#send-result-сost-max', '.building-filter__col');
     }
 
     if ($('#area').exists()) {
         let min = $('#area').closest('.building-filter__col').find('.building-filter__range').data('min');
         let max = $('#area').closest('.building-filter__col').find('.building-filter__range').data('max');
-
         let min_step = $('#area').closest('.building-filter__col').find('.building-filter__range').data('min');
         let max_step = $('#area').closest('.building-filter__col').find('.building-filter__range').data('max');
-
-
-
         let steps = setRange('area', min_step, max_step);
-
-        console.log(steps[1]);
-        // function rangeSlider(block, min, max, min_step, max_step, steps, input_min, input_max, parent) {
 
 
         rangeSlider('#area', min, max, steps[0], steps[1], 10, '#send-result-area-min', '#send-result-area-max', '.building-filter__col');
@@ -1664,7 +1715,11 @@ $(() => {
     if ($('#distance').exists()) {
         let min = $('#distance').closest('.building-filter__col').find('.building-filter__range').data('min');
         let max = $('#distance').closest('.building-filter__col').find('.building-filter__range').data('max');
-        rangeSlider('#distance', min, max, 10, '#send-result-distance-min', '#send-result-distance-max', '.building-filter__col');
+        let min_step = $('#distance').closest('.building-filter__col').find('.building-filter__range').data('min');
+        let max_step = $('#distance').closest('.building-filter__col').find('.building-filter__range').data('max');
+        let steps = setRange('distance', min_step, max_step);
+        
+        rangeSlider('#distance', min, max, steps[0], steps[1], 10, '#send-result-distance-min', '#send-result-distance-max', '.building-filter__col');
     }
 
     if ($('.burger-filter').exists()) {
@@ -2381,15 +2436,15 @@ $(() => {
                 objEl.id = $(this).closest('.building-filter__col').data('id');
                 objEl.title = $(this).text();
 
-                arrTitle.push(objEl);
+               projectFunc.arrTitle.push(objEl);
 
-                localStorage.setItem('titleCol', JSON.stringify(arrTitle));
-
-
+                localStorage.setItem('titleCol', JSON.stringify(projectFunc.arrTitle));
 
 
 
-                console.log(arrTitle);
+
+
+                console.log( projectFunc.arrTitle);
 
             });
         });

@@ -12,9 +12,9 @@ block content
 				span.line
 				span.line
 				span.line
-			form(method="get").building-filter.building-filter--second-flats.building-filter--land-point
+			form(method="get" id="ds_landplot").building-filter.building-filter--second-flats.building-filter--land-point
 				.building-filter__row
-					.building-filter__col.building-filter__col--project
+					.building-filter__col.building-filter__col--project(data-id="11")
 						.building-filter__header Тип объекта
 						.building-filter__box
 							.building-filter__case
@@ -37,7 +37,7 @@ block content
 									.building-filter__unit
 										<input id="type4" type="radio" name="type" value="улица имени Газеты Правда, 79">
 										<label for="type4" title="улица имени Газеты Правда, 79">улица имени Газеты Правда, 79</label>
-					.building-filter__col.building-filter__col--cost
+					.building-filter__col.building-filter__col--cost(data-id="12")
 						.building-filter__header Цена
 						.building-filter__range(data-min="1500000" data-max="13500000")
 							.building-filter__up
@@ -45,7 +45,7 @@ block content
 						div#cost
 						<input type="hidden" name="send-cost-min" id="send-result-сost-min" />
 						<input type="hidden" name="send-cost-max" id="send-result-сost-max" />
-					.building-filter__col.building-filter__col--type
+					.building-filter__col.building-filter__col--type(data-id="13")
 						.building-filter__header Категория земель
 						.building-filter__box
 							.building-filter__case
@@ -68,7 +68,7 @@ block content
 									.building-filter__unit
 										<input id="category4" type="radio" name="category" value="улица имени Газеты Правда, 79">
 										<label for="category4" title="улица имени Газеты Правда, 79">улица имени Газеты Правда, 79</label>
-					.building-filter__col.building-filter__col--cost
+					.building-filter__col.building-filter__col--cost(data-id="14")
 						.building-filter__header Площадь, сот.
 						.building-filter__range(data-min="0" data-max="100")
 							.building-filter__up
@@ -76,7 +76,7 @@ block content
 						div#area
 						<input type="hidden" name="send-area-min" id="send-result-area-min" />
 						<input type="hidden" name="send-area-max" id="send-result-area-max" />
-					.building-filter__col.building-filter__col--cost.building-filter__col--distance
+					.building-filter__col.building-filter__col--cost.building-filter__col--distance(data-id="15")
 						.building-filter__header Расстояние до города, км.
 						.building-filter__range(data-min="0" data-max="200")
 							.building-filter__up
