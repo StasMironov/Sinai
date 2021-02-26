@@ -250,7 +250,6 @@ const projectFunc = {
 
                         if ($('.overlay-plate').exists()) {
                             $('.overlay-plate').click(function (e) {
-                                // console.log(e.target.className.indexOf('overlay'));
                                 if (e.target.className.indexOf('overlay-plate') != -1) {
                                     $(this).removeClass('overlay-plate--show');
                                     $('html').css('overflow', 'auto');
@@ -423,11 +422,8 @@ if ($('#ds_form').exists()) {
         var ds = '';
         ds = document.getElementById('ds_form');
 
-
         ds.onchange = () => {
             let json = JSON.stringify(Array.from(new FormData(ds)));
-            // console.log(json);
-
             localStorage.setItem(ds.id, json);
         };
 
@@ -437,8 +433,6 @@ if ($('#ds_form').exists()) {
             if (values) {
                 for (let i = 0; i < values.length; ++i) {
                     let el = ds[values[i][0]];
-                   // console.log(ds[values[i][0]]);
-
 
                     if (NodeList.prototype.isPrototypeOf(el)) { // RadioList
                         el.forEach((element, i) => {
@@ -458,8 +452,6 @@ if ($('#ds_form').exists()) {
                     }
                 }
             }
-
-
         });
     }
     catch (err) {
@@ -475,8 +467,6 @@ if ($('#ds_landplot').exists()) {
 
         ds.onchange = () => {
             let json = JSON.stringify(Array.from(new FormData(ds)));
-            // console.log(json);
-
             localStorage.setItem(ds.id, json);
         };
 
@@ -486,8 +476,6 @@ if ($('#ds_landplot').exists()) {
             if (values) {
                 for (let i = 0; i < values.length; ++i) {
                     let el = ds[values[i][0]];
-                   // console.log(ds[values[i][0]]);
-
 
                     if (NodeList.prototype.isPrototypeOf(el)) { // RadioList
                         el.forEach((element, i) => {
@@ -521,7 +509,7 @@ if ($('#ds_landplot').exists()) {
 document.addEventListener("DOMContentLoaded", function (event) {
 
     if (localStorage.getItem('titleCol') !== null) {
-       projectFunc.arrTitle = JSON.parse(localStorage.getItem('titleCol'))
+        projectFunc.arrTitle = JSON.parse(localStorage.getItem('titleCol'))
 
         let titleCol = document.querySelectorAll('.building-filter__col');
         let titleVal = JSON.parse(localStorage.getItem('titleCol'));
@@ -538,10 +526,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
     else {
         projectFunc.arrTitle = [];
     }
-
-    
-
-    //localStorage.setItem('titleCol', JSON.stringify(arrTitle));
 
     const isSafari = !!navigator.userAgent.match(/Version\/[\d\.]+.*Safari/);
 
@@ -573,8 +557,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
                         slidesPerView: 1,
                         spaceBetween: 10,
                         touchRatio: 1,
-
-
                     }
                 }
             });
@@ -615,8 +597,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
             console.log(err);
         }
     }
-
-    //.index-example__right
 
     if ($('.footer__bloc')) {
         try {
@@ -783,8 +763,6 @@ $(() => {
                     $(handle).find('.building-filter__low')
                 ];
 
-                // console.log(slider.noUiSlider);
-
                 slider.noUiSlider.on('update', function (values, i) {
                     $(skipValues[i]).text(values[i]);
                     $(input_min).val(values[0]).change();
@@ -801,7 +779,6 @@ $(() => {
     function checkVal(bloc, rangeBloc, sendBbox) {
         let inputVal = $(rangeBloc).closest('.flats-calc__item').find('.flats-calc__block').data('min');
 
-        // console.log($(bloc).val());
         if ($(bloc).val() != '') {
             inputVal = $(sendBbox).val();
         }
@@ -1168,12 +1145,8 @@ $(() => {
 
     if ($('.index__left').exists()) {
         $('.index__left').each((index) => {
-            //console.log(index)
             if (((index) % 2 == 0) && index != 0) {
-                // console.log($('.index__left')[index]);
                 ScrollReveal().reveal($('.index__left')[index], {
-                    //delay: 600,
-                    // interval: 3000
                     enter: 'left',
                     origin: 'left',
                     duration: 1500,
@@ -1183,9 +1156,6 @@ $(() => {
                 })
             } else if ((index != 0) && ((index) % 2 != 0)) {
                 ScrollReveal().reveal($('.index__left')[index], {
-                    //delay: 600,
-                    //interval: 3000,
-
                     enter: 'right',
                     origin: 'right',
                     duration: 1000,
@@ -1198,7 +1168,6 @@ $(() => {
     }
 
     if ($('.index__info').exists()) {
-        // console.log($('.index__info'));
         ScrollReveal().reveal('.index__info', {
             delay: 600,
             //interval: 3000,
@@ -1211,7 +1180,6 @@ $(() => {
         },
             ScrollReveal().reveal('.index__right', {
                 delay: 1500,
-                //interval: 3000,
                 distance: '150px',
                 enter: 'bottom',
                 origin: 'bottom',
@@ -1222,18 +1190,6 @@ $(() => {
 
             ))
     }
-
-    // if ($('.index__right').exists()) {
-    //     console.log($('.index__right'));
-    //     ScrollReveal().reveal('.index__right', {
-    //         delay: 600,
-    //         //interval: 3000,
-    //         distance: '150px',
-    //         enter: 'bottom',
-    //         origin: 'bottom',
-    //         duration: 1000
-    //     })
-    // }
 
     if ($('.menu__close').exists()) {
         $('.menu__close').on('click', () => {
@@ -1260,7 +1216,6 @@ $(() => {
         $('.header__item--menu').on('mouseenter', function () {
             $(this).find('.header__link').addClass('header__link--hover');
         });
-        //mouseleave
 
         $('.header__item--menu').on('mouseleave', function () {
             $(this).find('.header__link').removeClass('header__link--hover');
@@ -1269,7 +1224,6 @@ $(() => {
 
     if ($('.overlay').exists()) {
         $('.overlay').click(function (e) {
-            // console.log(e.target.className.indexOf('overlay'));
             if (e.target.className.indexOf('overlay') != -1) {
                 $(this).removeClass('overlay--show');
                 $('html').css('overflow', 'auto');
@@ -1280,7 +1234,6 @@ $(() => {
 
     if ($('.menu').exists()) {
         $('.menu').click(function (e) {
-            // console.log(e.target.className.indexOf('overlay'));
             if (e.target.className.indexOf('menu--show') != -1) {
                 $('.burger').removeClass('burger--active');
                 $('html').css('overflow', 'auto');
@@ -1291,7 +1244,6 @@ $(() => {
                         'opacity': '0'
                     }, 0.001);
                     $('.header .share-bloc__items').removeClass('share-bloc__items--active').addClass('share-bloc__items--mf');
-                    // $('.menu__item--menu').removeClass('menu__item--active');
                 }
             }
         });
@@ -1300,7 +1252,12 @@ $(() => {
     if ($('#price').exists()) {
         let min = $('#price').closest('.flats-calc__item').find('.flats-calc__block').data('min');
         let max = $('#price').closest('.flats-calc__item').find('.flats-calc__block').data('max');
-        let slider = rangeSlider('#price', min, max, 10000, '#send-result-price-min', '#send-result-price-max', '.flats-calc__item');
+
+        let min_step = $('#price').closest('.flats-calc__bloc').find('.flats-calc__block').data('min');
+        let max_step = $('#price').closest('.flats-calc__bloc').find('.flats-calc__block').data('max');
+        let steps = setRange('price', min_step, max_step);
+
+        let slider = rangeSlider('#price', min, max, steps[0], steps[1], 10000, '#send-result-price-min', '#send-result-price-max', '.flats-calc__item');
         $('#flat-price').val(min);
         checkInput('#flat-price', min, max, slider);
     }
@@ -1308,7 +1265,12 @@ $(() => {
     if ($('#donat').exists()) {
         let min = $('#donat').closest('.flats-calc__item').find('.flats-calc__block').data('min');
         let max = $('#donat').closest('.flats-calc__item').find('.flats-calc__block').data('max');
-        let slider = rangeSlider('#donat', min, max, 1000, '#send-result-donat-min', '#send-result-donat-max', '.flats-calc__item');
+
+        let min_step = $('#donat').closest('.flats-calc__bloc').find('.flats-calc__block').data('min');
+        let max_step = $('#donat').closest('.flats-calc__bloc').find('.flats-calc__block').data('max');
+        let steps = setRange('donat', min_step, max_step);
+
+        let slider = rangeSlider('#donat', min, max, steps[0], steps[1], 1000, '#send-result-donat-min', '#send-result-donat-max', '.flats-calc__item');
         $('#flats-donat').val(min);
         checkInput('#flats-donat', min, max, slider);
     }
@@ -1316,7 +1278,13 @@ $(() => {
     if ($('#period').exists()) {
         let min = $('#period').closest('.flats-calc__item').find('.flats-calc__block').data('min');
         let max = $('#period').closest('.flats-calc__item').find('.flats-calc__block').data('max');
-        let slider = rangeSlider('#period', min, max, 1, '#send-result-period-min', '#send-result-period-max', '.flats-calc__item');
+
+        let min_step = $('#period').closest('.flats-calc__bloc').find('.flats-calc__block').data('min');
+        let max_step = $('#period').closest('.flats-calc__bloc').find('.flats-calc__block').data('max');
+
+        let steps = setRange('period', min_step, max_step);
+        let slider = rangeSlider('#period', min, max, steps[0], steps[1], 1, '#send-result-period-min', '#send-result-period-max', '.flats-calc__item');
+
         $('#flats-period').val(min);
         checkInput('#flats-period', min, max, slider);
     }
@@ -1324,39 +1292,43 @@ $(() => {
     if ($('#savings').exists()) {
         let min = $('#savings').closest('.flats-calc__item').find('.flats-calc__block').data('min');
         let max = $('#savings').closest('.flats-calc__item').find('.flats-calc__block').data('max');
-        let slider = rangeSlider('#savings', min, max, 1, '#send-result-savings-min', '#send-result-savings-max', '.flats-calc__item');
+
+        let min_step = $('#savings').closest('.flats-calc__bloc').find('.flats-calc__block').data('min');
+        let max_step = $('#savings').closest('.flats-calc__bloc').find('.flats-calc__block').data('max');
+        let steps = setRange('savings', min_step, max_step);
+        let slider = rangeSlider('#savings', min, max, steps[0], steps[1], 1, '#send-result-savings-min', '#send-result-savings-max', '.flats-calc__item');
+
         $('#flats-savings').val(max);
         checkInput('#flats-savings', min, max, slider);
     }
 
-    // if ($('.structure__items--projects').exists()) {
-    //     $('.structure__items--projects').mCustomScrollbar({
-    //         theme: "minimal-dark",
-    //         mouseWheelPixels: 400,
-    //         callbacks: {
-    //             onTotalScroll: function () {
-    //                 console.log('End');
-    //             }
-    //         }
-    //     });
-    // }
+    if ($('.structure__items--projects').exists()) {
+        $('.structure__items--projects').mCustomScrollbar({
+            theme: "minimal-dark",
+            mouseWheelPixels: 400,
+            callbacks: {
+                onTotalScroll: function () {
+                    console.log('End');
+                }
+            }
+        });
+    }
 
-
-    // if ($('.second-flats__items').exists()) {
-    //     $(window).on('resize load', function () {
-    //         if ($(this).width() >= 768) {
-    //             $('.second-flats__items').mCustomScrollbar({
-    //                 theme: "minimal-dark",
-    //                 mouseWheelPixels: 500,
-    //                 callbacks: {
-    //                     onTotalScroll: function () {
-    //                         console.log('End');
-    //                     }
-    //                 }
-    //             });
-    //         }
-    //     });
-    // }
+    if ($('.second-flats__items').exists()) {
+        $(window).on('resize load', function () {
+            if ($(this).width() >= 768) {
+                $('.second-flats__items').mCustomScrollbar({
+                    theme: "minimal-dark",
+                    mouseWheelPixels: 500,
+                    callbacks: {
+                        onTotalScroll: function () {
+                            console.log('End');
+                        }
+                    }
+                });
+            }
+        });
+    }
 
     $('[data-name="savings"]').on('click', function () {
         if ($(this).prop("checked")) {
@@ -1451,10 +1423,6 @@ $(() => {
             });
         });
     }
-
-    //console.log($('.form-project'));
-
-
 
     if ($('#plan-slider').exists()) {
         try {
@@ -1655,19 +1623,11 @@ $(() => {
         let min_s = min_step,
             max_s = max_step;
 
-        if (localStorage.getItem(ds.id) !== null) {
-
+        if ((ds) && localStorage.getItem(ds.id) !== null) {
             let values = JSON.parse(localStorage.getItem(ds.id));
 
-           
-
             values.forEach((element, index) => {
-
-                console.log(element);
-
-                if(element[0] == `send-${idVal}-max` && element[1] > 0){
-                    console.log('true');
-
+                if (element[0] == `send-${idVal}-max` && element[1] > 0) {
                     max_s = element[1];
                 }
 
@@ -1676,14 +1636,11 @@ $(() => {
                         min_s = element[1];
                         break;
                     case `send-${idVal}-max`:
-                        if(element[1] > 0){
-                           max_s = element[1]; 
+                        if (element[1] > 0) {
+                            max_s = element[1];
                         }
-                        console.log(max_step)
                         break;
                 }
-
-
             });
 
         }
@@ -1718,7 +1675,7 @@ $(() => {
         let min_step = $('#distance').closest('.building-filter__col').find('.building-filter__range').data('min');
         let max_step = $('#distance').closest('.building-filter__col').find('.building-filter__range').data('max');
         let steps = setRange('distance', min_step, max_step);
-        
+
         rangeSlider('#distance', min, max, steps[0], steps[1], 10, '#send-result-distance-min', '#send-result-distance-max', '.building-filter__col');
     }
 
@@ -1972,11 +1929,9 @@ $(() => {
                 },
                 on: {
                     slideChangeTransitionStart: function () {
-                        // console.log(this.activeIndex);
                         updatePag('.index-example__slider .swiper-menu', this.activeIndex)
                     },
                     slideChangeTransitionEnd: function () {
-                        // console.log(this.activeIndex);
                         updatePag('.index-example__slider .swiper-menu', this.activeIndex)
                     },
                 },
@@ -2332,8 +2287,6 @@ $(() => {
         }
     }
 
-
-
     projectFunc.createMap('map-projects', '.structure__item');
     projectFunc.createMap('map-flat', '#map-flat');
     projectFunc.createMap('map-contacts', '#map-contacts');
@@ -2436,21 +2389,12 @@ $(() => {
                 objEl.id = $(this).closest('.building-filter__col').data('id');
                 objEl.title = $(this).text();
 
-               projectFunc.arrTitle.push(objEl);
+                projectFunc.arrTitle.push(objEl);
 
                 localStorage.setItem('titleCol', JSON.stringify(projectFunc.arrTitle));
-
-
-
-
-
-                console.log( projectFunc.arrTitle);
-
             });
         });
-
     }
-
 
     if ($('.project-period__bloc').length > 0) {
         $('.project-period__bloc').each(function () {
@@ -2460,8 +2404,6 @@ $(() => {
             });
         });
     }
-
-
 
     $(document).click(function (e) {
         var elem = $('.project-period__box');
@@ -2541,15 +2483,7 @@ $(() => {
         }
     });
 
-
-
-    // fixBloc('.mf-fix', '.structure__inner', false);
     fixBloc('.mf-move', '.structure__inner', true);
-
-
-
-    // fixMap('.structure__aside .structure__inner', '.mf-edge', '.structure__aside');
-    //fixMap('#map-projects', '.structure__note', '.structure__inner');
 
     function fixBloc(bloc, target, fix) {
         if ($(bloc).exists()) {
@@ -2598,8 +2532,6 @@ $(() => {
         let qtySlide = swiperCont.slides.length;
         let parentEl = bloc.querySelectorAll('.swiper-menu');
 
-        //console.log(parentEl)
-
         if (qtySlide > 0) {
             for (let i = 0; i < parentEl.length; i++) {
                 for (let j = 0; j < qtySlide; j++) {
@@ -2619,8 +2551,6 @@ $(() => {
     }
 
     function checkPag(contecst, sliderBox, slider) {
-        //console.log(contecst);
-        //console.log(slider);
         let contecsts = contecst;
         const index = $(contecsts).data('index');
         slider.slideTo(index);
@@ -2662,11 +2592,9 @@ $(() => {
                 },
                 on: {
                     slideChangeTransitionStart: function () {
-                        // console.log(this.activeIndex);
                         updatePag('.inner-slider .swiper-menu', this.activeIndex)
                     },
                     slideChangeTransitionEnd: function () {
-                        // console.log(this.activeIndex);
                         updatePag('.inner-slider .swiper-menu', this.activeIndex)
                     },
                 },
@@ -2680,11 +2608,6 @@ $(() => {
             console.log('Ошибка ' + err.name + ":" + err.message + "\n" + err.stack);
         }
     }
-
-    // if ($('.project-period__slider').exists()) {
-    //     createPag('.project-period__slider', projecPeriod);
-    // }
-    // //console.log(projecPeriod);
 
     if ($('.flats-basic__nav').exists()) {
         try {
@@ -2718,8 +2641,6 @@ $(() => {
             }
         }
     }
-
-
 
     if ($('.plate-box__slider').exists()) {
 
@@ -2756,37 +2677,10 @@ $(() => {
                             createdL = false;
                         }
                     }
-
-
-                    // if{
-                    //     $('.plate-box__list').after(temp);
-                    // }
-
                 });
             } catch (err) {
                 console.log(err);
             }
         }
-
-
-
-        // let plateSlider = new Swiper('.plate-box__slider', {
-        //     slidesPerView: '1',
-        //     spaceBetween: 40,
-        //     effect: 'fade',
-        //     pagination: '.pag-shoes',
-        //     paginationClickable: true,
-        //     fadeEffect: {
-        //         crossFade: true
-        //     },
-        //     touchRatio: 0,
-        //     navigation: {
-        //         nextEl: '.plate-box__arrow.plate-box__arrow--next',
-        //         prevEl: '.plate-box__arrow.plate-box__arrow--prev',
-        //     },
-        // });
-
-        // plateControl.controller.control = plateSlider;
-        // plateSlider.controller.control = plateControl;
     }
 });

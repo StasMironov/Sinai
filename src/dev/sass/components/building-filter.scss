@@ -83,7 +83,7 @@
         }
 
         & input[type=radio]:checked+label {
-            color: red;
+            color: $black-1;
         }
 
         & input {
