@@ -17,8 +17,82 @@
         margin-top: 20px;
     }
 
+    &__flats {
+        position: absolute;
+        display: flex;
+        flex-wrap: nowrap;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+        // background-color: red;
+        // opacity: .3;
+
+        .flats-basic__flat {
+            position: relative;
+            height: 100%;
+            width: auto;
+            cursor: pointer;
+
+            &:before {
+                position: absolute;
+                content: '';
+                width: 100%;
+                height: 100%;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                z-index: 1;
+                transition: .3s ease;
+                // opacity: 1;
+            }
+
+            &.active {
+                outline: initial !important;
+                outline: 2px !important;
+                outline-color: rgba(216, 187, 84, 1) !important;
+                outline-style: auto !important;
+
+                &:hover {
+                    &:before {
+                        background-color: rgba(216, 187, 84, 0.2);
+                        //  opacity: .2;
+                    }
+                }
+            }
+
+            &.booked {
+                pointer-events: none;
+
+                &:before {
+                    background-color: rgba(0, 0, 0, 0.2);
+                }
+            }
+
+            &.sold {
+                pointer-events: none;
+
+                &:before {
+                    background-color: rgba(30, 32, 44, 0.6);
+                }
+            }
+
+            img {
+                height: 100%;
+                width: auto;
+            }
+        }
+    }
+
+
+
     &__floor {
-        height: 100%;
+        position: relative;
+        display: flex;
+        align-self: center;
+        width: 100%;
 
         img {
             width: 100%;
@@ -634,9 +708,17 @@
         }
     }
 
+    &__inner {
+        height: 100%;
+        display: flex;
+    }
+
     // .current_page_item label {
     //     font-size: 18px;
     // }
+
+
+
 
     label {
         transition: .4s;
