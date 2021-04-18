@@ -1,10 +1,10 @@
 .flats-detailed {
     &__wrapper {
         display: flex;
-        margin-top: 88px;
+        margin-top: 90px;
         justify-content: space-between;
 
-        @media(max-width: 768px) {
+        @media(max-width: 992px) {
             flex-direction: column;
             align-items: center;
             margin-top: 36px;
@@ -18,24 +18,27 @@
     }
 
     &__left {
-        width: 513px;
-        margin-right: 97px;
+        width: 626px;
+        margin-right: 84px;
+        padding-top: 56px;
 
         @media(max-width: 1300px) {
-            width: 460px;
+            width: 540px;
+            margin-right: 60px;
         }
 
         @media(max-width: 1235px) {
             margin-right: 35px;
+            width: 495px;
         }
 
         @media(max-width: 1024px) {
-            width: 375px;
+            width: 480px;
         }
 
         @media(max-width: 992px) {
-            width: 290px;
-            margin-right: 20px;
+            width: 368px;
+            margin-right: 0;
         }
 
         @media(max-width: 768px) {
@@ -44,20 +47,21 @@
     }
 
     &__right {
-        padding-top: 13px;
+        padding-top: 11px;
         width: calc(100% - 513px - 97px);
+        overflow: hidden;
 
         @media(max-width: 1300px) {
-            width: calc(100% - 460px - 97px);
+            width: calc(100% - 540px - 60px);
         }
 
         @media(max-width: 1235px) {
-            max-width: 595px;
+            width: calc(100% - 495px - 35px);
             width: 100%;
         }
 
         @media(max-width: 1024px) {
-            width: calc(100% - 430px - 35px);
+            width: calc(100% - 480px - 35px);
         }
 
         @media(max-width: 992px) {
@@ -72,6 +76,10 @@
 
         @media(max-width: 500px) {
             margin-top: 0;
+        }
+
+        .btn {
+            margin-top: 40px;
         }
     }
 }

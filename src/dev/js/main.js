@@ -2568,6 +2568,50 @@ $(() => {
         })
     }
 
+    if($('.js-slider-flat').exists()){
+        try {
+
+            let flatPlan= new Swiper('.js-slider-flat', {
+                slidesPerView: 1,
+                effect: 'fade',
+                fadeEffect: {
+                    crossFade: true
+                },
+                navigation: {
+                    nextEl: '.arr--next',
+                    prevEl: '.arr--prev'
+                },
+                pagination: {
+                    el: '.js-slider-flat .pagination',
+                    type: "custom",
+                    renderCustom: function (swiper, current, total) {
+                        let i = current ? current : 0;
+                        return `<span class="mf-num">${("" + i).slice(-2)}</span>` +
+                            `<span class="mf-txt">Этаж</span>`;
+                    },
+                },
+                
+            });
+
+           setTimeout(()=>$('.slider-flats').css('opacity', '1'),500);
+
+            let flatInfo = new Swiper('.js-slider-flat-info', {
+                slidesPerView: 1,
+                effect: 'fade',
+                fadeEffect: {
+                    crossFade: true
+                }
+            });
+
+            flatPlan.controller.control = flatInfo;
+            flatInfo.controller.control = flatPlan;
+
+        }
+        catch(err){
+            console.log(err);
+        }
+    }
+
     if ($('.inner-slider').exists()) {
         try {
             let projectImg = new Swiper('.inner-slider', {

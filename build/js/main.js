@@ -2465,6 +2465,44 @@ $(function () {
     });
   }
 
+  if ($('.js-slider-flat').exists()) {
+    try {
+      var flatPlan = new Swiper('.js-slider-flat', {
+        slidesPerView: 1,
+        effect: 'fade',
+        fadeEffect: {
+          crossFade: true
+        },
+        navigation: {
+          nextEl: '.arr--next',
+          prevEl: '.arr--prev'
+        },
+        pagination: {
+          el: '.js-slider-flat .pagination',
+          type: "custom",
+          renderCustom: function renderCustom(swiper, current, total) {
+            var i = current ? current : 0;
+            return "<span class=\"mf-num\">".concat(("" + i).slice(-2), "</span>") + "<span class=\"mf-txt\">\u042D\u0442\u0430\u0436</span>";
+          }
+        }
+      });
+      setTimeout(function () {
+        return $('.slider-flats').css('opacity', '1');
+      }, 500);
+      var flatInfo = new Swiper('.js-slider-flat-info', {
+        slidesPerView: 1,
+        effect: 'fade',
+        fadeEffect: {
+          crossFade: true
+        }
+      });
+      flatPlan.controller.control = flatInfo;
+      flatInfo.controller.control = flatPlan;
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
   if ($('.inner-slider').exists()) {
     try {
       var _projectImg = new Swiper('.inner-slider', {
