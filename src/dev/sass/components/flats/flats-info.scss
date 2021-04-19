@@ -8,10 +8,8 @@
     &__items {
         display: flex;
         flex-wrap: wrap;
-        margin-left: -80px;
-        max-width: 407px;
-        width: 100%;
-        margin-top: -16px;
+        width: calc(100% + 40px);
+        margin: -16px -20px 0;
 
         @media(max-width: 992px) {
             margin-left: -40px;
@@ -28,9 +26,8 @@
     }
 
     &__item {
-        width: calc(50% - 80px);
-        margin-left: 80px;
-        margin-top: 18px;
+        width: calc(50% - 40px);
+        margin: 18px 20px 0;
         line-height: 26px;
 
         @media(max-width: 992px) {
