@@ -23,6 +23,14 @@
 
     &__slider {
         overflow: hidden;
+
+        .swiper-wrapper {
+            justify-content: center;
+
+            @media(max-width: 620px) {
+                justify-content: normal;
+            }
+        }
     }
 
     &__cover {

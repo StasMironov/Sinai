@@ -390,20 +390,10 @@ button {
   }
 }
 
-.mapboxgl-ctrl-logo,
-.mapboxgl-ctrl-attrib-inner a,
-.mapboxgl-canvas,
-.mapboxgl-ctrl-bottom-left,
-.mapboxgl-ctrl {
-  pointer-events: none !important;
-}
-
 #map-contacts {
   height: 438px;
   margin-top: 70px;
-
   margin-bottom: -70px;
-  pointer-events: none;
 
   @media(max-width: 600px) {
     margin-top: 40px;
