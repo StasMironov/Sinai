@@ -46,7 +46,7 @@ const projectFunc = {
             return;
         });
     },
-    createMap: function createMap(mapBloc, itemEl) {
+    createMap: function (mapBloc, itemEl) {
         if ($(`#${mapBloc}`).exists()) {
             let centerMap = $(`#${mapBloc}`).data('center').reverse();
             let markerArr = [];
