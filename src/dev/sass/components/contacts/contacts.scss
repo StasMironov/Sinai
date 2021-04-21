@@ -36,10 +36,10 @@
     }
 
     &__box {
-        margin-top: 12px;
+        margin: 12px 0 40px;
 
         @media(max-width: 640px) {
-            margin-top: 15px;
+            margin: 15px 0 30px;
         }
     }
 

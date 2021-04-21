@@ -45,6 +45,12 @@
         font-size: 12px;
         line-height: 19px;
         letter-spacing: 0.3px;
+
+        &--subtitle {
+            line-height: 1;
+            text-align: center;
+            margin-right: 8px;
+        }
     }
 
     @media(max-width: 620px) {

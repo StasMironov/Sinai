@@ -14,7 +14,6 @@
 
     &__items {
         display: flex;
-        justify-content: space-between;
         max-width: 693px;
         width: 100%;
         margin-top: 19px;
@@ -28,7 +27,7 @@
 
     &__item {
         &:not(:last-child) {
-            margin-right: 40px;
+            margin-right: 50px;
 
             @media(max-width: 640px) {
                 margin-right: 0;

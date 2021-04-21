@@ -15,12 +15,12 @@
 
     &__container {
         padding-top: 14px;
-        padding-bottom: 14px;
+        padding-bottom: 20px;
         transition: .4s;
 
         @media(max-width: 620px) {
-            padding-top: 11px;
-            padding-bottom: 9px;
+            padding-top: 10px;
+            padding-bottom: 10px;
         }
     }
 
