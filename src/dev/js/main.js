@@ -46,14 +46,14 @@ const projectFunc = {
             return;
         });
     },
-    createMap: function (mapBloc, itemEl) {
-        if ($(`#${mapBloc}`).exists()) {
-            let centerMap = $(`#${mapBloc}`).data('center').reverse();
-            let markerArr = [];
+    createMap: function createMap(mapBloc, itemEl) {
+        if ($("#".concat(mapBloc)).exists()) {
+            var centerMap = $("#".concat(mapBloc)).data('center').reverse();
+            var markerArr = [];
             mapboxgl.accessToken = 'pk.eyJ1IjoiYWRtaW5zaW5haSIsImEiOiJja2N2czJ2ejcwNzdoMzBtbDVneTh6NTNkIn0.pkiEoq-UDjbqvdDrB_zZCQ';
-            let flying = false;
-            let mapCenter = centerMap;
-            let map = new mapboxgl.Map({
+            var flying = false;
+            var mapCenter = centerMap;
+            var map = new mapboxgl.Map({
                 container: mapBloc,
                 //Без #
                 style: 'mapbox://styles/mapbox/light-v10',
@@ -68,10 +68,10 @@ const projectFunc = {
             }));
 
             if ($(itemEl).exists()) {
-                let temp = 0;
+                var temp = 0;
 
                 try {
-                    let fly = function fly(i) {
+                    var fly = function fly(i) {
                         map.flyTo({
                             center: projectsData[i],
                             zoom: 15.9,
@@ -84,16 +84,16 @@ const projectFunc = {
                     };
 
                     $(itemEl).each(function () {
-                        let coordinatesData = $(this).data('coordinates').reverse();
-                        let el = document.createElement('div');
-                        let doc = new DOMParser().parseFromString('<svg width="80" height="80" viewBox="0 0 118 118" fill="none" xmlns="http://www.w3.org/2000/svg"><rect class="rect" y="59" width="83.4386" height="83.4386" transform="rotate(-45 0 59)" fill="#40424C"/><path d="M68.2258 75.368V45.0131C68.2258 44.0275 67.4259 43.2275 66.4402 43.2275H52.1556C51.1699 43.2275 50.37 44.0275 50.37 45.0131V75.368" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>                <path d="M50.3699 53.9409H43.2276C42.242 53.9409 41.442 54.7409 41.442 55.7265V75.3679" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>                <path d="M77.1537 75.3679V55.7265C77.1537 54.7409 76.3538 53.9409 75.3682 53.9409H68.2258" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M54.8339 68.2256H63.7618" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M61.9763 68.2256V75.3679" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M56.6195 75.3679V68.2256" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M55.7267 56.6194H62.869" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M55.7267 61.976H62.869" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M55.7267 51.2627H62.869" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M46.7988 61.976H50.37" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M46.7988 68.2256H50.37" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M68.2258 61.976H71.797" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M68.2258 68.2256H71.797" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/> <path d="M78.9393 75.3679H39.6565" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>', 'application/xml');
+                        var coordinatesData = $(this).data('coordinates').reverse();
+                        var el = document.createElement('div');
+                        var doc = new DOMParser().parseFromString('<svg width="80" height="80" viewBox="0 0 118 118" fill="none" xmlns="http://www.w3.org/2000/svg"><rect class="rect" y="59" width="83.4386" height="83.4386" transform="rotate(-45 0 59)" fill="#40424C"/><path d="M68.2258 75.368V45.0131C68.2258 44.0275 67.4259 43.2275 66.4402 43.2275H52.1556C51.1699 43.2275 50.37 44.0275 50.37 45.0131V75.368" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>                <path d="M50.3699 53.9409H43.2276C42.242 53.9409 41.442 54.7409 41.442 55.7265V75.3679" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>                <path d="M77.1537 75.3679V55.7265C77.1537 54.7409 76.3538 53.9409 75.3682 53.9409H68.2258" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M54.8339 68.2256H63.7618" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M61.9763 68.2256V75.3679" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M56.6195 75.3679V68.2256" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M55.7267 56.6194H62.869" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M55.7267 61.976H62.869" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M55.7267 51.2627H62.869" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M46.7988 61.976H50.37" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M46.7988 68.2256H50.37" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M68.2258 61.976H71.797" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M68.2258 68.2256H71.797" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/> <path d="M78.9393 75.3679H39.6565" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>', 'application/xml');
                         el.appendChild(el.ownerDocument.importNode(doc.documentElement, true));
                         el.className = 'marker';
                         markerArr.push(el);
                         new mapboxgl.Marker(el).setLngLat(coordinatesData) // sets a popup on this marker
                             .addTo(map);
                     });
-                    let projectsData = [];
+                    var projectsData = [];
                     $(itemEl).each(function (i) {
                         markerArr[i].setAttribute('data-href', $(this).data('href'));
 
@@ -110,7 +110,7 @@ const projectFunc = {
                         if (flying) {
                             markerArr[temp].classList.add('marker--active');
 
-                            for (let i = 0; i < markerArr.length; i++) {
+                            for (var i = 0; i < markerArr.length; i++) {
                                 if (i != temp) {
                                     markerArr[i].classList.remove('marker--active');
                                 }
@@ -127,7 +127,7 @@ const projectFunc = {
                     });
                     markerArr.forEach(function (element) {
                         element.addEventListener('click', function () {
-                            let hrefPath = this.getAttribute('data-href');
+                            var hrefPath = this.getAttribute('data-href');
                             location = hrefPath;
                         });
                     });
@@ -1163,24 +1163,24 @@ $(() => {
 
     if ($('.index__info').exists()) {
         ScrollReveal().reveal('.index__info', {
-            delay: 600,
-            //interval: 3000,
-            distance: '150px',
-            enter: 'bottom',
-            origin: 'bottom',
-            duration: 1000,
-            easing: 'ease-in',
-            mobile: false
-        },
-            ScrollReveal().reveal('.index__right', {
-                delay: 1500,
+                delay: 600,
+                //interval: 3000,
                 distance: '150px',
                 enter: 'bottom',
                 origin: 'bottom',
                 duration: 1000,
-                easing: 'ease-in-out',
+                easing: 'ease-in',
                 mobile: false
-            }
+            },
+            ScrollReveal().reveal('.index__right', {
+                    delay: 1500,
+                    distance: '150px',
+                    enter: 'bottom',
+                    origin: 'bottom',
+                    duration: 1000,
+                    easing: 'ease-in-out',
+                    mobile: false
+                }
 
             ))
     }
@@ -2587,7 +2587,7 @@ $(() => {
 
             });
 
-           setTimeout(()=>$('.slider-flats').css('opacity', '1'),500);
+            setTimeout(()=>$('.slider-flats').css('opacity', '1'),500);
 
             let flatInfo = new Swiper('.js-slider-flat-info', {
                 slidesPerView: 1,
