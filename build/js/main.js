@@ -800,7 +800,7 @@ $(function () {
       mCapital = sumCapital - (percent + monthPay);
       sumLoan = sumLoan - mCapital - monthPay;
       kofPay = percentRate * Math.pow(1 + percentRate, periodLoan) / (Math.pow(1 + percentRate, periodLoan) - 1);
-      monthPay = Math.ceil(kofPay * sumLoan); //payment = percent + sumLoan + 
+      monthPay = Math.ceil(kofPay * sumLoan); //payment = percent + sumLoan +
 
       $('#calc-rezult').val(monthPay); // console.log(monthPay);
     } else {

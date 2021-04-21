@@ -47,8 +47,8 @@ const projectFunc = {
         });
     },
     createMap: function createMap(mapBloc, itemEl) {
-        if ($("#".concat(mapBloc)).exists()) {
-            let centerMap = $("#".concat(mapBloc)).data('center').reverse();
+        if ($(`#${mapBloc}`).exists()) {
+            let centerMap = $(`#${mapBloc}`).data('center').reverse();
             let markerArr = [];
             mapboxgl.accessToken = 'pk.eyJ1IjoiYWRtaW5zaW5haSIsImEiOiJja2N2czJ2ejcwNzdoMzBtbDVneTh6NTNkIn0.pkiEoq-UDjbqvdDrB_zZCQ';
             let flying = false;
@@ -847,7 +847,7 @@ $(() => {
             sumLoan = sumLoan - mCapital - monthPay;
             kofPay = (percentRate * (Math.pow((1 + percentRate), periodLoan))) / ((Math.pow((1 + percentRate), periodLoan)) - 1);
             monthPay = Math.ceil(kofPay * sumLoan);
-            //payment = percent + sumLoan + 
+            //payment = percent + sumLoan +
             $('#calc-rezult').val(monthPay);
             // console.log(monthPay);
         } else {
@@ -2584,7 +2584,7 @@ $(() => {
                             `<span class="mf-txt">Этаж</span>`;
                     },
                 },
-                
+
             });
 
            setTimeout(()=>$('.slider-flats').css('opacity', '1'),500);
