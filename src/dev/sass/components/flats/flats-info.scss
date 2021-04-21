@@ -1,46 +1,25 @@
 .flats-info {
     height: 100%;
 
-    &__txt {
-        white-space: nowrap;
-    }
-
     &__items {
         display: flex;
         flex-wrap: wrap;
-        margin-left: -80px;
-        max-width: 407px;
         width: 100%;
+        margin-left: -20px;
         margin-top: -16px;
 
-        @media(max-width: 992px) {
-            margin-left: -40px;
-        }
-
-        @media(max-width: 768px) {
-            max-width: 335px;
-        }
-
         @media(max-width: 500px) {
-            margin-left: -20px;
             margin-top: -10px;
          }
     }
 
     &__item {
-        width: calc(50% - 80px);
-        margin-left: 80px;
+        width: calc(50% - 20px);
+        margin-left: 20px;
         margin-top: 18px;
         line-height: 26px;
 
-        @media(max-width: 992px) {
-            width: calc(50% - 40px);
-            margin-left: 40px;
-        }
-
         @media(max-width: 500px) {
-            width: calc(50% - 20px);
-            margin-left: 20px;
             margin-top: 10px;
          }
     }
