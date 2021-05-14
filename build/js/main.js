@@ -691,6 +691,8 @@ $(function () {
   // }
 
 
+  var arrSlider = [];
+
   function rangeSlider(block, min, max, min_step, max_step, steps, input_min, input_max, parent) {
     if ($(block).exists()) {
       try {
@@ -709,6 +711,7 @@ $(function () {
             'max': max
           }
         });
+        arrSlider.push(slider);
         var handle = $(block).closest(parent);
         var skipValues = [$(handle).find('.building-filter__up'), $(handle).find('.building-filter__low')];
         slider.noUiSlider.on('update', function (values, i) {
@@ -756,8 +759,27 @@ $(function () {
 
         calcPay(checkVal(bloc, '#price', '#send-result-price-min'), checkVal(bloc, '#donat', '#send-result-donat-min'), checkVal(bloc, '#period', '#send-result-period-min'), checkVal(bloc, '#savings', '#send-result-savings-min'));
       });
+
+      if ($('#price').exists()) {
+        $('#flat-price').on('change', function () {
+          var minCost = $('#flat-price').val();
+          var procCost = minCost / 100 * 10;
+          $('#flats-donat').val(procCost);
+          arrSlider[1].noUiSlider.set(procCost);
+          console.log(1);
+        });
+      }
+
       slider.noUiSlider.on('slide', function (values, handle) {
         $(bloc).val(values[0]);
+        calcPay(checkVal(bloc, '#price', '#send-result-price-min'), checkVal(bloc, '#donat', '#send-result-donat-min'), checkVal(bloc, '#period', '#send-result-period-min'), checkVal(bloc, '#savings', '#send-result-savings-min'));
+      });
+      arrSlider[0].noUiSlider.on('slide', function (values, handle) {
+        console.log(values);
+        var minCost = values[0];
+        var procCost = minCost / 100 * 10;
+        $('#flats-donat').val(procCost);
+        arrSlider[1].noUiSlider.set(procCost);
         calcPay(checkVal(bloc, '#price', '#send-result-price-min'), checkVal(bloc, '#donat', '#send-result-donat-min'), checkVal(bloc, '#period', '#send-result-period-min'), checkVal(bloc, '#savings', '#send-result-savings-min'));
       });
 
@@ -1172,20 +1194,29 @@ $(function () {
   }
 
   if ($('#donat').exists()) {
-    var _min = $('#donat').closest('.flats-calc__item').find('.flats-calc__block').data('min');
+    if ($('#price').exists()) {
+      try {
+        var minCost = $('#price').closest('.flats-calc__item').find('.flats-calc__block').data('min');
+        var procCost = minCost / 100 * 10;
+        console.log(procCost);
+        var _min = procCost;
 
-    var _max = $('#donat').closest('.flats-calc__item').find('.flats-calc__block').data('max');
+        var _max = $('#donat').closest('.flats-calc__item').find('.flats-calc__block').data('max');
 
-    var _min_step = $('#donat').closest('.flats-calc__bloc').find('.flats-calc__block').data('min');
+        var _min_step = procCost;
 
-    var _max_step = $('#donat').closest('.flats-calc__bloc').find('.flats-calc__block').data('max');
+        var _max_step = $('#donat').closest('.flats-calc__bloc').find('.flats-calc__block').data('max');
 
-    var _steps = setRange('donat', _min_step, _max_step);
+        var _steps = setRange('donat', _min_step, _max_step);
 
-    var _slider = rangeSlider('#donat', _min, _max, _steps[0], _steps[1], 1000, '#send-result-donat-min', '#send-result-donat-max', '.flats-calc__item');
+        var _slider = rangeSlider('#donat', _min, _max, _steps[0], _steps[1], 1000, '#send-result-donat-min', '#send-result-donat-max', '.flats-calc__item');
 
-    $('#flats-donat').val(_min);
-    checkInput('#flats-donat', _min, _max, _slider);
+        $('#flats-donat').val(_min);
+        checkInput('#flats-donat', _min, _max, _slider);
+      } catch (err) {
+        console.log(err);
+      }
+    }
   }
 
   if ($('#period').exists()) {

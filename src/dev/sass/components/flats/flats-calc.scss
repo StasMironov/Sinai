@@ -326,6 +326,11 @@
             box-shadow: none;
             cursor: pointer;
 
+            @media(max-width: 640px) {
+                width: 15px;
+                height: 15px;
+            }
+
             &:before,
             &:after {
                 content: none;

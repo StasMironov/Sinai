@@ -728,6 +728,8 @@ $(() => {
     //     }
     // }
 
+    const arrSlider = [];
+
     function rangeSlider(block, min, max, min_step, max_step, steps, input_min, input_max, parent) {
         if ($(block).exists()) {
             try {
@@ -749,6 +751,8 @@ $(() => {
                         'max': max
                     }
                 });
+
+                arrSlider.push(slider);
 
                 let handle = $(block).closest(parent);
 
@@ -785,7 +789,6 @@ $(() => {
 
             $(bloc).on('change', function () {
 
-
                 if ($(this).val() > max) {
                     slider.noUiSlider.set(max);
                     $(this).val(max);
@@ -800,9 +803,6 @@ $(() => {
                 slider.noUiSlider.on('update', function (values, handle) {
                     $(bloc).val(values[0]);
                 });
-
-
-
                 // let priceFlat = checkVal(bloc, '#price', '#send-result-price');
                 // let firstDonat = checkVal(bloc, '#donat', '#send-result-donat');
                 // let periodLoan = checkVal(bloc, '#period', '#send-result-period');
@@ -810,9 +810,33 @@ $(() => {
                 calcPay(checkVal(bloc, '#price', '#send-result-price-min'), checkVal(bloc, '#donat', '#send-result-donat-min'), checkVal(bloc, '#period', '#send-result-period-min'), checkVal(bloc, '#savings', '#send-result-savings-min'));
             });
 
+            if ($('#price').exists()) {
+
+
+
+                $('#flat-price').on('change', function () {
+                    let minCost = $('#flat-price').val();
+                    const procCost = minCost / 100 * 10;
+
+                    $('#flats-donat').val(procCost);
+                    arrSlider[1].noUiSlider.set(procCost);
+                    console.log(1);
+                });
+            }
+
             slider.noUiSlider.on('slide', function (values, handle) {
 
                 $(bloc).val(values[0]);
+                calcPay(checkVal(bloc, '#price', '#send-result-price-min'), checkVal(bloc, '#donat', '#send-result-donat-min'), checkVal(bloc, '#period', '#send-result-period-min'), checkVal(bloc, '#savings', '#send-result-savings-min'));
+            });
+
+            arrSlider[0].noUiSlider.on('slide', function (values, handle) {
+                console.log(values);
+                let minCost = values[0];
+                const procCost = minCost / 100 * 10;
+
+                $('#flats-donat').val(procCost);
+                arrSlider[1].noUiSlider.set(procCost);
                 calcPay(checkVal(bloc, '#price', '#send-result-price-min'), checkVal(bloc, '#donat', '#send-result-donat-min'), checkVal(bloc, '#period', '#send-result-period-min'), checkVal(bloc, '#savings', '#send-result-savings-min'));
             });
 
@@ -1163,24 +1187,24 @@ $(() => {
 
     if ($('.index__info').exists()) {
         ScrollReveal().reveal('.index__info', {
-                delay: 600,
-                //interval: 3000,
+            delay: 600,
+            //interval: 3000,
+            distance: '150px',
+            enter: 'bottom',
+            origin: 'bottom',
+            duration: 1000,
+            easing: 'ease-in',
+            mobile: false
+        },
+            ScrollReveal().reveal('.index__right', {
+                delay: 1500,
                 distance: '150px',
                 enter: 'bottom',
                 origin: 'bottom',
                 duration: 1000,
-                easing: 'ease-in',
+                easing: 'ease-in-out',
                 mobile: false
-            },
-            ScrollReveal().reveal('.index__right', {
-                    delay: 1500,
-                    distance: '150px',
-                    enter: 'bottom',
-                    origin: 'bottom',
-                    duration: 1000,
-                    easing: 'ease-in-out',
-                    mobile: false
-                }
+            }
 
             ))
     }
@@ -1257,16 +1281,33 @@ $(() => {
     }
 
     if ($('#donat').exists()) {
-        let min = $('#donat').closest('.flats-calc__item').find('.flats-calc__block').data('min');
-        let max = $('#donat').closest('.flats-calc__item').find('.flats-calc__block').data('max');
 
-        let min_step = $('#donat').closest('.flats-calc__bloc').find('.flats-calc__block').data('min');
-        let max_step = $('#donat').closest('.flats-calc__bloc').find('.flats-calc__block').data('max');
-        let steps = setRange('donat', min_step, max_step);
+        if ($('#price').exists()) {
+            try {
+                let minCost = $('#price').closest('.flats-calc__item').find('.flats-calc__block').data('min');
+                const procCost = minCost / 100 * 10;
+                console.log(procCost);
 
-        let slider = rangeSlider('#donat', min, max, steps[0], steps[1], 1000, '#send-result-donat-min', '#send-result-donat-max', '.flats-calc__item');
-        $('#flats-donat').val(min);
-        checkInput('#flats-donat', min, max, slider);
+                let min = procCost;
+                let max = $('#donat').closest('.flats-calc__item').find('.flats-calc__block').data('max');
+
+                let min_step = procCost;
+                let max_step = $('#donat').closest('.flats-calc__bloc').find('.flats-calc__block').data('max');
+
+
+                let steps = setRange('donat', min_step, max_step);
+
+                let slider = rangeSlider('#donat', min, max, steps[0], steps[1], 1000, '#send-result-donat-min', '#send-result-donat-max', '.flats-calc__item');
+                $('#flats-donat').val(min);
+                checkInput('#flats-donat', min, max, slider);
+            }
+            catch (err) {
+                console.log(err);
+            }
+        }
+
+
+
     }
 
     if ($('#period').exists()) {
@@ -2562,10 +2603,10 @@ $(() => {
         })
     }
 
-    if($('.js-slider-flat').exists()){
+    if ($('.js-slider-flat').exists()) {
         try {
 
-            let flatPlan= new Swiper('.js-slider-flat', {
+            let flatPlan = new Swiper('.js-slider-flat', {
                 slidesPerView: 1,
                 effect: 'fade',
                 fadeEffect: {
@@ -2587,7 +2628,7 @@ $(() => {
 
             });
 
-            setTimeout(()=>$('.slider-flats').css('opacity', '1'),500);
+            setTimeout(() => $('.slider-flats').css('opacity', '1'), 500);
 
             let flatInfo = new Swiper('.js-slider-flat-info', {
                 slidesPerView: 1,
@@ -2601,7 +2642,7 @@ $(() => {
             flatInfo.controller.control = flatPlan;
 
         }
-        catch(err){
+        catch (err) {
             console.log(err);
         }
     }
