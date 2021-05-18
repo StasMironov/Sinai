@@ -7,6 +7,8 @@ ScrollReveal({
     mobile: false
 });
 
+
+
 const projectFunc = {
     arrTitle: '',
     ObjAd: function (element, place) {
@@ -408,8 +410,158 @@ const projectFunc = {
         }
 
         history.pushState(null, null, document.location.pathname + getParamsUrl);
-    }
+    },
+    globalProps: {
+        arrSlider: []
+    },
+    rangeSlider: function(block, min, max, min_step, max_step, steps, input_min, input_max, parent){
+        if ($(block).exists()) {
+            try {
+                
+                var slider = document.querySelector(block);
+                let rangeBloc = $(block).closest(parent).find('.building-filter__range');
+
+                noUiSlider.create(slider, {
+                    start: [min_step, max_step],
+                    connect: true,
+                    step: steps,
+                    format: wNumb({
+                        decimals: 0
+                    }),
+                    range: {
+                        'min': min,
+                        'max': max
+                    }
+                });
+
+               projectFunc.globalProps.arrSlider.push(slider);
+
+                let handle = $(block).closest(parent);
+
+                var skipValues = [
+                    $(handle).find('.building-filter__up'),
+                    $(handle).find('.building-filter__low')
+                ];
+
+                slider.noUiSlider.on('update', function (values, i) {
+                    $(skipValues[i]).text(values[i]);
+                    $(input_min).val(values[0]).change();
+                    $(input_max).val(values[1]).change();
+                });
+
+                return slider;
+            } catch (err) {
+                console.log(err);
+            }
+        }
+    },
+    checkVal: function(bloc, rangeBloc, sendBbox){
+        let inputVal = $(rangeBloc).closest('.flats-calc__item').find('.flats-calc__block').data('min');
+
+        if ($(bloc).val() != '') {
+            inputVal = $(sendBbox).val();
+        }
+        return inputVal;
+    },
+    checkInput: function(bloc, min, max, slider){
+        if ($(bloc).exists()) {
+          projectFunc.calcPay(projectFunc.checkVal(bloc, '#price', '#send-result-price-min'), projectFunc.checkVal(bloc, '#donat', '#send-result-donat-min'), projectFunc.checkVal(bloc, '#period', '#send-result-period-min'), projectFunc.checkVal(bloc, '#savings', '#send-result-savings-min'));
+
+            $(bloc).on('change', function () {
+
+                if ($(this).val() > max) {
+                    slider.noUiSlider.set(max);
+                    $(this).val(max);
+                } else if ($(this).val() < min || $(this).val() == 0) {
+                    slider.noUiSlider.set(min);
+                    $(this).val(min);
+                } else {
+                    slider.noUiSlider.set($(this).val());
+                }
+
+                slider.noUiSlider.set([this.value, null]);
+                slider.noUiSlider.on('update', function (values, handle) {
+                    $(bloc).val(values[0]);
+                });
+                // let priceFlat = checkVal(bloc, '#price', '#send-result-price');
+                // let firstDonat = checkVal(bloc, '#donat', '#send-result-donat');
+                // let periodLoan = checkVal(bloc, '#period', '#send-result-period');
+
+                projectFunc.calcPay(projectFunc.checkVal(bloc, '#price', '#send-result-price-min'), projectFunc.checkVal(bloc, '#donat', '#send-result-donat-min'), projectFunc.checkVal(bloc, '#period', '#send-result-period-min'), projectFunc.checkVal(bloc, '#savings', '#send-result-savings-min'));
+            });
+
+            slider.noUiSlider.on('slide', function (values, handle) {
+                $(bloc).val(values[0]);
+                projectFunc.calcPay(projectFunc.checkVal(bloc, '#price', '#send-result-price-min'), projectFunc.checkVal(bloc, '#donat', '#send-result-donat-min'), projectFunc.checkVal(bloc, '#period', '#send-result-period-min'), projectFunc.checkVal(bloc, '#savings', '#send-result-savings-min'));
+            });
+
+            if (bloc === '#flats-savings') {
+                slider.noUiSlider.set(max);
+            }
+        }
+    },
+    calcPay: function(priceF, donat, period, capital = 0){
+        let monthPay = 0; // x
+        let kofPay = 0; // k
+        let priceFlat = priceF; // Стоимость квартиры
+        let sumLoan; // Сумма займа
+        let firstDonat = donat; // Первый взнос
+        let periodLoan = period * 12; // Срок кредита
+        let percentRate = (4.85 / 12) / 100; // Процентная ставка
+        let percent = 0;
+        let payment = 0; //Платёж
+        let mCapital = 0; // Мат. капитал
+        let sumCapital = capital; // Платёж мат.капитала
+        sumLoan = priceFlat - firstDonat;
+
+        if ($('[data-name="savings"]').prop("checked")) {
+            kofPay = (percentRate * (Math.pow((1 + percentRate), periodLoan))) / ((Math.pow((1 + percentRate), periodLoan)) - 1);
+            kofPay = kofPay.toFixed(5);
+            monthPay = Math.ceil(kofPay * sumLoan);
+
+            percent = sumLoan * percentRate * (30 / 365);
+            mCapital = sumCapital - (percent + monthPay);
+
+            sumLoan = sumLoan - mCapital - monthPay;
+            kofPay = (percentRate * (Math.pow((1 + percentRate), periodLoan))) / ((Math.pow((1 + percentRate), periodLoan)) - 1);
+            monthPay = Math.ceil(kofPay * sumLoan);
+            $('#calc-rezult').val(monthPay);
+        } else {
+            kofPay = (percentRate * (Math.pow((1 + percentRate), periodLoan))) / ((Math.pow((1 + percentRate), periodLoan)) - 1);
+            kofPay = kofPay.toFixed(5);
+            monthPay = Math.ceil(kofPay * sumLoan);
+            $('#calc-rezult').val(monthPay);
+        }
+    },
+    setRange: function(idVal, min_step, max_step){
+        let min_s = min_step,
+        max_s = max_step;
+
+        if ((ds) && localStorage.getItem(ds.id) !== null) {
+            let values = JSON.parse(localStorage.getItem(ds.id));
+
+            values.forEach((element, index) => {
+                if (element[0] == `send-${idVal}-max` && element[1] > 0) {
+                    max_s = element[1];
+                }
+
+                switch (element[0]) {
+                    case `send-${idVal}-min`:
+                        min_s = element[1];
+                        break;
+                    case `send-${idVal}-max`:
+                        if (element[1] > 0) {
+                            max_s = element[1];
+                        }
+                        break;
+                }
+            });
+
+        }
+        return [min_s, max_s];
+        }
 }
+
 
 if ($('#ds_form').exists()) {
     try {
@@ -728,7 +880,7 @@ $(() => {
     //     }
     // }
 
-    const arrSlider = [];
+    
 
     function rangeSlider(block, min, max, min_step, max_step, steps, input_min, input_max, parent) {
         if ($(block).exists()) {
@@ -811,9 +963,6 @@ $(() => {
             });
 
             if ($('#price').exists()) {
-
-
-
                 $('#flat-price').on('change', function () {
                     let minCost = $('#flat-price').val();
                     const procCost = minCost / 100 * 10;
@@ -825,20 +974,19 @@ $(() => {
             }
 
             slider.noUiSlider.on('slide', function (values, handle) {
-
                 $(bloc).val(values[0]);
                 calcPay(checkVal(bloc, '#price', '#send-result-price-min'), checkVal(bloc, '#donat', '#send-result-donat-min'), checkVal(bloc, '#period', '#send-result-period-min'), checkVal(bloc, '#savings', '#send-result-savings-min'));
             });
 
-            arrSlider[0].noUiSlider.on('slide', function (values, handle) {
-                console.log(values);
-                let minCost = values[0];
-                const procCost = minCost / 100 * 10;
+            // arrSlider[0].noUiSlider.on('slide', function (values, handle) {
+            //     console.log(values);
+            //     let minCost = values[0];
+            //     const procCost = minCost / 100 * 10;
 
-                $('#flats-donat').val(procCost);
-                arrSlider[1].noUiSlider.set(procCost);
-                calcPay(checkVal(bloc, '#price', '#send-result-price-min'), checkVal(bloc, '#donat', '#send-result-donat-min'), checkVal(bloc, '#period', '#send-result-period-min'), checkVal(bloc, '#savings', '#send-result-savings-min'));
-            });
+            //     $('#flats-donat').val(procCost);
+            //     arrSlider[1].noUiSlider.set(procCost);
+            //     calcPay(checkVal(bloc, '#price', '#send-result-price-min'), checkVal(bloc, '#donat', '#send-result-donat-min'), checkVal(bloc, '#period', '#send-result-period-min'), checkVal(bloc, '#savings', '#send-result-savings-min'));
+            // });
 
             if (bloc === '#flats-savings') {
                 slider.noUiSlider.set(max);
@@ -871,25 +1019,13 @@ $(() => {
             sumLoan = sumLoan - mCapital - monthPay;
             kofPay = (percentRate * (Math.pow((1 + percentRate), periodLoan))) / ((Math.pow((1 + percentRate), periodLoan)) - 1);
             monthPay = Math.ceil(kofPay * sumLoan);
-            //payment = percent + sumLoan +
             $('#calc-rezult').val(monthPay);
-            // console.log(monthPay);
         } else {
             kofPay = (percentRate * (Math.pow((1 + percentRate), periodLoan))) / ((Math.pow((1 + percentRate), periodLoan)) - 1);
             kofPay = kofPay.toFixed(5);
             monthPay = Math.ceil(kofPay * sumLoan);
             $('#calc-rezult').val(monthPay);
         }
-
-        // kofPay = (percentRate * (Math.pow((1 + percentRate), periodLoan))) / ((Math.pow((1 + percentRate), periodLoan)) - 1);
-        // kofPay = kofPay.toFixed(5);
-        // monthPay = Math.ceil(kofPay * sumLoan);
-        // $('#calc-rezult').val(monthPay);
-        //console.log(monthPay);
-        // console.log(priceFlat);
-        // console.log(firstDonat);
-        //console.log(monthPay);
-        // console.log(sumLoan);
     }
 
     if ($('.index-project__item').exists()) {
@@ -1273,11 +1409,11 @@ $(() => {
 
         let min_step = $('#price').closest('.flats-calc__bloc').find('.flats-calc__block').data('min');
         let max_step = $('#price').closest('.flats-calc__bloc').find('.flats-calc__block').data('max');
-        let steps = setRange('price', min_step, max_step);
+        let steps = projectFunc.setRange('price', min_step, max_step);
 
-        let slider = rangeSlider('#price', min, max, steps[0], steps[1], 10000, '#send-result-price-min', '#send-result-price-max', '.flats-calc__item');
+        let slider = projectFunc.rangeSlider('#price', min, max, steps[0], steps[1], 10000, '#send-result-price-min', '#send-result-price-max', '.flats-calc__item');
         $('#flat-price').val(min);
-        checkInput('#flat-price', min, max, slider);
+        projectFunc.checkInput('#flat-price', min, max, slider);
     }
 
     if ($('#donat').exists()) {
@@ -1285,21 +1421,21 @@ $(() => {
         if ($('#price').exists()) {
             try {
                 let minCost = $('#price').closest('.flats-calc__item').find('.flats-calc__block').data('min');
-                const procCost = minCost / 100 * 10;
-                console.log(procCost);
+                // const procCost = minCost / 100 * 10;
+                // console.log(procCost);
 
-                let min = procCost;
+                let min = $('#donat').closest('.flats-calc__item').find('.flats-calc__block').data('min');
                 let max = $('#donat').closest('.flats-calc__item').find('.flats-calc__block').data('max');
 
-                let min_step = procCost;
+                let min_step = $('#donat').closest('.flats-calc__bloc').find('.flats-calc__block').data('min');
                 let max_step = $('#donat').closest('.flats-calc__bloc').find('.flats-calc__block').data('max');
 
 
-                let steps = setRange('donat', min_step, max_step);
+                let steps = projectFunc.setRange('donat', min_step, max_step);
 
-                let slider = rangeSlider('#donat', min, max, steps[0], steps[1], 1000, '#send-result-donat-min', '#send-result-donat-max', '.flats-calc__item');
+                let slider = projectFunc.rangeSlider('#donat', min, max, steps[0], steps[1], 1000, '#send-result-donat-min', '#send-result-donat-max', '.flats-calc__item');
                 $('#flats-donat').val(min);
-                checkInput('#flats-donat', min, max, slider);
+                projectFunc.checkInput('#flats-donat', min, max, slider);
             }
             catch (err) {
                 console.log(err);
@@ -1317,11 +1453,11 @@ $(() => {
         let min_step = $('#period').closest('.flats-calc__bloc').find('.flats-calc__block').data('min');
         let max_step = $('#period').closest('.flats-calc__bloc').find('.flats-calc__block').data('max');
 
-        let steps = setRange('period', min_step, max_step);
-        let slider = rangeSlider('#period', min, max, steps[0], steps[1], 1, '#send-result-period-min', '#send-result-period-max', '.flats-calc__item');
+        let steps = projectFunc.setRange('period', min_step, max_step);
+        let slider = projectFunc.rangeSlider('#period', min, max, steps[0], steps[1], 1, '#send-result-period-min', '#send-result-period-max', '.flats-calc__item');
 
         $('#flats-period').val(min);
-        checkInput('#flats-period', min, max, slider);
+        projectFunc.checkInput('#flats-period', min, max, slider);
     }
 
     if ($('#savings').exists()) {
@@ -1330,11 +1466,11 @@ $(() => {
 
         let min_step = $('#savings').closest('.flats-calc__bloc').find('.flats-calc__block').data('min');
         let max_step = $('#savings').closest('.flats-calc__bloc').find('.flats-calc__block').data('max');
-        let steps = setRange('savings', min_step, max_step);
-        let slider = rangeSlider('#savings', min, max, steps[0], steps[1], 1, '#send-result-savings-min', '#send-result-savings-max', '.flats-calc__item');
+        let steps = projectFunc.setRange('savings', min_step, max_step);
+        let slider = projectFunc.rangeSlider('#savings', min, max, steps[0], steps[1], 1, '#send-result-savings-min', '#send-result-savings-max', '.flats-calc__item');
 
         $('#flats-savings').val(max);
-        checkInput('#flats-savings', min, max, slider);
+        projectFunc.checkInput('#flats-savings', min, max, slider);
     }
 
     if ($('.structure__items--projects').exists()) {
@@ -1368,7 +1504,7 @@ $(() => {
     $('[data-name="savings"]').on('click', function () {
         if ($(this).prop("checked")) {
             $('.flats-calc__row--savings').addClass('flats-calc__row--active');
-            calcPay(checkVal('#flat-price', '#price', '#send-result-price'), checkVal('#flats-donat', '#donat', '#send-result-donat'), checkVal('#flats-period', '#period', '#send-result-period'), checkVal('#flats-savings', '#savings', '#send-result-savings'));
+            projectFunc.calcPay(projectFunc.checkVal('#flat-price', '#price', '#send-result-price'), projectFunc.checkVal('#flats-donat', '#donat', '#send-result-donat'), projectFunc.checkVal('#flats-period', '#period', '#send-result-period'), projectFunc.checkVal('#flats-savings', '#savings', '#send-result-savings'));
         } else {
             $('.flats-calc__row--savings').removeClass('flats-calc__row--active');
         }
@@ -1654,33 +1790,33 @@ $(() => {
         }
     }
 
-    function setRange(idVal, min_step, max_step) {
-        let min_s = min_step,
-            max_s = max_step;
+    // function setRange(idVal, min_step, max_step) {
+    //     let min_s = min_step,
+    //         max_s = max_step;
 
-        if ((ds) && localStorage.getItem(ds.id) !== null) {
-            let values = JSON.parse(localStorage.getItem(ds.id));
+    //     if ((ds) && localStorage.getItem(ds.id) !== null) {
+    //         let values = JSON.parse(localStorage.getItem(ds.id));
 
-            values.forEach((element, index) => {
-                if (element[0] == `send-${idVal}-max` && element[1] > 0) {
-                    max_s = element[1];
-                }
+    //         values.forEach((element, index) => {
+    //             if (element[0] == `send-${idVal}-max` && element[1] > 0) {
+    //                 max_s = element[1];
+    //             }
 
-                switch (element[0]) {
-                    case `send-${idVal}-min`:
-                        min_s = element[1];
-                        break;
-                    case `send-${idVal}-max`:
-                        if (element[1] > 0) {
-                            max_s = element[1];
-                        }
-                        break;
-                }
-            });
+    //             switch (element[0]) {
+    //                 case `send-${idVal}-min`:
+    //                     min_s = element[1];
+    //                     break;
+    //                 case `send-${idVal}-max`:
+    //                     if (element[1] > 0) {
+    //                         max_s = element[1];
+    //                     }
+    //                     break;
+    //             }
+    //         });
 
-        }
-        return [min_s, max_s];
-    }
+    //     }
+    //     return [min_s, max_s];
+    // }
 
     if ($('#cost').exists()) {
 
@@ -1688,9 +1824,9 @@ $(() => {
         let max = $('#cost').closest('.building-filter__col').find('.building-filter__range').data('max');
         let min_step = $('#cost').closest('.building-filter__col').find('.building-filter__range').data('min');
         let max_step = $('#cost').closest('.building-filter__col').find('.building-filter__range').data('max');
-        let steps = setRange('cost', min_step, max_step);
+        let steps = projectFunc.setRange('cost', min_step, max_step);
 
-        rangeSlider('#cost', min, max, steps[0], steps[1], 100000, '#send-result-сost-min', '#send-result-сost-max', '.building-filter__col');
+        projectFunc.rangeSlider('#cost', min, max, steps[0], steps[1], 100000, '#send-result-сost-min', '#send-result-сost-max', '.building-filter__col');
     }
 
     if ($('#area').exists()) {
@@ -1698,10 +1834,10 @@ $(() => {
         let max = $('#area').closest('.building-filter__col').find('.building-filter__range').data('max');
         let min_step = $('#area').closest('.building-filter__col').find('.building-filter__range').data('min');
         let max_step = $('#area').closest('.building-filter__col').find('.building-filter__range').data('max');
-        let steps = setRange('area', min_step, max_step);
+        let steps = projectFunc.setRange('area', min_step, max_step);
 
 
-        rangeSlider('#area', min, max, steps[0], steps[1], 10, '#send-result-area-min', '#send-result-area-max', '.building-filter__col');
+        projectFunc.rangeSlider('#area', min, max, steps[0], steps[1], 10, '#send-result-area-min', '#send-result-area-max', '.building-filter__col');
     }
 
     if ($('#distance').exists()) {
@@ -1709,9 +1845,9 @@ $(() => {
         let max = $('#distance').closest('.building-filter__col').find('.building-filter__range').data('max');
         let min_step = $('#distance').closest('.building-filter__col').find('.building-filter__range').data('min');
         let max_step = $('#distance').closest('.building-filter__col').find('.building-filter__range').data('max');
-        let steps = setRange('distance', min_step, max_step);
+        let steps = projectFunc.setRange('distance', min_step, max_step);
 
-        rangeSlider('#distance', min, max, steps[0], steps[1], 10, '#send-result-distance-min', '#send-result-distance-max', '.building-filter__col');
+        projectFunc.rangeSlider('#distance', min, max, steps[0], steps[1], 10, '#send-result-distance-min', '#send-result-distance-max', '.building-filter__col');
     }
 
     if ($('.burger-filter').exists()) {
