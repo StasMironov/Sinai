@@ -456,51 +456,6 @@ const projectFunc = {
             }
         }
     },
-    checkVal: function(bloc, rangeBloc, sendBbox){
-        let inputVal = $(rangeBloc).closest('.flats-calc__item').find('.flats-calc__block').data('min');
-
-        if ($(bloc).val() != '') {
-            inputVal = $(sendBbox).val();
-        }
-        return inputVal;
-    },
-    //checkInput: function(bloc, min, max, slider){
-    //     if ($(bloc).exists()) {
-    //       projectFunc.calcPay(projectFunc.checkVal(bloc, '#price', '#send-result-price-min'), projectFunc.checkVal(bloc, '#donat', '#send-result-donat-min'), projectFunc.checkVal(bloc, '#period', '#send-result-period-min'), projectFunc.checkVal(bloc, '#savings', '#send-result-savings-min'));
-
-    //         $(bloc).on('change', function () {
-
-    //             if ($(this).val() > max) {
-    //                 slider.noUiSlider.set(max);
-    //                 $(this).val(max);
-    //             } else if ($(this).val() < min || $(this).val() == 0) {
-    //                 slider.noUiSlider.set(min);
-    //                 $(this).val(min);
-    //             } else {
-    //                 slider.noUiSlider.set($(this).val());
-    //             }
-
-    //             slider.noUiSlider.set([this.value, null]);
-    //             slider.noUiSlider.on('update', function (values, handle) {
-    //                 $(bloc).val(values[0]);
-    //             });
-    //             // let priceFlat = checkVal(bloc, '#price', '#send-result-price');
-    //             // let firstDonat = checkVal(bloc, '#donat', '#send-result-donat');
-    //             // let periodLoan = checkVal(bloc, '#period', '#send-result-period');
-
-    //             projectFunc.calcPay(projectFunc.checkVal(bloc, '#price', '#send-result-price-min'), projectFunc.checkVal(bloc, '#donat', '#send-result-donat-min'), projectFunc.checkVal(bloc, '#period', '#send-result-period-min'), projectFunc.checkVal(bloc, '#savings', '#send-result-savings-min'));
-    //         });
-
-    //         slider.noUiSlider.on('slide', function (values, handle) {
-    //             $(bloc).val(values[0]);
-    //             projectFunc.calcPay(projectFunc.checkVal(bloc, '#price', '#send-result-price-min'), projectFunc.checkVal(bloc, '#donat', '#send-result-donat-min'), projectFunc.checkVal(bloc, '#period', '#send-result-period-min'), projectFunc.checkVal(bloc, '#savings', '#send-result-savings-min'));
-    //         });
-
-    //         if (bloc === '#flats-savings') {
-    //             slider.noUiSlider.set(max);
-    //         }
-    //     }
-    // }, 
     calcPay: function(priceF, donat, period, capital = 0){
         let monthPay = 0; // x
         let kofPay = 0; // k
@@ -521,19 +476,13 @@ const projectFunc = {
             kofPay = (percentRate * (Math.pow((1 + percentRate), periodLoan))) / ((Math.pow((1 + percentRate), periodLoan)) - 1);
             kofPay = kofPay.toFixed(5);
             monthPay = Math.ceil(kofPay * sumLoan);
-            console.log(kofPay);
-
             percent = sumLoan * percentRate * (30 / 365);
             mCapital = sumCapital - (percent + monthPay);
-
             sumLoan = sumLoan - mCapital - monthPay;
             kofPay = (percentRate * (Math.pow((1 + percentRate), periodLoan))) / ((Math.pow((1 + percentRate), periodLoan)) - 1);
-            monthPay = Math.ceil(kofPay * sumLoan);
-           
+            monthPay = Math.ceil(kofPay * sumLoan); 
             $('#calc-rezult').val(monthPay);
         } else {
-            // projectFunc.globalProps.motherCapital = 0;
-            // console.log(projectFunc.globalProps.motherCapital);
             kofPay = (percentRate * (Math.pow((1 + percentRate), periodLoan))) / ((Math.pow((1 + percentRate), periodLoan)) - 1);
             kofPay = kofPay.toFixed(5);
             monthPay = Math.ceil(kofPay * sumLoan);
@@ -668,7 +617,6 @@ const startCalc = () => {
     let period = '';
     let savings = projectFunc.globalProps.motherCapital;
    // const slider = this.slider;
-   console.log(projectFunc.globalProps.arrSlider); 
 
     if(projectFunc.globalProps.arrSlider.length > 0) {
         projectFunc.globalProps.arrSlider.forEach(element => {
@@ -985,52 +933,6 @@ $(() => {
         });
     }
 
-
-
-    // let temp = fetch("./js/json/plate.json")
-    //     .then(response => response.json())
-    //     .then(json => json);
-
-    // console.log(temp);
-
-    // function rangeSlider(block, min, max, steps, input, parent) {
-    //     if ($(block).exists()) {
-    //         try {
-    //             var slider = document.querySelector(block);
-    //             noUiSlider.create(slider, {
-    //                 start: [min, max],
-    //                 connect: true,
-    //                 step: steps,
-    //                 format: wNumb({
-    //                     decimals: 0
-    //                 }),
-    //                 range: {
-    //                     'min': min,
-    //                     'max': max
-    //                 }
-    //             });
-
-    //             let handle = $(block).closest(parent);
-
-    //             var skipValues = [
-    //                 $(handle).find('.building-filter__up'),
-    //                 $(handle).find('.building-filter__low')
-    //             ];
-
-    //             slider.noUiSlider.on('update', function (values, i) {
-    //                 $(skipValues[i]).text(values[i]);
-    //                 $(input).val(values);
-    //             });
-
-    //             return slider;
-    //         } catch (err) {
-    //             console.log(err);
-    //         }
-    //     }
-    // }
-
-    
-
     function rangeSlider(block, min, max, min_step, max_step, steps, input_min, input_max, parent) {
         if ($(block).exists()) {
             try {
@@ -1083,99 +985,6 @@ $(() => {
         }
         return inputVal;
     }
-
-    // function checkInput(bloc, min, max, slider) {
-    //     if ($(bloc).exists()) {
-    //         calcPay(checkVal(bloc, '#price', '#send-result-price-min'), checkVal(bloc, '#donat', '#send-result-donat-min'), checkVal(bloc, '#period', '#send-result-period-min'), checkVal(bloc, '#savings', '#send-result-savings-min'));
-
-    //         $(bloc).on('change', function () {
-
-    //             if ($(this).val() > max) {
-    //                 slider.noUiSlider.set(max);
-    //                 $(this).val(max);
-    //             } else if ($(this).val() < min || $(this).val() == 0) {
-    //                 slider.noUiSlider.set(min);
-    //                 $(this).val(min);
-    //             } else {
-    //                 slider.noUiSlider.set($(this).val());
-    //             }
-
-    //             slider.noUiSlider.set([this.value, null]);
-    //             slider.noUiSlider.on('update', function (values, handle) {
-    //                 $(bloc).val(values[0]);
-    //             });
-    //             // let priceFlat = checkVal(bloc, '#price', '#send-result-price');
-    //             // let firstDonat = checkVal(bloc, '#donat', '#send-result-donat');
-    //             // let periodLoan = checkVal(bloc, '#period', '#send-result-period');
-
-    //             calcPay(checkVal(bloc, '#price', '#send-result-price-min'), checkVal(bloc, '#donat', '#send-result-donat-min'), checkVal(bloc, '#period', '#send-result-period-min'), checkVal(bloc, '#savings', '#send-result-savings-min'));
-    //         });
-
-    //         if ($('#price').exists()) {
-    //             $('#flat-price').on('change', function () {
-    //                 let minCost = $('#flat-price').val();
-    //                 const procCost = minCost / 100 * 10;
-
-    //                 $('#flats-donat').val(procCost);
-    //                 arrSlider[1].noUiSlider.set(procCost);
-    //                 console.log(1);
-    //             });
-    //         }
-
-    //         slider.noUiSlider.on('slide', function (values, handle) {
-    //             $(bloc).val(values[0]);
-    //             calcPay(checkVal(bloc, '#price', '#send-result-price-min'), checkVal(bloc, '#donat', '#send-result-donat-min'), checkVal(bloc, '#period', '#send-result-period-min'), checkVal(bloc, '#savings', '#send-result-savings-min'));
-    //         });
-
-    //         // arrSlider[0].noUiSlider.on('slide', function (values, handle) {
-    //         //     console.log(values);
-    //         //     let minCost = values[0];
-    //         //     const procCost = minCost / 100 * 10;
-
-    //         //     $('#flats-donat').val(procCost);
-    //         //     arrSlider[1].noUiSlider.set(procCost);
-    //         //     calcPay(checkVal(bloc, '#price', '#send-result-price-min'), checkVal(bloc, '#donat', '#send-result-donat-min'), checkVal(bloc, '#period', '#send-result-period-min'), checkVal(bloc, '#savings', '#send-result-savings-min'));
-    //         // });
-
-    //         if (bloc === '#flats-savings') {
-    //             slider.noUiSlider.set(max);
-    //         }
-    //     }
-    // }
-
-    // function calcPay(priceF, donat, period, capital = 0) {
-    //     let monthPay = 0; // x
-    //     let kofPay = 0; // k
-    //     let priceFlat = priceF; // Стоимость квартиры
-    //     let sumLoan; // Сумма займа
-    //     let firstDonat = donat; // Первый взнос
-    //     let periodLoan = period * 12; // Срок кредита
-    //     let percentRate = (4.85 / 12) / 100; // Процентная ставка
-    //     let percent = 0;
-    //     let payment = 0; //Платёж
-    //     let mCapital = 0; // Мат. капитал
-    //     let sumCapital = capital; // Платёж мат.капитала
-    //     sumLoan = priceFlat - firstDonat;
-
-    //     if ($('[data-name="savings"]').prop("checked")) {
-    //         kofPay = (percentRate * (Math.pow((1 + percentRate), periodLoan))) / ((Math.pow((1 + percentRate), periodLoan)) - 1);
-    //         kofPay = kofPay.toFixed(5);
-    //         monthPay = Math.ceil(kofPay * sumLoan);
-
-    //         percent = sumLoan * percentRate * (30 / 365);
-    //         mCapital = sumCapital - (percent + monthPay);
-
-    //         sumLoan = sumLoan - mCapital - monthPay;
-    //         kofPay = (percentRate * (Math.pow((1 + percentRate), periodLoan))) / ((Math.pow((1 + percentRate), periodLoan)) - 1);
-    //         monthPay = Math.ceil(kofPay * sumLoan);
-    //         $('#calc-rezult').val(monthPay);
-    //     } else {
-    //         kofPay = (percentRate * (Math.pow((1 + percentRate), periodLoan))) / ((Math.pow((1 + percentRate), periodLoan)) - 1);
-    //         kofPay = kofPay.toFixed(5);
-    //         monthPay = Math.ceil(kofPay * sumLoan);
-    //         $('#calc-rezult').val(monthPay);
-    //     }
-    // }
 
     if ($('.index-project__item').exists()) {
         ScrollReveal().reveal('.index-project__item', {
@@ -1332,11 +1141,6 @@ $(() => {
             )
     }
 
-
-    // flats-basic__item
-    // index-news__info
-    //index-certificate__left
-
     if ($('.header__inner').exists) {
         try {
             let $window = $(window),
@@ -1396,30 +1200,6 @@ $(() => {
             }
         });
     }
-
-    // if ($('.burger').length > 0) {
-    //     $('.burger').on('click', function () {
-    //         $(this).toggleClass('burger--active');
-    //         if ($('.overlay').exists()) {
-    //             $('.overlay').toggleClass('overlay--show');
-    //             $('html').css('overflow', 'hidden');
-
-    //             if ($('.menu__item').exists()) {
-    //                 ScrollReveal().reveal('.menu__item', {
-    //                     delay: 100,
-    //                     interval: 100,
-    //                     origin: 'bottom'
-    //                 },
-    //                     ScrollReveal().reveal('.share-bloc--header .share-bloc__items', {
-    //                         delay: 800,
-    //                         interval: 500,
-    //                         enter: 'left'
-    //                     })
-    //                 );
-    //             }
-    //         }
-    //     });
-    // }
 
     if ($('.burger').length > 0) {
         $('.burger').on('click', function () {
