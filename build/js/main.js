@@ -1,5 +1,11 @@
 "use strict";
 
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
 //===== Function check element ==========//
 jQuery.fn.exists = function () {
   return $(this).length;
@@ -403,7 +409,8 @@ var projectFunc = {
     history.pushState(null, null, document.location.pathname + getParamsUrl);
   },
   globalProps: {
-    arrSlider: []
+    arrSlider: [],
+    motherCapital: 0
   },
   rangeSlider: function rangeSlider(block, min, max, min_step, max_step, steps, input_min, input_max, parent) {
     if ($(block).exists()) {
@@ -445,39 +452,37 @@ var projectFunc = {
 
     return inputVal;
   },
-  checkInput: function checkInput(bloc, min, max, slider) {
-    if ($(bloc).exists()) {
-      projectFunc.calcPay(projectFunc.checkVal(bloc, '#price', '#send-result-price-min'), projectFunc.checkVal(bloc, '#donat', '#send-result-donat-min'), projectFunc.checkVal(bloc, '#period', '#send-result-period-min'), projectFunc.checkVal(bloc, '#savings', '#send-result-savings-min'));
-      $(bloc).on('change', function () {
-        if ($(this).val() > max) {
-          slider.noUiSlider.set(max);
-          $(this).val(max);
-        } else if ($(this).val() < min || $(this).val() == 0) {
-          slider.noUiSlider.set(min);
-          $(this).val(min);
-        } else {
-          slider.noUiSlider.set($(this).val());
-        }
-
-        slider.noUiSlider.set([this.value, null]);
-        slider.noUiSlider.on('update', function (values, handle) {
-          $(bloc).val(values[0]);
-        }); // let priceFlat = checkVal(bloc, '#price', '#send-result-price');
-        // let firstDonat = checkVal(bloc, '#donat', '#send-result-donat');
-        // let periodLoan = checkVal(bloc, '#period', '#send-result-period');
-
-        projectFunc.calcPay(projectFunc.checkVal(bloc, '#price', '#send-result-price-min'), projectFunc.checkVal(bloc, '#donat', '#send-result-donat-min'), projectFunc.checkVal(bloc, '#period', '#send-result-period-min'), projectFunc.checkVal(bloc, '#savings', '#send-result-savings-min'));
-      });
-      slider.noUiSlider.on('slide', function (values, handle) {
-        $(bloc).val(values[0]);
-        projectFunc.calcPay(projectFunc.checkVal(bloc, '#price', '#send-result-price-min'), projectFunc.checkVal(bloc, '#donat', '#send-result-donat-min'), projectFunc.checkVal(bloc, '#period', '#send-result-period-min'), projectFunc.checkVal(bloc, '#savings', '#send-result-savings-min'));
-      });
-
-      if (bloc === '#flats-savings') {
-        slider.noUiSlider.set(max);
-      }
-    }
-  },
+  //checkInput: function(bloc, min, max, slider){
+  //     if ($(bloc).exists()) {
+  //       projectFunc.calcPay(projectFunc.checkVal(bloc, '#price', '#send-result-price-min'), projectFunc.checkVal(bloc, '#donat', '#send-result-donat-min'), projectFunc.checkVal(bloc, '#period', '#send-result-period-min'), projectFunc.checkVal(bloc, '#savings', '#send-result-savings-min'));
+  //         $(bloc).on('change', function () {
+  //             if ($(this).val() > max) {
+  //                 slider.noUiSlider.set(max);
+  //                 $(this).val(max);
+  //             } else if ($(this).val() < min || $(this).val() == 0) {
+  //                 slider.noUiSlider.set(min);
+  //                 $(this).val(min);
+  //             } else {
+  //                 slider.noUiSlider.set($(this).val());
+  //             }
+  //             slider.noUiSlider.set([this.value, null]);
+  //             slider.noUiSlider.on('update', function (values, handle) {
+  //                 $(bloc).val(values[0]);
+  //             });
+  //             // let priceFlat = checkVal(bloc, '#price', '#send-result-price');
+  //             // let firstDonat = checkVal(bloc, '#donat', '#send-result-donat');
+  //             // let periodLoan = checkVal(bloc, '#period', '#send-result-period');
+  //             projectFunc.calcPay(projectFunc.checkVal(bloc, '#price', '#send-result-price-min'), projectFunc.checkVal(bloc, '#donat', '#send-result-donat-min'), projectFunc.checkVal(bloc, '#period', '#send-result-period-min'), projectFunc.checkVal(bloc, '#savings', '#send-result-savings-min'));
+  //         });
+  //         slider.noUiSlider.on('slide', function (values, handle) {
+  //             $(bloc).val(values[0]);
+  //             projectFunc.calcPay(projectFunc.checkVal(bloc, '#price', '#send-result-price-min'), projectFunc.checkVal(bloc, '#donat', '#send-result-donat-min'), projectFunc.checkVal(bloc, '#period', '#send-result-period-min'), projectFunc.checkVal(bloc, '#savings', '#send-result-savings-min'));
+  //         });
+  //         if (bloc === '#flats-savings') {
+  //             slider.noUiSlider.set(max);
+  //         }
+  //     }
+  // }, 
   calcPay: function calcPay(priceF, donat, period) {
     var capital = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
     var monthPay = 0; // x
@@ -504,9 +509,11 @@ var projectFunc = {
     sumLoan = priceFlat - firstDonat;
 
     if ($('[data-name="savings"]').prop("checked")) {
+      console.log(projectFunc.globalProps.motherCapital);
       kofPay = percentRate * Math.pow(1 + percentRate, periodLoan) / (Math.pow(1 + percentRate, periodLoan) - 1);
       kofPay = kofPay.toFixed(5);
       monthPay = Math.ceil(kofPay * sumLoan);
+      console.log(kofPay);
       percent = sumLoan * percentRate * (30 / 365);
       mCapital = sumCapital - (percent + monthPay);
       sumLoan = sumLoan - mCapital - monthPay;
@@ -514,6 +521,8 @@ var projectFunc = {
       monthPay = Math.ceil(kofPay * sumLoan);
       $('#calc-rezult').val(monthPay);
     } else {
+      // projectFunc.globalProps.motherCapital = 0;
+      // console.log(projectFunc.globalProps.motherCapital);
       kofPay = percentRate * Math.pow(1 + percentRate, periodLoan) / (Math.pow(1 + percentRate, periodLoan) - 1);
       kofPay = kofPay.toFixed(5);
       monthPay = Math.ceil(kofPay * sumLoan);
@@ -549,6 +558,136 @@ var projectFunc = {
     return [min_s, max_s];
   }
 };
+
+var SliderUi =
+/*#__PURE__*/
+function () {
+  function SliderUi(name, min, max, step, minOutInput, maxOutInput, connectInput) {
+    var calc = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : "false";
+
+    _classCallCheck(this, SliderUi);
+
+    this.name = name, this.min = min, this.max = max, this.step = step, this.minOutInput = minOutInput, this.maxOutInput = maxOutInput, this.connectInput = connectInput, this.calc = calc, this.slider = '', this.sliders = [];
+  }
+
+  _createClass(SliderUi, [{
+    key: "createSlider",
+    value: function createSlider() {
+      var min_s = this.min;
+      var max_s = this.max;
+      var step = this.step;
+      var connectInput = '';
+
+      if (this.connectInput !== undefined) {
+        connectInput = this.connectInput;
+      }
+
+      if ($("#".concat(this.name)).exists()) {
+        try {
+          var slider = document.getElementById(this.name);
+          var minOutInput = document.getElementById("".concat(this.minOutInput));
+
+          if (slider !== undefined) {
+            noUiSlider.create(slider, {
+              start: [min_s, max_s],
+              connect: true,
+              step: step,
+              format: wNumb({
+                decimals: 0
+              }),
+              range: {
+                'min': min_s,
+                'max': max_s
+              }
+            });
+            projectFunc.globalProps.arrSlider.push(slider);
+            var handle = $("#".concat(this.name)).siblings('.flats-calc__block');
+            var skipValues = [$(handle).find('.building-filter__up'), $(handle).find('.building-filter__low')];
+            var inputOut = [$("#".concat(this.minOutInput))[0], $("#".concat(this.maxOutInput))[0]];
+            slider.noUiSlider.on('update', function (values, handle) {
+              var value = values[handle];
+              $(skipValues[handle]).text(values[handle]);
+
+              if (handle) {
+                inputOut[1].value = value;
+              } else {
+                $(skipValues[0]).text(values[0]);
+                inputOut[0].value = value;
+
+                if ($("#".concat(connectInput)).exists()) {
+                  $("#".concat(connectInput)).val(values[0]);
+                  $("#".concat(connectInput)).on('change', function () {
+                    slider.noUiSlider.set($(this).val());
+                  });
+                }
+              }
+            });
+            this.slider = slider;
+            this.sliders.push(slider);
+            return slider;
+          }
+        } catch (err) {
+          console.log(err);
+        }
+      }
+    }
+  }]);
+
+  return SliderUi;
+}();
+
+var startCalc = function startCalc() {
+  // const calc = this.calc;
+  var price = '';
+  var donat = '';
+  var period = '';
+  var savings = projectFunc.globalProps.motherCapital; // const slider = this.slider;
+
+  console.log(projectFunc.globalProps.arrSlider);
+
+  if (projectFunc.globalProps.arrSlider.length > 0) {
+    projectFunc.globalProps.arrSlider.forEach(function (element) {
+      element.noUiSlider.on('update', function () {
+        switch (element.noUiSlider.target.id) {
+          case 'price':
+            if (element.noUiSlider.get()[0]) {
+              price = element.noUiSlider.get()[0];
+            }
+
+            break;
+
+          case 'donat':
+            if (element.noUiSlider.get()[0]) {
+              donat = element.noUiSlider.get()[0];
+            }
+
+            break;
+
+          case 'period':
+            if (element.noUiSlider.get()[0]) {
+              period = element.noUiSlider.get()[0];
+            }
+
+            break;
+
+          case 'savings':
+            if (element.noUiSlider.get()[0]) {
+              savings = element.noUiSlider.get()[0];
+              projectFunc.globalProps.motherCapital = savings;
+            }
+
+            break;
+        }
+
+        projectFunc.calcPay(price, donat, period, projectFunc.globalProps.motherCapital);
+      });
+    });
+  }
+};
+
+setTimeout(function () {
+  startCalc();
+}, 100);
 
 if ($('#ds_form').exists()) {
   try {
@@ -878,102 +1017,85 @@ $(function () {
     }
 
     return inputVal;
-  }
+  } // function checkInput(bloc, min, max, slider) {
+  //     if ($(bloc).exists()) {
+  //         calcPay(checkVal(bloc, '#price', '#send-result-price-min'), checkVal(bloc, '#donat', '#send-result-donat-min'), checkVal(bloc, '#period', '#send-result-period-min'), checkVal(bloc, '#savings', '#send-result-savings-min'));
+  //         $(bloc).on('change', function () {
+  //             if ($(this).val() > max) {
+  //                 slider.noUiSlider.set(max);
+  //                 $(this).val(max);
+  //             } else if ($(this).val() < min || $(this).val() == 0) {
+  //                 slider.noUiSlider.set(min);
+  //                 $(this).val(min);
+  //             } else {
+  //                 slider.noUiSlider.set($(this).val());
+  //             }
+  //             slider.noUiSlider.set([this.value, null]);
+  //             slider.noUiSlider.on('update', function (values, handle) {
+  //                 $(bloc).val(values[0]);
+  //             });
+  //             // let priceFlat = checkVal(bloc, '#price', '#send-result-price');
+  //             // let firstDonat = checkVal(bloc, '#donat', '#send-result-donat');
+  //             // let periodLoan = checkVal(bloc, '#period', '#send-result-period');
+  //             calcPay(checkVal(bloc, '#price', '#send-result-price-min'), checkVal(bloc, '#donat', '#send-result-donat-min'), checkVal(bloc, '#period', '#send-result-period-min'), checkVal(bloc, '#savings', '#send-result-savings-min'));
+  //         });
+  //         if ($('#price').exists()) {
+  //             $('#flat-price').on('change', function () {
+  //                 let minCost = $('#flat-price').val();
+  //                 const procCost = minCost / 100 * 10;
+  //                 $('#flats-donat').val(procCost);
+  //                 arrSlider[1].noUiSlider.set(procCost);
+  //                 console.log(1);
+  //             });
+  //         }
+  //         slider.noUiSlider.on('slide', function (values, handle) {
+  //             $(bloc).val(values[0]);
+  //             calcPay(checkVal(bloc, '#price', '#send-result-price-min'), checkVal(bloc, '#donat', '#send-result-donat-min'), checkVal(bloc, '#period', '#send-result-period-min'), checkVal(bloc, '#savings', '#send-result-savings-min'));
+  //         });
+  //         // arrSlider[0].noUiSlider.on('slide', function (values, handle) {
+  //         //     console.log(values);
+  //         //     let minCost = values[0];
+  //         //     const procCost = minCost / 100 * 10;
+  //         //     $('#flats-donat').val(procCost);
+  //         //     arrSlider[1].noUiSlider.set(procCost);
+  //         //     calcPay(checkVal(bloc, '#price', '#send-result-price-min'), checkVal(bloc, '#donat', '#send-result-donat-min'), checkVal(bloc, '#period', '#send-result-period-min'), checkVal(bloc, '#savings', '#send-result-savings-min'));
+  //         // });
+  //         if (bloc === '#flats-savings') {
+  //             slider.noUiSlider.set(max);
+  //         }
+  //     }
+  // }
+  // function calcPay(priceF, donat, period, capital = 0) {
+  //     let monthPay = 0; // x
+  //     let kofPay = 0; // k
+  //     let priceFlat = priceF; // Стоимость квартиры
+  //     let sumLoan; // Сумма займа
+  //     let firstDonat = donat; // Первый взнос
+  //     let periodLoan = period * 12; // Срок кредита
+  //     let percentRate = (4.85 / 12) / 100; // Процентная ставка
+  //     let percent = 0;
+  //     let payment = 0; //Платёж
+  //     let mCapital = 0; // Мат. капитал
+  //     let sumCapital = capital; // Платёж мат.капитала
+  //     sumLoan = priceFlat - firstDonat;
+  //     if ($('[data-name="savings"]').prop("checked")) {
+  //         kofPay = (percentRate * (Math.pow((1 + percentRate), periodLoan))) / ((Math.pow((1 + percentRate), periodLoan)) - 1);
+  //         kofPay = kofPay.toFixed(5);
+  //         monthPay = Math.ceil(kofPay * sumLoan);
+  //         percent = sumLoan * percentRate * (30 / 365);
+  //         mCapital = sumCapital - (percent + monthPay);
+  //         sumLoan = sumLoan - mCapital - monthPay;
+  //         kofPay = (percentRate * (Math.pow((1 + percentRate), periodLoan))) / ((Math.pow((1 + percentRate), periodLoan)) - 1);
+  //         monthPay = Math.ceil(kofPay * sumLoan);
+  //         $('#calc-rezult').val(monthPay);
+  //     } else {
+  //         kofPay = (percentRate * (Math.pow((1 + percentRate), periodLoan))) / ((Math.pow((1 + percentRate), periodLoan)) - 1);
+  //         kofPay = kofPay.toFixed(5);
+  //         monthPay = Math.ceil(kofPay * sumLoan);
+  //         $('#calc-rezult').val(monthPay);
+  //     }
+  // }
 
-  function checkInput(bloc, min, max, slider) {
-    if ($(bloc).exists()) {
-      calcPay(checkVal(bloc, '#price', '#send-result-price-min'), checkVal(bloc, '#donat', '#send-result-donat-min'), checkVal(bloc, '#period', '#send-result-period-min'), checkVal(bloc, '#savings', '#send-result-savings-min'));
-      $(bloc).on('change', function () {
-        if ($(this).val() > max) {
-          slider.noUiSlider.set(max);
-          $(this).val(max);
-        } else if ($(this).val() < min || $(this).val() == 0) {
-          slider.noUiSlider.set(min);
-          $(this).val(min);
-        } else {
-          slider.noUiSlider.set($(this).val());
-        }
-
-        slider.noUiSlider.set([this.value, null]);
-        slider.noUiSlider.on('update', function (values, handle) {
-          $(bloc).val(values[0]);
-        }); // let priceFlat = checkVal(bloc, '#price', '#send-result-price');
-        // let firstDonat = checkVal(bloc, '#donat', '#send-result-donat');
-        // let periodLoan = checkVal(bloc, '#period', '#send-result-period');
-
-        calcPay(checkVal(bloc, '#price', '#send-result-price-min'), checkVal(bloc, '#donat', '#send-result-donat-min'), checkVal(bloc, '#period', '#send-result-period-min'), checkVal(bloc, '#savings', '#send-result-savings-min'));
-      });
-
-      if ($('#price').exists()) {
-        $('#flat-price').on('change', function () {
-          var minCost = $('#flat-price').val();
-          var procCost = minCost / 100 * 10;
-          $('#flats-donat').val(procCost);
-          arrSlider[1].noUiSlider.set(procCost);
-          console.log(1);
-        });
-      }
-
-      slider.noUiSlider.on('slide', function (values, handle) {
-        $(bloc).val(values[0]);
-        calcPay(checkVal(bloc, '#price', '#send-result-price-min'), checkVal(bloc, '#donat', '#send-result-donat-min'), checkVal(bloc, '#period', '#send-result-period-min'), checkVal(bloc, '#savings', '#send-result-savings-min'));
-      }); // arrSlider[0].noUiSlider.on('slide', function (values, handle) {
-      //     console.log(values);
-      //     let minCost = values[0];
-      //     const procCost = minCost / 100 * 10;
-      //     $('#flats-donat').val(procCost);
-      //     arrSlider[1].noUiSlider.set(procCost);
-      //     calcPay(checkVal(bloc, '#price', '#send-result-price-min'), checkVal(bloc, '#donat', '#send-result-donat-min'), checkVal(bloc, '#period', '#send-result-period-min'), checkVal(bloc, '#savings', '#send-result-savings-min'));
-      // });
-
-      if (bloc === '#flats-savings') {
-        slider.noUiSlider.set(max);
-      }
-    }
-  }
-
-  function calcPay(priceF, donat, period) {
-    var capital = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
-    var monthPay = 0; // x
-
-    var kofPay = 0; // k
-
-    var priceFlat = priceF; // Стоимость квартиры
-
-    var sumLoan; // Сумма займа
-
-    var firstDonat = donat; // Первый взнос
-
-    var periodLoan = period * 12; // Срок кредита
-
-    var percentRate = 4.85 / 12 / 100; // Процентная ставка
-
-    var percent = 0;
-    var payment = 0; //Платёж
-
-    var mCapital = 0; // Мат. капитал
-
-    var sumCapital = capital; // Платёж мат.капитала
-
-    sumLoan = priceFlat - firstDonat;
-
-    if ($('[data-name="savings"]').prop("checked")) {
-      kofPay = percentRate * Math.pow(1 + percentRate, periodLoan) / (Math.pow(1 + percentRate, periodLoan) - 1);
-      kofPay = kofPay.toFixed(5);
-      monthPay = Math.ceil(kofPay * sumLoan);
-      percent = sumLoan * percentRate * (30 / 365);
-      mCapital = sumCapital - (percent + monthPay);
-      sumLoan = sumLoan - mCapital - monthPay;
-      kofPay = percentRate * Math.pow(1 + percentRate, periodLoan) / (Math.pow(1 + percentRate, periodLoan) - 1);
-      monthPay = Math.ceil(kofPay * sumLoan);
-      $('#calc-rezult').val(monthPay);
-    } else {
-      kofPay = percentRate * Math.pow(1 + percentRate, periodLoan) / (Math.pow(1 + percentRate, periodLoan) - 1);
-      kofPay = kofPay.toFixed(5);
-      monthPay = Math.ceil(kofPay * sumLoan);
-      $('#calc-rezult').val(monthPay);
-    }
-  }
 
   if ($('.index-project__item').exists()) {
     ScrollReveal().reveal('.index-project__item', {
@@ -1318,34 +1440,20 @@ $(function () {
   if ($('#price').exists()) {
     var min = $('#price').closest('.flats-calc__item').find('.flats-calc__block').data('min');
     var max = $('#price').closest('.flats-calc__item').find('.flats-calc__block').data('max');
-    var min_step = $('#price').closest('.flats-calc__bloc').find('.flats-calc__block').data('min');
-    var max_step = $('#price').closest('.flats-calc__bloc').find('.flats-calc__block').data('max');
-    var steps = projectFunc.setRange('price', min_step, max_step);
-    var slider = projectFunc.rangeSlider('#price', min, max, steps[0], steps[1], 10000, '#send-result-price-min', '#send-result-price-max', '.flats-calc__item');
-    $('#flat-price').val(min);
-    projectFunc.checkInput('#flat-price', min, max, slider);
+    var slider = new SliderUi('price', min, max, 10000, 'send-result-price-min', 'send-result-price-max', 'flat-price', true);
+    slider.createSlider();
   }
 
   if ($('#donat').exists()) {
     if ($('#price').exists()) {
       try {
-        var minCost = $('#price').closest('.flats-calc__item').find('.flats-calc__block').data('min'); // const procCost = minCost / 100 * 10;
-        // console.log(procCost);
-
         var _min = $('#donat').closest('.flats-calc__item').find('.flats-calc__block').data('min');
 
         var _max = $('#donat').closest('.flats-calc__item').find('.flats-calc__block').data('max');
 
-        var _min_step = $('#donat').closest('.flats-calc__bloc').find('.flats-calc__block').data('min');
+        var _slider = new SliderUi('donat', _min, _max, 10000, 'send-result-donat-min', 'send-result-donat-max', 'flats-donat', true);
 
-        var _max_step = $('#donat').closest('.flats-calc__bloc').find('.flats-calc__block').data('max');
-
-        var _steps = projectFunc.setRange('donat', _min_step, _max_step);
-
-        var _slider = projectFunc.rangeSlider('#donat', _min, _max, _steps[0], _steps[1], 1000, '#send-result-donat-min', '#send-result-donat-max', '.flats-calc__item');
-
-        $('#flats-donat').val(_min);
-        projectFunc.checkInput('#flats-donat', _min, _max, _slider);
+        _slider.createSlider();
       } catch (err) {
         console.log(err);
       }
@@ -1357,16 +1465,9 @@ $(function () {
 
     var _max2 = $('#period').closest('.flats-calc__item').find('.flats-calc__block').data('max');
 
-    var _min_step2 = $('#period').closest('.flats-calc__bloc').find('.flats-calc__block').data('min');
+    var _slider2 = new SliderUi('period', _min2, _max2, 1, 'send-result-period-min', 'send-result-period-max', 'flats-period', true);
 
-    var _max_step2 = $('#period').closest('.flats-calc__bloc').find('.flats-calc__block').data('max');
-
-    var _steps2 = projectFunc.setRange('period', _min_step2, _max_step2);
-
-    var _slider2 = projectFunc.rangeSlider('#period', _min2, _max2, _steps2[0], _steps2[1], 1, '#send-result-period-min', '#send-result-period-max', '.flats-calc__item');
-
-    $('#flats-period').val(_min2);
-    projectFunc.checkInput('#flats-period', _min2, _max2, _slider2);
+    _slider2.createSlider();
   }
 
   if ($('#savings').exists()) {
@@ -1374,16 +1475,9 @@ $(function () {
 
     var _max3 = $('#savings').closest('.flats-calc__item').find('.flats-calc__block').data('max');
 
-    var _min_step3 = $('#savings').closest('.flats-calc__bloc').find('.flats-calc__block').data('min');
+    var _slider3 = new SliderUi('savings', _min3, _max3, 10000, 'send-result-savings-min', 'send-result-savings-max', 'flats-savings', true);
 
-    var _max_step3 = $('#savings').closest('.flats-calc__bloc').find('.flats-calc__block').data('max');
-
-    var _steps3 = projectFunc.setRange('savings', _min_step3, _max_step3);
-
-    var _slider3 = projectFunc.rangeSlider('#savings', _min3, _max3, _steps3[0], _steps3[1], 1, '#send-result-savings-min', '#send-result-savings-max', '.flats-calc__item');
-
-    $('#flats-savings').val(_max3);
-    projectFunc.checkInput('#flats-savings', _min3, _max3, _slider3);
+    _slider3.createSlider();
   }
 
   if ($('.structure__items--projects').exists()) {
@@ -1417,9 +1511,10 @@ $(function () {
   $('[data-name="savings"]').on('click', function () {
     if ($(this).prop("checked")) {
       $('.flats-calc__row--savings').addClass('flats-calc__row--active');
-      projectFunc.calcPay(projectFunc.checkVal('#flat-price', '#price', '#send-result-price'), projectFunc.checkVal('#flats-donat', '#donat', '#send-result-donat'), projectFunc.checkVal('#flats-period', '#period', '#send-result-period'), projectFunc.checkVal('#flats-savings', '#savings', '#send-result-savings'));
+      startCalc();
     } else {
       $('.flats-calc__row--savings').removeClass('flats-calc__row--active');
+      startCalc();
     }
   });
 
@@ -1726,13 +1821,10 @@ $(function () {
 
     var _max4 = $('#cost').closest('.building-filter__col').find('.building-filter__range').data('max');
 
-    var _min_step4 = $('#cost').closest('.building-filter__col').find('.building-filter__range').data('min');
-
-    var _max_step4 = $('#cost').closest('.building-filter__col').find('.building-filter__range').data('max');
-
-    var _steps4 = projectFunc.setRange('cost', _min_step4, _max_step4);
-
-    projectFunc.rangeSlider('#cost', _min4, _max4, _steps4[0], _steps4[1], 100000, '#send-result-сost-min', '#send-result-сost-max', '.building-filter__col');
+    var min_step = $('#cost').closest('.building-filter__col').find('.building-filter__range').data('min');
+    var max_step = $('#cost').closest('.building-filter__col').find('.building-filter__range').data('max');
+    var steps = projectFunc.setRange('cost', min_step, max_step);
+    projectFunc.rangeSlider('#cost', _min4, _max4, steps[0], steps[1], 100000, '#send-result-сost-min', '#send-result-сost-max', '.building-filter__col');
   }
 
   if ($('#area').exists()) {
@@ -1740,13 +1832,13 @@ $(function () {
 
     var _max5 = $('#area').closest('.building-filter__col').find('.building-filter__range').data('max');
 
-    var _min_step5 = $('#area').closest('.building-filter__col').find('.building-filter__range').data('min');
+    var _min_step = $('#area').closest('.building-filter__col').find('.building-filter__range').data('min');
 
-    var _max_step5 = $('#area').closest('.building-filter__col').find('.building-filter__range').data('max');
+    var _max_step = $('#area').closest('.building-filter__col').find('.building-filter__range').data('max');
 
-    var _steps5 = projectFunc.setRange('area', _min_step5, _max_step5);
+    var _steps = projectFunc.setRange('area', _min_step, _max_step);
 
-    projectFunc.rangeSlider('#area', _min5, _max5, _steps5[0], _steps5[1], 10, '#send-result-area-min', '#send-result-area-max', '.building-filter__col');
+    projectFunc.rangeSlider('#area', _min5, _max5, _steps[0], _steps[1], 10, '#send-result-area-min', '#send-result-area-max', '.building-filter__col');
   }
 
   if ($('#distance').exists()) {
@@ -1754,13 +1846,13 @@ $(function () {
 
     var _max6 = $('#distance').closest('.building-filter__col').find('.building-filter__range').data('max');
 
-    var _min_step6 = $('#distance').closest('.building-filter__col').find('.building-filter__range').data('min');
+    var _min_step2 = $('#distance').closest('.building-filter__col').find('.building-filter__range').data('min');
 
-    var _max_step6 = $('#distance').closest('.building-filter__col').find('.building-filter__range').data('max');
+    var _max_step2 = $('#distance').closest('.building-filter__col').find('.building-filter__range').data('max');
 
-    var _steps6 = projectFunc.setRange('distance', _min_step6, _max_step6);
+    var _steps2 = projectFunc.setRange('distance', _min_step2, _max_step2);
 
-    projectFunc.rangeSlider('#distance', _min6, _max6, _steps6[0], _steps6[1], 10, '#send-result-distance-min', '#send-result-distance-max', '.building-filter__col');
+    projectFunc.rangeSlider('#distance', _min6, _max6, _steps2[0], _steps2[1], 10, '#send-result-distance-min', '#send-result-distance-max', '.building-filter__col');
   }
 
   if ($('.burger-filter').exists()) {
