@@ -1,0 +1,143 @@
+extends ../layout/main
+
+block variables
+	- var title = 'Главная страница'
+	- var pageClass = 'index-page';
+
+block content
+	.structure.mf-margin
+		.structure__container.b-container
+			.structure__title.title-1 Ход строительства
+			.structure__quote Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+			.structure__wrapper
+				.structure__left
+					.structure__items.structure__items--projects
+						.structure__item(data-coordinates = "[58.988547, 53.376635]" data-href="test1")
+							a(href="project.html")
+								.structure__pic
+									img(src="./img/index/p1.jpg" alt="")
+									.structure__status Старт продаж
+								.structure__box
+									.structure__top
+										.structure__bloc
+											.structure__article Современный дом в центре города
+											.structure__adres по Завенягина, рядом с парком
+										.structure__price от 1,5 млн руб.
+									.structure__midle
+										.structure_info Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas varius tortor nibh, sit amet tempor nibh finibus et. Aenean eu enim justo. Vestibulum aliquam hendrerit molestie. Mauris malesuada nisi sit amet augue accumsan tincidunt. Maecenas tincidunt, velit ac porttitor pulvinar.
+							.structure__bottom
+								.structure__floor
+									.structure__ic
+									.structure__qty 132
+									a(href="javascript:void(0)").structure__ref свободные квартиры
+								.structure__date срок сдачи: <span>1 апреля 2020</span>
+						.structure__item(data-coordinates = "[59.089068, 53.379590]" data-href="test2")
+							a(href="project.html")
+								.structure__pic
+									img(src="./img/index/p1.jpg" alt="")
+									.structure__status Старт продаж
+								.structure__box
+									.structure__top
+										.structure__bloc
+											.structure__article Современный дом в центре города
+											.structure__adres по Завенягина, рядом с парком
+										.structure__price от 1,5 млн руб.
+									.structure__midle
+										.structure_info Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas varius tortor nibh, sit amet tempor nibh finibus et. Aenean eu enim justo. Vestibulum aliquam hendrerit molestie. Mauris malesuada nisi sit amet augue accumsan tincidunt. Maecenas tincidunt, velit ac porttitor pulvinar.
+							.structure__bottom
+								.structure__floor
+									.structure__ic
+									.structure__qty 132
+									a(href="javascript:void(0)").structure__ref свободные квартиры
+								.structure__date срок сдачи: <span>1 апреля 2020</span>
+						.structure__item.structure__item--special(data-coordinates = "[58.986310, 53.375217]" data-href="test3")
+							a(href="project.html")
+								.structure__pic
+									img(src="./img/index/p1.jpg" alt="")
+									.structure__status Старт продаж
+								.structure__box
+									.structure__top
+										.structure__bloc
+											.structure__article Современный дом в центре города
+											.structure__adres по Завенягина, рядом с парком
+										.structure__price от 1,5 млн руб.
+									.structure__midle
+										.structure_info Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas varius tortor nibh, sit amet tempor nibh finibus et. Aenean eu enim justo. Vestibulum aliquam hendrerit molestie. Mauris malesuada nisi sit amet augue accumsan tincidunt. Maecenas tincidunt, velit ac porttitor pulvinar.
+							.structure__bottom
+								.structure__floor
+									.structure__ic
+									.structure__qty 132
+									a(href="javascript:void(0)").structure__ref свободные квартиры
+								.structure__date срок сдачи: <span>1 апреля 2020</span>
+						.structure__item.structure__item--special(data-coordinates = "[58.987253, 53.376125]" data-href="test4")
+							a(href="project.html")
+								.structure__pic
+									img(src="./img/index/p1.jpg" alt="")
+									.structure__status Старт продаж
+								.structure__box
+									.structure__top
+										.structure__bloc
+											.structure__article Современный дом в центре города
+											.structure__adres по Завенягина, рядом с парком
+										.structure__price от 1,5 млн руб.
+									.structure__midle
+										.structure_info Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas varius tortor nibh, sit amet tempor nibh finibus et. Aenean eu enim justo. Vestibulum aliquam hendrerit molestie. Mauris malesuada nisi sit amet augue accumsan tincidunt. Maecenas tincidunt, velit ac porttitor pulvinar.
+							.structure__bottom
+								.structure__floor
+									.structure__ic
+									.structure__qty 132
+									a(href="javascript:void(0)").structure__ref свободные квартиры
+								.structure__date срок сдачи: <span>1 апреля 2020</span>
+						.structure__item.structure__item--special(data-coordinates = "[58.986476, 53.376934]" data-href="test5")
+							a(href="project.html")
+								.structure__pic
+									img(src="./img/index/p1.jpg" alt="")
+									.structure__status Старт продаж
+								.structure__box
+									.structure__top
+										.structure__bloc
+											.structure__article Современный дом в центре города
+											.structure__adres по Завенягина, рядом с парком
+										.structure__price от 1,5 млн руб.
+									.structure__midle
+										.structure_info Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas varius tortor nibh, sit amet tempor nibh finibus et. Aenean eu enim justo. Vestibulum aliquam hendrerit molestie. Mauris malesuada nisi sit amet augue accumsan tincidunt. Maecenas tincidunt, velit ac porttitor pulvinar.
+							.structure__bottom
+								.structure__floor
+									.structure__ic
+									.structure__qty 132
+									a(href="javascript:void(0)").structure__ref свободные квартиры
+								.structure__date срок сдачи: <span>1 апреля 2020</span>	
+						include ../modules/preloader
+					.structure__catalog
+						.structure__info Каталог квартир на обмен
+						a(href="flats-plan.html").structure__count 64 квартиры 
+				.structure__right
+					.structure__map.structure__map--step-build
+						.structure__inner
+							#map-projects(data-center="[58.985550, 53.377120]")
+			.mf-edge
+		.index-project.index-project--about
+			.b-container
+					.title-2 Реализованные проекты Синай-групп
+			.index-project__inner
+				.b-container
+					include ../modules/object-slider
+		.include-obj.include-obj--step-build
+			.b-container
+				include ../modules/call.pug
+				//- .structure__note
+				//- 	.structure__word Узнайте больше о проектах или запишитесь на экскурсию. Оставьте свой номер, и мы перезвоним вам в течение рабочего дня.	
+				//- 	a(href="").btn.btn--decor.btn--black
+				//- 		.btn__cover
+				//- 			.btn__button
+				//- 				.btn__line
+				//- 					+svg('arr')
+				//- 				.btn__figure
+				//- 					+svg('figure')
+				//- 					.btn__decor
+				//- 						+svg('arr')
+				//- 			.btn__button.btn__button--laptop 
+				//- 				+svg('phone')
+				//- 		.btn__txt Заказать обратный звонок
+				
+block script

@@ -1,0 +1,430 @@
+{
+    "entranceCount": "2",
+    "floorsCount": 10,
+    "entrances": {
+        "1д": {
+            "floors": {
+                "3": {
+                    "flats": [
+                        {
+                            "id": 2,
+                            "rooms": 3,
+                            "status": 3,
+                            "statusName": "Продано",
+                            "about": "/about",
+                            "scheme": "/scheme",
+                            "price": 2.5
+                        },
+                        {
+                            "id": 5,
+                            "rooms": 2,
+                            "status": 2,
+                            "statusName": "На рассмотрении",
+                            "about": "/about",
+                            "scheme": "/scheme",
+                            "price": 1.5
+                        }
+                    ]
+                },
+                "2": {
+                    "flats": [
+                        {
+                            "id": 2,
+                            "rooms": 3,
+                            "status": 1,
+                            "statusName": "Свободно",
+                            "about": "/about",
+                            "scheme": "/scheme",
+                            "price": 2.5
+                        },
+                        {
+                            "id": 5,
+                            "rooms": 2,
+                            "status": 2,
+                            "statusName": "На рассмотрении",
+                            "about": "/about",
+                            "scheme": "/scheme",
+                            "price": 1.5
+                        },
+                        {
+                            "id": 8,
+                            "rooms": 3,
+                            "status": 3,
+                            "statusName": "Продано",
+                            "about": "/about",
+                            "scheme": "/scheme",
+                            "price": 2.5
+                        },
+                        {
+                            "id": 13,
+                            "rooms": 1,
+                            "status": 4,
+                            "statusName": "Забронировано",
+                            "about": "/about",
+                            "scheme": "/scheme",
+                            "price": 1
+                        }
+                    ]
+                },
+                "1": {
+                    "flats": [
+                        {
+                            "id": 2,
+                            "rooms": 4,
+                            "status": 1,
+                            "statusName": "Свободно",
+                            "about": "/about",
+                            "scheme": "/scheme",
+                            "price": 5
+                        },
+                        {
+                            "id": 5,
+                            "rooms": 2,
+                            "status": 1,
+                            "statusName": "Свободно",
+                            "about": "/about",
+                            "scheme": "/scheme",
+                            "price": 1.5
+                        },
+                        {
+                            "id": 8,
+                            "rooms": 3,
+                            "status": 1,
+                            "statusName": "Продано",
+                            "about": "/about",
+                            "scheme": "/scheme",
+                            "price": 3.5
+                        },
+                        {
+                            "id": 13,
+                            "rooms": 1,
+                            "status": 1,
+                            "statusName": "Свободно",
+                            "about": "/about",
+                            "scheme": "/scheme",
+                            "price": 1
+                        }
+                    ]
+                }
+            }
+        },
+        "1г": {
+            "floors": {
+                "3": {
+                    "flats": [
+                        {
+                            "id": 2,
+                            "rooms": 3,
+                            "status": 3,
+                            "statusName": "Продано",
+                            "about": "/about",
+                            "scheme": "/scheme",
+                            "price": 2.5
+                        },
+                        {
+                            "id": 5,
+                            "rooms": 2,
+                            "status": 2,
+                            "statusName": "На рассмотрении",
+                            "about": "/about",
+                            "scheme": "/scheme",
+                            "price": 1.5
+                        }
+                    ]
+                },
+                "2": {
+                    "flats": [
+                        {
+                            "id": 2,
+                            "rooms": 3,
+                            "status": 1,
+                            "statusName": "Свободно",
+                            "about": "/about",
+                            "scheme": "/scheme",
+                            "price": 2.5
+                        },
+                        {
+                            "id": 5,
+                            "rooms": 2,
+                            "status": 2,
+                            "statusName": "На рассмотрении",
+                            "about": "/about",
+                            "scheme": "/scheme",
+                            "price": 1.5
+                        },
+                        {
+                            "id": 8,
+                            "rooms": 3,
+                            "status": 3,
+                            "statusName": "Продано",
+                            "about": "/about",
+                            "scheme": "/scheme",
+                            "price": 2.5
+                        },
+                        {
+                            "id": 13,
+                            "rooms": 1,
+                            "status": 4,
+                            "statusName": "Забронировано",
+                            "about": "/about",
+                            "scheme": "/scheme",
+                            "price": 1
+                        }
+                    ]
+                },
+                "1": {
+                    "flats": [
+                        {
+                            "id": 2,
+                            "rooms": 4,
+                            "status": 1,
+                            "statusName": "Свободно",
+                            "about": "/about",
+                            "scheme": "/scheme",
+                            "price": 5
+                        },
+                        {
+                            "id": 5,
+                            "rooms": 2,
+                            "status": 1,
+                            "statusName": "Свободно",
+                            "about": "/about",
+                            "scheme": "/scheme",
+                            "price": 1.5
+                        },
+                        {
+                            "id": 8,
+                            "rooms": 3,
+                            "status": 1,
+                            "statusName": "Продано",
+                            "about": "/about",
+                            "scheme": "/scheme",
+                            "price": 3.5
+                        },
+                        {
+                            "id": 13,
+                            "rooms": 1,
+                            "status": 1,
+                            "statusName": "Свободно",
+                            "about": "/about",
+                            "scheme": "/scheme",
+                            "price": 1
+                        }
+                    ]
+                }
+            }
+        },
+        "1в": {
+            "floors": {
+                "3": {
+                    "flats": [
+                        {
+                            "id": 2,
+                            "rooms": 3,
+                            "status": 3,
+                            "statusName": "Продано",
+                            "about": "/about",
+                            "scheme": "/scheme",
+                            "price": 2.5
+                        },
+                        {
+                            "id": 5,
+                            "rooms": 2,
+                            "status": 2,
+                            "statusName": "На рассмотрении",
+                            "about": "/about",
+                            "scheme": "/scheme",
+                            "price": 1.5
+                        }
+                    ]
+                },
+                "2": {
+                    "flats": [
+                        {
+                            "id": 2,
+                            "rooms": 3,
+                            "status": 1,
+                            "statusName": "Свободно",
+                            "about": "/about",
+                            "scheme": "/scheme",
+                            "price": 2.5
+                        },
+                        {
+                            "id": 5,
+                            "rooms": 2,
+                            "status": 2,
+                            "statusName": "На рассмотрении",
+                            "about": "/about",
+                            "scheme": "/scheme",
+                            "price": 1.5
+                        },
+                        {
+                            "id": 8,
+                            "rooms": 3,
+                            "status": 3,
+                            "statusName": "Продано",
+                            "about": "/about",
+                            "scheme": "/scheme",
+                            "price": 2.5
+                        },
+                        {
+                            "id": 13,
+                            "rooms": 1,
+                            "status": 4,
+                            "statusName": "Забронировано",
+                            "about": "/about",
+                            "scheme": "/scheme",
+                            "price": 1
+                        }
+                    ]
+                },
+                "1": {
+                    "flats": [
+                        {
+                            "id": 2,
+                            "rooms": 4,
+                            "status": 1,
+                            "statusName": "Свободно",
+                            "about": "/about",
+                            "scheme": "/scheme",
+                            "price": 5
+                        },
+                        {
+                            "id": 5,
+                            "rooms": 2,
+                            "status": 1,
+                            "statusName": "Свободно",
+                            "about": "/about",
+                            "scheme": "/scheme",
+                            "price": 1.5
+                        },
+                        {
+                            "id": 8,
+                            "rooms": 3,
+                            "status": 1,
+                            "statusName": "Продано",
+                            "about": "/about",
+                            "scheme": "/scheme",
+                            "price": 3.5
+                        },
+                        {
+                            "id": 13,
+                            "rooms": 1,
+                            "status": 1,
+                            "statusName": "Свободно",
+                            "about": "/about",
+                            "scheme": "/scheme",
+                            "price": 1
+                        }
+                    ]
+                }
+            }
+        },
+        "1б": {
+            "floors": {
+                "3": {
+                    "flats": [
+                        {
+                            "id": 2,
+                            "rooms": 3,
+                            "status": 3,
+                            "statusName": "Продано",
+                            "about": "/about",
+                            "scheme": "/scheme",
+                            "price": 2.5
+                        },
+                        {
+                            "id": 5,
+                            "rooms": 2,
+                            "status": 2,
+                            "statusName": "На рассмотрении",
+                            "about": "/about",
+                            "scheme": "/scheme",
+                            "price": 1.5
+                        }
+                    ]
+                },
+                "2": {
+                    "flats": [
+                        {
+                            "id": 2,
+                            "rooms": 3,
+                            "status": 1,
+                            "statusName": "Свободно",
+                            "about": "/about",
+                            "scheme": "/scheme",
+                            "price": 2.5
+                        },
+                        {
+                            "id": 5,
+                            "rooms": 2,
+                            "status": 2,
+                            "statusName": "На рассмотрении",
+                            "about": "/about",
+                            "scheme": "/scheme",
+                            "price": 1.5
+                        },
+                        {
+                            "id": 8,
+                            "rooms": 3,
+                            "status": 3,
+                            "statusName": "Продано",
+                            "about": "/about",
+                            "scheme": "/scheme",
+                            "price": 2.5
+                        },
+                        {
+                            "id": 13,
+                            "rooms": 1,
+                            "status": 4,
+                            "statusName": "Забронировано",
+                            "about": "/about",
+                            "scheme": "/scheme",
+                            "price": 1
+                        }
+                    ]
+                },
+                "1": {
+                    "flats": [
+                        {
+                            "id": 2,
+                            "rooms": 4,
+                            "status": 1,
+                            "statusName": "Свободно",
+                            "about": "/about",
+                            "scheme": "/scheme",
+                            "price": 5
+                        },
+                        {
+                            "id": 5,
+                            "rooms": 2,
+                            "status": 1,
+                            "statusName": "Свободно",
+                            "about": "/about",
+                            "scheme": "/scheme",
+                            "price": 1.5
+                        },
+                        {
+                            "id": 8,
+                            "rooms": 3,
+                            "status": 1,
+                            "statusName": "Продано",
+                            "about": "/about",
+                            "scheme": "/scheme",
+                            "price": 3.5
+                        },
+                        {
+                            "id": 13,
+                            "rooms": 1,
+                            "status": 1,
+                            "statusName": "Свободно",
+                            "about": "/about",
+                            "scheme": "/scheme",
+                            "price": 1
+                        }
+                    ]
+                }
+            }
+        }
+    }
+}

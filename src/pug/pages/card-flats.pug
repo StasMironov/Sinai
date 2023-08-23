@@ -1,0 +1,88 @@
+extends ../layout/main
+
+block variables
+	- var title = 'Главная страница'
+	- var pageClass = 'index-page';
+
+block content
+	.flats-filter.mf-margin
+		.flats-filter__container.b-container
+			.flats-filter__title.title-1 1-к квартира, 23.5 м, 8/9 эт. 
+			.flats-filter__date 1 ч. назад
+			.flats-filter__box
+				.flats-filter__unit.flats-filter__unit--price 1 250 000 руб.
+				.flats-filter__unit 15 234 руб. за м<sup>2</sup>
+	.structure.structure--simple
+		.structure__container.b-container
+			.structure__wrapper.structure__wrapper--content
+				.structure__left
+					.card-flats
+						.project-period.project-period--simple.project-period--big
+							.project-period__slider
+								.swiper-wrapper
+									.swiper-slide(data-slide='1')
+										img(src='./img/card/pic4.jpg' alt='')
+									.swiper-slide(data-slide='2')
+										img(src='./img/card/pic2.jpg' alt='' )
+									.swiper-slide(data-slide='3')
+										img(src='./img/card/pic3.jpg' alt='' )
+								.inner-slider__inner
+									.inner-slider__num
+									.inner-slider__wrapper.inner-slider__wrapper--build
+										.inner-slider__pagination.button
+											.inner-slider__in
+												.inner-slider__link.inner-slider__link--prev
+												.inner-slider__link.inner-slider__link--next
+								.project-period__pagination
+								.swiper-menu
+						.card-flats__items
+							.card-flats__item
+								.card-flats__text Этаж:
+								.card-flats__text 4
+							.card-flats__item
+								.card-flats__text Этажей в доме: 
+								.card-flats__text 9
+							.card-flats__item
+								.card-flats__text Тип дома: 
+								.card-flats__text панельный
+							.card-flats__item
+								.card-flats__text Количество комнат:
+								.card-flats__text 1-комнатные
+							.card-flats__item
+								.card-flats__text Общая площадь:
+								.card-flats__text 65 м<sup>2</sup>
+							.card-flats__item
+								.card-flats__text Жилая площадь:
+								.card-flats__text 44 м<sup>2</sup>
+							.card-flats__item
+								.card-flats__text Площадь кухни:
+								.card-flats__text 9 м<sup>2</sup>
+						.card-location
+							.card-location__text Челябинская область, г. Магнитогорск, ул. Завенягина 123/2, р-н Орджоникидзевский
+							.card-location__map 
+								#map-flat(data-center="[58.985550, 53.377120]" data-coordinates = "[58.985550, 53.377120]")
+							.card-location__info Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+							.share-bloc
+								.share-bloc__box
+									.share-bloc__text Поделиться
+									.share-bloc__items
+										a(href="javascript:void(0);").share-bloc__item
+											+svg('vk')
+										a(href="javascript:void(0);").share-bloc__item
+											+svg('inst')
+										a(href="javascript:void(0);").share-bloc__item
+											+svg('face')
+										a(href="javascript:void(0);").share-bloc__item
+											+svg('ok')
+
+					.include-obj.include-obj--flats
+						.include-obj__title.title-3 Похожие объявления
+						include ../modules/flats
+				.structure__right
+					.structure__aside.mf-fix
+						.structure__inner
+							include ../modules/call-panel
+							a(href="javascript:void(0);").ad
+								img(src="./img/card/ad.jpg" alt="")
+				
+block script

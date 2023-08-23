@@ -1,0 +1,328 @@
+.content {
+    max-width: 895px;
+    margin: 0 auto;
+    width: 100%;
+
+
+
+    img,
+    blockquote,
+    & ol,
+    & ul,
+    & div,
+    & p,
+        {
+
+        &:first-child {
+            margin-top: 0 !important;
+        }
+
+    }
+
+    blockquote {
+        border-left: 6px solid #BFE2FF;
+        font-size: 16px;
+        font-style: italic;
+        padding: 16px 24px;
+        position: relative;
+
+        &:before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: -6px;
+            height: 40px;
+            background-color: #fff;
+            width: 6px;
+            margin-top: -1em;
+        }
+
+        &:after {
+            content: "”";
+            position: absolute;
+            top: 50%;
+            left: -20px;
+            color: #337AB7;
+            font-size: 50px;
+            font-weight: bold;
+            line-height: 30px;
+        }
+
+        cite {
+            color: #337AB7;
+            font-size: 15px;
+            padding-top: 10px;
+            display: block;
+            text-align: right;
+        }
+    }
+
+
+
+    & h1,
+    & h2,
+    & h3,
+    & h4 {
+        margin-top: 50px;
+
+        @media(max-width: 1024px) {
+            margin-top: 40px;
+        }
+
+        &:first-child {
+            margin-top: 0;
+        }
+    }
+
+    & h1 {
+        font-weight: bold;
+        font-size: 50px;
+        line-height: 108%;
+        color: $black-1;
+        letter-spacing: 1px;
+
+        @media(max-width: 1024px) {
+            font-weight: bold;
+            font-size: 40px;
+            line-height: 43px;
+            letter-spacing: 1px;
+        }
+
+        @media(max-width: 640px) {
+            font-size: 35px;
+            line-height: 42px;
+            letter-spacing: 0.5px;
+        }
+    }
+
+    & h2 {
+        font-weight: bold;
+        font-size: 40px;
+        line-height: 120%;
+        color: $black-1;
+        letter-spacing: 1.3px;
+
+        @media(max-width: 1024px) {
+            font-size: 32px;
+            line-height: 38px;
+            letter-spacing: 1px;
+        }
+
+        @media(max-width: 640px) {
+            font-size: 30px;
+            line-height: 36px;
+            letter-spacing: 0.5px;
+        }
+    }
+
+    & h3 {
+        font-weight: bold;
+        font-size: 30px;
+        line-height: 108%;
+
+        @media(max-width: 640px) {
+            font-size: 26px;
+            line-height: 30px;
+        }
+    }
+
+    & h4 {
+        font-size: 18px;
+        line-height: 24px;
+    }
+
+    & a {
+        font-weight: 600;
+        transition: .3s;
+
+        &:hover {
+            color: $ochre;
+        }
+    }
+
+    & blockquote,
+    & ol,
+    & ul,
+    & div,
+    & p,
+    & img {
+        margin-top: 24px;
+    }
+
+    & div>img {
+        margin-top: 0;
+    }
+
+    & p {
+        font-size: 16px;
+        line-height: 28px;
+        margin-top: 24px;
+
+        & img {
+            max-width: 100%;
+            height: auto;
+            margin: 5px 0;
+        }
+
+        &+p,
+        &+ol,
+        &+ul,
+        &+div {
+            margin-top: 24px;
+        }
+    }
+
+    & ol,
+    & ul {
+        padding: 20px 30px 20px 16px;
+        box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+        font-size: 16px;
+        line-height: 26px;
+
+        & li {
+            position: relative;
+            padding-left: 10px;
+        }
+    }
+
+    & ol {
+        counter-reset: a;
+        padding-left: 20px;
+
+        & li {
+            padding-left: 20px;
+
+            & ol {
+                & li {
+                    font-size: 14px;
+                    padding-left: 30px;
+                }
+            }
+
+            &:before {
+                content: counters(a, ".") ". ";
+                counter-increment: a;
+                position: absolute;
+                left: 0;
+            }
+        }
+    }
+
+    & ul {
+
+        li {
+            position: relative;
+            padding-left: 20px;
+
+            &:after {
+                position: absolute;
+                content: "";
+                width: 10px;
+                height: 1px;
+                background-color: $basic;
+                left: 0;
+                top: 14px;
+                padding-left: 0;
+            }
+        }
+    }
+
+    iframe {
+        display: block;
+        max-width: 615px;
+        width: 100%;
+        margin: 0 auto;
+        height: 320px;
+
+        @media(max-width: 620px) {
+            height: 180px;
+        }
+    }
+
+    .quote {
+        padding: 20px 30px 20px 16px;
+        box-shadow: 0 0 4px rgba(0, 0, 0, .25);
+        font-size: 14px;
+        line-height: 28px;
+        margin-top: 24px;
+    }
+
+    img {
+        height: 460px;
+        width: 100%;
+        object-fit: cover;
+
+        @media(max-width: 1024px) {
+            height: 400px;
+        }
+
+        @media(max-width: 768px) {
+            height: 295px;
+        }
+
+        @media(max-width: 640px) {
+            height: 195px;
+        }
+    }
+
+    &--prooject {
+        margin-top: 70px;
+
+        @media(max-width: 1024px) {
+            margin-top: 50px;
+        }
+
+        @media(max-width: 640px) {
+            margin-top: 24px;
+        }
+    }
+
+    &--news {
+        .project__img {
+            max-width: 590px;
+            height: 434px;
+
+            @media(max-width: 1024px) {
+                height: 400px;
+            }
+
+            @media(max-width: 922px) {
+                height: 265px;
+            }
+
+            @media(max-width: 768px) {
+                max-width: 541px;
+            }
+
+            @media(max-width: 640px) {
+                height: 194px;
+            }
+
+            &:not(:first-child) {
+                margin-top: 24px;
+            }
+
+            &+p {
+                margin-top: 16px;
+            }
+        }
+
+        & h1,
+        & h2,
+        & h3,
+        & h4 {
+            margin-top: 24px;
+
+            &:first-child {
+                margin-top: 0;
+            }
+
+            &+p,
+            &+div,
+            &+ul,
+            &+ol {
+                margin-top: 16px;
+            }
+        }
+    }
+}

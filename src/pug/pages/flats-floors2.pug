@@ -1,0 +1,174 @@
+extends ../layout/main
+
+block variables
+	- var title = 'Главная страница'
+	- var pageClass = 'index-page';
+
+block content
+	.flats-filter.mf-margin
+		.flats-filter__container.b-container
+			.flats-filter__title.title-1 Квартиры Завенягина 1/2
+			.flats-filter__date 2 квартал 2021
+			.burger-filter
+				span.line
+				span.line
+				span.line
+			include ../modules/filter-flats
+			.filter-sort
+				.filter-sort__box
+					.filter-sort__case
+						.filter-sort__wrp
+							.filter-sort__text Сортировка
+							.filter-sort__img
+								<svg width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+									<path d="M1 5L5.24264 9.24264L9.48528 5" stroke="#1E202C" stroke-width="1.5"/>
+								</svg>
+						.filter-sort__select
+							.filter-sort__unit
+								<input id="sorts1" type="radio" name="sorts" value="pay-min" checked>
+								<label for="sorts1" title="Цена (минимальная)">Цена (минимальная)</label>
+							.filter-sort__unit
+								<input id="sorts2" type="radio" name="sorts" value="pay-max" checked>
+								<label for="sorts2" title="Цена (максимальная)">Цена (максимальная)</label>
+							.filter-sort__unit
+								<input id="sorts3" type="radio" name="sorts" value="area-min" checked>
+								<label for="sorts3" title="Площадь (минимальная)">Площадь (минимальная)</label>
+							.filter-sort__unit
+								<input id="sorts4" type="radio" name="sorts" value="area-max" checked>
+								<label for="sorts4" title="Площадь (максимальная)">Площадь (максимальная)</label>
+						
+
+	.flats-basic
+		.flats-basic__container.b-container
+			.flats-basic__menu
+				<nav class="filter-menu nav-wrap">
+						<ul class="group" id="example-one">
+							<li>
+								<a class="filter-menu__link ">
+									<input id="view1" type="radio" name="radio" value="1" checked>
+									<label for="view1">Планировка</label>
+								</a>
+							</li>
+							<li>
+								<a class="filter-menu__link ">
+									<input id="view2" type="radio" name="radio" value="2">
+									<label for="view2">Плитка</label>
+								</a>
+							</li>
+							<li class="current_page_item">
+								<a class="filter-menu__link ">
+									<input id="view3" type="radio" name="radio" value="3">
+									<label for="view3">Этажи</label>
+								</a>
+							</li>							
+						</ul>
+				</nav>
+				form(method="get").flats-basic__filter
+					.flats-basic__word Сортировать по
+					.flats-basic__group
+						.flats-basic__module
+							.flats-basic__text Цене
+							.flats-basic__switch
+								.flats-basic__sort
+									<input id="sort1" type="radio" name="sort1" value="1">
+									<label for="sort1">
+										+svg('arr_list')
+									</label>
+								.flats-basic__sort
+									<input id="sort2" type="radio" name="sort1" value="2">
+									<label for="sort2">
+										+svg('arr_list')
+									</label>
+						.flats-basic__module
+							.flats-basic__text Площади
+							.flats-basic__switch
+								.flats-basic__sort
+									<input id="sort3" type="radio" name="sort2" value="3">
+									<label for="sort3">
+										+svg('arr_list')
+									</label>
+								.flats-basic__sort
+									<input id="sort4" type="radio" name="sort2" value="4">
+									<label for="sort4">
+										+svg('arr_list')
+									</label>
+					button(type="reset").flats-basic__close
+						.flats-basic__ic 
+						.flats-basic__text Сбросить фильтр
+			.flats-basic__box.flats-basic__box--floor
+				#insert
+				.flats-basic__grid
+					.flats-basic__left
+						#aside.flats-basic__article Этажи
+						.flats-basic__nav
+							.flats-basic__unit
+								<input id="flr1" type="radio" name="floor" value="area-max" checked>
+								<label for="flr1" title="">12</label>
+							.flats-basic__unit
+								<input id="flr2" type="radio" name="floor" value="area-max">
+								<label for="flr2" title="">11</label>
+							.flats-basic__unit
+								<input id="flr3" type="radio" name="floor" value="area-max">
+								<label for="flr3" title="">10</label>
+							.flats-basic__unit
+								<input id="flr4" type="radio" name="floor" value="area-max" >
+								<label for="flr4" title="">9</label>
+							.flats-basic__unit
+								<input id="flr5" type="radio" name="floor" value="area-max">
+								<label for="flr5" title="">8</label>
+							.flats-basic__unit
+								<input id="flr6" type="radio" name="floor" value="area-max">
+								<label for="flr6" title="">7</label>
+							.flats-basic__unit
+								<input id="flr7" type="radio" name="floor" value="area-max">
+								<label for="flr7" title="">6</label>
+							.flats-basic__unit
+								<input id="flr8" type="radio" name="floor" value="area-max">
+								<label for="flr8" title="">5</label>
+							.flats-basic__unit
+								<input id="flr9" type="radio" name="floor" value="area-max">
+								<label for="flr9" title="">4</label>
+							.flats-basic__unit
+								<input id="flr10" type="radio" name="floor" value="area-max">
+								<label for="flr10" title="">3</label>
+							.flats-basic__unit
+								<input id="flr11" type="radio" name="floor" value="area-max">
+								<label for="flr11" title="">2</label>
+							.flats-basic__unit
+								<input id="flr12" type="radio" name="floor" value="area-max">
+								<label for="flr12" title="">1</label>
+							
+							
+					.flats-basic__right
+						.flats-basic__inner
+							.flats-basic__floor
+								img(src='./img/flats/floor/floor1.jpg' alt="")
+								.flats-basic__flats
+									a(href="/flat/25829/").flats-basic__flat.active
+										img(src="./img/flats/floor/flat/f1.jpg" alt="")
+									a(href="/flat/25829/").flats-basic__flat.booked 
+										img(src="./img/flats/floor/flat/f2.jpg" alt="")
+									a(href="/flat/25829/").flats-basic__flat.sold
+										img(src="./img/flats/floor/flat/f3.jpg" alt="")
+									a(href="/flat/25829/").flats-basic__flat.active
+										img(src="./img/flats/floor/flat/f4.jpg" alt="")
+									a(href="/flat/25829/").flats-basic__flat.active
+										img(src="./img/flats/floor/flat/f5.jpg" alt="")
+									a(href="/flat/25829/").flats-basic__flat.booked 
+										img(src="./img/flats/floor/flat/f6.jpg" alt="")
+									a(href="/flat/25829/").flats-basic__flat.active
+										img(src="./img/flats/floor/flat/f7.jpg" alt="")
+									a(href="/flat/25829/").flats-basic__flat.sold
+										img(src="./img/flats/floor/flat/f8.jpg" alt="")
+
+									//- img(src="./img/flats/floor/flat/f2.jpg" alt="").flats-basic__flat
+									//- img(src="./img/flats/floor/flat/f3.jpg" alt="").flats-basic__flat
+									//- img(src="./img/flats/floor/flat/f4.jpg" alt="").flats-basic__flat
+									//- img(src="./img/flats/floor/flat/f5.jpg" alt="").flats-basic__flat
+									//- img(src="./img/flats/floor/flat/f6.jpg" alt="").flats-basic__flat
+									//- img(src="./img/flats/floor/flat/f7.jpg" alt="").flats-basic__flat
+									//- img(src="./img/flats/floor/flat/f8.jpg" alt="").flats-basic__flat
+
+
+
+block script

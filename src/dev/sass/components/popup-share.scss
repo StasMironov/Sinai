@@ -1,0 +1,194 @@
+.popup-share {
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    background-color: white;
+    position: fixed;
+    z-index: 201;
+    padding: 118px 103px 135px;
+    max-width: 830px;
+
+    @media(max-width: 1300px) {
+        padding: 90px 103px 105px;
+    }
+
+    @media(max-width: 1024px) {
+        max-width: 728px;
+        padding: 70px 103px 85px;
+    }
+
+    @media(max-width: 768px) {
+        max-width: 600px;
+        padding: 70px 70px 85px;
+    }
+
+    @media(max-width: 640px) {
+        max-width: 568px;
+        padding: 60px 40px 60px;
+    }
+
+    @media(max-width: 600px) {
+        max-width: 468px;
+    }
+
+    @media(max-width: 500px) {
+        max-width: 290px;
+        padding: 45px 20px 50px;
+    }
+
+    &__inner {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+    }
+
+    &__title {
+        text-align: center;
+    }
+
+    &__text {
+        line-height: 25px;
+        text-align: center;
+        margin-top: 25px;
+        color: $black-3;
+    }
+
+    &__close {
+        cursor: pointer;
+        right: -45px;
+        position: absolute;
+        width: 40px;
+        height: 40px;
+        top: -45px;
+        margin: 0 auto;
+
+        @media(max-width: 1024px) {
+            top: -60px;
+            right: 0;
+            left: 0;
+        }
+
+        @media(max-width: 640px) {
+            width: 30px;
+            height: 30px;
+            top: -45px;
+        }
+
+        &:after,
+        &:before {
+            position: absolute;
+            content: "";
+            height: 100%;
+            width: 2px;
+            background-color: white;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            margin: auto;
+            transition: .4s ease;
+        }
+
+        &:after {
+            transform: rotate(45deg);
+        }
+
+        &:before {
+            transform: rotate(-45deg);
+        }
+
+        &:hover {
+
+            &:after,
+            &:before {
+                background-color: $ochre;
+            }
+        }
+    }
+
+    .ya-share2__link {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+
+        &:hover {
+            .ya-share2__badge {
+                background-color: $ochre !important;
+            }
+
+            .ya-share2__title {
+                color: $ochre;
+            }
+        }
+    }
+
+    .ya-share2__title {
+        display: inline-block !important;
+        vertical-align: bottom;
+        margin: 0;
+        font-size: 16px;
+        margin-top: 8px;
+        transition: .4s ease;
+    }
+
+    .ya-share2__badge {
+        height: 48px;
+        width: 48px;
+        margin: 0;
+        border-radius: 0;
+        background-color: $black-1 !important;
+        transition: .4s ease;
+    }
+
+    .ya-share2__container_size_m .ya-share2__icon {
+        height: 100% !important;
+        width: 100% !important;
+        -webkit-background-size: 100% 100% !important;
+        background-size: 100% 100% !important;
+    }
+
+    .ya-share2__container_size_m .ya-share2__badge+.ya-share2__title {
+        margin-left: 0px;
+    }
+
+    .ya-share2__list {
+        display: flex;
+        align-items: center;
+        max-width: 520px;
+        width: 100%;
+        justify-content: space-between;
+        margin: 0 auto;
+
+        @media(max-width: 600px) {
+            display: flex;
+            flex-wrap: wrap;
+            margin-left: -20px;
+            margin: 0 auto;
+            max-width: 310px;
+            justify-content: center;
+            margin-top: -20px;
+        }
+    }
+
+    .ya-share2__list.ya-share2__list_direction_horizontal {
+        @media(max-width: 600px) {
+            margin-top: -20px;
+        }
+    }
+
+    .ya-share2 {
+        margin-top: 50px;
+    }
+
+    .ya-share2__item {
+        margin: 0 !important;
+
+        @media(max-width: 600px) {
+            width: calc(50% - 20px);
+            margin-left: 20px;
+            margin-top: 20px !important;
+        }
+    }
+}

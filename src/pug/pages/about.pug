@@ -1,0 +1,87 @@
+extends ../layout/main
+
+block variables
+	- var title = 'Главная страница'
+	- var pageClass = 'index-page';
+
+block content
+	.about.mf-margin
+		.about__container.b-container
+			.about__title.title-1 Мы — группа <br> компаний Синай-групп
+			.about__group 
+				.about__items
+					.about__item 
+						img(src="./img/about/img1.svg" alt="")
+					.about__item 
+						img(src="./img/about/img2.svg" alt="")
+					.about__item 
+						img(src="./img/about/img3.svg" alt="")
+					.about__item 
+						img(src="./img/about/img4.svg" alt="")
+			.about__quote But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man.
+			.about__box
+				.about__bloc
+					.about__num 26
+					.about__article возведенных объектов
+					.about__txt Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.
+				.about__bloc
+					.about__num 9
+					.about__article лет опыта
+					.about__txt Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.
+				.about__bloc
+					.about__num 11
+					.about__article земельных участков
+					.about__txt Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.
+	.index-project.index-project--about
+		.b-container
+				.title-2 Реализованные проекты Синай-групп
+		.index-project__inner
+			.b-container
+				include ../modules/object-slider
+	.partner
+		.partner__container.b-container
+			.partner__title.title-3 Наши партнеры
+		.partner__inner
+			.partner__slider
+				.swiper-wrapper
+					.swiper-slide
+						img(src="./img/partner/img1.svg" alt="")
+					.swiper-slide
+						img(src="./img/partner/img2.svg" alt="")
+					.swiper-slide
+						img(src="./img/partner/img3.svg" alt="")
+					.swiper-slide
+						img(src="./img/partner/img4.svg" alt="")
+					.swiper-slide
+						img(src="./img/partner/img5.svg" alt="")
+	.certificate
+		.certificate__container.b-container
+			.certificate__title.title-2 Наши сертификаты
+			.certificate__quote Чтобы доказать нашу компетенцию и вы смогли доверить нам вашу жизнь и жизни родных — ознакомьтесь с документами. Сертификаты выдаются гос. структурами за соблюдение общепринятых норм в строительстве и проектировании, что делает наши возводимые объекты гарантом надежности и безопасности. 
+			.certificate__cover
+				.certificate__slider
+					.swiper-wrapper#certificate__gallery
+						a(href="./img/certificate/cer.png").swiper-slide
+							img(src="./img/certificate/cer.png" alt="")
+						a(href="./img/certificate/cer.png").swiper-slide
+							img(src="./img/certificate/cer.png" alt="")
+						a(href="./img/certificate/cer.png").swiper-slide
+							img(src="./img/certificate/cer.png" alt="")
+						a(href="./img/certificate/cer.png").swiper-slide
+							img(src="./img/certificate/cer.png" alt="")
+						a(href="./img/certificate/cer.png").swiper-slide
+							img(src="./img/certificate/cer.png" alt="")
+						a(href="./img/certificate/cer.png").swiper-slide
+							img(src="./img/certificate/cer.png" alt="")
+						a(href="./img/certificate/cer.png").swiper-slide
+							img(src="./img/certificate/cer.png" alt="")
+						a(href="./img/certificate/cer.png").swiper-slide
+							img(src="./img/certificate/cer.png" alt="")
+						a(href="./img/certificate/cer.png").swiper-slide
+							img(src="./img/certificate/cer.png" alt="")
+						a(href="./img/certificate/cer.png").swiper-slide
+							img(src="./img/certificate/cer.png" alt="")
+	include ../modules/news
+	.b-container
+		include ../modules/call.pug
+block script

@@ -1,0 +1,40 @@
+.card-location {
+    margin-top: 70px;
+
+    @media(max-width: 600px) {
+        margin-top: 40px;
+    }
+
+    &__map {
+        margin-top: 32px;
+        height: 595px;
+        pointer-events: none;
+
+        @media(max-width: 1235px) {
+            height: 500px;
+        }
+
+        @media(max-width: 1024px) {
+            height: 478px;
+        }
+
+        #map-flat {
+            height: 100%;
+            pointer-events: none;
+        }
+    }
+
+    &__info {
+        margin-top: 24px;
+        line-height: 26px;
+    }
+
+    &__text {
+        color: $black-1;
+
+        @media(max-width: 600px) {
+            line-height: 27px;
+            letter-spacing: 0.3px;
+        }
+    }
+}

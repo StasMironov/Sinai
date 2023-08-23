@@ -1,0 +1,43 @@
+.breadcrumb {
+    margin-bottom: 22px;
+
+    &__link {
+        display: inline-block;
+        opacity: .5;
+        position: relative;
+        letter-spacing: -0.3px;
+        transition: 400ms ease;
+
+        &:hover {
+            color: $black-1;
+            opacity: 1;
+
+            // &:after {
+ //     opacity: .5;
+ // }
+        }
+
+        &:not(:last-child) {
+            margin-right: 23px;
+
+            &:after {
+                position: absolute;
+                content: "";
+                width: 16px;
+                height: 1px;
+                background-color: $basic;
+                opacity: .4;
+                top: 0;
+                bottom: -1px;
+                left: auto;
+                right: -20px;
+                margin: auto;
+                pointer-events: none;
+            }
+        }
+
+        &--active {
+            pointer-events: none
+        }
+    }
+}

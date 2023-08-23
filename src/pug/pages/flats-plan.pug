@@ -1,0 +1,290 @@
+extends ../layout/main
+
+block variables
+	- var title = 'Главная страница'
+	- var pageClass = 'index-page';
+
+block content
+	.flats-filter.mf-margin
+		.flats-filter__container.b-container
+			.flats-filter__title.title-1 Квартиры Завенягина 1/2
+			.flats-filter__date 2 квартал 2021
+			.burger-filter
+				span.line
+				span.line
+				span.line
+			include ../modules/filter-flats
+			.filter-sort
+				.filter-sort__box
+					.filter-sort__case
+						.filter-sort__wrp
+							.filter-sort__text Сортировка
+							.filter-sort__img
+								<svg width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+									<path d="M1 5L5.24264 9.24264L9.48528 5" stroke="#1E202C" stroke-width="1.5"/>
+								</svg>
+						.filter-sort__select
+							.filter-sort__unit
+								<input id="sorts1" type="radio" name="sorts" value="pay-min" checked>
+								<label for="sorts1" title="Цена (минимальная)">Цена (минимальная)</label>
+							.filter-sort__unit
+								<input id="sorts2" type="radio" name="sorts" value="pay-max" checked>
+								<label for="sorts2" title="Цена (максимальная)">Цена (максимальная)</label>
+							.filter-sort__unit
+								<input id="sorts3" type="radio" name="sorts" value="area-min" checked>
+								<label for="sorts3" title="Площадь (минимальная)">Площадь (минимальная)</label>
+							.filter-sort__unit
+								<input id="sorts4" type="radio" name="sorts" value="area-max" checked>
+								<label for="sorts4" title="Площадь (максимальная)">Площадь (максимальная)</label>
+						
+
+	.flats-basic
+		.flats-basic__container.b-container
+			.flats-basic__menu
+				<nav class="filter-menu nav-wrap">
+						<ul class="group" id="example-one">
+							<li class="current_page_item">
+								<a class="filter-menu__link ">
+									<input id="view1" type="radio" name="radio" value="1" checked>
+									<label for="view1">Планировка</label>
+								</a>
+							</li>
+							<li>
+								<a class="filter-menu__link ">
+									<input id="view2" type="radio" name="radio" value="2">
+									<label for="view2">Плитка</label>
+								</a>
+							</li>
+							<li>
+								<a class="filter-menu__link ">
+									<input id="view3" type="radio" name="radio" value="3">
+									<label for="view3">Этажи</label>
+								</a>
+							</li>							
+						</ul>
+				</nav>
+				form(method="get").flats-basic__filter
+					.flats-basic__word Сортировать по
+					.flats-basic__group
+						.flats-basic__module
+							.flats-basic__text Цене
+							.flats-basic__switch
+								.flats-basic__sort
+									<input id="sort1" type="radio" name="sort1" value="1">
+									<label for="sort1">
+										+svg('arr_list')
+									</label>
+								.flats-basic__sort
+									<input id="sort2" type="radio" name="sort1" value="2">
+									<label for="sort2">
+										+svg('arr_list')
+									</label>
+						.flats-basic__module
+							.flats-basic__text Площади
+							.flats-basic__switch
+								.flats-basic__sort
+									<input id="sort3" type="radio" name="sort2" value="3">
+									<label for="sort3">
+										+svg('arr_list')
+									</label>
+								.flats-basic__sort
+									<input id="sort4" type="radio" name="sort2" value="4">
+									<label for="sort4">
+										+svg('arr_list')
+									</label>
+					button(type="reset").flats-basic__close
+						.flats-basic__ic 
+						.flats-basic__text Сбросить фильтр
+			.flats-basic__box
+				.flats-basic__items
+					.flats-basic__item
+						.flats-basic__plan
+							.flats-basic__qty <span>4<span> квартиры
+							.flats-basic__inner
+								.flats-basic__img
+									img(src='./img/flats/plan/plan.png' alt='')
+						.flats-basic__cover
+							.flats-basic__info 1 комнатная квартира 23,0м <sup><small>2</small></sup>
+							.flats-basic__price от <span>1 250 000</span> руб.
+							.flats-basic__adres(title="Завенягина 123/2") Завенягина 123/2
+							.flats-basic__bottom
+								.flats-basic__bloc
+									.flats-basic__txt Срок сдачи:
+									.flats-basic__period 1 квартал 2021
+								a(href="flats-detailed.html").flats-basic__link 
+									.flats-basic__decor
+										<svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+											<path d="M2 13.5C7.52298 6.83333 16.477 6.83333 22 13.5" stroke="#D8BB54" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+											<path class = "fill" d="M15.682 9.81802C17.4393 11.5754 17.4393 14.4246 15.682 16.182C13.9246 17.9393 11.0754 17.9393 9.31802 16.182C7.56066 14.4246 7.56066 11.5754 9.31802 9.81802C11.0754 8.06066 13.9246 8.06066 15.682 9.81802" stroke="#D8BB54" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+										</svg>
+									.flats-basic__char Подробнее
+					.flats-basic__item
+						.flats-basic__plan
+							.flats-basic__qty <span>4<span> квартиры
+							.flats-basic__inner
+								.flats-basic__img
+									img(src='./img/flats/plan/plan.png' alt='')
+						.flats-basic__cover
+							.flats-basic__info 1 комнатная квартира 23,0м <sup><small>2</small></sup>
+							.flats-basic__price от <span>1 250 000</span> руб.
+							.flats-basic__adres(title="Завенягина 123/2") Завенягина 123/2
+							.flats-basic__bottom
+								.flats-basic__bloc
+									.flats-basic__txt Срок сдачи:
+									.flats-basic__period 1 квартал 2021
+								a(href="flats-detailed.html").flats-basic__link 
+									.flats-basic__decor
+										<svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+											<path d="M2 13.5C7.52298 6.83333 16.477 6.83333 22 13.5" stroke="#D8BB54" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+											<path class = "fill" d="M15.682 9.81802C17.4393 11.5754 17.4393 14.4246 15.682 16.182C13.9246 17.9393 11.0754 17.9393 9.31802 16.182C7.56066 14.4246 7.56066 11.5754 9.31802 9.81802C11.0754 8.06066 13.9246 8.06066 15.682 9.81802" stroke="#D8BB54" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+										</svg>
+									.flats-basic__char Подробнее
+									
+					.flats-basic__item
+						.flats-basic__plan
+							.flats-basic__qty <span>4<span> квартиры
+							.flats-basic__inner
+								.flats-basic__img
+									img(src='./img/flats/plan/plan.png' alt='')
+						.flats-basic__cover
+							.flats-basic__info 1 комнатная квартира 23,0м <sup><small>2</small></sup>
+							.flats-basic__price от <span>1 250 000</span> руб.
+							.flats-basic__adres(title="Завенягина 123/2") Завенягина 123/2
+							.flats-basic__bottom
+								.flats-basic__bloc
+									.flats-basic__txt Срок сдачи:
+									.flats-basic__period 1 квартал 2021
+								a(href="flats-detailed.html").flats-basic__link 
+									.flats-basic__decor
+										<svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+											<path d="M2 13.5C7.52298 6.83333 16.477 6.83333 22 13.5" stroke="#D8BB54" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+											<path class = "fill" d="M15.682 9.81802C17.4393 11.5754 17.4393 14.4246 15.682 16.182C13.9246 17.9393 11.0754 17.9393 9.31802 16.182C7.56066 14.4246 7.56066 11.5754 9.31802 9.81802C11.0754 8.06066 13.9246 8.06066 15.682 9.81802" stroke="#D8BB54" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+										</svg>
+									.flats-basic__char Подробнее
+					.flats-basic__item
+						.flats-basic__plan
+							.flats-basic__qty <span>4<span> квартиры
+							.flats-basic__inner
+								.flats-basic__img
+									img(src='./img/flats/plan/plan.png' alt='')
+						.flats-basic__cover
+							.flats-basic__info 1 комнатная квартира 23,0м <sup><small>2</small></sup>
+							.flats-basic__price от <span>1 250 000</span> руб.
+							.flats-basic__adres(title="Завенягина 123/2") Завенягина 123/2
+							.flats-basic__bottom
+								.flats-basic__bloc
+									.flats-basic__txt Срок сдачи:
+									.flats-basic__period 1 квартал 2021
+								a(href="flats-detailed.html").flats-basic__link 
+									.flats-basic__decor
+										<svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+											<path d="M2 13.5C7.52298 6.83333 16.477 6.83333 22 13.5" stroke="#D8BB54" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+											<path class = "fill" d="M15.682 9.81802C17.4393 11.5754 17.4393 14.4246 15.682 16.182C13.9246 17.9393 11.0754 17.9393 9.31802 16.182C7.56066 14.4246 7.56066 11.5754 9.31802 9.81802C11.0754 8.06066 13.9246 8.06066 15.682 9.81802" stroke="#D8BB54" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+										</svg>
+									.flats-basic__char Подробнее
+					.flats-basic__item
+						.flats-basic__plan
+							.flats-basic__qty <span>4<span> квартиры
+							.flats-basic__inner
+								.flats-basic__img
+									img(src='./img/flats/plan/plan.png' alt='')
+						.flats-basic__cover
+							.flats-basic__info 1 комнатная квартира 23,0м <sup><small>2</small></sup>
+							.flats-basic__price от <span>1 250 000</span> руб.
+							.flats-basic__adres(title="Завенягина 123/2") Завенягина 123/2
+							.flats-basic__bottom
+								.flats-basic__bloc
+									.flats-basic__txt Срок сдачи:
+									.flats-basic__period 1 квартал 2021
+								a(href="flats-detailed.html").flats-basic__link 
+									.flats-basic__decor
+										<svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+											<path d="M2 13.5C7.52298 6.83333 16.477 6.83333 22 13.5" stroke="#D8BB54" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+											<path class = "fill" d="M15.682 9.81802C17.4393 11.5754 17.4393 14.4246 15.682 16.182C13.9246 17.9393 11.0754 17.9393 9.31802 16.182C7.56066 14.4246 7.56066 11.5754 9.31802 9.81802C11.0754 8.06066 13.9246 8.06066 15.682 9.81802" stroke="#D8BB54" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+										</svg>
+									.flats-basic__char Подробнее
+					.flats-basic__item
+						.flats-basic__plan
+							.flats-basic__qty <span>4<span> квартиры
+							.flats-basic__inner
+								.flats-basic__img
+									img(src='./img/flats/plan/plan.png' alt='')
+						.flats-basic__cover
+							.flats-basic__info 1 комнатная квартира 23,0м <sup><small>2</small></sup>
+							.flats-basic__price от <span>1 250 000</span> руб.
+							.flats-basic__adres(title="Завенягина 123/2") Завенягина 123/2
+							.flats-basic__bottom
+								.flats-basic__bloc
+									.flats-basic__txt Срок сдачи:
+									.flats-basic__period 1 квартал 2021
+								a(href="flats-detailed.html").flats-basic__link 
+									.flats-basic__decor
+										<svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+											<path d="M2 13.5C7.52298 6.83333 16.477 6.83333 22 13.5" stroke="#D8BB54" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+											<path class = "fill" d="M15.682 9.81802C17.4393 11.5754 17.4393 14.4246 15.682 16.182C13.9246 17.9393 11.0754 17.9393 9.31802 16.182C7.56066 14.4246 7.56066 11.5754 9.31802 9.81802C11.0754 8.06066 13.9246 8.06066 15.682 9.81802" stroke="#D8BB54" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+										</svg>
+									.flats-basic__char Подробнее
+					.flats-basic__item
+						.flats-basic__plan
+							.flats-basic__qty <span>4<span> квартиры
+							.flats-basic__inner
+								.flats-basic__img
+									img(src='./img/flats/plan/plan.png' alt='')
+						.flats-basic__cover
+							.flats-basic__info 1 комнатная квартира 23,0м <sup><small>2</small></sup>
+							.flats-basic__price от <span>1 250 000</span> руб.
+							.flats-basic__adres(title="Завенягина 123/2") Завенягина 123/2
+							.flats-basic__bottom
+								.flats-basic__bloc
+									.flats-basic__txt Срок сдачи:
+									.flats-basic__period 1 квартал 2021
+								a(href="flats-detailed.html").flats-basic__link 
+									.flats-basic__decor
+										<svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+											<path d="M2 13.5C7.52298 6.83333 16.477 6.83333 22 13.5" stroke="#D8BB54" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+											<path class = "fill" d="M15.682 9.81802C17.4393 11.5754 17.4393 14.4246 15.682 16.182C13.9246 17.9393 11.0754 17.9393 9.31802 16.182C7.56066 14.4246 7.56066 11.5754 9.31802 9.81802C11.0754 8.06066 13.9246 8.06066 15.682 9.81802" stroke="#D8BB54" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+										</svg>
+									.flats-basic__char Подробнее
+					.flats-basic__item
+						.flats-basic__plan
+							.flats-basic__qty <span>4<span> квартиры
+							.flats-basic__inner
+								.flats-basic__img
+									img(src='./img/flats/plan/plan.png' alt='')
+						.flats-basic__cover
+							.flats-basic__info 1 комнатная квартира 23,0м <sup><small>2</small></sup>
+							.flats-basic__price от <span>1 250 000</span> руб.
+							.flats-basic__adres(title="Завенягина 123/2") Завенягина 123/2
+							.flats-basic__bottom
+								.flats-basic__bloc
+									.flats-basic__txt Срок сдачи:
+									.flats-basic__period 1 квартал 2021
+								a(href="flats-detailed.html").flats-basic__link 
+									.flats-basic__decor
+										<svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+											<path d="M2 13.5C7.52298 6.83333 16.477 6.83333 22 13.5" stroke="#D8BB54" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+											<path class = "fill" d="M15.682 9.81802C17.4393 11.5754 17.4393 14.4246 15.682 16.182C13.9246 17.9393 11.0754 17.9393 9.31802 16.182C7.56066 14.4246 7.56066 11.5754 9.31802 9.81802C11.0754 8.06066 13.9246 8.06066 15.682 9.81802" stroke="#D8BB54" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+										</svg>
+									.flats-basic__char Подробнее
+					.flats-basic__item
+						.flats-basic__plan
+							.flats-basic__qty <span>4<span> квартиры
+							.flats-basic__inner
+								.flats-basic__img
+									img(src='./img/flats/plan/plan.png' alt='')
+						.flats-basic__cover
+							.flats-basic__info 1 комнатная квартира 23,0м <sup><small>2</small></sup>
+							.flats-basic__price от <span>1 250 000</span> руб.
+							.flats-basic__adres(title="Завенягина 123/2") Завенягина 123/2
+							.flats-basic__bottom
+								.flats-basic__bloc
+									.flats-basic__txt Срок сдачи:
+									.flats-basic__period 1 квартал 2021
+								a(href="flats-detailed.html").flats-basic__link 
+									.flats-basic__decor
+										<svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+											<path d="M2 13.5C7.52298 6.83333 16.477 6.83333 22 13.5" stroke="#D8BB54" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+											<path class = "fill" d="M15.682 9.81802C17.4393 11.5754 17.4393 14.4246 15.682 16.182C13.9246 17.9393 11.0754 17.9393 9.31802 16.182C7.56066 14.4246 7.56066 11.5754 9.31802 9.81802C11.0754 8.06066 13.9246 8.06066 15.682 9.81802" stroke="#D8BB54" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+										</svg>
+									.flats-basic__char Подробнее
+block script

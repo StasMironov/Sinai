@@ -1,0 +1,44 @@
+.partner {
+    margin-top: 70px;
+
+    &__slider {
+        margin-top: 40px;
+        overflow: hidden;
+    }
+
+    &__inner {
+        padding-left: 28px;
+
+        @media(max-width: 1024px) {
+            padding: 0 20px;
+        }
+    }
+
+    &__title {
+        text-align: center;
+    }
+
+    .b-container--partner {
+        padding: 0;
+    }
+
+    .swiper-slide {
+        width: auto;
+
+        @media(max-width: 1024px) {
+            height: 65px;
+        }
+
+        img {
+            @media(max-width: 1300px) {
+                height: 100%;
+                width: 100%;
+                object-fit: contain;
+            }
+        }
+    }
+
+    .swiper-wrapper {
+        align-items: center;
+    }
+}

@@ -1,0 +1,232 @@
+extends ../layout/main
+
+block variables
+	- var title = 'Главная страница'
+	- var pageClass = 'index-page';
+
+block content
+	.flats-filter.mf-margin
+		.flats-filter__container.b-container
+			.flats-filter__title.title-1 Продажа земельного участка
+			.burger-filter
+				span.line
+				span.line
+				span.line
+			form(method="get" id="ds_landplot").building-filter.building-filter--second-flats.building-filter--land-point
+				.building-filter__row
+					.building-filter__col.building-filter__col--project(data-id="11")
+						.building-filter__header Тип объекта
+						.building-filter__box
+							.building-filter__case
+								.building-filter__wrp
+									.building-filter__text Все
+									.building-filter__img
+										<svg width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+											<path d="M1 5L5.24264 9.24264L9.48528 5" stroke="#1E202C" stroke-width="1.5"/>
+										</svg>
+								.building-filter__select
+									.building-filter__unit
+										<input id="type1" type="radio" name="type" value="Завенягина 1/2" checked>
+										<label for="type1" title="Завенягина 1">Завенягина 1/2</label>
+									.building-filter__unit
+										<input id="type2" type="radio" name="type" value="улица имени Газеты Правда, 79">
+										<label for="type2" title="улица имени Газеты Правда, 79">улица имени Газеты Правда, 79</label>
+									.building-filter__unit
+										<input id="type3" type="radio" name="type" value="Завенягина 1/2" checked>
+										<label for="type3" title="Завенягина 1">Завенягина 1/2</label>
+									.building-filter__unit
+										<input id="type4" type="radio" name="type" value="улица имени Газеты Правда, 79">
+										<label for="type4" title="улица имени Газеты Правда, 79">улица имени Газеты Правда, 79</label>
+					.building-filter__col.building-filter__col--cost(data-id="12")
+						.building-filter__header Цена
+						.building-filter__range(data-min="1500000" data-max="13500000")
+							.building-filter__up
+							.building-filter__low
+						div#cost
+						<input type="hidden" name="send-cost-min" id="send-result-сost-min" />
+						<input type="hidden" name="send-cost-max" id="send-result-сost-max" />
+					.building-filter__col.building-filter__col--type(data-id="13")
+						.building-filter__header Категория земель
+						.building-filter__box
+							.building-filter__case
+								.building-filter__wrp
+									.building-filter__text Все
+									.building-filter__img
+										<svg width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+											<path d="M1 5L5.24264 9.24264L9.48528 5" stroke="#1E202C" stroke-width="1.5"/>
+										</svg>
+								.building-filter__select
+									.building-filter__unit
+										<input id="category1" type="radio" name="category" value="Завенягина 1/2" checked>
+										<label for="category1" title="Завенягина 1">Завенягина 1/2</label>
+									.building-filter__unit
+										<input id="category2" type="radio" name="category" value="улица имени Газеты Правда, 79">
+										<label for="category2" title="улица имени Газеты Правда, 79">улица имени Газеты Правда, 79</label>
+									.building-filter__unit
+										<input id="category3" type="radio" name="category" value="Завенягина 1/2" checked>
+										<label for="category3" title="Завенягина 1">Завенягина 1/2</label>
+									.building-filter__unit
+										<input id="category4" type="radio" name="category" value="улица имени Газеты Правда, 79">
+										<label for="category4" title="улица имени Газеты Правда, 79">улица имени Газеты Правда, 79</label>
+					.building-filter__col.building-filter__col--cost(data-id="14")
+						.building-filter__header Площадь, сот.
+						.building-filter__range(data-min="0" data-max="100")
+							.building-filter__up
+							.building-filter__low
+						div#area
+						<input type="hidden" name="send-area-min" id="send-result-area-min" />
+						<input type="hidden" name="send-area-max" id="send-result-area-max" />
+					.building-filter__col.building-filter__col--cost.building-filter__col--distance(data-id="15")
+						.building-filter__header Расстояние до города, км.
+						.building-filter__range(data-min="0" data-max="200")
+							.building-filter__up
+							.building-filter__low
+						div#distance
+						<input type="hidden" name="send-distance-min" id="send-result-distance-min" />
+						<input type="hidden" name="send-distance-max" id="send-result-distance-max" />
+				.building-filter__row
+					.building-filter__button
+						.building-filter__txt Свободно <span>55</span> участков
+						button.btn.btn--decor#submit
+							.btn__cover
+								.btn__button
+									.btn__line
+										+svg('arr')
+									.btn__figure
+										+svg('figure')
+										.btn__decor
+											+svg('arr')
+								.btn__button.btn__button--laptop 
+									<svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+										<path d="M2 13.5C7.52298 6.83333 16.477 6.83333 22 13.5" stroke="#D8BB54" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+										<path class = "fill" d="M15.682 9.81802C17.4393 11.5754 17.4393 14.4246 15.682 16.182C13.9246 17.9393 11.0754 17.9393 9.31802 16.182C7.56066 14.4246 7.56066 11.5754 9.31802 9.81802C11.0754 8.06066 13.9246 8.06066 15.682 9.81802" stroke="#D8BB54" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+									</svg>
+							.btn__txt Показать
+			.filter-sort
+				.filter-sort__box
+					.filter-sort__case
+						.filter-sort__wrp
+							.filter-sort__text Сортировка
+							.filter-sort__img
+								<svg width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+									<path d="M1 5L5.24264 9.24264L9.48528 5" stroke="#1E202C" stroke-width="1.5"/>
+								</svg>
+						.filter-sort__select
+							.filter-sort__unit
+								<input id="sorts1" type="radio" name="sorts" value="pay-min" checked>
+								<label for="sorts1" title="Цена (минимальная)">Цена (минимальная)</label>
+							.filter-sort__unit
+								<input id="sorts2" type="radio" name="sorts" value="pay-max" checked>
+								<label for="sorts2" title="Цена (максимальная)">Цена (максимальная)</label>
+							.filter-sort__unit
+								<input id="sorts3" type="radio" name="sorts" value="publish-min" checked>
+								<label for="sorts3" title="Площадь (минимальная)">Дата публикации (минимальная)</label>
+							.filter-sort__unit
+								<input id="sorts4" type="radio" name="sorts" value="publish-max" checked>
+								<label for="sorts4" title="Площадь (максимальная)">Дата публикации (максимальная)</label>
+	
+	.structure.structure--content.mf-bg
+		.structure__container.b-container
+			form(method="get").flats-basic__filter
+				.flats-basic__word Сортировать по
+				.flats-basic__group
+					.flats-basic__module
+						.flats-basic__text Цене
+						.flats-basic__switch
+							.flats-basic__sort
+								<input id="sort1" type="radio" name="sort1" value="1">
+								<label for="sort1">
+									+svg('arr_list')
+								</label>
+							.flats-basic__sort
+								<input id="sort2" type="radio" name="sort1" value="2">
+								<label for="sort2">
+									+svg('arr_list')
+								</label>
+					.flats-basic__module
+						.flats-basic__text Дата публикации
+						.flats-basic__switch
+							.flats-basic__sort
+								<input id="sort3" type="radio" name="sort2" value="3">
+								<label for="sort3">
+									+svg('arr_list')
+								</label>
+							.flats-basic__sort
+								<input id="sort4" type="radio" name="sort2" value="4">
+								<label for="sort4">
+									+svg('arr_list')
+								</label>
+				button(type="reset").flats-basic__close
+					.flats-basic__ic 
+					.flats-basic__text Сбросить фильтр
+			.structure__wrapper.structure__wrapper--content
+				.structure__left
+					.second-flats.second-flats--land
+						.second-flats__items
+							a(href="card-flats.html").second-flats__item
+								.second-flats__pic
+									img(src="./img/card/pic6.jpg" alt="")
+								.second-flats__content
+									.second-flats__box
+										.second-flats__bloc
+											.second-flats__area.title-3 1-к квартира, 23,5 м<sup>2</sup>
+											.second-flats__adres г. Магнитогорск, ул. Завенягина 123/2 р-н Орджоникидзевский
+									.second-flats__box.second-flats__box--price
+										.second-flats__price
+											.second-flats__unit.second-flats__unit--price 1 250 000 руб. 
+											.second-flats__unit 15 234 руб. за м<sup>2</sup>
+										.second-flats__wrp
+											.second-flats__publish дата публикации: <span>1 ч. назад</span>
+							div#insert
+							a(href="card-flats.html").second-flats__item
+								.second-flats__pic
+									img(src="./img/card/pic6.jpg" alt="")
+								.second-flats__content
+									.second-flats__box
+										.second-flats__bloc
+											.second-flats__area.title-3 1-к квартира, 23,5 м<sup>2</sup>
+											.second-flats__adres г. Магнитогорск, ул. Завенягина 123/2 р-н Орджоникидзевский
+									.second-flats__box.second-flats__box--price
+										.second-flats__price
+											.second-flats__unit.second-flats__unit--price 1 250 000 руб. 
+											.second-flats__unit 15 234 руб. за м<sup>2</sup>
+										.second-flats__wrp
+											.second-flats__publish дата публикации: <span>1 ч. назад</span>
+							a(href="card-flats.html").second-flats__item
+								.second-flats__pic
+									img(src="./img/card/pic6.jpg" alt="")
+								.second-flats__content
+									.second-flats__box
+										.second-flats__bloc
+											.second-flats__area.title-3 1-к квартира, 23,5 м<sup>2</sup>
+											.second-flats__adres г. Магнитогорск, ул. Завенягина 123/2 р-н Орджоникидзевский
+									.second-flats__box.second-flats__box--price
+										.second-flats__price
+											.second-flats__unit.second-flats__unit--price 1 250 000 руб. 
+											.second-flats__unit 15 234 руб. за м<sup>2</sup>
+										.second-flats__wrp
+											.second-flats__publish дата публикации: <span>1 ч. назад</span>
+							a(href="card-flats.html").second-flats__item
+								.second-flats__pic
+									img(src="./img/card/pic6.jpg" alt="")
+								.second-flats__content
+									.second-flats__box
+										.second-flats__bloc
+											.second-flats__area.title-3 1-к квартира, 23,5 м<sup>2</sup>
+											.second-flats__adres г. Магнитогорск, ул. Завенягина 123/2 р-н Орджоникидзевский
+									.second-flats__box.second-flats__box--price
+										.second-flats__price
+											.second-flats__unit.second-flats__unit--price 1 250 000 руб. 
+											.second-flats__unit 15 234 руб. за м<sup>2</sup>
+										.second-flats__wrp
+											.second-flats__publish дата публикации: <span>1 ч. назад</span>
+							include ../modules/preloader
+				.structure__right
+					.structure__aside.mf-fix
+						.structure__inner
+							include ../modules/call-panel
+							a(href="javascript:void(0);").ad
+								img(src="./img/card/ad.jpg" alt="")
+								
+				
+block script

@@ -1,0 +1,52 @@
+.popup {
+    display: flex;
+    transform-origin: center;
+    transition: .5s linear;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    max-width: 776px;
+    width: 100%;
+    transform: scale(0);
+    height: 0;
+
+    &--show {
+        transform: scale(1);
+    }
+
+    .call-help__box,
+    .form-project__group {
+        @media(max-width: 768px) {
+            flex-direction: column;
+        }
+    }
+
+    .call-help__article {
+        @media(max-width: 768px) {
+            text-align: center;
+            max-width: 100%;
+        }
+    }
+
+    .form-project__block:first-child {
+        @media(max-width: 768px) {
+            max-width: 100%;
+            margin-right: 0;
+        }
+    }
+
+    .call-help__link {
+        white-space: nowrap;
+
+        @media(max-width: 768px) {
+            text-align: center;
+            white-space: initial;
+        }
+    }
+}

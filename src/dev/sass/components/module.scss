@@ -1,0 +1,117 @@
+.module {
+    position: absolute;
+    top: 272px;
+    height: auto;
+    width: 286px;
+    background-color: white;
+    left: 38.4%;
+    right: 0;
+    font-size: 16px;
+    line-height: 26px;
+    letter-spacing: .3px;
+    transition: ease-out .5s;
+    opacity: 0;
+    transform: translateX(-100px);
+    visibility: hidden;
+
+    @media(max-width: 1024px) {
+        left: 25.4%;
+    }
+
+    &--active {
+        opacity: 1;
+        visibility: visible;
+
+        transform: translateX(0px);
+
+        @media(max-width: 768px) {
+            transform: translateX(-100px);
+        }
+    }
+
+    &__info {
+        display: flex;
+        align-items: center;
+        font-weight: normal;
+        font-size: 16px;
+        line-height: 26px;
+        letter-spacing: 0.3px;
+
+        @media(max-width: 1024px) {
+            font-size: 14px;
+            line-height: 24px;
+        }
+    }
+
+    &__top,
+    &__row {
+        display: flex;
+        align-items: center;
+    }
+
+    &__top {
+        border-bottom: 1px solid $gray-1;
+        padding: 15px 20px 13px;
+
+        @media(max-width: 1024px) {
+            padding: 10px 15px 10px;
+        }
+    }
+
+    &__row {
+        &:not(:first-child) {
+            margin-top: 13px;
+
+            @media(max-width: 768px) {
+                margin-top: 5px;
+            }
+        }
+    }
+
+    &__bottom {
+        padding: 20px;
+        padding: 15px 20px 19px;
+
+        @media(max-width: 1024px) {
+            padding: 10px 15px 10px;
+        }
+    }
+
+    &__floor {
+        margin-right: 10px;
+    }
+
+    &__cell {
+        font-style: normal;
+        font-weight: normal;
+        font-size: 16px;
+        line-height: 26px;
+        letter-spacing: 0.3px;
+
+        @media(max-width: 1024px) {
+            font-size: 14px;
+            line-height: 24px;
+        }
+
+        &:nth-child(1) {
+            margin-right: 20px;
+        }
+
+        &:nth-child(2) {
+            margin-right: 24px;
+        }
+    }
+
+    &:after {
+        position: absolute;
+        content: "";
+        border: 10px solid transparent;
+        border-left: 18px solid white;
+        right: -28px;
+        top: 8px;
+        bottom: 0;
+        margin: auto;
+        height: 0;
+        background-image: url(../img/icon/tr.png);
+    }
+}

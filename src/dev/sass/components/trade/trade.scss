@@ -1,0 +1,78 @@
+.trade {
+    &__calc {
+        position: relative;
+        min-height: 784px;
+        z-index: 1;
+        margin-top: 40px;
+
+        .flats-calc {
+            padding-bottom: 82px;
+            margin-top: 0;
+            padding-top: 123px;
+
+            @media(max-width: 922px) {
+                padding: 60px 0 60px;
+            }
+
+            @media(max-width: 600px) {
+                padding: 40px 0 22px;
+            }
+        }
+    }
+
+    &__txt {
+        margin-top: 20px;
+        line-height: 26px;
+    }
+
+    &__inner {
+        position: absolute;
+        width: 100vw;
+        margin-left: calc(33% - 50vw);
+        max-width: 1200px;
+        right: 0;
+
+        @media(max-width: 1235px) {
+            max-width: 1194px;
+        }
+
+        @media(max-width: 1024px) {
+            max-width: 982px;
+        }
+
+        @media(max-width: 992px) {
+            max-width: 953px;
+        }
+
+        @media(max-width: 922px) {
+            position: relative;
+            width: initial;
+            margin-left: initial;
+            max-width: initial;
+            right: auto;
+        }
+
+        &:after {
+            position: absolute;
+            content: "";
+            width: 100vw;
+            height: 100%;
+            background: $gray-3;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            margin-left: calc(50% - 50vw);
+            z-index: -1;
+        }
+    }
+
+    &__bloc {
+        &:not(:first-child) {
+            margin-top: 70px;
+
+            @media(max-width: 600px) {
+                margin-top: 40px;
+            }
+        }
+    }
+}
